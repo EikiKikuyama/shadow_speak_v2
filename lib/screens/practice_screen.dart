@@ -1,13 +1,11 @@
-// lib/screens/practice_screen.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/practice_mode_provider.dart';
-import '../screens/listening_mode.dart';
-import '../screens/overlapping_mode.dart';
-import '../screens/shadowing_mode.dart';
-import '../screens/recording_only_mode.dart';
-
+import '../providers/selected_material_provider.dart';
+import 'listening_mode.dart';
+import 'shadowing_mode.dart';
+import 'overlapping_mode.dart';
+import 'recording_only_mode.dart';
 
 class PracticeScreen extends ConsumerWidget {
   const PracticeScreen({super.key});
@@ -15,37 +13,21 @@ class PracticeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mode = ref.watch(practiceModeProvider);
+    final material = ref.watch(selectedMaterialProvider);
 
-    Widget modeWidget;
+    // 🔒 nullチェック（nullの可能性がある場合）
+// ❌ 以下の行を削除または修正
+
+    // 🎯 各モードへ分岐
     switch (mode) {
       case PracticeMode.listening:
-        modeWidget = const ListeningMode();
-        break;
-      case PracticeMode.overlapping:
-        modeWidget = const OverlappingMode();
-        break;
+        return ListeningMode(material: material!);
       case PracticeMode.shadowing:
-        modeWidget = const ShadowingMode();
-        break;
+        return ShadowingMode(material: material!);
+      case PracticeMode.overlapping:
+        return OverlappingMode(material: material!);
       case PracticeMode.recordingOnly:
-        modeWidget = const RecordingOnlyMode();
-        break;
+        return RecordingOnlyMode(material: material!);
     }
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Practice'),
-      ),
-      body: Column(
-  mainAxisAlignment: MainAxisAlignment.center,
-  children: [
-    Text('Current mode: ${mode.name}'),
-    const SizedBox(height: 20),
-    modeWidget,
-  ],
-),
-
-
-    );
   }
 }
