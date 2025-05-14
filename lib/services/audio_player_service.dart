@@ -1,45 +1,30 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/foundation.dart';
 
 class AudioPlayerService {
-  late AudioPlayer _player = AudioPlayer();
+  final AudioPlayer _player = AudioPlayer();
 
-  Future<void> reset() async {
-    try {
-      await _player.stop();
-      _player = AudioPlayer(); // 完全な状態リセット
-      // 👇 ここで play はしない！
-      debugPrint('🔄 リセット完了（再生なし）');
-    } catch (e) {
-      debugPrint('❌ リセット失敗: $e');
-    }
+  /// 汎用再生（Listeningモード用） → asset or URL
+  Future<void> play(String sourcePath) async {
+    await _player.stop(); // 再生中なら停止
+    await _player.play(AssetSource(sourcePath));
   }
 
-  Future<void> play(String audioPath) async {
-    if (audioPath.isEmpty) return;
-
-    try {
-      debugPrint('🎧 再生開始: $audioPath');
-      await _player.play(AssetSource(audioPath));
-    } catch (e) {
-      debugPrint('❌ 再生失敗: $e');
-    }
-  }
-
-  Future<void> stop() async {
-    try {
-      await _player.stop();
-    } catch (e) {
-      debugPrint('❌ 停止失敗: $e');
-    }
+  /// 録音ファイルなどローカル再生（Shadowingモードなど用）
+  Future<void> playLocalFile(String filePath) async {
+    await _player.stop();
+    await _player.play(DeviceFileSource(filePath));
   }
 
   Future<void> pause() async {
-    try {
-      await _player.pause();
-    } catch (e) {
-      debugPrint('❌ 一時停止失敗: $e');
-    }
+    await _player.pause();
+  }
+
+  Future<void> stop() async {
+    await _player.stop();
+  }
+
+  Future<void> reset() async {
+    await _player.seek(Duration.zero);
   }
 
   void dispose() {

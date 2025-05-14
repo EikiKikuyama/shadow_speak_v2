@@ -45,5 +45,13 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<!-- 🎤 マイク使用の許可文言 -->
+	<key>NSMicrophoneUsageDescription</key>
+	<string>録音機能のためマイクを使用します</string>
+
+	<!-- 💾 ファイル保存許可（必要であれば） -->
+	<key>NSDocumentsFolderUsageDescription</key>
+	<string>音声ファイルを保存します</string>
 </dict>
 </plist>
