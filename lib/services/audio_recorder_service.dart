@@ -4,7 +4,6 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:ffmpeg_kit_flutter/ffmpeg_kit.dart';
 
 class AudioRecorderService {
   final AudioRecorder _recorder = AudioRecorder();
@@ -117,11 +116,6 @@ class AudioRecorderService {
     }
 
     return waveform;
-  }
-
-  Future<void> convertM4aToPcm(String inputPath, String outputPath) async {
-    final String command = "-i $inputPath -f s16le -ac 1 $outputPath";
-    await FFmpegKit.execute(command);
   }
 
   void dispose() {

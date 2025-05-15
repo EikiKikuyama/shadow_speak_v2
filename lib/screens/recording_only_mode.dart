@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/material_model.dart';
 import '../services/audio_recorder_service.dart';
 import '../services/audio_player_service.dart';
+import '../widgets/realtime_waveform_widget.dart';
+import '../screens/wav_waveform_screen.dart';
 
 class RecordingOnlyMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -34,6 +36,16 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
         _recordedPath = path;
       });
       debugPrint('🎤 録音停止: $path');
+
+      // 🔥 波形表示画面に遷移（追加部分）
+      if (path != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => WavWaveformScreen(wavFilePath: path),
+          ),
+        );
+      }
     } else {
       await _recorder.startRecording();
       setState(() {
@@ -75,10 +87,9 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
             SizedBox(
               height: 150,
               width: double.infinity,
-              child: Container(
-                color: Colors.grey.shade300,
-                alignment: Alignment.center,
-                child: const Text('📈 波形表示（仮）'),
+              child: RealtimeWaveformWidget(
+                amplitudeStream: _recorder.amplitudeStream,
+                height: 150,
               ),
             ),
             const SizedBox(height: 20),

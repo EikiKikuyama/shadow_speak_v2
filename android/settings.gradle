@@ -13,8 +13,10 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        maven { url "https://maven.arthenica.com" } // ✅← これを追加
     }
 }
+
 
 plugins {
     id "dev.flutter.flutter-plugin-loader" version "1.0.0"
