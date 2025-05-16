@@ -4,6 +4,7 @@ import '../services/audio_recorder_service.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/realtime_waveform_widget.dart';
 import '../screens/wav_waveform_screen.dart';
+import '../widgets/sample_waveform_widget.dart';
 
 class RecordingOnlyMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -20,6 +21,22 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
 
   bool _isRecording = false;
   String? _recordedPath;
+  String? sampleFilePath; // ✅ 見本音声のローカルパス
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSampleAudio();
+  }
+
+  Future<void> _loadSampleAudio() async {
+    final path = await _audioService
+        .copyAssetToFile(widget.material.audioPath); // ← ここを修正！
+    if (!mounted) return;
+    setState(() {
+      sampleFilePath = path;
+    });
+  }
 
   @override
   void dispose() {
@@ -37,7 +54,6 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
       });
       debugPrint('🎤 録音停止: $path');
 
-      // 🔥 波形表示画面に遷移（追加部分）
       if (path != null) {
         Navigator.push(
           context,
@@ -83,18 +99,21 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // 仮の波形表示
             SizedBox(
               height: 150,
               width: double.infinity,
-              child: RealtimeWaveformWidget(
-                amplitudeStream: _recorder.amplitudeStream,
-                height: 150,
+              child: Stack(
+                children: [
+                  if (sampleFilePath != null)
+                    SampleWaveformWidget(filePath: sampleFilePath!),
+                  RealtimeWaveformWidget(
+                    amplitudeStream: _recorder.amplitudeStream,
+                    height: 150,
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 20),
-
-            // アイコンボタン4つ（録音・再生・停止・リセット）
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -121,8 +140,6 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
               ],
             ),
             const SizedBox(height: 20),
-
-            // スクリプト表示（今は path 表示、後で本文に差し替え）
             SizedBox(
               height: 120,
               width: double.infinity,
@@ -135,7 +152,6 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
                 ),
               ),
             ),
-
             if (_recordedPath != null) ...[
               const SizedBox(height: 20),
               Text('📁 録音ファイル: $_recordedPath'),

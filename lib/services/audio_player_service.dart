@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class AudioPlayerService {
@@ -29,5 +32,15 @@ class AudioPlayerService {
 
   void dispose() {
     _player.dispose();
+  }
+
+  /// ✅ assets/audio/ 配下の音声ファイルを一時保存し、ファイルパスを返す
+  // utils/audio_player_service.dart 内
+  Future<String> copyAssetToFile(String assetPath) async {
+    final byteData = await rootBundle.load('assets/$assetPath'); // ← 修正！
+    final tempDir = await getTemporaryDirectory();
+    final file = File('${tempDir.path}/${assetPath.split("/").last}');
+    await file.writeAsBytes(byteData.buffer.asUint8List());
+    return file.path;
   }
 }
