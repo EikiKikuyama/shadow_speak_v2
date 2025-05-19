@@ -27,11 +27,17 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
   void initState() {
     super.initState();
     _loadSampleAudio();
+
+    // ✅ 起動時は見本音声を再生（確認用）
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.material.audioPath.isNotEmpty) {
+        _audioService.play(widget.material.audioPath);
+      }
+    });
   }
 
   Future<void> _loadSampleAudio() async {
-    final path = await _audioService
-        .copyAssetToFile(widget.material.audioPath); // ← ここを修正！
+    final path = await _audioService.copyAssetToFile(widget.material.audioPath);
     if (!mounted) return;
     setState(() {
       sampleFilePath = path;
@@ -48,13 +54,14 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
   Future<void> _toggleRecording() async {
     if (_isRecording) {
       final path = await _recorder.stopRecording();
+      await _audioService.stop(); // ✅ 見本音声を止める
       setState(() {
         _isRecording = false;
         _recordedPath = path;
       });
       debugPrint('🎤 録音停止: $path');
 
-      if (path != null) {
+      if (path != null && mounted) {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -63,6 +70,7 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
         );
       }
     } else {
+      await _audioService.stop(); // ✅ 再生中の見本音声を必ず止める
       await _recorder.startRecording();
       setState(() {
         _isRecording = true;
@@ -105,7 +113,10 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
               child: Stack(
                 children: [
                   if (sampleFilePath != null)
-                    SampleWaveformWidget(filePath: sampleFilePath!),
+                    SampleWaveformWidget(
+                      filePath: sampleFilePath!,
+                      audioPlayerService: _audioService,
+                    ),
                   RealtimeWaveformWidget(
                     amplitudeStream: _recorder.amplitudeStream,
                     height: 150,

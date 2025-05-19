@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class LineWavePainter extends CustomPainter {
   final List<double> amplitudes;
   final double maxAmplitude;
-  final double progress;
+  final double progress; // 0.0〜1.0（再生位置）
 
   LineWavePainter({
     required this.amplitudes,
@@ -29,16 +29,22 @@ class LineWavePainter extends CustomPainter {
       ..strokeWidth = 2.0
       ..style = PaintingStyle.stroke;
 
-    double centerX = size.width / 2;
-    double scrollOffset = progress * size.width;
+    final double centerX = size.width / 2;
+
+    // ✅ スクロールオフセット（再生位置に合わせて滑らかに中央合わせ）
+    final int totalSamples = amplitudes.length;
+    final double clampedProgress = progress.clamp(0.0, 1.0);
+    final double progressIndex = clampedProgress * totalSamples;
+    final double scrollOffset =
+        ((progressIndex - (totalSamples / 2)) / totalSamples) * size.width;
 
     Path pastPath = Path();
     Path futurePath = Path();
-
     bool hasPastPathStarted = false;
     bool hasFuturePathStarted = false;
 
     for (int i = 0; i < amplitudes.length - 1; i++) {
+      // X座標のスケーリング調整
       double x1 = centerX +
           ((i - amplitudes.length / 2) / amplitudes.length) * size.width -
           scrollOffset;
@@ -50,6 +56,7 @@ class LineWavePainter extends CustomPainter {
       double y2 = size.height / 2 -
           ((amplitudes[i + 1] / maxAmplitude) * size.height * 0.6);
 
+      // ✅ 描画の安全性チェック
       if (y1.isNaN || y1.isInfinite || y2.isNaN || y2.isInfinite) continue;
 
       if (x1 < centerX) {
@@ -70,6 +77,7 @@ class LineWavePainter extends CustomPainter {
     canvas.drawPath(pastPath, pastWavePaint);
     canvas.drawPath(futurePath, futureWavePaint);
 
+    // ✅ 再生位置ライン（中央）
     canvas.drawLine(
       Offset(centerX, 0),
       Offset(centerX, size.height),

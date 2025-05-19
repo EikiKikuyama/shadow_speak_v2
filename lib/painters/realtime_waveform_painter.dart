@@ -2,41 +2,36 @@ import 'package:flutter/material.dart';
 
 class RealtimeWaveformPainter extends CustomPainter {
   final List<double> amplitudes;
-  final Color color;
+  final double height;
 
   RealtimeWaveformPainter({
     required this.amplitudes,
-    this.color = Colors.red,
+    required this.height,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..strokeWidth = 2.0
-      ..strokeCap = StrokeCap.round;
+    final Paint paint = Paint()
+      ..color = Colors.red
+      ..strokeWidth = 2.0;
 
-    final centerX = size.width / 2;
-    final height = size.height;
+    final double centerX = size.width / 2;
+    final double centerY = size.height / 2;
+    final double widthPerSample = size.width / amplitudes.length;
 
-    // 最新が最後に追加されると仮定（右から左へ描画）
-    for (int i = 0; i < amplitudes.length; i++) {
-      final x = centerX - i * 4; // 4px間隔で左に描画
-      if (x < 0) break;
+    for (int i = 0; i < amplitudes.length - 1; i++) {
+      final double x1 = centerX - (amplitudes.length - i) * widthPerSample;
+      final double x2 = centerX - (amplitudes.length - i - 1) * widthPerSample;
 
-      final amplitude = amplitudes[amplitudes.length - 1 - i];
-      final barHeight = amplitude * height;
+      final double y1 =
+          centerY - (amplitudes[i] * centerY).clamp(-centerY, centerY);
+      final double y2 =
+          centerY - (amplitudes[i + 1] * centerY).clamp(-centerY, centerY);
 
-      canvas.drawLine(
-        Offset(x, height / 2 - barHeight / 2),
-        Offset(x, height / 2 + barHeight / 2),
-        paint,
-      );
+      canvas.drawLine(Offset(x1, y1), Offset(x2, y2), paint);
     }
   }
 
   @override
-  bool shouldRepaint(covariant RealtimeWaveformPainter oldDelegate) {
-    return oldDelegate.amplitudes != amplitudes;
-  }
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
 }

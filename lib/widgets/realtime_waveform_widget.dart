@@ -1,17 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import '../painters/realtime_waveform_painter.dart';
 
 class RealtimeWaveformWidget extends StatefulWidget {
   final Stream<double> amplitudeStream;
-  final int maxSamples;
   final double height;
 
   const RealtimeWaveformWidget({
     super.key,
     required this.amplitudeStream,
-    this.maxSamples = 50,
-    this.height = 100.0,
+    required this.height,
   });
 
   @override
@@ -19,21 +16,20 @@ class RealtimeWaveformWidget extends StatefulWidget {
 }
 
 class _RealtimeWaveformWidgetState extends State<RealtimeWaveformWidget> {
-  late StreamSubscription<double> _subscription;
   final List<double> _amplitudes = [];
+  late StreamSubscription<double> _subscription;
 
   @override
   void initState() {
     super.initState();
-    _subscription = widget.amplitudeStream.listen((amplitude) {
-      setState(() {
-        // 0.0〜1.0の範囲で制限（必要なら強調可）
-        _amplitudes.add(amplitude.clamp(0.0, 1.0));
-        if (_amplitudes.length > widget.maxSamples) {
-          _amplitudes.removeAt(0);
-        }
-      });
-    });
+    _subscription = widget.amplitudeStream.listen(
+      (amplitude) {
+        // 波形更新ロジック
+      },
+      onError: (e) {
+        debugPrint("❌ Streamエラー: $e");
+      },
+    );
   }
 
   @override
@@ -44,12 +40,38 @@ class _RealtimeWaveformWidgetState extends State<RealtimeWaveformWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: widget.height,
-      width: double.infinity,
-      child: CustomPaint(
-        painter: RealtimeWaveformPainter(amplitudes: _amplitudes),
-      ),
+    return CustomPaint(
+      size: Size(double.infinity, widget.height),
+      painter: _WaveformPainter(_amplitudes),
     );
   }
+}
+
+class _WaveformPainter extends CustomPainter {
+  final List<double> amplitudes;
+
+  _WaveformPainter(this.amplitudes);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.red
+      ..strokeWidth = 2.0;
+
+    final centerY = size.height / 2;
+    final widthPerSample = size.width / amplitudes.length;
+
+    for (int i = 0; i < amplitudes.length - 1; i++) {
+      final x1 = i * widthPerSample;
+      final y1 = centerY - (amplitudes[i] * centerY).clamp(-centerY, centerY);
+      final x2 = (i + 1) * widthPerSample;
+      final y2 =
+          centerY - (amplitudes[i + 1] * centerY).clamp(-centerY, centerY);
+
+      canvas.drawLine(Offset(x1, y1), Offset(x2, y2), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _WaveformPainter oldDelegate) => true;
 }
