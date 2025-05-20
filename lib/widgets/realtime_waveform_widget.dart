@@ -17,24 +17,40 @@ class RealtimeWaveformWidget extends StatefulWidget {
 
 class _RealtimeWaveformWidgetState extends State<RealtimeWaveformWidget> {
   final List<double> _amplitudes = [];
+  final List<double> _bufferedAmplitudes = [];
   late StreamSubscription<double> _subscription;
+  Timer? _throttleTimer;
 
   @override
   void initState() {
     super.initState();
+
     _subscription = widget.amplitudeStream.listen(
       (amplitude) {
-        // 波形更新ロジック
+        _bufferedAmplitudes.add(amplitude);
       },
       onError: (e) {
         debugPrint("❌ Streamエラー: $e");
       },
     );
+
+    _throttleTimer = Timer.periodic(const Duration(milliseconds: 50), (_) {
+      if (_bufferedAmplitudes.isNotEmpty) {
+        setState(() {
+          _amplitudes.addAll(_bufferedAmplitudes);
+          _bufferedAmplitudes.clear();
+          if (_amplitudes.length > 100) {
+            _amplitudes.removeRange(0, _amplitudes.length - 100);
+          }
+        });
+      }
+    });
   }
 
   @override
   void dispose() {
     _subscription.cancel();
+    _throttleTimer?.cancel();
     super.dispose();
   }
 
@@ -58,20 +74,30 @@ class _WaveformPainter extends CustomPainter {
       ..color = Colors.red
       ..strokeWidth = 2.0;
 
+    final centerX = size.width / 2;
     final centerY = size.height / 2;
-    final widthPerSample = size.width / amplitudes.length;
+    final widthPerSample = amplitudes.isNotEmpty
+        ? size.width / 100 // 固定幅を想定
+        : size.width;
 
-    for (int i = 0; i < amplitudes.length - 1; i++) {
-      final x1 = i * widthPerSample;
-      final y1 = centerY - (amplitudes[i] * centerY).clamp(-centerY, centerY);
-      final x2 = (i + 1) * widthPerSample;
+    final int sampleCount = amplitudes.length;
+
+    for (int i = 0; i < sampleCount - 1; i++) {
+      // 最新データを centerX に合わせる
+      final x1 = centerX - (sampleCount - 1 - i) * widthPerSample;
+      final x2 = centerX - (sampleCount - 2 - i) * widthPerSample;
+
+      final y1 =
+          centerY - (amplitudes[i] * centerY * 10).clamp(-centerY, centerY);
       final y2 =
-          centerY - (amplitudes[i + 1] * centerY).clamp(-centerY, centerY);
+          centerY - (amplitudes[i + 1] * centerY * 10).clamp(-centerY, centerY);
 
       canvas.drawLine(Offset(x1, y1), Offset(x2, y2), paint);
     }
   }
 
   @override
-  bool shouldRepaint(covariant _WaveformPainter oldDelegate) => true;
+  bool shouldRepaint(covariant _WaveformPainter oldDelegate) {
+    return oldDelegate.amplitudes != amplitudes;
+  }
 }

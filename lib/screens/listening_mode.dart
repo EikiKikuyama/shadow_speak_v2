@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/material_model.dart';
 import '../services/audio_player_service.dart';
+import '../widgets/sample_waveform_widget.dart';
 
 class ListeningMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -12,12 +13,41 @@ class ListeningMode extends StatefulWidget {
 }
 
 class _ListeningModeState extends State<ListeningMode> {
-  final _audioService = AudioPlayerService();
+  final AudioPlayerService _audioService = AudioPlayerService();
+  String? sampleFilePath;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSampleAudio();
+  }
+
+  Future<void> _loadSampleAudio() async {
+    final path = await _audioService.copyAssetToFile(widget.material.audioPath);
+    if (!mounted) return;
+    setState(() {
+      sampleFilePath = path;
+    });
+  }
 
   @override
   void dispose() {
     _audioService.dispose();
     super.dispose();
+  }
+
+  Future<void> _play() async {
+    if (sampleFilePath != null) {
+      await _audioService.playLocalFile(sampleFilePath!);
+    }
+  }
+
+  Future<void> _pause() async {
+    await _audioService.pause();
+  }
+
+  Future<void> _reset() async {
+    await _audioService.reset();
   }
 
   @override
@@ -28,45 +58,35 @@ class _ListeningModeState extends State<ListeningMode> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // 波形領域（仮）
             SizedBox(
               height: 150,
               width: double.infinity,
-              child: Container(
-                color: Colors.grey.shade300,
-                alignment: Alignment.center,
-                child: const Text('📈 波形表示（仮）'),
-              ),
+              child: sampleFilePath != null
+                  ? SampleWaveformWidget(
+                      filePath: sampleFilePath!,
+                      audioPlayerService: _audioService,
+                    )
+                  : const Center(child: CircularProgressIndicator()),
             ),
             const SizedBox(height: 20),
-
-            // 機能アイコン行
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
                   icon: const Icon(Icons.play_arrow, size: 32),
-                  onPressed: () async {
-                    await _audioService.play(widget.material.audioPath);
-                  },
+                  onPressed: _play,
                 ),
                 IconButton(
                   icon: const Icon(Icons.pause, size: 32),
-                  onPressed: () async {
-                    await _audioService.pause();
-                  },
+                  onPressed: _pause,
                 ),
                 IconButton(
                   icon: const Icon(Icons.replay, size: 32),
-                  onPressed: () async {
-                    await _audioService.reset();
-                  },
+                  onPressed: _reset,
                 ),
               ],
             ),
             const SizedBox(height: 20),
-
-            // スクリプト表示（今は path 表示、後で本文に差し替え）
             SizedBox(
               height: 120,
               width: double.infinity,

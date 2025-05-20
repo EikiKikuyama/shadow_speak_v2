@@ -7,16 +7,20 @@ import 'package:path_provider/path_provider.dart';
 
 class AudioRecorderService {
   final AudioRecorder _recorder = AudioRecorder();
-  final StreamController<double> _amplitudeController =
-      StreamController<double>.broadcast();
   String? _filePath;
   String? recordedFilePath;
   bool isRecording = false;
   StreamSubscription<RecordState>? _stateSubscription;
-  StreamSubscription<Amplitude>? _amplitudeSubscription;
 
-  Stream<double> get amplitudeStream =>
-      _amplitudeController.stream.asBroadcastStream();
+  // 🎯 振幅ストリームを外部が直接listen（加工付き）
+  Stream<double> get amplitudeStream => _recorder
+          .onAmplitudeChanged(const Duration(milliseconds: 100))
+          .map((event) {
+        double amplitude = event.current;
+        double normalized = (amplitude + 160) / 160;
+        double boosted = (normalized - 0.8) * 10;
+        return boosted.clamp(0.0, 1.0);
+      });
 
   Future<void> startRecording() async {
     try {
@@ -45,22 +49,6 @@ class AudioRecorderService {
           log("🎤 録音中...");
         }
       });
-
-      _amplitudeSubscription ??= _recorder
-          .onAmplitudeChanged(const Duration(milliseconds: 100))
-          .listen((event) {
-        double amplitude = event.current;
-        double normalized = (amplitude + 160) / 160;
-        double boosted = (normalized - 0.8) * 10;
-        boosted = boosted.clamp(0.0, 1.0);
-
-        log("📊 raw: $amplitude, norm: $normalized, boosted: $boosted");
-
-        // ✅ ここが抜けてた！
-        _amplitudeController.add(boosted);
-      }, onError: (e) {
-        log("❌ 振幅エラー: $e");
-      });
     } catch (e) {
       log("❌ 録音開始エラー: $e");
     }
@@ -76,9 +64,6 @@ class AudioRecorderService {
 
       await _stateSubscription?.cancel();
       _stateSubscription = null;
-
-      await _amplitudeSubscription?.cancel();
-      _amplitudeSubscription = null;
 
       return filePath;
     } catch (e) {
@@ -120,7 +105,5 @@ class AudioRecorderService {
 
   void dispose() {
     _stateSubscription?.cancel();
-    _amplitudeSubscription?.cancel();
-    _amplitudeController.close();
   }
 }
