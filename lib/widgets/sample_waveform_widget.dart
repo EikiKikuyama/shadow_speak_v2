@@ -24,7 +24,7 @@ class SampleWaveformWidget extends StatelessWidget {
         if (!snapshot.hasData) return const SizedBox();
 
         final waveform = snapshot.data!;
-        final maxAmplitude = waveform.reduce((a, b) => a > b ? a : b) * 1.5;
+        final maxAmplitude = waveform.reduce((a, b) => a > b ? a : b) * 1.2;
 
         return StreamBuilder<Duration>(
           stream: audioPlayerService.onPositionChanged,

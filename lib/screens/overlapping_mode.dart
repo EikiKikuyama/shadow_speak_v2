@@ -85,7 +85,10 @@ class _OverlappingModeState extends State<OverlappingMode> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => WavWaveformScreen(wavFilePath: path),
+          builder: (_) => WavWaveformScreen(
+            wavFilePath: path,
+            material: widget.material, // ← ここを追加！
+          ),
         ),
       );
     }

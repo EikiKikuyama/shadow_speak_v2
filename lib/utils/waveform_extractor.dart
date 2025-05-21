@@ -22,7 +22,7 @@ List<double> processWaveform(List<double> waveform) {
 
   List<double> processed =
       waveform.map((value) => max(0, value).toDouble()).toList();
-  int numSamplesPerSecond = 30;
+  int numSamplesPerSecond = 60;
   int windowSize = (processed.length / numSamplesPerSecond).floor();
   if (windowSize <= 0) return processed;
 

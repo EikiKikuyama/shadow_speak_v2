@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // ← 追加：字幕読み込み用
 import '../models/material_model.dart';
 import '../services/audio_recorder_service.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/sample_waveform_widget.dart';
 import '../widgets/realtime_waveform_widget.dart';
+import '../widgets/subtitles_widget.dart'; // ← 字幕表示用
 import '../screens/wav_waveform_screen.dart';
 
 class ShadowingMode extends StatefulWidget {
@@ -24,11 +26,13 @@ class _ShadowingModeState extends State<ShadowingMode> {
   bool _isPlaying = false;
   String? sampleFilePath;
   int? countdownValue;
+  String subtitleText = ''; // ← 字幕用
 
   @override
   void initState() {
     super.initState();
     _loadSampleAudio();
+    _loadSubtitle(); // ← 字幕読み込み
   }
 
   Future<void> _loadSampleAudio() async {
@@ -37,6 +41,21 @@ class _ShadowingModeState extends State<ShadowingMode> {
     setState(() {
       sampleFilePath = path;
     });
+  }
+
+  Future<void> _loadSubtitle() async {
+    try {
+      final text = await rootBundle.loadString(widget.material.scriptPath);
+      if (!mounted) return;
+      setState(() {
+        subtitleText = text;
+      });
+    } catch (e) {
+      debugPrint('❌ 字幕読み込み失敗: $e');
+      setState(() {
+        subtitleText = '字幕の読み込みに失敗しました。';
+      });
+    }
   }
 
   @override
@@ -83,7 +102,10 @@ class _ShadowingModeState extends State<ShadowingMode> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => WavWaveformScreen(wavFilePath: path),
+          builder: (_) => WavWaveformScreen(
+            wavFilePath: path,
+            material: widget.material, // ← ここを追加！
+          ),
         ),
       );
     }
@@ -136,17 +158,11 @@ class _ShadowingModeState extends State<ShadowingMode> {
               ],
             ),
             const SizedBox(height: 20),
+            // 字幕表示エリア
             SizedBox(
               height: 120,
               width: double.infinity,
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                color: Colors.grey.shade100,
-                child: Text(
-                  widget.material.scriptPath,
-                  style: const TextStyle(fontSize: 16),
-                ),
-              ),
+              child: SubtitlesWidget(subtitleText: subtitleText),
             ),
           ],
         ),

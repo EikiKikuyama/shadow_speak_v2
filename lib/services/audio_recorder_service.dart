@@ -18,8 +18,11 @@ class AudioRecorderService {
           .map((event) {
         double amplitude = event.current;
         double normalized = (amplitude + 160) / 160;
-        double boosted = (normalized - 0.8) * 10;
-        return boosted.clamp(0.0, 1.0);
+        double boosted = (normalized - 0.6) * 10;
+        final value = boosted.clamp(0.0, 1.0);
+
+        log('🎤 Raw: $amplitude, Normalized: $normalized, Boosted: $value');
+        return value;
       });
 
   Future<void> startRecording() async {

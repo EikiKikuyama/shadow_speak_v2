@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // ← 字幕読み込みに必要
 import '../models/material_model.dart';
 import '../services/audio_recorder_service.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/realtime_waveform_widget.dart';
+import '../widgets/subtitles_widget.dart'; // ← 字幕ウィジェット
 import '../screens/wav_waveform_screen.dart';
 
 class RecordingOnlyMode extends StatefulWidget {
@@ -20,6 +22,28 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
 
   bool _isRecording = false;
   String? _recordedPath;
+  String subtitleText = ''; // ← 字幕用
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSubtitle();
+  }
+
+  Future<void> _loadSubtitle() async {
+    try {
+      final text = await rootBundle.loadString(widget.material.scriptPath);
+      if (!mounted) return;
+      setState(() {
+        subtitleText = text;
+      });
+    } catch (e) {
+      debugPrint('❌ 字幕読み込み失敗: $e');
+      setState(() {
+        subtitleText = '字幕の読み込みに失敗しました。';
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -42,7 +66,10 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => WavWaveformScreen(wavFilePath: path),
+            builder: (_) => WavWaveformScreen(
+              wavFilePath: path,
+              material: widget.material, // ← ここを追加！
+            ),
           ),
         );
       }
@@ -100,14 +127,7 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
             SizedBox(
               height: 120,
               width: double.infinity,
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                color: Colors.grey.shade100,
-                child: Text(
-                  widget.material.scriptPath,
-                  style: const TextStyle(fontSize: 16),
-                ),
-              ),
+              child: SubtitlesWidget(subtitleText: subtitleText),
             ),
             if (_recordedPath != null) ...[
               const SizedBox(height: 20),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/material_model.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/sample_waveform_widget.dart';
+import '../widgets/subtitles_widget.dart'; // 必要ならこちらを使う
+import 'package:flutter/services.dart'; // for rootBundle
 
 class ListeningMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -15,11 +17,13 @@ class ListeningMode extends StatefulWidget {
 class _ListeningModeState extends State<ListeningMode> {
   final AudioPlayerService _audioService = AudioPlayerService();
   String? sampleFilePath;
+  String subtitleText = ''; // ← 追加：字幕データ保持用
 
   @override
   void initState() {
     super.initState();
     _loadSampleAudio();
+    _loadSubtitle(); // ← 字幕読み込み
   }
 
   Future<void> _loadSampleAudio() async {
@@ -28,6 +32,22 @@ class _ListeningModeState extends State<ListeningMode> {
     setState(() {
       sampleFilePath = path;
     });
+  }
+
+  Future<void> _loadSubtitle() async {
+    try {
+      debugPrint('📂 読み込もうとしている字幕ファイル: ${widget.material.scriptPath}');
+      final loadedText =
+          await rootBundle.loadString(widget.material.scriptPath);
+      setState(() {
+        subtitleText = loadedText;
+      });
+    } catch (e) {
+      debugPrint('❌ 字幕の読み込みに失敗: $e');
+      setState(() {
+        subtitleText = '字幕の読み込みに失敗しました。';
+      });
+    }
   }
 
   @override
@@ -87,17 +107,12 @@ class _ListeningModeState extends State<ListeningMode> {
               ],
             ),
             const SizedBox(height: 20),
+            // 字幕表示部分
             SizedBox(
               height: 120,
               width: double.infinity,
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                color: Colors.grey.shade100,
-                child: Text(
-                  widget.material.scriptPath,
-                  style: const TextStyle(fontSize: 16),
-                ),
-              ),
+              child: SubtitlesWidget(subtitleText: subtitleText),
+              // または Container+Text でもOK（デバッグ目的なら）
             ),
           ],
         ),

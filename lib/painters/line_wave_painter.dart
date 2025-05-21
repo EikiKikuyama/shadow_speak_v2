@@ -48,13 +48,13 @@ class LineWavePainter extends CustomPainter {
       double x1 = centerX +
           ((i - amplitudes.length / 2) / amplitudes.length) * size.width -
           scrollOffset;
-      double y1 = size.height / 2 -
-          ((amplitudes[i] / maxAmplitude) * size.height * 0.6);
+      double y1 =
+          size.height - ((amplitudes[i] / maxAmplitude) * size.height * 0.9);
       double x2 = centerX +
           (((i + 1) - amplitudes.length / 2) / amplitudes.length) * size.width -
           scrollOffset;
-      double y2 = size.height / 2 -
-          ((amplitudes[i + 1] / maxAmplitude) * size.height * 0.6);
+      double y2 = size.height -
+          ((amplitudes[i + 1] / maxAmplitude) * size.height * 0.9);
 
       // ✅ 描画の安全性チェック
       if (y1.isNaN || y1.isInfinite || y2.isNaN || y2.isInfinite) continue;
