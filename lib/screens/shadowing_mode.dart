@@ -184,9 +184,19 @@ class _ShadowingModeState extends State<ShadowingMode> {
             ),
 
             const SizedBox(height: 20),
-
-            // 📃 字幕表示
-            SubtitlesWidget(subtitleText: widget.material.scriptPath),
+// ✅ 字幕だけスクロール可能に
+            Container(
+              height: 300,
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: SingleChildScrollView(
+                child:
+                    SubtitlesWidget(subtitleText: widget.material.scriptPath),
+              ),
+            ),
           ],
         ),
       ),

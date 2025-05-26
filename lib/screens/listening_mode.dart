@@ -3,8 +3,8 @@ import '../models/material_model.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/sample_waveform_widget.dart';
 import '../widgets/subtitles_widget.dart';
-import '../widgets/speed_selector.dart'; // 🆕 追加
-import 'package:flutter/services.dart'; // for rootBundle
+import '../widgets/speed_selector.dart';
+import 'package:flutter/services.dart';
 
 class ListeningMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -19,7 +19,7 @@ class _ListeningModeState extends State<ListeningMode> {
   final AudioPlayerService _audioService = AudioPlayerService();
   String? sampleFilePath;
   String subtitleText = '';
-  double _currentSpeed = 1.0; // 🆕 再生速度
+  double _currentSpeed = 1.0;
 
   @override
   void initState() {
@@ -54,9 +54,9 @@ class _ListeningModeState extends State<ListeningMode> {
 
   Future<void> _play() async {
     if (sampleFilePath != null) {
-      await _audioService.setSpeed(_currentSpeed); // 🆕 再生速度を設定
+      await _audioService.setSpeed(_currentSpeed);
       await _audioService.prepareAndPlayLocalFile(
-          sampleFilePath!, _currentSpeed); // ← ✅ 正解
+          sampleFilePath!, _currentSpeed);
     }
   }
 
@@ -78,60 +78,66 @@ class _ListeningModeState extends State<ListeningMode> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('🎧 リスニングモード')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 150,
-              width: double.infinity,
-              child: sampleFilePath != null
-                  ? SampleWaveformWidget(
-                      filePath: sampleFilePath!,
-                      audioPlayerService: _audioService,
-                      playbackSpeed: _currentSpeed, // 🆕 再生速度を渡す
-                    )
-                  : const Center(child: CircularProgressIndicator()),
-            ),
-            const SizedBox(height: 20),
-
-            // 再生ボタン群
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.play_arrow, size: 32),
-                  onPressed: _play,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 150,
+                width: double.infinity,
+                child: sampleFilePath != null
+                    ? SampleWaveformWidget(
+                        filePath: sampleFilePath!,
+                        audioPlayerService: _audioService,
+                        playbackSpeed: _currentSpeed,
+                      )
+                    : const Center(child: CircularProgressIndicator()),
+              ),
+              const SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.play_arrow, size: 32),
+                    onPressed: _play,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.pause, size: 32),
+                    onPressed: _pause,
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.replay, size: 32),
+                    onPressed: _reset,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              SpeedSelector(
+                currentSpeed: _currentSpeed,
+                onSpeedSelected: (speed) {
+                  setState(() {
+                    _currentSpeed = speed;
+                  });
+                  _audioService.setSpeed(speed);
+                },
+              ),
+              const SizedBox(height: 20),
+// ✅ 字幕だけスクロール可能に
+              Container(
+                height: 300,
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade200,
+                  borderRadius: BorderRadius.circular(8),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.pause, size: 32),
-                  onPressed: _pause,
+                child: SingleChildScrollView(
+                  child:
+                      SubtitlesWidget(subtitleText: widget.material.scriptPath),
                 ),
-                IconButton(
-                  icon: const Icon(Icons.replay, size: 32),
-                  onPressed: _reset,
-                ),
-              ],
-            ),
-
-            const SizedBox(height: 20),
-
-            // 🎚 スピード調整ウィジェット
-            SpeedSelector(
-              currentSpeed: _currentSpeed,
-              onSpeedSelected: (speed) {
-                setState(() {
-                  _currentSpeed = speed;
-                });
-                _audioService.setSpeed(speed); // 再生中でも変更反映
-              },
-            ),
-
-            const SizedBox(height: 20),
-
-            // 字幕表示
-            SubtitlesWidget(subtitleText: widget.material.scriptPath),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

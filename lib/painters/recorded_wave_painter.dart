@@ -26,6 +26,7 @@ class RecordedWavePainter extends CustomPainter {
       ..strokeWidth = 2.5;
 
     final Paint futureWavePaint = Paint()
+      // ignore: deprecated_member_use
       ..color = Colors.grey.withOpacity(0.5)
       ..strokeWidth = 2.0
       ..style = PaintingStyle.stroke;

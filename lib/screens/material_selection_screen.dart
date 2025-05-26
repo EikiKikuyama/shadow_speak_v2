@@ -24,6 +24,24 @@ class MaterialSelectionScreen extends ConsumerWidget {
       audioPath: 'audio/Weatherannounce.wav',
       scriptPath: 'assets/scripts/Weatherannounce.txt',
     ),
+    PracticeMaterial(
+      id: 'introduction',
+      title: 'Introduction',
+      audioPath: 'audio/introduction.wav',
+      scriptPath: 'assets/scripts/introduction.txt',
+    ),
+    PracticeMaterial(
+      id: 'School Announcement',
+      title: 'School Announcement',
+      audioPath: 'audio/school_announcement.wav',
+      scriptPath: 'assets/scripts/school_announcement.txt',
+    ),
+    PracticeMaterial(
+      id: 'Weather',
+      title: 'Weather',
+      audioPath: 'audio/weather.wav',
+      scriptPath: 'assets/scripts/weather.txt',
+    ),
   ];
 
   MaterialSelectionScreen({super.key});

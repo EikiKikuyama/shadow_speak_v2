@@ -21,7 +21,6 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
   final AudioPlayerService _audioService = AudioPlayerService();
 
   bool _isRecording = false;
-  String? _recordedPath;
   String subtitleText = ''; // ← 字幕用
 
   @override
@@ -58,7 +57,6 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
       await _audioService.stop();
       setState(() {
         _isRecording = false;
-        _recordedPath = path;
       });
       debugPrint('🎤 録音停止: $path');
 
@@ -78,7 +76,6 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
       await _recorder.startRecording();
       setState(() {
         _isRecording = true;
-        _recordedPath = null;
       });
       debugPrint('🎤 録音開始');
     }
@@ -124,12 +121,19 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
               ],
             ),
             const SizedBox(height: 20),
-            // 📃 字幕表示（SubtitlesWidget 内部でファイルを読み込む）
-            SubtitlesWidget(subtitleText: widget.material.scriptPath),
-            if (_recordedPath != null) ...[
-              const SizedBox(height: 20),
-              Text('📁 録音ファイル: $_recordedPath'),
-            ],
+// ✅ 字幕だけスクロール可能に
+            Container(
+              height: 300,
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: SingleChildScrollView(
+                child:
+                    SubtitlesWidget(subtitleText: widget.material.scriptPath),
+              ),
+            ),
           ],
         ),
       ),
