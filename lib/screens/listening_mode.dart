@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/material_model.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/sample_waveform_widget.dart';
-import '../widgets/subtitles_widget.dart'; // 必要ならこちらを使う
+import '../widgets/subtitles_widget.dart';
+import '../widgets/speed_selector.dart'; // 🆕 追加
 import 'package:flutter/services.dart'; // for rootBundle
 
 class ListeningMode extends StatefulWidget {
@@ -17,13 +18,14 @@ class ListeningMode extends StatefulWidget {
 class _ListeningModeState extends State<ListeningMode> {
   final AudioPlayerService _audioService = AudioPlayerService();
   String? sampleFilePath;
-  String subtitleText = ''; // ← 追加：字幕データ保持用
+  String subtitleText = '';
+  double _currentSpeed = 1.0; // 🆕 再生速度
 
   @override
   void initState() {
     super.initState();
     _loadSampleAudio();
-    _loadSubtitle(); // ← 字幕読み込み
+    _loadSubtitle();
   }
 
   Future<void> _loadSampleAudio() async {
@@ -50,15 +52,11 @@ class _ListeningModeState extends State<ListeningMode> {
     }
   }
 
-  @override
-  void dispose() {
-    _audioService.dispose();
-    super.dispose();
-  }
-
   Future<void> _play() async {
     if (sampleFilePath != null) {
-      await _audioService.playLocalFile(sampleFilePath!);
+      await _audioService.setSpeed(_currentSpeed); // 🆕 再生速度を設定
+      await _audioService.prepareAndPlayLocalFile(
+          sampleFilePath!, _currentSpeed); // ← ✅ 正解
     }
   }
 
@@ -68,6 +66,12 @@ class _ListeningModeState extends State<ListeningMode> {
 
   Future<void> _reset() async {
     await _audioService.reset();
+  }
+
+  @override
+  void dispose() {
+    _audioService.dispose();
+    super.dispose();
   }
 
   @override
@@ -85,10 +89,13 @@ class _ListeningModeState extends State<ListeningMode> {
                   ? SampleWaveformWidget(
                       filePath: sampleFilePath!,
                       audioPlayerService: _audioService,
+                      playbackSpeed: _currentSpeed, // 🆕 再生速度を渡す
                     )
                   : const Center(child: CircularProgressIndicator()),
             ),
             const SizedBox(height: 20),
+
+            // 再生ボタン群
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -106,14 +113,24 @@ class _ListeningModeState extends State<ListeningMode> {
                 ),
               ],
             ),
+
             const SizedBox(height: 20),
-            // 字幕表示部分
-            SizedBox(
-              height: 120,
-              width: double.infinity,
-              child: SubtitlesWidget(subtitleText: subtitleText),
-              // または Container+Text でもOK（デバッグ目的なら）
+
+            // 🎚 スピード調整ウィジェット
+            SpeedSelector(
+              currentSpeed: _currentSpeed,
+              onSpeedSelected: (speed) {
+                setState(() {
+                  _currentSpeed = speed;
+                });
+                _audioService.setSpeed(speed); // 再生中でも変更反映
+              },
             ),
+
+            const SizedBox(height: 20),
+
+            // 字幕表示
+            SubtitlesWidget(subtitleText: widget.material.scriptPath),
           ],
         ),
       ),

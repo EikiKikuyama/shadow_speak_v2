@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class LineWavePainter extends CustomPainter {
   final List<double> amplitudes;
@@ -16,48 +17,45 @@ class LineWavePainter extends CustomPainter {
     if (amplitudes.isEmpty || maxAmplitude <= 0 || maxAmplitude.isNaN) return;
 
     final Paint pastWavePaint = Paint()
-      ..color = Colors.blue
+      ..color = Colors.blueAccent
+      ..strokeWidth = 2.5
+      ..style = PaintingStyle.stroke;
+
+    final Paint futureWavePaint = Paint()
+      ..color = Colors.grey.shade400
       ..strokeWidth = 2.0
       ..style = PaintingStyle.stroke;
 
     final Paint redLinePaint = Paint()
       ..color = Colors.red
-      ..strokeWidth = 2.5;
-
-    final Paint futureWavePaint = Paint()
-      ..color = Colors.grey
-      ..strokeWidth = 2.0
-      ..style = PaintingStyle.stroke;
+      ..strokeWidth = 3.0;
 
     final double centerX = size.width / 2;
-
-    // ✅ スクロールオフセット（再生位置に合わせて滑らかに中央合わせ）
     final int totalSamples = amplitudes.length;
-    final double clampedProgress = progress.clamp(0.0, 1.0);
-    final double progressIndex = clampedProgress * totalSamples;
-    final double scrollOffset =
-        ((progressIndex - (totalSamples / 2)) / totalSamples) * size.width;
+
+    // 🎯 スクロール位置を progress に比例させる（シンプルでズレにくい）
+    final double scrollOffset = progress * size.width;
+    debugPrint(
+        '🖌 progress: ${progress.toStringAsFixed(3)} → scrollOffset: ${scrollOffset.toStringAsFixed(2)}');
 
     Path pastPath = Path();
     Path futurePath = Path();
     bool hasPastPathStarted = false;
     bool hasFuturePathStarted = false;
 
-    for (int i = 0; i < amplitudes.length - 1; i++) {
-      // X座標のスケーリング調整
-      double x1 = centerX +
-          ((i - amplitudes.length / 2) / amplitudes.length) * size.width -
-          scrollOffset;
-      double y1 =
-          size.height - ((amplitudes[i] / maxAmplitude) * size.height * 0.9);
-      double x2 = centerX +
-          (((i + 1) - amplitudes.length / 2) / amplitudes.length) * size.width -
-          scrollOffset;
-      double y2 = size.height -
-          ((amplitudes[i + 1] / maxAmplitude) * size.height * 0.9);
+    double normalize(double amp) => max(amp, 0.05);
 
-      // ✅ 描画の安全性チェック
-      if (y1.isNaN || y1.isInfinite || y2.isNaN || y2.isInfinite) continue;
+    for (int i = 0; i < totalSamples - 1; i++) {
+      double x1 = (i / totalSamples) * size.width - scrollOffset + centerX;
+      double x2 =
+          ((i + 1) / totalSamples) * size.width - scrollOffset + centerX;
+
+      double y1 = size.height -
+          ((normalize(amplitudes[i]) / maxAmplitude) * size.height * 1.2);
+      double y2 = size.height -
+          ((normalize(amplitudes[i + 1]) / maxAmplitude) * size.height * 1.2);
+
+      if (y1.isNaN || y2.isNaN || y1.isInfinite || y2.isInfinite) continue;
 
       if (x1 < centerX) {
         if (!hasPastPathStarted) {
@@ -74,10 +72,9 @@ class LineWavePainter extends CustomPainter {
       }
     }
 
+    // 🔴 中央赤ライン（現在の再生位置）
     canvas.drawPath(pastPath, pastWavePaint);
     canvas.drawPath(futurePath, futureWavePaint);
-
-    // ✅ 再生位置ライン（中央）
     canvas.drawLine(
       Offset(centerX, 0),
       Offset(centerX, size.height),

@@ -6,6 +6,8 @@ import '../services/audio_player_service.dart';
 import '../widgets/sample_waveform_widget.dart';
 import '../widgets/realtime_waveform_widget.dart';
 import '../screens/wav_waveform_screen.dart';
+import '../widgets/subtitles_widget.dart';
+import '../widgets/speed_selector.dart';
 
 class OverlappingMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -24,6 +26,8 @@ class _OverlappingModeState extends State<OverlappingMode> {
   bool _isPlaying = false;
   String? sampleFilePath;
   int? countdownValue;
+
+  double _currentSpeed = 1.0; // 🆕 再生速度
 
   @override
   void initState() {
@@ -68,8 +72,13 @@ class _OverlappingModeState extends State<OverlappingMode> {
 
     await _recorder.startRecording();
 
+    // 🆕 再生速度を設定
+    await _audioService.setSpeed(_currentSpeed);
+
     // 再生と同時に再生終了まで待つ
-    await _audioService.playLocalFile(sampleFilePath!);
+    await _audioService.prepareAndPlayLocalFile(
+        sampleFilePath!, _currentSpeed); // ← ✅ 正解
+
     final duration = _audioService.totalDuration ?? const Duration(seconds: 10);
     await Future.delayed(duration);
 
@@ -87,7 +96,7 @@ class _OverlappingModeState extends State<OverlappingMode> {
         MaterialPageRoute(
           builder: (_) => WavWaveformScreen(
             wavFilePath: path,
-            material: widget.material, // ← ここを追加！
+            material: widget.material,
           ),
         ),
       );
@@ -112,6 +121,7 @@ class _OverlappingModeState extends State<OverlappingMode> {
                     SampleWaveformWidget(
                       filePath: sampleFilePath!,
                       audioPlayerService: _audioService,
+                      playbackSpeed: _currentSpeed, // 🆕 再生速度を渡す
                     ),
                   RealtimeWaveformWidget(
                     amplitudeStream: _recorder.amplitudeStream,
@@ -141,18 +151,18 @@ class _OverlappingModeState extends State<OverlappingMode> {
               ],
             ),
             const SizedBox(height: 20),
-            SizedBox(
-              height: 120,
-              width: double.infinity,
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                color: Colors.grey.shade100,
-                child: Text(
-                  widget.material.scriptPath,
-                  style: const TextStyle(fontSize: 16),
-                ),
-              ),
+            // 🆕 再生スピード選択
+            SpeedSelector(
+              currentSpeed: _currentSpeed,
+              onSpeedSelected: (speed) {
+                setState(() {
+                  _currentSpeed = speed;
+                });
+                _audioService.setSpeed(speed); // 再生中にも反映
+              },
             ),
+            const SizedBox(height: 20),
+            SubtitlesWidget(subtitleText: widget.material.scriptPath),
           ],
         ),
       ),

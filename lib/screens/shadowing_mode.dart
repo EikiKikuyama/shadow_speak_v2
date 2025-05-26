@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // ← 追加：字幕読み込み用
+import 'package:flutter/services.dart';
 import '../models/material_model.dart';
 import '../services/audio_recorder_service.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/sample_waveform_widget.dart';
 import '../widgets/realtime_waveform_widget.dart';
-import '../widgets/subtitles_widget.dart'; // ← 字幕表示用
+import '../widgets/subtitles_widget.dart';
 import '../screens/wav_waveform_screen.dart';
+import '../widgets/speed_selector.dart';
 
 class ShadowingMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -26,13 +27,15 @@ class _ShadowingModeState extends State<ShadowingMode> {
   bool _isPlaying = false;
   String? sampleFilePath;
   int? countdownValue;
-  String subtitleText = ''; // ← 字幕用
+  String subtitleText = '';
+
+  double _currentSpeed = 1.0; // 🆕 再生速度
 
   @override
   void initState() {
     super.initState();
     _loadSampleAudio();
-    _loadSubtitle(); // ← 字幕読み込み
+    _loadSubtitle();
   }
 
   Future<void> _loadSampleAudio() async {
@@ -86,7 +89,13 @@ class _ShadowingModeState extends State<ShadowingMode> {
     });
 
     await _recorder.startRecording();
-    await _audioService.playLocalFile(sampleFilePath!);
+
+    // 🆕 再生速度を設定
+    await _audioService.setSpeed(_currentSpeed);
+
+    await _audioService.prepareAndPlayLocalFile(
+        sampleFilePath!, _currentSpeed); // ← ✅ 正解
+
     final duration = _audioService.totalDuration ?? const Duration(seconds: 10);
     await Future.delayed(duration);
 
@@ -104,7 +113,7 @@ class _ShadowingModeState extends State<ShadowingMode> {
         MaterialPageRoute(
           builder: (_) => WavWaveformScreen(
             wavFilePath: path,
-            material: widget.material, // ← ここを追加！
+            material: widget.material,
           ),
         ),
       );
@@ -129,6 +138,7 @@ class _ShadowingModeState extends State<ShadowingMode> {
                     SampleWaveformWidget(
                       filePath: sampleFilePath!,
                       audioPlayerService: _audioService,
+                      playbackSpeed: _currentSpeed, // 🆕 速度渡す
                     ),
                   RealtimeWaveformWidget(
                     amplitudeStream: _recorder.amplitudeStream,
@@ -147,6 +157,8 @@ class _ShadowingModeState extends State<ShadowingMode> {
               ),
             ),
             const SizedBox(height: 20),
+
+            // 🎛️ 再生ボタン
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -157,13 +169,24 @@ class _ShadowingModeState extends State<ShadowingMode> {
                 ),
               ],
             ),
+
             const SizedBox(height: 20),
-            // 字幕表示エリア
-            SizedBox(
-              height: 120,
-              width: double.infinity,
-              child: SubtitlesWidget(subtitleText: subtitleText),
+
+            // 🎚️ 再生速度セレクター
+            SpeedSelector(
+              currentSpeed: _currentSpeed,
+              onSpeedSelected: (speed) {
+                setState(() {
+                  _currentSpeed = speed;
+                });
+                _audioService.setSpeed(speed);
+              },
             ),
+
+            const SizedBox(height: 20),
+
+            // 📃 字幕表示
+            SubtitlesWidget(subtitleText: widget.material.scriptPath),
           ],
         ),
       ),

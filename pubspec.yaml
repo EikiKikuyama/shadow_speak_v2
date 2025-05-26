@@ -32,6 +32,7 @@ dependencies:
   googleapis_auth: 
   logger: ^2.0.2
   uuid: ^4.2.2
+  just_audio: ^0.10.3
 
   cupertino_icons: ^1.0.8
 

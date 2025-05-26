@@ -124,11 +124,8 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
               ],
             ),
             const SizedBox(height: 20),
-            SizedBox(
-              height: 120,
-              width: double.infinity,
-              child: SubtitlesWidget(subtitleText: subtitleText),
-            ),
+            // 📃 字幕表示（SubtitlesWidget 内部でファイルを読み込む）
+            SubtitlesWidget(subtitleText: widget.material.scriptPath),
             if (_recordedPath != null) ...[
               const SizedBox(height: 20),
               Text('📁 録音ファイル: $_recordedPath'),

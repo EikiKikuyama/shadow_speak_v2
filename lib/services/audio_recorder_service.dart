@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:developer';
+import 'dart:developer' as dev;
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:record/record.dart';
@@ -12,7 +12,9 @@ class AudioRecorderService {
   bool isRecording = false;
   StreamSubscription<RecordState>? _stateSubscription;
 
-  // 🎯 振幅ストリームを外部が直接listen（加工付き）
+  double _maxObservedAmplitude = 0.0;
+
+  // 🎯 振幅ストリーム（録音中のリアルタイム可視化＆最大値記録）
   Stream<double> get amplitudeStream => _recorder
           .onAmplitudeChanged(const Duration(milliseconds: 100))
           .map((event) {
@@ -21,7 +23,12 @@ class AudioRecorderService {
         double boosted = (normalized - 0.6) * 10;
         final value = boosted.clamp(0.0, 1.0);
 
-        log('🎤 Raw: $amplitude, Normalized: $normalized, Boosted: $value');
+        if (value > _maxObservedAmplitude) {
+          _maxObservedAmplitude = value;
+          dev.log('📈 最大振幅更新: $_maxObservedAmplitude');
+        }
+
+        dev.log('🎤 Raw: $amplitude, Normalized: $normalized, Boosted: $value');
         return value;
       });
 
@@ -35,6 +42,7 @@ class AudioRecorderService {
       if (!recordingsDir.existsSync()) {
         recordingsDir.createSync(recursive: true);
       }
+
       _filePath =
           "${recordingsDir.path}/recording_${DateTime.now().millisecondsSinceEpoch}.m4a";
 
@@ -45,32 +53,35 @@ class AudioRecorderService {
 
       isRecording = true;
       recordedFilePath = null;
+      _maxObservedAmplitude = 0.0; // 🔄 初期化
 
       _stateSubscription?.cancel();
       _stateSubscription = _recorder.onStateChanged().listen((state) {
         if (state == RecordState.record) {
-          log("🎤 録音中...");
+          dev.log("🎤 録音中...");
         }
       });
     } catch (e) {
-      log("❌ 録音開始エラー: $e");
+      dev.log("❌ 録音開始エラー: $e");
     }
   }
 
   Future<String?> stopRecording() async {
     try {
       String? filePath = await _recorder.stop();
-      log("🎤 録音停止: $filePath");
+      dev.log("🎤 録音停止: $filePath");
 
       isRecording = false;
       if (filePath != null) recordedFilePath = filePath;
+
+      dev.log("✅ この録音の最大振幅: $_maxObservedAmplitude");
 
       await _stateSubscription?.cancel();
       _stateSubscription = null;
 
       return filePath;
     } catch (e) {
-      log("❌ 録音停止エラー: $e");
+      dev.log("❌ 録音停止エラー: $e");
       return null;
     }
   }
@@ -100,7 +111,7 @@ class AudioRecorderService {
         waveform.add(count > 0 ? sum / count : 0.0);
       }
     } catch (e) {
-      log("⚠️ 波形抽出失敗: $e");
+      dev.log("⚠️ 波形抽出失敗: $e");
     }
 
     return waveform;
