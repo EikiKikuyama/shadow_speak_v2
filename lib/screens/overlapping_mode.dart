@@ -4,8 +4,6 @@ import '../models/material_model.dart';
 import '../services/audio_recorder_service.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/sample_waveform_widget.dart';
-import '../widgets/realtime_waveform_widget.dart';
-import '../screens/wav_waveform_screen.dart';
 import '../widgets/subtitles_widget.dart';
 import '../widgets/speed_selector.dart';
 
@@ -24,10 +22,12 @@ class _OverlappingModeState extends State<OverlappingMode> {
 
   bool _isRecording = false;
   bool _isPlaying = false;
+  bool _isResetting = false;
+  bool _hasPlayedOnce = false;
+
   String? sampleFilePath;
   int? countdownValue;
-
-  double _currentSpeed = 1.0; // 🆕 再生速度
+  double _currentSpeed = 1.0;
 
   @override
   void initState() {
@@ -38,16 +38,45 @@ class _OverlappingModeState extends State<OverlappingMode> {
   Future<void> _loadSampleAudio() async {
     final path = await _audioService.copyAssetToFile(widget.material.audioPath);
     if (!mounted) return;
+    await _audioService.prepareLocalFile(path, _currentSpeed);
     setState(() {
       sampleFilePath = path;
     });
   }
 
-  @override
-  void dispose() {
-    _recorder.dispose();
-    _audioService.dispose();
-    super.dispose();
+  Future<void> _handleReset() async {
+    _isResetting = true;
+    await _audioService.reset();
+    await _audioService.stop();
+
+    if (sampleFilePath != null) {
+      await _audioService.prepareLocalFile(sampleFilePath!, _currentSpeed);
+    }
+
+    if (!mounted) return;
+    setState(() {
+      _isPlaying = false;
+      _isRecording = false;
+      countdownValue = null;
+      _hasPlayedOnce = false;
+    });
+  }
+
+  Future<void> _pause() async {
+    await _audioService.pause();
+    if (!mounted) return;
+    setState(() {
+      _isPlaying = false;
+    });
+  }
+
+  Future<void> _resume() async {
+    await _audioService.resume();
+    if (!mounted) return;
+    setState(() {
+      _isPlaying = true;
+      _hasPlayedOnce = true;
+    });
   }
 
   Future<void> _startCountdownAndPlay() async {
@@ -55,52 +84,46 @@ class _OverlappingModeState extends State<OverlappingMode> {
 
     setState(() {
       countdownValue = 3;
+      _isResetting = false;
     });
 
     for (int i = 3; i > 0; i--) {
       await Future.delayed(const Duration(seconds: 1));
-      setState(() {
-        countdownValue = i - 1;
-      });
+      if (!mounted || _isResetting) return;
+      setState(() => countdownValue = i - 1);
     }
+
+    if (!mounted || _isResetting) return;
 
     setState(() {
       countdownValue = null;
       _isPlaying = true;
       _isRecording = true;
+      _hasPlayedOnce = true;
     });
 
     await _recorder.startRecording();
-
-    // 🆕 再生速度を設定
     await _audioService.setSpeed(_currentSpeed);
-
-    // 再生と同時に再生終了まで待つ
-    await _audioService.prepareAndPlayLocalFile(
-        sampleFilePath!, _currentSpeed); // ← ✅ 正解
+    await _audioService.prepareAndPlayLocalFile(sampleFilePath!, _currentSpeed);
 
     final duration = _audioService.totalDuration ?? const Duration(seconds: 10);
     await Future.delayed(duration);
 
-    final path = await _recorder.stopRecording();
     await _audioService.stop();
+    if (!mounted || _isResetting) return;
 
     setState(() {
       _isRecording = false;
       _isPlaying = false;
     });
+  }
 
-    if (path != null && mounted) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => WavWaveformScreen(
-            wavFilePath: path,
-            material: widget.material,
-          ),
-        ),
-      );
-    }
+  @override
+  void dispose() {
+    _recorder.dispose();
+    _audioService.dispose();
+    _isResetting = true;
+    super.dispose();
   }
 
   @override
@@ -121,12 +144,8 @@ class _OverlappingModeState extends State<OverlappingMode> {
                     SampleWaveformWidget(
                       filePath: sampleFilePath!,
                       audioPlayerService: _audioService,
-                      playbackSpeed: _currentSpeed, // 🆕 再生速度を渡す
+                      playbackSpeed: _currentSpeed,
                     ),
-                  RealtimeWaveformWidget(
-                    amplitudeStream: _recorder.amplitudeStream,
-                    height: 150,
-                  ),
                   if (countdownValue != null)
                     Text(
                       countdownValue == 0 ? 'Go!' : countdownValue.toString(),
@@ -146,23 +165,33 @@ class _OverlappingModeState extends State<OverlappingMode> {
                 IconButton(
                   icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow,
                       size: 32),
-                  onPressed: _startCountdownAndPlay,
+                  onPressed: () {
+                    if (_isPlaying) {
+                      _pause();
+                    } else {
+                      if (_hasPlayedOnce) {
+                        _resume();
+                      } else {
+                        _startCountdownAndPlay();
+                      }
+                    }
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.refresh, size: 28),
+                  onPressed: _handleReset,
                 ),
               ],
             ),
             const SizedBox(height: 20),
-            // 🆕 再生スピード選択
             SpeedSelector(
               currentSpeed: _currentSpeed,
               onSpeedSelected: (speed) {
-                setState(() {
-                  _currentSpeed = speed;
-                });
-                _audioService.setSpeed(speed); // 再生中にも反映
+                setState(() => _currentSpeed = speed);
+                _audioService.setSpeed(speed);
               },
             ),
             const SizedBox(height: 20),
-// ✅ 字幕だけスクロール可能に
             Container(
               height: 300,
               padding: const EdgeInsets.all(8.0),

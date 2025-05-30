@@ -31,6 +31,7 @@ class _ListeningModeState extends State<ListeningMode> {
   Future<void> _loadSampleAudio() async {
     final path = await _audioService.copyAssetToFile(widget.material.audioPath);
     if (!mounted) return;
+    await _audioService.prepareLocalFile(path, _currentSpeed); // ← これが必要！
     setState(() {
       sampleFilePath = path;
     });

@@ -23,8 +23,7 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
 
   Future<void> _play() async {
     setState(() => _isPlaying = true);
-    await _audioService.prepareAndPlayLocalFile(
-        widget.wavFilePath, 1.0); // 等倍再生
+    await _audioService.prepareAndPlayLocalFile(widget.wavFilePath, 1.0);
   }
 
   Future<void> _pause() async {
@@ -33,6 +32,7 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
   }
 
   Future<void> _reset() async {
+    setState(() => _isPlaying = false);
     await _audioService.reset();
   }
 
@@ -50,11 +50,20 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // 🎵 波形表示
+            // 👤 見本波形（上）
+            SampleWaveformWidget(
+              filePath: widget.material.audioPath,
+              audioPlayerService: _audioService,
+              playbackSpeed: 1.0,
+              height: 100,
+            ),
+            const SizedBox(height: 16),
+            // 🎙️ 録音波形（下）
             SampleWaveformWidget(
               filePath: widget.wavFilePath,
               audioPlayerService: _audioService,
-              playbackSpeed: 1.0, // 固定
+              playbackSpeed: 1.0,
+              height: 100,
             ),
             const SizedBox(height: 24),
             // ▶️ / ⏸ / 🔁

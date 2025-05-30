@@ -6,8 +6,9 @@ import '../utils/waveform_extractor.dart';
 
 class SampleWaveformWidget extends StatelessWidget {
   final String filePath;
+  final bool isAsset; // ← 新規追加ポイント
   final AudioPlayerService audioPlayerService;
-  final double playbackSpeed; // ※使わなくなるけどUI保持用に残す
+  final double playbackSpeed; // UI互換用に残す
   final double height;
 
   const SampleWaveformWidget({
@@ -16,6 +17,7 @@ class SampleWaveformWidget extends StatelessWidget {
     required this.audioPlayerService,
     required this.playbackSpeed,
     this.height = 200,
+    this.isAsset = false, // ← デフォルトはfalse（録音ファイル）
   });
 
   @override
@@ -42,13 +44,9 @@ class SampleWaveformWidget extends StatelessWidget {
               return const SizedBox();
             }
 
-            // ✅ 再生速度に関係なく、position ÷ 元のduration で progress を算出
             double progress =
                 position.inMilliseconds / originalDuration.inMilliseconds;
             progress = progress.clamp(0.0, 1.0);
-
-            debugPrint(
-                '🎧 再生位置: $position / $originalDuration → progress: ${progress.toStringAsFixed(3)}');
 
             return SizedBox(
               height: height,
@@ -68,8 +66,12 @@ class SampleWaveformWidget extends StatelessWidget {
   }
 
   Future<List<double>> _loadAndProcessWaveform() async {
-    final file = File(filePath);
-    final raw = extractWaveform(file);
+    List<double> raw;
+    if (isAsset) {
+      raw = await extractWaveformFromAssets(filePath);
+    } else {
+      raw = extractWaveform(File(filePath));
+    }
     return processWaveform(raw);
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // ← 字幕読み込みに必要
+import 'package:flutter/services.dart';
 import '../models/material_model.dart';
 import '../services/audio_recorder_service.dart';
 import '../services/audio_player_service.dart';
-import '../widgets/realtime_waveform_widget.dart';
-import '../widgets/subtitles_widget.dart'; // ← 字幕ウィジェット
+// import '../widgets/realtime_waveform_widget.dart';
+import '../widgets/subtitles_widget.dart';
 import '../screens/wav_waveform_screen.dart';
 
 class RecordingOnlyMode extends StatefulWidget {
@@ -21,7 +21,7 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
   final AudioPlayerService _audioService = AudioPlayerService();
 
   bool _isRecording = false;
-  String subtitleText = ''; // ← 字幕用
+  String subtitleText = '';
 
   @override
   void initState() {
@@ -58,15 +58,13 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
       setState(() {
         _isRecording = false;
       });
-      debugPrint('🎤 録音停止: $path');
-
       if (path != null && mounted) {
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (_) => WavWaveformScreen(
               wavFilePath: path,
-              material: widget.material, // ← ここを追加！
+              material: widget.material,
             ),
           ),
         );
@@ -77,13 +75,11 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
       setState(() {
         _isRecording = true;
       });
-      debugPrint('🎤 録音開始');
     }
   }
 
   Future<void> _resetPlayback() async {
     await _audioService.reset();
-    debugPrint('🔄 リセット');
   }
 
   @override
@@ -94,14 +90,14 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SizedBox(
-              height: 150,
-              width: double.infinity,
-              child: RealtimeWaveformWidget(
-                amplitudeStream: _recorder.amplitudeStream,
-                height: 150,
-              ),
-            ),
+            // SizedBox(
+            //   height: 150,
+            //   width: double.infinity,
+            //   child: RealtimeWaveformWidget(
+            //     amplitudeStream: _recorder.amplitudeStream,
+            //     height: 150,
+            //   ),
+            // ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -121,7 +117,6 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
               ],
             ),
             const SizedBox(height: 20),
-// ✅ 字幕だけスクロール可能に
             Container(
               height: 300,
               padding: const EdgeInsets.all(8.0),

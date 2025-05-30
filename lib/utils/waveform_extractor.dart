@@ -1,9 +1,8 @@
-// lib/utils/waveform_extractor.dart
-
 import 'dart:io';
 import 'dart:math';
-import 'dart:typed_data';
+import 'package:flutter/services.dart'; // ← assets用に必要
 
+/// 録音ファイル（File）から波形データを抽出
 List<double> extractWaveform(File file) {
   final List<double> amplitudes = [];
   final Uint8List data = file.readAsBytesSync();
@@ -17,6 +16,22 @@ List<double> extractWaveform(File file) {
   return amplitudes;
 }
 
+/// assets内の音声ファイルから波形データを抽出（非同期）
+Future<List<double>> extractWaveformFromAssets(String assetPath) async {
+  final ByteData byteData = await rootBundle.load(assetPath);
+  final Uint8List data = byteData.buffer.asUint8List();
+  final List<double> amplitudes = [];
+  int step = 50;
+
+  for (int i = 0; i < data.length - 1; i += step) {
+    int sample = (data[i] | (data[i + 1] << 8)).toSigned(16);
+    amplitudes.add(sample.toDouble());
+  }
+
+  return amplitudes;
+}
+
+/// 波形を視認しやすいように加工（スムージング＋正規化）
 List<double> processWaveform(List<double> waveform) {
   if (waveform.isEmpty) return [];
 
