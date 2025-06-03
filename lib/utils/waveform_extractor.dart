@@ -1,9 +1,13 @@
 import 'dart:io';
 import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // ← assets用に必要
 
 /// 録音ファイル（File）から波形データを抽出
 List<double> extractWaveform(File file) {
+  debugPrint("📄 extractWaveform(): path = ${file.path}");
+  debugPrint("📄 ファイル存在する？ ${file.existsSync()}");
+
   final List<double> amplitudes = [];
   final Uint8List data = file.readAsBytesSync();
   int step = 50;

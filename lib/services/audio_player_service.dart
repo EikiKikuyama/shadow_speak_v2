@@ -8,7 +8,6 @@ import 'package:just_audio/just_audio.dart';
 class AudioPlayerService {
   final AudioPlayer _player = AudioPlayer();
   Duration? _duration;
-  // ignore: unnecessary_getters_setters
   Duration? get totalDuration => _duration;
   set totalDuration(Duration? value) => _duration = value;
 
@@ -28,14 +27,22 @@ class AudioPlayerService {
     });
   }
 
-  /// アセットの通常再生
   Future<void> play(String sourcePath) async {
     await _player.stop();
     await _player.setAsset(sourcePath);
     await _player.play();
   }
 
-  /// 再開機能付きスマート再生（途中から or 初めから）
+  Future<void> prepareAndPlayAsset(String assetPath, double speed) async {
+    await setSpeed(speed);
+    await stop();
+    await Future.delayed(const Duration(milliseconds: 200));
+    await _player.setAsset(assetPath);
+    totalDuration = _player.duration;
+    await _player.play();
+    debugPrint("📦 Asset再生開始: $assetPath");
+  }
+
   Future<void> smartPlayLocalFile(String filePath) async {
     final file = File(filePath);
     if (!file.existsSync()) {
@@ -64,7 +71,6 @@ class AudioPlayerService {
     }
   }
 
-  /// 🆕 再開メソッド（停止後の再生位置から再開）
   Future<void> resume() async {
     if (_currentFilePath == null) {
       debugPrint("❌ resume: ファイルパスが未設定");
@@ -82,25 +88,34 @@ class AudioPlayerService {
     }
   }
 
-  /// ローカルファイルの準備＋再生
   Future<void> prepareAndPlayLocalFile(String filePath, double speed) async {
     await setSpeed(speed);
-    await stop(); // ソース切り替えのため
+    await stop();
     await Future.delayed(const Duration(milliseconds: 200));
     await _player.setFilePath(filePath);
     _currentFilePath = filePath;
     totalDuration = _player.duration;
     await _player.play();
     debugPrint("▶️ prepareAndPlay: 再生開始");
+    debugPrint("🕒 再生ファイル duration: ${_player.duration}");
   }
 
-  /// 再生準備のみ（波形用）
   Future<void> prepareLocalFile(String path, double speed) async {
     await setSpeed(speed);
     await _player.setFilePath(path);
     _currentFilePath = path;
     totalDuration = _player.duration;
     debugPrint("📦 prepareLocalFile: duration = $totalDuration");
+  }
+
+  Future<Duration?> getDuration(String filePath) async {
+    try {
+      await _player.setFilePath(filePath);
+      return _player.duration;
+    } catch (e) {
+      debugPrint("❌ getDuration エラー: $e");
+      return null;
+    }
   }
 
   Future<void> pause() async {
@@ -110,7 +125,6 @@ class AudioPlayerService {
 
   Future<void> stop() async {
     await _player.stop();
-    // _currentFilePath は残すことで resume が可能になる
     debugPrint("⏹ 停止");
   }
 

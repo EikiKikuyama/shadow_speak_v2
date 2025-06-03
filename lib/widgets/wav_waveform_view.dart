@@ -1,93 +1,90 @@
 import 'package:flutter/material.dart';
-import '../models/material_model.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/sample_waveform_widget.dart';
+import '../widgets/recorded_waveform_widget.dart';
 
-class WavWaveformScreen extends StatefulWidget {
-  final String wavFilePath;
-  final PracticeMaterial material;
+class WavWaveformView extends StatefulWidget {
+  final String sampleAssetPath;
+  final String recordedFilePath;
+  final AudioPlayerService audioPlayerService;
+  final double playbackSpeed;
 
-  const WavWaveformScreen({
+  const WavWaveformView({
     super.key,
-    required this.wavFilePath,
-    required this.material,
+    required this.sampleAssetPath,
+    required this.recordedFilePath,
+    required this.audioPlayerService,
+    required this.playbackSpeed,
   });
 
   @override
-  State<WavWaveformScreen> createState() => _WavWaveformScreenState();
+  State<WavWaveformView> createState() => _WavWaveformViewState();
 }
 
-class _WavWaveformScreenState extends State<WavWaveformScreen> {
-  final AudioPlayerService _audioService = AudioPlayerService();
-  bool _isPlaying = false;
-
-  Future<void> _play() async {
-    setState(() => _isPlaying = true);
-    await _audioService.prepareAndPlayLocalFile(widget.wavFilePath, 1.0);
-  }
-
-  Future<void> _pause() async {
-    setState(() => _isPlaying = false);
-    await _audioService.pause();
-  }
-
-  Future<void> _reset() async {
-    setState(() => _isPlaying = false);
-    await _audioService.reset();
-  }
+class _WavWaveformViewState extends State<WavWaveformView> {
+  Duration? _audioDuration;
+  Duration _currentPosition = Duration.zero;
+  late final Stream<Duration> _positionStream;
 
   @override
-  void dispose() {
-    _audioService.dispose();
-    super.dispose();
+  void initState() {
+    super.initState();
+    _loadAudioDuration();
+
+    // 録音ファイルを再生開始
+    widget.audioPlayerService.prepareAndPlayLocalFile(
+      widget.recordedFilePath,
+      widget.playbackSpeed,
+    );
+
+    _positionStream = widget.audioPlayerService.positionStream;
+    _positionStream.listen((position) {
+      if (!mounted) return;
+      setState(() => _currentPosition = position);
+    });
+  }
+
+  Future<void> _loadAudioDuration() async {
+    final duration =
+        await widget.audioPlayerService.getDuration(widget.recordedFilePath);
+    if (!mounted) return;
+    setState(() => _audioDuration = duration);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('📊 録音波形の確認')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            // 👤 見本波形（assets）
-            SampleWaveformWidget(
-              filePath: widget.material.audioPath,
-              isAsset: true, // ← ここ重要！！
-              audioPlayerService: _audioService,
-              playbackSpeed: 1.0,
-              height: 100,
-            ),
-            const SizedBox(height: 16),
-            // 🎙️ 録音波形（録音ファイル）
-            SampleWaveformWidget(
-              filePath: widget.wavFilePath,
-              isAsset: false,
-              audioPlayerService: _audioService,
-              playbackSpeed: 1.0,
-              height: 100,
-            ),
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: Icon(
-                    _isPlaying ? Icons.pause : Icons.play_arrow,
-                    size: 32,
-                  ),
-                  onPressed: _isPlaying ? _pause : _play,
-                ),
-                const SizedBox(width: 24),
-                IconButton(
-                  icon: const Icon(Icons.replay, size: 32),
-                  onPressed: _reset,
-                ),
-              ],
-            ),
-          ],
+    if (_audioDuration == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
+    final double progress =
+        _currentPosition.inMilliseconds / _audioDuration!.inMilliseconds;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        const SizedBox(height: 16),
+        SampleWaveformWidget(
+          filePath: widget.sampleAssetPath,
+          audioPlayerService: widget.audioPlayerService,
+          playbackSpeed: widget.playbackSpeed,
+          height: 100,
+          isAsset: true,
         ),
-      ),
+        const SizedBox(height: 32),
+        RecordedWaveformWidget(
+          filePath: widget.recordedFilePath,
+          audioDuration: _audioDuration!,
+          height: 100,
+          progress: progress,
+        ),
+      ],
     );
+  }
+
+  @override
+  void dispose() {
+    widget.audioPlayerService.dispose();
+    super.dispose();
   }
 }

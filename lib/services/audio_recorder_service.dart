@@ -14,6 +14,8 @@ class AudioRecorderService {
 
   double _maxObservedAmplitude = 0.0;
 
+  String? get getRecordedFilePath => recordedFilePath;
+
   // 🎯 振幅ストリーム（録音中のリアルタイム可視化＆最大値記録）
   Stream<double> get amplitudeStream => _recorder
           .onAmplitudeChanged(const Duration(milliseconds: 100))
@@ -44,10 +46,10 @@ class AudioRecorderService {
       }
 
       _filePath =
-          "${recordingsDir.path}/recording_${DateTime.now().millisecondsSinceEpoch}.m4a";
+          "${recordingsDir.path}/recording_${DateTime.now().millisecondsSinceEpoch}.wav";
 
       await _recorder.start(
-        RecordConfig(encoder: AudioEncoder.aacLc),
+        RecordConfig(encoder: AudioEncoder.wav),
         path: _filePath!,
       );
 
