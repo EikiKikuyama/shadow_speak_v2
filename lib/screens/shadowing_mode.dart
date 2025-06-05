@@ -26,7 +26,6 @@ class _ShadowingModeState extends State<ShadowingMode> {
 
   String? sampleFilePath;
   int? countdownValue;
-
   double _currentSpeed = 1.0;
 
   @override
@@ -42,14 +41,6 @@ class _ShadowingModeState extends State<ShadowingMode> {
     setState(() {
       sampleFilePath = path;
     });
-  }
-
-  @override
-  void dispose() {
-    _isResetting = true;
-    _recorder.dispose();
-    _audioService.dispose();
-    super.dispose();
   }
 
   Future<void> _startCountdownAndPlay() async {
@@ -113,7 +104,6 @@ class _ShadowingModeState extends State<ShadowingMode> {
   Future<void> _handleReset() async {
     _isResetting = true;
     await _audioService.stop();
-    // 🆕 音声再準備（prepareLocalFileで再読み込み）
     if (sampleFilePath != null) {
       await _audioService.prepareLocalFile(sampleFilePath!, _currentSpeed);
     }
@@ -126,24 +116,45 @@ class _ShadowingModeState extends State<ShadowingMode> {
   }
 
   @override
+  void dispose() {
+    _isResetting = true;
+    _recorder.dispose();
+    _audioService.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('🗣 シャドーイングモード')),
-      body: Padding(
+      backgroundColor: const Color(0xFF2E7D32),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF2E7D32),
+        elevation: 0,
+        title: const Text(
+          '🗣 シャドーイングモード',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SizedBox(
-              height: 150,
+            // 波形エリア
+            Container(
               width: double.infinity,
+              height: 160,
+              color: const Color(0xFF212121),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   if (sampleFilePath != null)
-                    SampleWaveformWidget(
-                      filePath: sampleFilePath!,
-                      audioPlayerService: _audioService,
-                      playbackSpeed: _currentSpeed,
+                    ClipRect(
+                      child: SampleWaveformWidget(
+                        filePath: sampleFilePath!,
+                        audioPlayerService: _audioService,
+                        playbackSpeed: _currentSpeed,
+                      ),
                     ),
                   if (countdownValue != null)
                     Text(
@@ -151,19 +162,25 @@ class _ShadowingModeState extends State<ShadowingMode> {
                       style: const TextStyle(
                         fontSize: 48,
                         fontWeight: FontWeight.bold,
-                        color: Colors.green,
+                        color: Colors.white,
                       ),
                     ),
                 ],
               ),
             ),
+
             const SizedBox(height: 20),
+
+            // 再生・停止・リセット
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
-                  icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow,
-                      size: 32),
+                  icon: Icon(
+                    _isPlaying ? Icons.pause : Icons.play_arrow,
+                    size: 40,
+                    color: Colors.white,
+                  ),
                   onPressed: () {
                     if (_isPlaying) {
                       _pause();
@@ -177,12 +194,16 @@ class _ShadowingModeState extends State<ShadowingMode> {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(Icons.refresh, size: 28),
+                  icon:
+                      const Icon(Icons.refresh, size: 32, color: Colors.white),
                   onPressed: _handleReset,
                 ),
               ],
             ),
+
             const SizedBox(height: 20),
+
+            // スピードセレクター
             SpeedSelector(
               currentSpeed: _currentSpeed,
               onSpeedSelected: (speed) {

@@ -49,24 +49,58 @@ class MaterialSelectionScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(title: const Text('題材を選択')),
-      body: ListView.builder(
-        itemCount: materials.length,
-        itemBuilder: (context, index) {
-          final material = materials[index];
-          return ListTile(
-              title: Text(material.title),
-              leading: const Icon(Icons.audiotrack),
-              trailing: const Icon(Icons.arrow_forward),
-              onTap: () {
-                ref.read(selectedMaterialProvider.notifier).state = material;
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const PracticeModeSelectionScreen(),
-                  ),
-                );
-              });
+      backgroundColor: const Color(0xFF2E7D32), // 黒板グリーン背景
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF2E7D32),
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text(
+          '題材を選択',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView.builder(
+          itemCount: materials.length,
+          itemBuilder: (context, index) {
+            final material = materials[index];
+            return _buildMaterialTile(material, ref, context);
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMaterialTile(
+      PracticeMaterial material, WidgetRef ref, BuildContext context) {
+    return Card(
+      color: const Color(0xFFE8F5E9), // 明るい緑（ノート風）
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      margin: const EdgeInsets.only(bottom: 12),
+      child: ListTile(
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        leading: const Icon(Icons.audiotrack, color: Colors.green),
+        title: Text(
+          material.title,
+          style: const TextStyle(
+            fontSize: 16,
+            color: Colors.black87,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+        onTap: () {
+          ref.read(selectedMaterialProvider.notifier).state = material;
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PracticeModeSelectionScreen(),
+            ),
+          );
         },
       ),
     );

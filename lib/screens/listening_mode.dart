@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../models/material_model.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/sample_waveform_widget.dart';
-import '../widgets/subtitles_widget.dart';
 import '../widgets/speed_selector.dart';
 import 'package:flutter/services.dart';
+import '../widgets/subtitles_widget.dart';
 
 class ListeningMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -20,6 +20,8 @@ class _ListeningModeState extends State<ListeningMode> {
   String? sampleFilePath;
   String subtitleText = '';
   double _currentSpeed = 1.0;
+  bool _isPlaying = false;
+  bool _hasPlayedOnce = false;
 
   @override
   void initState() {
@@ -31,7 +33,7 @@ class _ListeningModeState extends State<ListeningMode> {
   Future<void> _loadSampleAudio() async {
     final path = await _audioService.copyAssetToFile(widget.material.audioPath);
     if (!mounted) return;
-    await _audioService.prepareLocalFile(path, _currentSpeed); // ← これが必要！
+    await _audioService.prepareLocalFile(path, _currentSpeed);
     setState(() {
       sampleFilePath = path;
     });
@@ -39,14 +41,12 @@ class _ListeningModeState extends State<ListeningMode> {
 
   Future<void> _loadSubtitle() async {
     try {
-      debugPrint('📂 読み込もうとしている字幕ファイル: ${widget.material.scriptPath}');
       final loadedText =
           await rootBundle.loadString(widget.material.scriptPath);
       setState(() {
         subtitleText = loadedText;
       });
     } catch (e) {
-      debugPrint('❌ 字幕の読み込みに失敗: $e');
       setState(() {
         subtitleText = '字幕の読み込みに失敗しました。';
       });
@@ -58,15 +58,29 @@ class _ListeningModeState extends State<ListeningMode> {
       await _audioService.setSpeed(_currentSpeed);
       await _audioService.prepareAndPlayLocalFile(
           sampleFilePath!, _currentSpeed);
+      setState(() {
+        _isPlaying = true;
+        _hasPlayedOnce = true;
+      });
     }
   }
 
   Future<void> _pause() async {
     await _audioService.pause();
+    setState(() => _isPlaying = false);
+  }
+
+  Future<void> _resume() async {
+    await _audioService.resume();
+    setState(() => _isPlaying = true);
   }
 
   Future<void> _reset() async {
     await _audioService.reset();
+    setState(() {
+      _isPlaying = false;
+      _hasPlayedOnce = false;
+    });
   }
 
   @override
@@ -77,68 +91,93 @@ class _ListeningModeState extends State<ListeningMode> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final subtitleHeight = screenHeight * 0.3;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('🎧 リスニングモード')),
+      backgroundColor: const Color(0xFF2E7D32),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF2E7D32),
+        elevation: 0,
+        title: const Text('🎧 リスニングモード', style: TextStyle(color: Colors.white)),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 150,
-                width: double.infinity,
-                child: sampleFilePath != null
-                    ? SampleWaveformWidget(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: 160,
+              color: const Color(0xFF212121),
+              child: sampleFilePath != null
+                  ? ClipRect(
+                      child: SampleWaveformWidget(
                         filePath: sampleFilePath!,
                         audioPlayerService: _audioService,
                         playbackSpeed: _currentSpeed,
-                      )
-                    : const Center(child: CircularProgressIndicator()),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.play_arrow, size: 32),
-                    onPressed: _play,
+                      ),
+                    )
+                  : const Center(
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    _isPlaying ? Icons.pause : Icons.play_arrow,
+                    size: 40,
+                    color: Colors.white,
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.pause, size: 32),
-                    onPressed: _pause,
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.replay, size: 32),
-                    onPressed: _reset,
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20),
-              SpeedSelector(
-                currentSpeed: _currentSpeed,
-                onSpeedSelected: (speed) {
-                  setState(() {
-                    _currentSpeed = speed;
-                  });
-                  _audioService.setSpeed(speed);
-                },
-              ),
-              const SizedBox(height: 20),
-// ✅ 字幕だけスクロール可能に
-              Container(
-                height: 300,
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(8),
+                  onPressed: () {
+                    if (_isPlaying) {
+                      _pause();
+                    } else {
+                      if (_hasPlayedOnce) {
+                        _resume();
+                      } else {
+                        _play();
+                      }
+                    }
+                  },
                 ),
+                IconButton(
+                  icon: const Icon(Icons.replay, size: 32, color: Colors.white),
+                  onPressed: _reset,
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            SpeedSelector(
+              currentSpeed: _currentSpeed,
+              onSpeedSelected: (speed) {
+                setState(() {
+                  _currentSpeed = speed;
+                });
+                _audioService.setSpeed(speed);
+              },
+            ),
+            const SizedBox(height: 20),
+            Container(
+              height: subtitleHeight,
+              width: double.infinity,
+              padding: const EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFDF6E3),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Scrollbar(
                 child: SingleChildScrollView(
-                  child:
-                      SubtitlesWidget(subtitleText: widget.material.scriptPath),
+                  child: SubtitlesWidget(
+                    subtitleText: widget.material.scriptPath,
+                  ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

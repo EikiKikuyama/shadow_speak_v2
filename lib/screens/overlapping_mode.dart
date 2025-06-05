@@ -128,23 +128,38 @@ class _OverlappingModeState extends State<OverlappingMode> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final subtitleHeight = screenHeight * 0.3;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('🎤 オーバーラッピングモード')),
-      body: Padding(
+      backgroundColor: const Color(0xFF2E7D32),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF2E7D32),
+        elevation: 0,
+        title: const Text(
+          '🎤 オーバーラッピングモード',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            SizedBox(
-              height: 150,
+            Container(
               width: double.infinity,
+              height: 160,
+              color: const Color(0xFF212121),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   if (sampleFilePath != null)
-                    SampleWaveformWidget(
-                      filePath: sampleFilePath!,
-                      audioPlayerService: _audioService,
-                      playbackSpeed: _currentSpeed,
+                    ClipRect(
+                      child: SampleWaveformWidget(
+                        filePath: sampleFilePath!,
+                        audioPlayerService: _audioService,
+                        playbackSpeed: _currentSpeed,
+                      ),
                     ),
                   if (countdownValue != null)
                     Text(
@@ -152,7 +167,7 @@ class _OverlappingModeState extends State<OverlappingMode> {
                       style: const TextStyle(
                         fontSize: 48,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blue,
+                        color: Colors.white,
                       ),
                     ),
                 ],
@@ -163,8 +178,11 @@ class _OverlappingModeState extends State<OverlappingMode> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
-                  icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow,
-                      size: 32),
+                  icon: Icon(
+                    _isPlaying ? Icons.pause : Icons.play_arrow,
+                    size: 40,
+                    color: Colors.white,
+                  ),
                   onPressed: () {
                     if (_isPlaying) {
                       _pause();
@@ -178,7 +196,8 @@ class _OverlappingModeState extends State<OverlappingMode> {
                   },
                 ),
                 IconButton(
-                  icon: const Icon(Icons.refresh, size: 28),
+                  icon:
+                      const Icon(Icons.refresh, size: 32, color: Colors.white),
                   onPressed: _handleReset,
                 ),
               ],
@@ -193,15 +212,19 @@ class _OverlappingModeState extends State<OverlappingMode> {
             ),
             const SizedBox(height: 20),
             Container(
-              height: 300,
-              padding: const EdgeInsets.all(8.0),
+              height: subtitleHeight,
+              width: double.infinity,
+              padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(8),
+                color: const Color(0xFFFDF6E3),
+                borderRadius: BorderRadius.circular(12),
               ),
-              child: SingleChildScrollView(
-                child:
-                    SubtitlesWidget(subtitleText: widget.material.scriptPath),
+              child: Scrollbar(
+                child: SingleChildScrollView(
+                  child: SubtitlesWidget(
+                    subtitleText: widget.material.scriptPath,
+                  ),
+                ),
               ),
             ),
           ],

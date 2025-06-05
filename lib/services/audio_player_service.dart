@@ -36,6 +36,7 @@ class AudioPlayerService {
   Future<void> prepareAndPlayAsset(String assetPath, double speed) async {
     await setSpeed(speed);
     await stop();
+
     await Future.delayed(const Duration(milliseconds: 200));
     await _player.setAsset(assetPath);
     totalDuration = _player.duration;

@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import '../models/material_model.dart';
 import '../services/audio_recorder_service.dart';
 import '../services/audio_player_service.dart';
-// import '../widgets/realtime_waveform_widget.dart';
 import '../widgets/subtitles_widget.dart';
 import '../screens/wav_waveform_screen.dart';
 
@@ -44,13 +43,6 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
     }
   }
 
-  @override
-  void dispose() {
-    _recorder.dispose();
-    _audioService.dispose();
-    super.dispose();
-  }
-
   Future<void> _toggleRecording() async {
     if (_isRecording) {
       final path = await _recorder.stopRecording();
@@ -83,21 +75,32 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
   }
 
   @override
+  void dispose() {
+    _recorder.dispose();
+    _audioService.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final subtitleHeight = screenHeight * 0.7;
+
     return Scaffold(
-      appBar: AppBar(title: const Text('🎤 録音モード')),
-      body: Padding(
+      backgroundColor: const Color(0xFF2E7D32),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF2E7D32),
+        elevation: 0,
+        title: const Text(
+          '🎤 録音モード',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+      ),
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // SizedBox(
-            //   height: 150,
-            //   width: double.infinity,
-            //   child: RealtimeWaveformWidget(
-            //     amplitudeStream: _recorder.amplitudeStream,
-            //     height: 150,
-            //   ),
-            // ),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -105,28 +108,33 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
                 IconButton(
                   icon: Icon(
                     _isRecording ? Icons.stop : Icons.fiber_manual_record,
-                    color: _isRecording ? Colors.red : Colors.black,
-                    size: 32,
+                    color: _isRecording ? Colors.red : Colors.white,
+                    size: 40,
                   ),
                   onPressed: _toggleRecording,
                 ),
                 IconButton(
-                  icon: const Icon(Icons.restart_alt, size: 32),
+                  icon: const Icon(Icons.restart_alt,
+                      size: 32, color: Colors.white),
                   onPressed: _resetPlayback,
                 ),
               ],
             ),
             const SizedBox(height: 20),
             Container(
-              height: 300,
-              padding: const EdgeInsets.all(8.0),
+              height: subtitleHeight,
+              width: double.infinity,
+              padding: const EdgeInsets.all(12.0),
               decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(8),
+                color: const Color(0xFFFDF6E3),
+                borderRadius: BorderRadius.circular(12),
               ),
-              child: SingleChildScrollView(
-                child:
-                    SubtitlesWidget(subtitleText: widget.material.scriptPath),
+              child: Scrollbar(
+                child: SingleChildScrollView(
+                  child: SubtitlesWidget(
+                    subtitleText: widget.material.scriptPath,
+                  ),
+                ),
               ),
             ),
           ],
