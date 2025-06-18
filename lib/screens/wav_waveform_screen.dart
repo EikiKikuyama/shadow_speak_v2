@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import '../models/material_model.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/sample_waveform_widget.dart';
+import '../screens/ai_scoring_screen.dart';
 
 class WavWaveformScreen extends StatefulWidget {
   final String wavFilePath;
@@ -182,21 +183,34 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.green.shade700),
-                ),
-                child: const Center(
-                  child: Text(
-                    'AI採点へ（未実装）',
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => AiScoringScreen(
+                        recordedFilePath: widget.wavFilePath,
+                        material: widget.material,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.green.shade700),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'AI採点へ',
+                      style: TextStyle(
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),

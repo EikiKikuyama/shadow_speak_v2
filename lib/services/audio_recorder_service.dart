@@ -16,7 +16,6 @@ class AudioRecorderService {
 
   String? get getRecordedFilePath => recordedFilePath;
 
-  // 🎯 振幅ストリーム（録音中のリアルタイム可視化＆最大値記録）
   Stream<double> get amplitudeStream => _recorder
           .onAmplitudeChanged(const Duration(milliseconds: 100))
           .map((event) {
@@ -55,7 +54,7 @@ class AudioRecorderService {
 
       isRecording = true;
       recordedFilePath = null;
-      _maxObservedAmplitude = 0.0; // 🔄 初期化
+      _maxObservedAmplitude = 0.0;
 
       _stateSubscription?.cancel();
       _stateSubscription = _recorder.onStateChanged().listen((state) {
