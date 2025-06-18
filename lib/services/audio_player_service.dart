@@ -8,6 +8,7 @@ import 'package:just_audio/just_audio.dart';
 class AudioPlayerService {
   final AudioPlayer _player = AudioPlayer();
   Duration? _duration;
+  // ignore: unnecessary_getters_setters
   Duration? get totalDuration => _duration;
   set totalDuration(Duration? value) => _duration = value;
 

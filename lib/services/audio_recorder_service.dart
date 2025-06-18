@@ -93,8 +93,16 @@ class AudioRecorderService {
     try {
       final Uint8List data = await file.readAsBytes();
       int totalSamples = data.length ~/ 2;
+
+      // ✅ durationが0秒なら安全にスキップ
+      if (audioDuration.inSeconds == 0) {
+        dev.log("⚠️ audioDurationが0秒のため波形抽出をスキップします。");
+        return [];
+      }
+
       int desiredSamples = audioDuration.inSeconds * 10;
       int groupSize = (totalSamples / desiredSamples).ceil();
+
       final ByteData byteData = ByteData.sublistView(data);
 
       for (int i = 0; i < totalSamples; i += groupSize) {

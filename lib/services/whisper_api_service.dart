@@ -1,4 +1,5 @@
 import 'package:http/http.dart' as http;
+// ignore: depend_on_referenced_packages
 import 'package:http_parser/http_parser.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart'; // ← dotenvをimport
 import 'dart:convert';
