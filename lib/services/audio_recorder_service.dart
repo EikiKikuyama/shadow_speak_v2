@@ -73,7 +73,13 @@ class AudioRecorderService {
       dev.log("🎤 録音停止: $filePath");
 
       isRecording = false;
-      if (filePath != null) recordedFilePath = filePath;
+      if (filePath != null) {
+        recordedFilePath = filePath;
+
+        // ✅ ここに追加！
+        final size = await File(filePath).length();
+        dev.log("📦 録音ファイルサイズ: ${size} bytes");
+      }
 
       dev.log("✅ この録音の最大振幅: $_maxObservedAmplitude");
 
