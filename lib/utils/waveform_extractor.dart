@@ -37,15 +37,21 @@ Future<List<double>> extractWaveformFromAssets(String assetPath) async {
   return amplitudes;
 }
 
-/// 波形を視認しやすいように加工（スムージング＋正規化）
 List<double> processWaveform(List<double> waveform) {
-  if (waveform.isEmpty) return [];
+  if (waveform.isEmpty) {
+    debugPrint("📉 入力waveformが空です");
+    return [];
+  }
 
+  // マイナス値を0に変換
   List<double> processed =
       waveform.map((value) => max(0, value).toDouble()).toList();
+  debugPrint("🔢 processed.length: ${processed.length}");
 
+  // スムージング
   int numSamplesPerSecond = 60;
   int windowSize = (processed.length / numSamplesPerSecond).floor();
+  debugPrint("🪟 windowSize: $windowSize");
   if (windowSize <= 0) return processed;
 
   List<double> smoothed = [];
@@ -55,10 +61,15 @@ List<double> processWaveform(List<double> waveform) {
     smoothed.add(avg);
   }
 
+  debugPrint("📈 smoothed.length: ${smoothed.length}");
   if (smoothed.isEmpty) return [];
 
   final maxAmp = smoothed.reduce(max);
-  if (maxAmp == 0.0 || maxAmp.isNaN) return [];
+  debugPrint("🔊 maxAmp: $maxAmp");
+  final safeMaxAmp = maxAmp < 0.001 ? 1.0 : maxAmp;
 
-  return smoothed.map((e) => e / maxAmp * 0.6).toList(); // ← ⚠️ ここが折衷ポイント！
+  final normalized = smoothed.map((e) => (e / safeMaxAmp) * 0.6).toList();
+  debugPrint("✅ normalized.length: ${normalized.length}");
+
+  return normalized;
 }

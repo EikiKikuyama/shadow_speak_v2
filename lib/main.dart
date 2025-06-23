@@ -8,7 +8,13 @@ Future<void> main() async {
 
   try {
     await dotenv.load(); // ✅ 引数なしでOK！
-    print('✅ APIキー: ${dotenv.env['OPENAI_API_KEY']}');
+    final apiKey = dotenv.env['OPENAI_API_KEY'];
+
+    if (apiKey == null || apiKey.isEmpty) {
+      print('❌ APIキーが読み込めていません');
+    } else {
+      print('✅ APIキーの読み込みに成功しました'); // ← 中身は表示しない
+    }
   } catch (e) {
     print('❌ dotenv 読み込み失敗: $e');
   }

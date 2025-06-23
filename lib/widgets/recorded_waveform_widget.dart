@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../painters/line_wave_painter.dart';
 import '../utils/waveform_extractor.dart';
+import 'dart:math';
 
 class RecordedWaveformWidget extends StatelessWidget {
   final String filePath;
@@ -24,12 +25,15 @@ class RecordedWaveformWidget extends StatelessWidget {
     return FutureBuilder<List<double>>(
       future: _loadAndProcessWaveform(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return const Center(child: CircularProgressIndicator());
+        final waveform = snapshot.data;
+
+        if (waveform == null || waveform.isEmpty) {
+          debugPrint("⚠️ [Recorded] waveformがnullまたは空です。描画スキップ（$filePath）");
+          return const SizedBox();
         }
 
-        final waveform = snapshot.data!;
-        final maxAmplitude = waveform.reduce((a, b) => a > b ? a : b) * 1.2;
+        final maxAmplitude =
+            waveform.any((e) => e > 0) ? waveform.reduce(max).abs() * 1.2 : 1.0;
 
         return SizedBox(
           height: height,

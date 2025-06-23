@@ -24,7 +24,8 @@ class WhisperApiService {
         filePath,
         contentType: MediaType('audio', 'wav'),
       ))
-      ..fields['model'] = 'whisper-1';
+      ..fields['model'] = 'whisper-1'
+      ..fields['language'] = 'en'; // 必要に応じて言語を指定
 
     final streamedResponse = await request.send();
     final response = await http.Response.fromStream(streamedResponse);

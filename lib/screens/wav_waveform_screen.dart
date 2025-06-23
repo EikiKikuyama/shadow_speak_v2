@@ -24,12 +24,22 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
   bool _isPlaying = false;
   String? _copiedSamplePath;
   String subtitleText = '';
+  double _currentProgress = 0.0;
 
   @override
   void initState() {
     super.initState();
     _prepareSampleAudio();
     _loadSubtitle();
+
+    _audioService.positionStream.listen((pos) {
+      if (!mounted || _audioService.totalDuration == null) return;
+      final total = _audioService.totalDuration!.inMilliseconds;
+      final current = pos.inMilliseconds;
+      setState(() {
+        _currentProgress = total > 0 ? current / total : 0.0;
+      });
+    });
   }
 
   Future<void> _prepareSampleAudio() async {
@@ -126,8 +136,8 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
                       child: SampleWaveformWidget(
                         filePath: _copiedSamplePath!,
                         isAsset: false,
-                        audioPlayerService: _audioService,
-                        playbackSpeed: 1.0,
+                        height: waveformHeight,
+                        progress: _currentProgress,
                       ),
                     )
                   : buildWaveformContainer(
@@ -143,8 +153,8 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
                 child: SampleWaveformWidget(
                   filePath: widget.wavFilePath,
                   isAsset: false,
-                  audioPlayerService: _audioService,
-                  playbackSpeed: 1.0,
+                  height: waveformHeight,
+                  progress: _currentProgress,
                 ),
               ),
               const SizedBox(height: 24),

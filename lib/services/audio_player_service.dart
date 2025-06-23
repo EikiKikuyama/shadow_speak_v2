@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:just_audio/just_audio.dart';
+// ignore: depend_on_referenced_packages
+import 'package:rxdart/rxdart.dart';
 
 class AudioPlayerService {
   final AudioPlayer _player = AudioPlayer();
   Duration? _duration;
-  // ignore: unnecessary_getters_setters
   Duration? get totalDuration => _duration;
   set totalDuration(Duration? value) => _duration = value;
 
@@ -16,61 +17,36 @@ class AudioPlayerService {
       StreamController.broadcast();
   Stream<Duration> get onPositionChanged => _positionController.stream;
 
+  final BehaviorSubject<Duration> _durationSubject =
+      BehaviorSubject.seeded(Duration.zero);
+  Stream<Duration> get durationStream => _durationSubject.stream;
+
+  final BehaviorSubject<bool> _isPlayingSubject = BehaviorSubject.seeded(false);
+  Stream<bool> get isPlayingStream => _isPlayingSubject.stream;
+
   String? _currentFilePath;
 
   AudioPlayerService() {
     _player.durationStream.listen((duration) {
       _duration = duration;
+      if (duration != null) {
+        _durationSubject.add(duration);
+      }
     });
 
     _player.positionStream.listen((position) {
       _positionController.add(position);
     });
+
+    _player.playingStream.listen((isPlaying) {
+      _isPlayingSubject.add(isPlaying);
+    });
   }
 
-  Future<void> play(String sourcePath) async {
-    await _player.stop();
-    await _player.setAsset(sourcePath);
-    await _player.play();
-  }
+  bool get isActuallyPlaying => _player.playing;
 
-  Future<void> prepareAndPlayAsset(String assetPath, double speed) async {
-    await setSpeed(speed);
-    await stop();
-
-    await Future.delayed(const Duration(milliseconds: 200));
-    await _player.setAsset(assetPath);
-    totalDuration = _player.duration;
-    await _player.play();
-    debugPrint("📦 Asset再生開始: $assetPath");
-  }
-
-  Future<void> smartPlayLocalFile(String filePath) async {
-    final file = File(filePath);
-    if (!file.existsSync()) {
-      debugPrint("❌ smartPlay: ファイルが存在しません: $filePath");
-      return;
-    }
-
-    try {
-      final state = _player.playerState;
-
-      if (state.playing == false &&
-          _currentFilePath == filePath &&
-          state.processingState == ProcessingState.ready) {
-        await _player.play();
-        debugPrint("▶️ smartPlay: 再開");
-      } else {
-        await _player.stop();
-        await Future.delayed(const Duration(milliseconds: 300));
-        await _player.setFilePath(filePath);
-        _currentFilePath = filePath;
-        await _player.play();
-        debugPrint("🎧 smartPlay: ソース設定して再生");
-      }
-    } catch (e) {
-      debugPrint("❌ smartPlay エラー: $e");
-    }
+  Future<void> seek(Duration position) async {
+    await _player.seek(position);
   }
 
   Future<void> resume() async {
@@ -79,7 +55,8 @@ class AudioPlayerService {
       return;
     }
     try {
-      if (_player.playerState.processingState == ProcessingState.ready) {
+      if (_player.playerState.processingState == ProcessingState.ready ||
+          _player.playerState.processingState == ProcessingState.completed) {
         await _player.play();
         debugPrint("▶️ resume: 再開しました");
       } else {
@@ -157,11 +134,12 @@ class AudioPlayerService {
     return file.path;
   }
 
-  bool get isPlaying => _player.playing;
   Stream<Duration> get positionStream => _player.positionStream;
 
   void dispose() {
     _player.dispose();
     _positionController.close();
+    _durationSubject.close();
+    _isPlayingSubject.close();
   }
 }

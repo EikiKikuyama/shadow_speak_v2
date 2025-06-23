@@ -6,6 +6,7 @@ import '../services/audio_player_service.dart';
 import '../widgets/sample_waveform_widget.dart';
 import '../widgets/subtitles_widget.dart';
 import '../widgets/speed_selector.dart';
+import '../widgets/playback_controls.dart';
 
 class OverlappingMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -21,18 +22,37 @@ class _OverlappingModeState extends State<OverlappingMode> {
   final AudioPlayerService _audioService = AudioPlayerService();
 
   bool _isRecording = false;
-  bool _isPlaying = false;
   bool _isResetting = false;
   bool _hasPlayedOnce = false;
 
   String? sampleFilePath;
   int? countdownValue;
   double _currentSpeed = 1.0;
+  late StreamSubscription<bool> _playingSubscription;
+  bool _isPlaying = false;
+  Duration _currentPosition = Duration.zero;
+  StreamSubscription<Duration>? _positionSubscription;
 
   @override
   void initState() {
     super.initState();
     _loadSampleAudio();
+
+    _playingSubscription = _audioService.isPlayingStream.listen((isPlaying) {
+      if (mounted) {
+        setState(() {
+          _isPlaying = isPlaying;
+        });
+      }
+    });
+
+    _positionSubscription = _audioService.positionStream.listen((position) {
+      if (mounted) {
+        setState(() {
+          _currentPosition = position;
+        });
+      }
+    });
   }
 
   Future<void> _loadSampleAudio() async {
@@ -55,7 +75,6 @@ class _OverlappingModeState extends State<OverlappingMode> {
 
     if (!mounted) return;
     setState(() {
-      _isPlaying = false;
       _isRecording = false;
       countdownValue = null;
       _hasPlayedOnce = false;
@@ -66,15 +85,16 @@ class _OverlappingModeState extends State<OverlappingMode> {
     await _audioService.pause();
     if (!mounted) return;
     setState(() {
-      _isPlaying = false;
+      _isRecording = false;
     });
   }
 
   Future<void> _resume() async {
+    await _recorder.startRecording();
     await _audioService.resume();
     if (!mounted) return;
     setState(() {
-      _isPlaying = true;
+      _isRecording = true;
       _hasPlayedOnce = true;
     });
   }
@@ -97,7 +117,6 @@ class _OverlappingModeState extends State<OverlappingMode> {
 
     setState(() {
       countdownValue = null;
-      _isPlaying = true;
       _isRecording = true;
       _hasPlayedOnce = true;
     });
@@ -114,14 +133,20 @@ class _OverlappingModeState extends State<OverlappingMode> {
 
     setState(() {
       _isRecording = false;
-      _isPlaying = false;
     });
+  }
+
+  double _calculateProgress() {
+    final total = _audioService.totalDuration?.inMilliseconds ?? 1;
+    return _currentPosition.inMilliseconds / total;
   }
 
   @override
   void dispose() {
     _recorder.dispose();
     _audioService.dispose();
+    _playingSubscription.cancel();
+    _positionSubscription?.cancel();
     _isResetting = true;
     super.dispose();
   }
@@ -154,11 +179,14 @@ class _OverlappingModeState extends State<OverlappingMode> {
                 alignment: Alignment.center,
                 children: [
                   if (sampleFilePath != null)
-                    ClipRect(
-                      child: SampleWaveformWidget(
-                        filePath: sampleFilePath!,
-                        audioPlayerService: _audioService,
-                        playbackSpeed: _currentSpeed,
+                    Align(
+                      alignment: Alignment.center,
+                      child: ClipRect(
+                        child: SampleWaveformWidget(
+                          filePath: sampleFilePath!,
+                          height: 100,
+                          progress: _calculateProgress(),
+                        ),
                       ),
                     ),
                   if (countdownValue != null)
@@ -174,33 +202,22 @@ class _OverlappingModeState extends State<OverlappingMode> {
               ),
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  icon: Icon(
-                    _isPlaying ? Icons.pause : Icons.play_arrow,
-                    size: 40,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    if (_isPlaying) {
-                      _pause();
-                    } else {
-                      if (_hasPlayedOnce) {
-                        _resume();
-                      } else {
-                        _startCountdownAndPlay();
-                      }
-                    }
-                  },
-                ),
-                IconButton(
-                  icon:
-                      const Icon(Icons.refresh, size: 32, color: Colors.white),
-                  onPressed: _handleReset,
-                ),
-              ],
+            PlaybackControls(
+              isPlaying: _isPlaying,
+              onPlayPauseToggle: () {
+                if (!_hasPlayedOnce) {
+                  _startCountdownAndPlay();
+                } else if (_isPlaying) {
+                  _pause();
+                } else {
+                  _resume();
+                }
+              },
+              onRestart: _handleReset,
+              onSeekForward: () => _audioService
+                  .seek(_currentPosition + const Duration(seconds: 5)),
+              onSeekBackward: () => _audioService
+                  .seek(_currentPosition - const Duration(seconds: 5)),
             ),
             const SizedBox(height: 20),
             SpeedSelector(

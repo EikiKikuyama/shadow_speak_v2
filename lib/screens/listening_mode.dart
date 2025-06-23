@@ -3,8 +3,9 @@ import '../models/material_model.dart';
 import '../services/audio_player_service.dart';
 import '../widgets/sample_waveform_widget.dart';
 import '../widgets/speed_selector.dart';
-import 'package:flutter/services.dart';
 import '../widgets/subtitles_widget.dart';
+import '../widgets/playback_controls.dart';
+import 'package:flutter/services.dart';
 
 class ListeningMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -20,14 +21,17 @@ class _ListeningModeState extends State<ListeningMode> {
   String? sampleFilePath;
   String subtitleText = '';
   double _currentSpeed = 1.0;
-  bool _isPlaying = false;
-  bool _hasPlayedOnce = false;
+  Duration _currentPosition = Duration.zero;
 
   @override
   void initState() {
     super.initState();
     _loadSampleAudio();
     _loadSubtitle();
+
+    _audioService.positionStream.listen((pos) {
+      setState(() => _currentPosition = pos);
+    });
   }
 
   Future<void> _loadSampleAudio() async {
@@ -53,34 +57,18 @@ class _ListeningModeState extends State<ListeningMode> {
     }
   }
 
-  Future<void> _play() async {
-    if (sampleFilePath != null) {
-      await _audioService.setSpeed(_currentSpeed);
-      await _audioService.prepareAndPlayLocalFile(
-          sampleFilePath!, _currentSpeed);
-      setState(() {
-        _isPlaying = true;
-        _hasPlayedOnce = true;
-      });
+  Future<void> _togglePlayPause(bool isPlaying) async {
+    if (sampleFilePath == null) return;
+    await _audioService.setSpeed(_currentSpeed);
+    if (isPlaying) {
+      await _audioService.pause();
+    } else {
+      await _audioService.resume();
     }
-  }
-
-  Future<void> _pause() async {
-    await _audioService.pause();
-    setState(() => _isPlaying = false);
-  }
-
-  Future<void> _resume() async {
-    await _audioService.resume();
-    setState(() => _isPlaying = true);
   }
 
   Future<void> _reset() async {
     await _audioService.reset();
-    setState(() {
-      _isPlaying = false;
-      _hasPlayedOnce = false;
-    });
   }
 
   @override
@@ -93,6 +81,11 @@ class _ListeningModeState extends State<ListeningMode> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final subtitleHeight = screenHeight * 0.3;
+
+    final total = _audioService.totalDuration;
+    final progress = (total != null && total.inMilliseconds > 0)
+        ? _currentPosition.inMilliseconds / total.inMilliseconds
+        : 0.0;
 
     return Scaffold(
       backgroundColor: const Color(0xFF2E7D32),
@@ -114,41 +107,33 @@ class _ListeningModeState extends State<ListeningMode> {
                   ? ClipRect(
                       child: SampleWaveformWidget(
                         filePath: sampleFilePath!,
-                        audioPlayerService: _audioService,
-                        playbackSpeed: _currentSpeed,
+                        height: 100,
+                        progress: progress,
                       ),
                     )
                   : const Center(
-                      child: CircularProgressIndicator(color: Colors.white),
-                    ),
+                      child: CircularProgressIndicator(color: Colors.white)),
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  icon: Icon(
-                    _isPlaying ? Icons.pause : Icons.play_arrow,
-                    size: 40,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    if (_isPlaying) {
-                      _pause();
-                    } else {
-                      if (_hasPlayedOnce) {
-                        _resume();
-                      } else {
-                        _play();
-                      }
-                    }
+            StreamBuilder<bool>(
+              stream: _audioService.isPlayingStream,
+              initialData: false,
+              builder: (context, snapshot) {
+                final isPlaying = snapshot.data ?? false;
+                return PlaybackControls(
+                  isPlaying: isPlaying,
+                  onPlayPauseToggle: () => _togglePlayPause(isPlaying),
+                  onRestart: _reset,
+                  onSeekForward: () {
+                    _audioService
+                        .seek(_currentPosition + const Duration(seconds: 5));
                   },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.replay, size: 32, color: Colors.white),
-                  onPressed: _reset,
-                ),
-              ],
+                  onSeekBackward: () {
+                    _audioService
+                        .seek(_currentPosition - const Duration(seconds: 5));
+                  },
+                );
+              },
             ),
             const SizedBox(height: 20),
             SpeedSelector(

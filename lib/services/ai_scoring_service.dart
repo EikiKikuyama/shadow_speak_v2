@@ -13,7 +13,10 @@ class AiScoringService {
     final distance = _levenshtein(ref, res);
     final maxLen = ref.isNotEmpty ? ref.length : 1;
 
-    double similarity = (1 - distance / maxLen).clamp(0.0, 1.0);
+    const penaltyMultiplier = 1.5;
+    double penalty = (distance * penaltyMultiplier) / maxLen;
+
+    double similarity = (1 - penalty).clamp(0.0, 1.0);
     return (similarity * 100).roundToDouble();
   }
 

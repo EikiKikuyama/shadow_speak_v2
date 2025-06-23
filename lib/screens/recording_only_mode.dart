@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../models/material_model.dart';
@@ -20,6 +21,8 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
   final AudioPlayerService _audioService = AudioPlayerService();
 
   bool _isRecording = false;
+  bool _isResetting = false;
+  int? countdownValue;
   String subtitleText = '';
 
   @override
@@ -43,35 +46,55 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
     }
   }
 
-  Future<void> _toggleRecording() async {
-    if (_isRecording) {
-      final path = await _recorder.stopRecording();
-      await _audioService.stop();
-      setState(() {
-        _isRecording = false;
-      });
-      if (path != null && mounted) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => WavWaveformScreen(
-              wavFilePath: path,
-              material: widget.material,
-            ),
+  Future<void> _startCountdownAndRecord() async {
+    if (_isRecording) return;
+
+    setState(() {
+      countdownValue = 3;
+      _isResetting = false;
+    });
+
+    for (int i = 3; i > 0; i--) {
+      await Future.delayed(const Duration(seconds: 1));
+      if (!mounted || _isResetting) return;
+      setState(() => countdownValue = i - 1);
+    }
+
+    if (!mounted || _isResetting) return;
+
+    setState(() {
+      countdownValue = null;
+      _isRecording = true;
+    });
+
+    await _recorder.startRecording();
+  }
+
+  Future<void> _stopRecording() async {
+    final path = await _recorder.stopRecording();
+    setState(() {
+      _isRecording = false;
+    });
+    if (path != null && mounted) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => WavWaveformScreen(
+            wavFilePath: path,
+            material: widget.material,
           ),
-        );
-      }
-    } else {
-      await _audioService.stop();
-      await _recorder.startRecording();
-      setState(() {
-        _isRecording = true;
-      });
+        ),
+      );
     }
   }
 
-  Future<void> _resetPlayback() async {
-    await _audioService.reset();
+  Future<void> _reset() async {
+    setState(() {
+      _isResetting = true;
+      _isRecording = false;
+      countdownValue = null;
+    });
+    await _audioService.stop();
   }
 
   @override
@@ -102,23 +125,46 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Stack(
+              alignment: Alignment.center,
               children: [
-                IconButton(
-                  icon: Icon(
-                    _isRecording ? Icons.stop : Icons.fiber_manual_record,
-                    color: _isRecording ? Colors.red : Colors.white,
-                    size: 40,
+                GestureDetector(
+                  onTap: () {
+                    if (_isRecording) {
+                      _stopRecording();
+                    } else {
+                      _startCountdownAndRecord();
+                    }
+                  },
+                  child: Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.red, width: 4),
+                      color: _isRecording ? Colors.red : Colors.transparent,
+                    ),
+                    child: const Icon(Icons.mic, color: Colors.white, size: 40),
                   ),
-                  onPressed: _toggleRecording,
                 ),
-                IconButton(
-                  icon: const Icon(Icons.restart_alt,
-                      size: 32, color: Colors.white),
-                  onPressed: _resetPlayback,
-                ),
+                if (countdownValue != null)
+                  Positioned(
+                    child: Text(
+                      countdownValue == 0 ? 'Go!' : countdownValue.toString(),
+                      style: const TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
               ],
+            ),
+            const SizedBox(height: 20),
+            IconButton(
+              icon:
+                  const Icon(Icons.restart_alt, size: 32, color: Colors.white),
+              onPressed: _reset,
             ),
             const SizedBox(height: 20),
             Container(

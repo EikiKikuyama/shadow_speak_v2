@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
+import 'dart:math';
 
 class AudioRecorderService {
   final AudioRecorder _recorder = AudioRecorder();
@@ -78,7 +79,7 @@ class AudioRecorderService {
 
         // ✅ ここに追加！
         final size = await File(filePath).length();
-        dev.log("📦 録音ファイルサイズ: ${size} bytes");
+        dev.log("📦 録音ファイルサイズ: $size bytes");
       }
 
       dev.log("✅ この録音の最大振幅: $_maxObservedAmplitude");
@@ -106,7 +107,7 @@ class AudioRecorderService {
         return [];
       }
 
-      int desiredSamples = audioDuration.inSeconds * 10;
+      int desiredSamples = audioDuration.inSeconds * 10; // ← 分解能（10〜50が推奨）
       int groupSize = (totalSamples / desiredSamples).ceil();
 
       final ByteData byteData = ByteData.sublistView(data);
@@ -117,13 +118,24 @@ class AudioRecorderService {
         int count = 0;
 
         for (int j = i; j < end; j++) {
-          int sample = byteData.getInt16(j * 2, Endian.little);
-          double normalized = sample.abs() / 327.68;
+          int sample = byteData.getInt16(j * 2, Endian.little); // 16bit PCM
+          double normalized =
+              sample.abs() / 327.68; // 正規化（-32768〜+32767 → ±100.0）
           sum += normalized;
           count++;
         }
 
         waveform.add(count > 0 ? sum / count : 0.0);
+      }
+
+      // ✅ デバッグログ（状態確認）
+      if (waveform.isEmpty) {
+        dev.log("⚠️ waveformが空です。抽出に失敗した可能性があります。");
+      } else {
+        dev.log(
+            "🔍 waveformの最初の20個: ${waveform.take(20).map((v) => v.toStringAsFixed(2)).toList()}");
+        dev.log("📏 waveformの最大値: ${waveform.reduce(max).toStringAsFixed(2)}");
+        dev.log("📊 waveformの長さ: ${waveform.length}");
       }
     } catch (e) {
       dev.log("⚠️ 波形抽出失敗: $e");

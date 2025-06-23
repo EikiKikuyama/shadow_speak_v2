@@ -31,12 +31,13 @@ class _WavWaveformViewState extends State<WavWaveformView> {
     super.initState();
     _loadAudioDuration();
 
-    // 録音ファイルを再生開始
+    // 再生準備と開始
     widget.audioPlayerService.prepareAndPlayLocalFile(
       widget.recordedFilePath,
       widget.playbackSpeed,
     );
 
+    // 位置更新リスナー
     _positionStream = widget.audioPlayerService.positionStream;
     _positionStream.listen((position) {
       if (!mounted) return;
@@ -65,11 +66,9 @@ class _WavWaveformViewState extends State<WavWaveformView> {
       children: [
         const SizedBox(height: 16),
         SampleWaveformWidget(
-          filePath: widget.sampleAssetPath,
-          audioPlayerService: widget.audioPlayerService,
-          playbackSpeed: widget.playbackSpeed,
+          filePath: widget.sampleAssetPath, // ← 修正済み
           height: 100,
-          isAsset: true,
+          progress: 0.0, // ※必要なら `progress` にしてもOK
         ),
         const SizedBox(height: 32),
         RecordedWaveformWidget(

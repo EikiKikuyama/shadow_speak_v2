@@ -1,39 +1,85 @@
 import 'dart:io';
-import 'package:flutter/foundation.dart'; // debugPrint 用
+import 'dart:math';
+import '../utils/waveform_extractor.dart';
+import '../utils/dtw.dart';
 
 class WaveformProcessor {
-  static Future<double> calculateProsodyScore(File wavFile) async {
+  static Future<double> calculateProsodyScore({
+    required File recordedFile,
+    required String sampleAudioPath,
+    bool isAsset = true,
+  }) async {
     try {
-      final bytes = await wavFile.readAsBytes();
+      print('📥 Prosodyスコア計算スタート');
+      print('📄 録音ファイル: ${recordedFile.path}');
+      print('🎧 見本ファイル: $sampleAudioPath');
 
-      const int headerSize = 44;
-      if (bytes.length <= headerSize) return 0;
+      final sampleWave = isAsset
+          ? await extractWaveformFromAssets(sampleAudioPath)
+          : extractWaveform(File(sampleAudioPath));
+      final recordedWave = extractWaveform(recordedFile);
 
-      final data = bytes.sublist(headerSize);
-      final amplitudes = <double>[];
+      print('✅ 見本波形サンプル数: ${sampleWave.length}');
+      print('✅ 録音波形サンプル数: ${recordedWave.length}');
 
-      final byteData = ByteData.sublistView(Uint8List.fromList(data));
-      for (int i = 0; i < byteData.lengthInBytes; i += 2) {
-        final sample = byteData.getInt16(i, Endian.little);
-        amplitudes.add(sample.toDouble().abs());
-      }
+      final normalizedSample = _normalize(sampleWave);
+      final normalizedRecordedFull = _normalize(recordedWave);
 
-      if (amplitudes.isEmpty) return 0;
+      // 🎯 見本と同じ長さに切り詰める
+      final croppedRecorded = normalizedRecordedFull.sublist(
+        0,
+        min(normalizedSample.length, normalizedRecordedFull.length),
+      );
 
-      int spikes = 0;
-      for (int i = 1; i < amplitudes.length; i++) {
-        if ((amplitudes[i] - amplitudes[i - 1]).abs() > 1000) {
-          spikes++;
-        }
-      }
+      print(
+          '📊 正規化後：sample=${normalizedSample.length}, recorded(cropped)=${croppedRecorded.length}');
 
-      final spikeRatio = spikes / amplitudes.length;
-      final score = (spikeRatio * 5000).clamp(0, 100).toDouble();
+      final distance = await calculateDTWDistanceInIsolate(
+        normalizedSample,
+        croppedRecorded,
+      );
+
+      // 🧪 厳しめスコア計算
+      const maxScore = 100.0;
+      const penaltyFactor = 0.05; // ← ここを強化（前は 0.03）
+      final rawScore = maxScore - penaltyFactor * distance;
+      final score = rawScore.clamp(0, 100).toDouble();
+
+      print('📈 DTW距離: $distance');
+      print('📐 Sample長さ: ${normalizedSample.length}');
+      print('📐 CroppedRecorded長さ: ${croppedRecorded.length}');
+      print(
+          '⚙️ score = 100 - ($penaltyFactor × $distance) = $rawScore → clamped: $score');
+      print('🎯 DTWスコア（Prosody）: $score');
 
       return score;
     } catch (e) {
-      debugPrint('⚠️ 波形スコア算出エラー: $e');
-      return 0;
+      print('❌ Prosodyスコア計算エラー: $e');
+      return 0.0;
     }
+  }
+
+  static List<double> _normalize(List<double> values) {
+    if (values.isEmpty) return [];
+
+    // 平均と標準偏差を計算
+    final mean = values.reduce((a, b) => a + b) / values.length;
+    final stdDev = sqrt(
+      values.map((e) => pow(e - mean, 2)).reduce((a, b) => a + b) /
+          values.length,
+    );
+
+    if (stdDev == 0) return List.filled(values.length, 0.0); // フラット対策
+
+    // Zスコア正規化
+    final zNormalized = values.map((e) => (e - mean) / stdDev).toList();
+
+    // ダウンサンプリング（10個に1つ）
+    final downSampled = <double>[];
+    for (int i = 0; i < zNormalized.length; i += 10) {
+      downSampled.add(zNormalized[i]);
+    }
+
+    return downSampled;
   }
 }
