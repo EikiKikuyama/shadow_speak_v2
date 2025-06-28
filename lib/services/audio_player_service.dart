@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:just_audio/just_audio.dart';
-// ignore: depend_on_referenced_packages
 import 'package:rxdart/rxdart.dart';
 
 class AudioPlayerService {
@@ -24,21 +23,25 @@ class AudioPlayerService {
   final BehaviorSubject<bool> _isPlayingSubject = BehaviorSubject.seeded(false);
   Stream<bool> get isPlayingStream => _isPlayingSubject.stream;
 
+  StreamSubscription<Duration>? _positionSub;
+  StreamSubscription<Duration?>? _durationSub;
+  StreamSubscription<bool>? _playingSub;
+
   String? _currentFilePath;
 
   AudioPlayerService() {
-    _player.durationStream.listen((duration) {
+    _durationSub = _player.durationStream.listen((duration) {
       _duration = duration;
       if (duration != null) {
         _durationSubject.add(duration);
       }
     });
 
-    _player.positionStream.listen((position) {
+    _positionSub = _player.positionStream.listen((position) {
       _positionController.add(position);
     });
 
-    _player.playingStream.listen((isPlaying) {
+    _playingSub = _player.playingStream.listen((isPlaying) {
       _isPlayingSubject.add(isPlaying);
     });
   }
@@ -136,10 +139,18 @@ class AudioPlayerService {
 
   Stream<Duration> get positionStream => _player.positionStream;
 
-  void dispose() {
-    _player.dispose();
-    _positionController.close();
-    _durationSubject.close();
-    _isPlayingSubject.close();
+  Future<void> dispose() async {
+    try {
+      await stop();
+      await _player.dispose();
+      await _positionSub?.cancel();
+      await _durationSub?.cancel();
+      await _playingSub?.cancel();
+      await _positionController.close();
+      await _durationSubject.close();
+      await _isPlayingSubject.close();
+    } catch (e) {
+      debugPrint('⚠️ dispose エラー: $e');
+    }
   }
 }

@@ -1,12 +1,13 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import '../painters/line_wave_painter.dart';
 import '../utils/waveform_extractor.dart';
 
 class SampleWaveformWidget extends StatefulWidget {
   final String filePath;
   final double height;
-  final double progress;
+  final double progress; // 0.0〜1.0
   final bool isAsset;
 
   const SampleWaveformWidget({
@@ -23,47 +24,57 @@ class SampleWaveformWidget extends StatefulWidget {
 
 class _SampleWaveformWidgetState extends State<SampleWaveformWidget> {
   late Future<List<double>> _waveformFuture;
+  Duration? _audioDuration;
 
   @override
   void initState() {
     super.initState();
-    _waveformFuture = _loadAndProcessWaveform();
+    _loadAndPrepare();
   }
 
-  Future<List<double>> _loadAndProcessWaveform() async {
-    debugPrint(
-        "🧪 SampleWaveformWidget: filePath = ${widget.filePath}, isAsset = ${widget.isAsset}");
-
+  Future<void> _loadAndPrepare() async {
     try {
+      final player = AudioPlayer();
+      await player.setFilePath(widget.filePath);
+      final duration = player.duration ?? Duration.zero;
+      await player.dispose();
+
       List<double> raw = widget.isAsset
           ? await extractWaveformFromAssets(widget.filePath)
           : extractWaveform(File(widget.filePath));
 
       if (raw.isEmpty) {
-        debugPrint("⚠️ 抽出された波形が空です（${widget.filePath}）");
-        return [];
+        debugPrint("⚠️ 波形が空です（${widget.filePath}）");
       }
 
-      final processed = processWaveform(raw);
-      debugPrint("🔢 processed.length: ${processed.length}");
-      return processed;
+      final processed = processWaveform(raw); // ✅ ← 波形間引き処理を復活！
+
+      setState(() {
+        _audioDuration = duration;
+        _waveformFuture = Future.value(processed);
+      });
     } catch (e) {
-      debugPrint("❌ 波形抽出エラー: $e");
-      return [];
+      debugPrint("❌ 波形読み込みエラー: $e");
+      setState(() {
+        _audioDuration = Duration.zero;
+        _waveformFuture = Future.value([]);
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_audioDuration == null) {
+      return const Center(child: CircularProgressIndicator());
+    }
+
     return FutureBuilder<List<double>>(
       future: _waveformFuture,
       builder: (context, snapshot) {
         final waveform = snapshot.data;
 
         if (waveform == null || waveform.isEmpty) {
-          debugPrint(
-              "[Sample]⚠️ waveform（processed）がnullまたは空です。描画スキップ（${widget.filePath}）");
-          return const SizedBox();
+          return const SizedBox(); // 空でも落ちないように
         }
 
         final maxAmplitude = waveform.reduce((a, b) => a > b ? a : b) * 1.2;

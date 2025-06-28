@@ -28,6 +28,8 @@ class _AiScoringScreenState extends State<AiScoringScreen> {
   String? transcribedText;
   String? correctScript;
   List<TextSpan>? diffSpans;
+  String? prosodyFeedback;
+  String? grammarFeedback;
 
   @override
   void initState() {
@@ -42,12 +44,11 @@ class _AiScoringScreenState extends State<AiScoringScreen> {
       correctScript = scriptText.trim().toLowerCase();
     });
 
-    _analyzeProsody(); // ← DTWスコア
-    _transcribeWithWhisper(scriptText); // ← Whisperスコア
+    _analyzeProsody();
+    _transcribeWithWhisper(scriptText);
   }
 
   Future<void> _analyzeProsody() async {
-    // ★ assets/ を付ける補正
     final fixedAudioPath = widget.material.audioPath.startsWith('assets/')
         ? widget.material.audioPath
         : 'assets/${widget.material.audioPath}';
@@ -61,6 +62,7 @@ class _AiScoringScreenState extends State<AiScoringScreen> {
     if (!mounted) return;
     setState(() {
       prosodyScore = score;
+      prosodyFeedback = generateProsodyFeedback(score);
     });
   }
 
@@ -85,6 +87,7 @@ class _AiScoringScreenState extends State<AiScoringScreen> {
       setState(() {
         transcribedText = whisperResult;
         whisperScore = calculateAccuracy(correct, whisperResult);
+        grammarFeedback = generateGrammarFeedback(whisperScore!);
         diffSpans = buildDiffTextSpans(correct, whisperResult);
       });
     } catch (e) {
@@ -117,6 +120,44 @@ class _AiScoringScreenState extends State<AiScoringScreen> {
     return spans;
   }
 
+  String generateProsodyFeedback(double score) {
+    if (score >= 95) {
+      return "完璧です！ネイティブレベルの自然な抑揚が表現できています。";
+    } else if (score >= 85) {
+      return "非常に良いです！ごくわずかにリズムのズレがありますが、全体として自然です。";
+    } else if (score >= 75) {
+      return "良好です！一部の音節で抑揚が弱くなっています。";
+    } else if (score >= 65) {
+      return "安定していますが、抑揚が平坦に感じられる箇所があります。";
+    } else if (score >= 55) {
+      return "リズムは比較的整っていますが、全体的に抑揚が単調です。";
+    } else if (score >= 45) {
+      return "抑揚の欠如が目立ちます。音の高低を意識して練習してみましょう。";
+    } else if (score >= 30) {
+      return "リズム・抑揚ともにズレが多く、改善が必要です。短いフレーズ練習が有効です。";
+    } else {
+      return "全体的に平坦で、自然さが感じられません。声に強弱をつける練習から始めましょう。";
+    }
+  }
+
+  String generateGrammarFeedback(double score) {
+    if (score >= 95) {
+      return "ほぼ完全です。文法の誤りはほとんどありません。";
+    } else if (score >= 85) {
+      return "非常に正確です。細かな文法の不自然さがわずかにあります。";
+    } else if (score >= 75) {
+      return "おおむね正確ですが、少し文法ミスがあります。";
+    } else if (score >= 65) {
+      return "いくつかの文法ミスにより、意味が部分的に不明瞭です。";
+    } else if (score >= 50) {
+      return "文法エラーが目立ち、意味が伝わりづらい箇所があります。";
+    } else if (score >= 35) {
+      return "多くの文法的な誤りで、伝えたい内容が不明瞭になっています。";
+    } else {
+      return "文法が崩壊しており、ほとんど意味が伝わっていません。基礎文法の復習をおすすめします。";
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final isLoading =
@@ -130,16 +171,22 @@ class _AiScoringScreenState extends State<AiScoringScreen> {
             ? const Center(child: CircularProgressIndicator())
             : SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 32),
                     ScoreWidget(
                       prosodyScore: prosodyScore!,
                       whisperScore: whisperScore!,
                     ),
+                    const SizedBox(height: 24),
+                    Text("🗣️ 発音フィードバック：$prosodyFeedback",
+                        style: const TextStyle(fontSize: 16)),
+                    const SizedBox(height: 16),
+                    Text("📘 文法フィードバック：$grammarFeedback",
+                        style: const TextStyle(fontSize: 16)),
                     const SizedBox(height: 32),
-                    Text('Whisper結果と正解スクリプト比較：',
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                    const Text('Whisper結果と正解スクリプト比較：',
+                        style: TextStyle(fontWeight: FontWeight.bold)),
                     const SizedBox(height: 12),
                     RichText(
                       text: TextSpan(

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import '../models/material_model.dart';
+import '../models/subtitle_segment.dart';
 import '../services/audio_player_service.dart';
+import '../services/subtitle_loader.dart';
+import '../utils/subtitle_utils.dart';
 import '../widgets/sample_waveform_widget.dart';
 import '../widgets/speed_selector.dart';
-import '../widgets/subtitles_widget.dart';
 import '../widgets/playback_controls.dart';
-import 'package:flutter/services.dart';
+import '../widgets/subtitle_display.dart';
 
 class ListeningMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -19,9 +22,12 @@ class ListeningMode extends StatefulWidget {
 class _ListeningModeState extends State<ListeningMode> {
   final AudioPlayerService _audioService = AudioPlayerService();
   String? sampleFilePath;
-  String subtitleText = '';
   double _currentSpeed = 1.0;
   Duration _currentPosition = Duration.zero;
+
+  List<SubtitleSegment> _subtitles = [];
+  SubtitleSegment? _currentSubtitle;
+  StreamSubscription<Duration>? _positionSubscription;
 
   @override
   void initState() {
@@ -29,8 +35,15 @@ class _ListeningModeState extends State<ListeningMode> {
     _loadSampleAudio();
     _loadSubtitle();
 
-    _audioService.positionStream.listen((pos) {
+    _positionSubscription = _audioService.positionStream.listen((pos) {
+      if (!mounted) return;
       setState(() => _currentPosition = pos);
+      final current = getCurrentSubtitle(_subtitles, pos);
+      if (current != _currentSubtitle) {
+        setState(() {
+          _currentSubtitle = current;
+        });
+      }
     });
   }
 
@@ -44,17 +57,16 @@ class _ListeningModeState extends State<ListeningMode> {
   }
 
   Future<void> _loadSubtitle() async {
-    try {
-      final loadedText =
-          await rootBundle.loadString(widget.material.scriptPath);
-      setState(() {
-        subtitleText = loadedText;
-      });
-    } catch (e) {
-      setState(() {
-        subtitleText = '字幕の読み込みに失敗しました。';
-      });
-    }
+    final filename = widget.material.scriptPath
+        .split('/')
+        .last
+        .replaceAll('.txt', '')
+        .replaceAll('.json', '');
+
+    final data = await loadSubtitles(filename);
+    setState(() {
+      _subtitles = data;
+    });
   }
 
   Future<void> _togglePlayPause(bool isPlaying) async {
@@ -72,7 +84,10 @@ class _ListeningModeState extends State<ListeningMode> {
   }
 
   @override
+  @override
   void dispose() {
+    _positionSubscription?.cancel();
+    _audioService.stop(); // 同期で呼ぶ（ここで await しない）
     _audioService.dispose();
     super.dispose();
   }
@@ -156,9 +171,12 @@ class _ListeningModeState extends State<ListeningMode> {
               ),
               child: Scrollbar(
                 child: SingleChildScrollView(
-                  child: SubtitlesWidget(
-                    subtitleText: widget.material.scriptPath,
-                  ),
+                  child: _subtitles.isNotEmpty
+                      ? SubtitleDisplay(
+                          currentSubtitle: _currentSubtitle,
+                          allSubtitles: _subtitles,
+                        )
+                      : const Center(child: Text("字幕を読み込み中…")),
                 ),
               ),
             ),

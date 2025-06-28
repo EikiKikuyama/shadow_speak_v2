@@ -1,0 +1,47 @@
+[
+  {
+    "start": 0.0,
+    "end": 2.96,
+    "text": "Good morning. This is your weather update for today."
+  },
+  {
+    "start": 2.96,
+    "end": 5.28,
+    "text": "The morning will be mostly sunny with a gentle breeze."
+  },
+  {
+    "start": 5.92,
+    "end": 9.76,
+    "text": "Temperatures are expected to reach a high of 26 degrees Celsius."
+  },
+  {
+    "start": 9.76,
+    "end": 12.8,
+    "text": "In the afternoon, clouds will gradually increase."
+  },
+  {
+    "start": 12.8,
+    "end": 17.36,
+    "text": "There is a 30% chance of light rain after 6 p.m., especially in the northern areas."
+  },
+  {
+    "start": 18.16,
+    "end": 20.56,
+    "text": "Please carry an umbrella just in case."
+  },
+  {
+    "start": 20.56,
+    "end": 24.0,
+    "text": "Humidity levels will be moderate, making it a comfortable day overall."
+  },
+  {
+    "start": 24.56,
+    "end": 27.92,
+    "text": "Tomorrow, we expect cooler weather with scattered showers throughout the day."
+  },
+  {
+    "start": 27.92,
+    "end": 31.2,
+    "text": "Stay safe and enjoy the sunshine while it lasts."
+  }
+]

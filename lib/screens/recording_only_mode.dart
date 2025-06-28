@@ -67,7 +67,8 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
       _isRecording = true;
     });
 
-    await _recorder.startRecording();
+    final savePath = await _recorder.getSavePath();
+    await _recorder.startRecording(path: savePath); // ✅ 修正済み
   }
 
   Future<void> _stopRecording() async {
@@ -148,13 +149,14 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
                   ),
                 ),
                 if (countdownValue != null)
-                  Positioned(
+                  Align(
+                    alignment: Alignment.center,
                     child: Text(
                       countdownValue == 0 ? 'Go!' : countdownValue.toString(),
                       style: const TextStyle(
-                        fontSize: 40,
+                        fontSize: 200,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Color.fromARGB(81, 18, 6, 181),
                       ),
                     ),
                   ),

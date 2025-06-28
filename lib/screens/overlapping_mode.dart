@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import '../models/material_model.dart';
+import '../models/subtitle_segment.dart';
 import '../services/audio_recorder_service.dart';
 import '../services/audio_player_service.dart';
+import '../services/subtitle_loader.dart';
+import '../utils/subtitle_utils.dart';
 import '../widgets/sample_waveform_widget.dart';
-import '../widgets/subtitles_widget.dart';
+import '../widgets/subtitle_display.dart';
 import '../widgets/speed_selector.dart';
 import '../widgets/playback_controls.dart';
 
@@ -33,10 +36,14 @@ class _OverlappingModeState extends State<OverlappingMode> {
   Duration _currentPosition = Duration.zero;
   StreamSubscription<Duration>? _positionSubscription;
 
+  List<SubtitleSegment> _subtitles = [];
+  SubtitleSegment? _currentSubtitle;
+
   @override
   void initState() {
     super.initState();
     _loadSampleAudio();
+    _loadSubtitle();
 
     _playingSubscription = _audioService.isPlayingStream.listen((isPlaying) {
       if (mounted) {
@@ -50,6 +57,10 @@ class _OverlappingModeState extends State<OverlappingMode> {
       if (mounted) {
         setState(() {
           _currentPosition = position;
+          final current = getCurrentSubtitle(_subtitles, position);
+          if (current != _currentSubtitle) {
+            _currentSubtitle = current;
+          }
         });
       }
     });
@@ -61,6 +72,19 @@ class _OverlappingModeState extends State<OverlappingMode> {
     await _audioService.prepareLocalFile(path, _currentSpeed);
     setState(() {
       sampleFilePath = path;
+    });
+  }
+
+  Future<void> _loadSubtitle() async {
+    final filename = widget.material.scriptPath
+        .split('/')
+        .last
+        .replaceAll('.txt', '')
+        .replaceAll('.json', '');
+
+    final data = await loadSubtitles(filename);
+    setState(() {
+      _subtitles = data;
     });
   }
 
@@ -238,9 +262,12 @@ class _OverlappingModeState extends State<OverlappingMode> {
               ),
               child: Scrollbar(
                 child: SingleChildScrollView(
-                  child: SubtitlesWidget(
-                    subtitleText: widget.material.scriptPath,
-                  ),
+                  child: _subtitles.isNotEmpty
+                      ? SubtitleDisplay(
+                          currentSubtitle: _currentSubtitle,
+                          allSubtitles: _subtitles,
+                        )
+                      : const Center(child: Text("字幕を読み込み中…")),
                 ),
               ),
             ),

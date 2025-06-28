@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:math';
+import 'package:intl/intl.dart';
 
 class AudioRecorderService {
   final AudioRecorder _recorder = AudioRecorder();
@@ -34,19 +35,13 @@ class AudioRecorderService {
         return value;
       });
 
-  Future<void> startRecording() async {
+  Future<void> startRecording({String? path}) async {
     try {
       final bool hasPermission = await _recorder.hasPermission();
       if (!hasPermission) throw Exception("録音の許可がありません");
 
-      final directory = await getApplicationDocumentsDirectory();
-      final recordingsDir = Directory("${directory.path}/recordings");
-      if (!recordingsDir.existsSync()) {
-        recordingsDir.createSync(recursive: true);
-      }
-
-      _filePath =
-          "${recordingsDir.path}/recording_${DateTime.now().millisecondsSinceEpoch}.wav";
+      final savePath = path ?? await getSavePath(); // ✅ ここで自動生成もOKに
+      _filePath = savePath;
 
       await _recorder.start(
         RecordConfig(encoder: AudioEncoder.wav),
@@ -92,6 +87,19 @@ class AudioRecorderService {
       dev.log("❌ 録音停止エラー: $e");
       return null;
     }
+  }
+
+// 末尾に追加（または static メソッドにしてもOK）
+  Future<String> getSavePath() async {
+    final dir = await getApplicationDocumentsDirectory();
+    final recordingDir = Directory('${dir.path}/shadow_speak/recordings');
+
+    if (!await recordingDir.exists()) {
+      await recordingDir.create(recursive: true);
+    }
+
+    final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
+    return '${recordingDir.path}/recording_$timestamp.wav';
   }
 
   Future<List<double>> extractWaveform(
@@ -147,4 +155,6 @@ class AudioRecorderService {
   void dispose() {
     _stateSubscription?.cancel();
   }
+
+  start({required String path}) {}
 }
