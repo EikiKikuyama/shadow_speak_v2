@@ -1,107 +1,138 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/material_model.dart';
-import '../providers/selected_material_provider.dart';
-import 'practice_mode_selection_screen.dart';
+import '../../models/material_model.dart';
+import '../../data/practice_materials.dart';
+import '../../screens/practice_mode_selection_screen.dart';
 
-class MaterialSelectionScreen extends ConsumerWidget {
-  final List<PracticeMaterial> materials = [
-    PracticeMaterial(
-      id: 'TrainAnnouncement',
-      title: 'Train Announcement',
-      audioPath: 'audio/announcement.wav',
-      scriptPath: 'assets/scripts/announcement.txt',
-    ),
-    PracticeMaterial(
-      id: 'Mt.Fuji',
-      title: 'Mount Fuji Intro',
-      audioPath: 'audio/Mt.Fuji.wav',
-      scriptPath: 'assets/scripts/Mt.Fuji.txt',
-    ),
-    PracticeMaterial(
-      id: 'WeatherForecast',
-      title: 'Weather Forecast',
-      audioPath: 'audio/Weatherannounce.wav',
-      scriptPath: 'assets/scripts/Weatherannounce.txt',
-    ),
-    PracticeMaterial(
-      id: 'introduction',
-      title: 'Introduction',
-      audioPath: 'audio/introduction.wav',
-      scriptPath: 'assets/scripts/introduction.txt',
-    ),
-    PracticeMaterial(
-      id: 'School Announcement',
-      title: 'School Announcement',
-      audioPath: 'audio/school_announcement.wav',
-      scriptPath: 'assets/scripts/school_announcement.txt',
-    ),
-    PracticeMaterial(
-      id: 'Weather',
-      title: 'Weather',
-      audioPath: 'audio/weather.wav',
-      scriptPath: 'assets/scripts/weather.txt',
-    ),
-  ];
+class MaterialSelectionScreen extends StatefulWidget {
+  final String level;
 
-  MaterialSelectionScreen({super.key});
+  const MaterialSelectionScreen({super.key, required this.level});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  State<MaterialSelectionScreen> createState() =>
+      _MaterialSelectionScreenState();
+}
+
+class _MaterialSelectionScreenState extends State<MaterialSelectionScreen> {
+  String selectedCategory = 'すべて';
+  String searchQuery = '';
+
+  List<String> categories = ['すべて', '日常会話', 'ビジネス', '旅行', '放送'];
+
+  List<PracticeMaterial> get filteredMaterials {
+    return allMaterials.where((material) {
+      final matchesLevel = material.level == widget.level;
+      final matchesCategory =
+          selectedCategory == 'すべて' || material.tag == selectedCategory;
+      final matchesSearch =
+          searchQuery.isEmpty || material.title.contains(searchQuery);
+      return matchesLevel && matchesCategory && matchesSearch;
+    }).toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final recommended = filteredMaterials.take(2).toList();
+    final others = filteredMaterials.skip(2).toList();
+
     return Scaffold(
-      backgroundColor: const Color(0xFF2E7D32), // 黒板グリーン背景
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF2E7D32),
+        title: Text("${widget.level} の教材",
+            style: const TextStyle(color: Colors.black)),
+        backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text(
-          '題材を選択',
-          style: TextStyle(color: Colors.white),
-        ),
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView.builder(
-          itemCount: materials.length,
-          itemBuilder: (context, index) {
-            final material = materials[index];
-            return _buildMaterialTile(material, ref, context);
-          },
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            _buildCategoryChips(),
+            const SizedBox(height: 12),
+            _buildSearchField(),
+            const SizedBox(height: 20),
+            if (recommended.isNotEmpty) _buildSectionTitle('おすすめ教材'),
+            if (recommended.isNotEmpty) ...recommended.map(_buildMaterialItem),
+            const SizedBox(height: 16),
+            _buildSectionTitle('教材一覧'),
+            Expanded(
+              child: ListView.builder(
+                itemCount: others.length,
+                itemBuilder: (context, index) {
+                  return _buildMaterialItem(others[index]);
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  Widget _buildMaterialTile(
-      PracticeMaterial material, WidgetRef ref, BuildContext context) {
-    return Card(
-      color: const Color(0xFFE8F5E9), // 明るい緑（ノート風）
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+  Widget _buildCategoryChips() {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: categories.map((category) {
+          final isSelected = selectedCategory == category;
+          return Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: ChoiceChip(
+              label: Text(category),
+              selected: isSelected,
+              onSelected: (_) {
+                setState(() => selectedCategory = category);
+              },
+            ),
+          );
+        }).toList(),
       ),
-      margin: const EdgeInsets.only(bottom: 12),
-      child: ListTile(
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-        leading: const Icon(Icons.audiotrack, color: Colors.green),
-        title: Text(
-          material.title,
-          style: const TextStyle(
-            fontSize: 16,
-            color: Colors.black87,
-            fontWeight: FontWeight.w600,
-          ),
+    );
+  }
+
+  Widget _buildSearchField() {
+    return TextField(
+      decoration: InputDecoration(
+        hintText: 'タイトルまたはキーワードで検索',
+        prefixIcon: const Icon(Icons.search),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+        filled: true,
+        fillColor: Colors.grey[100],
+      ),
+      onChanged: (value) => setState(() => searchQuery = value),
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Text(
+          title,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        trailing: const Icon(Icons.chevron_right, color: Colors.grey),
+      ),
+    );
+  }
+
+  Widget _buildMaterialItem(PracticeMaterial material) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 6),
+      child: ListTile(
         onTap: () {
-          ref.read(selectedMaterialProvider.notifier).state = material;
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const PracticeModeSelectionScreen(),
+              builder: (context) =>
+                  PracticeModeSelectionScreen(material: material),
             ),
           );
         },
+        title: Text(material.title,
+            style: const TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: Text('${material.durationSec}秒・${material.wordCount}語'),
       ),
     );
   }

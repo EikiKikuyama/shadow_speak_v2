@@ -1,4 +1,4 @@
-package com.example.shadow_speak_v2
+package com.shadow.speak
 
 import io.flutter.embedding.android.FlutterActivity
 

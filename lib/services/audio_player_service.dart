@@ -130,10 +130,20 @@ class AudioPlayerService {
   }
 
   Future<String> copyAssetToFile(String assetPath) async {
-    final byteData = await rootBundle.load('assets/$assetPath');
     final tempDir = await getTemporaryDirectory();
     final file = File('${tempDir.path}/${assetPath.split("/").last}');
+
+    // ✅ すでに同名のファイルが存在していれば、コピーせずそのまま返す
+    if (await file.exists()) {
+      debugPrint("📁 既存のキャッシュファイルを使用: ${file.path}");
+      return file.path;
+    }
+
+    // ⬇ 初回のみ asset からコピー
+    final byteData = await rootBundle.load('assets/$assetPath');
     await file.writeAsBytes(byteData.buffer.asUint8List());
+    debugPrint("🆕 asset からファイルをコピー: ${file.path}");
+
     return file.path;
   }
 

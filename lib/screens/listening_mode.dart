@@ -29,6 +29,9 @@ class _ListeningModeState extends State<ListeningMode> {
   SubtitleSegment? _currentSubtitle;
   StreamSubscription<Duration>? _positionSubscription;
 
+  String fullText = "";
+  int currentCharIndex = 0;
+
   @override
   void initState() {
     super.initState();
@@ -66,6 +69,8 @@ class _ListeningModeState extends State<ListeningMode> {
     final data = await loadSubtitles(filename);
     setState(() {
       _subtitles = data;
+
+      fullText = _subtitles.map((s) => s.text).join(" ");
     });
   }
 
@@ -103,86 +108,153 @@ class _ListeningModeState extends State<ListeningMode> {
         : 0.0;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF2E7D32),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF2E7D32),
-        elevation: 0,
-        title: const Text('🎧 リスニングモード', style: TextStyle(color: Colors.white)),
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
+        backgroundColor: const Color(0xFF001F3F), // 深めの紺色
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF001F3F), // 深めの紺色
+          elevation: 0,
+          title:
+              const Text('🎧 リスニングモード', style: TextStyle(color: Colors.white)),
+          iconTheme: const IconThemeData(color: Colors.white),
+        ),
+        body: Column(
           children: [
+            // 👇最上部に追加
             Container(
+              height: 100,
               width: double.infinity,
-              height: 160,
-              color: const Color(0xFF212121),
-              child: sampleFilePath != null
-                  ? ClipRect(
-                      child: SampleWaveformWidget(
-                        filePath: sampleFilePath!,
-                        height: 100,
-                        progress: progress,
-                      ),
-                    )
-                  : const Center(
-                      child: CircularProgressIndicator(color: Colors.white)),
-            ),
-            const SizedBox(height: 20),
-            StreamBuilder<bool>(
-              stream: _audioService.isPlayingStream,
-              initialData: false,
-              builder: (context, snapshot) {
-                final isPlaying = snapshot.data ?? false;
-                return PlaybackControls(
-                  isPlaying: isPlaying,
-                  onPlayPauseToggle: () => _togglePlayPause(isPlaying),
-                  onRestart: _reset,
-                  onSeekForward: () {
-                    _audioService
-                        .seek(_currentPosition + const Duration(seconds: 5));
-                  },
-                  onSeekBackward: () {
-                    _audioService
-                        .seek(_currentPosition - const Duration(seconds: 5));
-                  },
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            SpeedSelector(
-              currentSpeed: _currentSpeed,
-              onSpeedSelected: (speed) {
-                setState(() {
-                  _currentSpeed = speed;
-                });
-                _audioService.setSpeed(speed);
-              },
-            ),
-            const SizedBox(height: 20),
-            Container(
-              height: subtitleHeight,
-              width: double.infinity,
-              padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
-                color: const Color(0xFFFDF6E3),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Scrollbar(
-                child: SingleChildScrollView(
-                  child: _subtitles.isNotEmpty
-                      ? SubtitleDisplay(
-                          currentSubtitle: _currentSubtitle,
-                          allSubtitles: _subtitles,
-                        )
-                      : const Center(child: Text("字幕を読み込み中…")),
+                image: DecorationImage(
+                  image: AssetImage('assets/icon.png'), // ←仮画像（差し替え可）
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
+            const SizedBox(height: 12),
+
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    // 波形
+                    Container(
+                      width: double.infinity,
+                      height: 160,
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                      child: sampleFilePath != null
+                          ? ClipRect(
+                              child: SampleWaveformWidget(
+                                filePath: sampleFilePath!,
+                                height: 100,
+                                progress: progress,
+                              ),
+                            )
+                          : const Center(
+                              child: CircularProgressIndicator(
+                                  color: Colors.white)),
+                    ),
+
+// 👇 追加：波形下に字幕（今は仮で固定1つ）
+                    Container(
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
+                      color: Colors.transparent,
+                      child: Center(
+                        child: Text(
+                          "波形のところだけ字幕表示はここ",
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+
+                    // 字幕（全文＋ハイライト対応）
+                    Container(
+                      height: subtitleHeight,
+                      width: double.infinity,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
+                      child: Scrollbar(
+                        child: SingleChildScrollView(
+                          child: _subtitles.isNotEmpty
+                              ? RichText(
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
+                                    children:
+                                        List.generate(fullText.length, (index) {
+                                      final isActive = index ==
+                                          currentCharIndex; // 🔥 ハイライト判定
+                                      return TextSpan(
+                                        text: fullText[index],
+                                        style: TextStyle(
+                                          color: isActive
+                                              ? Colors.yellow
+                                              : Colors.white,
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      );
+                                    }),
+                                  ),
+                                )
+                              : const Center(
+                                  child: Text(
+                                    "字幕を読み込み中…",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+
+            // 👇 下部に固定した再生＆速度ボタン
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: Column(
+                children: [
+                  StreamBuilder<bool>(
+                    stream: _audioService.isPlayingStream,
+                    initialData: false,
+                    builder: (context, snapshot) {
+                      final isPlaying = snapshot.data ?? false;
+                      return PlaybackControls(
+                        isPlaying: isPlaying,
+                        onPlayPauseToggle: () => _togglePlayPause(isPlaying),
+                        onRestart: _reset,
+                        onSeekForward: () {
+                          _audioService.seek(
+                              _currentPosition + const Duration(seconds: 5));
+                        },
+                        onSeekBackward: () {
+                          _audioService.seek(
+                              _currentPosition - const Duration(seconds: 5));
+                        },
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 12),
+                  SpeedSelector(
+                    currentSpeed: _currentSpeed,
+                    onSpeedSelected: (speed) {
+                      setState(() {
+                        _currentSpeed = speed;
+                      });
+                      _audioService.setSpeed(speed);
+                    },
+                  ),
+                ],
+              ),
+            ),
           ],
-        ),
-      ),
-    );
+        ));
   }
 }

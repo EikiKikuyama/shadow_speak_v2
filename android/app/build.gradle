@@ -6,7 +6,22 @@ plugins {
 }
 
 android {
-    namespace = "com.example.shadow_speak_v2"
+    signingConfigs {
+        release {
+            storeFile file("/Users/kikuyama/my-release-key.jks")
+            storePassword "And1new0831"
+            keyAlias "my-key-alias"
+            keyPassword "And1new0831"
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+
+    namespace = "com.shadow.speak"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -16,28 +31,18 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = "1.8"
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.shadow_speak_v2"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdkVersion 24  // ← ここを 21 → 23 に変更
-        targetSdkVersion flutter.targetSdkVersion
+    applicationId = "com.shadow.speak"
+    minSdkVersion 24
+    targetSdkVersion flutter.targetSdkVersion
 
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
-    }
+    versionCode 2        // 👈 明示的に「2」に変更！
+    versionName "1.0.1"  // 👈 わかりやすく名前も変えておくとベター
+}
 
-    buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.debug
-        }
-    }
 }
 
 flutter {

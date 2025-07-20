@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import '../models/material_model.dart';
 import '../services/audio_recorder_service.dart';
 import '../services/audio_player_service.dart';
-import '../widgets/subtitles_widget.dart';
+import '../temporary trash/subtitles_widget.dart';
 import '../screens/wav_waveform_screen.dart';
 
 class RecordingOnlyMode extends StatefulWidget {
