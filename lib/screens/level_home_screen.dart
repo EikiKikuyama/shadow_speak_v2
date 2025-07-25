@@ -1,47 +1,46 @@
 import 'package:flutter/material.dart';
-import 'material_selection_screen.dart'; // ファイル名に応じて修正
+import 'package:shadow_speak_v2/gen_l10n/app_localizations.dart';
+import 'material_selection_screen.dart';
+import 'package:shadow_speak_v2/widgets/custom_app_bar.dart';
 
 class LevelHomeScreen extends StatelessWidget {
   const LevelHomeScreen({super.key});
 
-  final List<Map<String, dynamic>> levels = const [
-    {
-      'title': 'Starter（〜50語）',
-      'description': '短い文章・簡単な語彙・中1レベル単語',
-      'color': Colors.green,
-    },
-    {
-      'title': 'Basic（〜80語）',
-      'description': '基本的な日常表現・中学生英語レベル',
-      'color': Colors.blue,
-    },
-    {
-      'title': 'Intermediate（〜100語）',
-      'description': '会話・スピーチの練習に最適',
-      'color': Colors.amber,
-    },
-    {
-      'title': 'Upper（〜130語）',
-      'description': '複雑な文構造にも挑戦できるレベル',
-      'color': Colors.orange,
-    },
-    {
-      'title': 'Advanced（〜150語）',
-      'description': '本格的な英語力が試されるレベル（1分超）',
-      'color': Colors.red,
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final t = AppLocalizations.of(context)!;
+
+    final levels = [
+      {
+        'title': t.levelStarterTitle,
+        'description': t.levelStarterDesc,
+        'color': Colors.green,
+      },
+      {
+        'title': t.levelBasicTitle,
+        'description': t.levelBasicDesc,
+        'color': Colors.blue,
+      },
+      {
+        'title': t.levelIntermediateTitle,
+        'description': t.levelIntermediateDesc,
+        'color': Colors.amber,
+      },
+      {
+        'title': t.levelUpperTitle,
+        'description': t.levelUpperDesc,
+        'color': Colors.orange,
+      },
+      {
+        'title': t.levelAdvancedTitle,
+        'description': t.levelAdvancedDesc,
+        'color': Colors.red,
+      },
+    ];
+
     return Scaffold(
-      backgroundColor: Colors.white, // ← 背景を白に変更
-      appBar: AppBar(
-        title: const Text('レベル選択', style: TextStyle(color: Colors.black)),
-        backgroundColor: Colors.white, // ← AppBarも白に
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
+      backgroundColor: Colors.white,
+      appBar: CustomAppBar(title: t.levelSelectTitle),
       body: ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: levels.length,
@@ -55,25 +54,24 @@ class LevelHomeScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) =>
-                      MaterialSelectionScreen(level: parsedLevel), // 修正済
+                  builder: (_) => MaterialSelectionScreen(level: parsedLevel),
                 ),
               );
             },
             child: Card(
               margin: const EdgeInsets.only(bottom: 16),
-              color: const Color(0xFFEDE7F6), // ← ラベンダー系カラーに変更
+              color: const Color(0xFFEDE7F6),
               elevation: 2,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundColor: level['color'],
+                  backgroundColor: level['color'] as Color,
                   radius: 10,
                 ),
                 title: Text(
-                  level['title'],
+                  level['title'] as String,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
@@ -81,7 +79,7 @@ class LevelHomeScreen extends StatelessWidget {
                   ),
                 ),
                 subtitle: Text(
-                  level['description'],
+                  level['description'] as String,
                   style: const TextStyle(fontSize: 14),
                 ),
                 trailing: const Icon(Icons.chevron_right),
@@ -89,19 +87,6 @@ class LevelHomeScreen extends StatelessWidget {
             ),
           );
         },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0,
-        selectedItemColor: Colors.deepPurple, // ラベンダーに合う濃紫
-        unselectedItemColor: Colors.grey,
-        onTap: (index) {
-          // TODO: 履歴や進捗に切り替え
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: '履歴'),
-          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: '進捗'),
-        ],
       ),
     );
   }

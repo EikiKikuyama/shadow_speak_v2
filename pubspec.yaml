@@ -1,14 +1,10 @@
 name: shadow_speak_v2
 description: "A new Flutter project."
-
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
-
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
   sdk: ^3.6.1
-
 
 dependencies:
   flutter:
@@ -19,7 +15,7 @@ dependencies:
   path_provider: ^2.1.1
   intl: ^0.20.2
   flutter_sound: ^9.2.13
-  audioplayers: ^6.1.2  # ✅ 最新版
+  audioplayers: ^6.1.2
   record: ^5.1.2
   permission_handler: ^11.3.1
   flutter_riverpod: ^2.4.9
@@ -28,29 +24,28 @@ dependencies:
   custom_painter: ^1.0.0
   fl_chart: ^0.70.2
   syncfusion_flutter_sliders: ^28.2.5  
+  shared_preferences: ^2.2.2
   firebase_core: ^3.11.0
   firebase_auth: ^5.4.2
-  googleapis: ^13.1.0  # 最新バージョンを確認してね
+  googleapis: ^13.1.0
   googleapis_auth: 
   logger: ^2.0.2
   uuid: ^4.2.2
   just_audio: ^0.10.3
-
+  table_calendar: ^3.0.9
   cupertino_icons: ^1.0.8
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
-  flutter_lints: ^5.0.0  # ✅ ここに入れる！
-
-flutter_icons:
-  android: true
-  ios: true
-  image_path: "assets/icon.png"
-
+  flutter_lints: ^5.0.0
 
 flutter:
+  generate: true
+  uses-material-design: true
   assets:
     - assets/image/
     - assets/audio/
@@ -58,6 +53,15 @@ flutter:
     - assets/subtitles/
     - .env
 
-  uses-material-design: true
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon.png"
 
-  
+# ← flutterと同じ階層でOK
+localizations:
+  arb-dir: lib/l10n
+  template-arb-file: app_en.arb
+  output-localization-file: app_localizations.dart
+  output-dir: lib/gen_l10n
+  output-class: AppLocalizations

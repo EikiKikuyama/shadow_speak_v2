@@ -10,6 +10,8 @@ import '../widgets/speed_selector.dart';
 import '../widgets/playback_controls.dart';
 import '../widgets/subtitle_display.dart';
 
+import 'package:shadow_speak_v2/widgets/custom_app_bar.dart';
+
 class ListeningMode extends StatefulWidget {
   final PracticeMaterial material;
 
@@ -109,12 +111,11 @@ class _ListeningModeState extends State<ListeningMode> {
 
     return Scaffold(
         backgroundColor: const Color(0xFF001F3F), // 深めの紺色
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF001F3F), // 深めの紺色
-          elevation: 0,
-          title:
-              const Text('🎧 リスニングモード', style: TextStyle(color: Colors.white)),
-          iconTheme: const IconThemeData(color: Colors.white),
+        appBar: const CustomAppBar(
+          title: '🎧 リスニングモード',
+          backgroundColor: Color(0xFF001F3F),
+          titleColor: Colors.white,
+          iconColor: Colors.white,
         ),
         body: Column(
           children: [
@@ -221,11 +222,35 @@ class _ListeningModeState extends State<ListeningMode> {
               padding: const EdgeInsets.only(bottom: 16.0),
               child: Column(
                 children: [
+                  if (total != null && total.inMilliseconds > 0)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Slider(
+                        value: _currentPosition.inMilliseconds
+                            .toDouble()
+                            .clamp(0, total.inMilliseconds.toDouble()),
+                        min: 0,
+                        max: total.inMilliseconds.toDouble(),
+                        activeColor: Colors.white,
+                        inactiveColor: Colors.white24,
+                        onChanged: (value) {
+                          setState(() {
+                            _currentPosition =
+                                Duration(milliseconds: value.toInt());
+                          });
+                        },
+                        onChangeEnd: (value) {
+                          _audioService
+                              .seek(Duration(milliseconds: value.toInt()));
+                        },
+                      ),
+                    ),
                   StreamBuilder<bool>(
                     stream: _audioService.isPlayingStream,
                     initialData: false,
                     builder: (context, snapshot) {
                       final isPlaying = snapshot.data ?? false;
+
                       return PlaybackControls(
                         isPlaying: isPlaying,
                         onPlayPauseToggle: () => _togglePlayPause(isPlaying),

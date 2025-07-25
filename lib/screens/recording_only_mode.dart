@@ -1,11 +1,19 @@
 import 'dart:async';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../services/subtitle_loader.dart';
+import '../widgets/custom_app_bar.dart';
+
 import '../models/material_model.dart';
 import '../services/audio_recorder_service.dart';
 import '../services/audio_player_service.dart';
-import '../temporary trash/subtitles_widget.dart';
 import '../screens/wav_waveform_screen.dart';
+import 'dart:io'; // ← FileやDirectoryを使っている場合
+
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
 
 class RecordingOnlyMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -33,10 +41,16 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
 
   Future<void> _loadSubtitle() async {
     try {
-      final text = await rootBundle.loadString(widget.material.scriptPath);
+      final filename = widget.material.scriptPath
+          .split('/')
+          .last
+          .replaceAll('.txt', '')
+          .replaceAll('.json', '');
+
+      final data = await loadSubtitles(filename);
       if (!mounted) return;
       setState(() {
-        subtitleText = text;
+        subtitleText = data.map((s) => s.text).join('\n');
       });
     } catch (e) {
       debugPrint('❌ 字幕読み込み失敗: $e');
@@ -67,8 +81,22 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
       _isRecording = true;
     });
 
-    final savePath = await _recorder.getSavePath();
-    await _recorder.startRecording(path: savePath); // ✅ 修正済み
+    // ✅ level と title を渡すように修正
+    final savePath = await _recorder.getSavePath(
+      level: widget.material.level,
+      title: widget.material.title,
+    );
+
+// 👇 ここにログを追加
+    debugPrint('🎯 渡されたlevel: ${widget.material.level}');
+    debugPrint('🎯 渡されたtitle: ${widget.material.title}');
+    debugPrint('🎯 savePath: $savePath');
+
+    await _recorder.startRecording(
+      path: savePath,
+      level: widget.material.level,
+      title: widget.material.title,
+    );
   }
 
   Future<void> _stopRecording() async {
@@ -76,6 +104,7 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
     setState(() {
       _isRecording = false;
     });
+
     if (path != null && mounted) {
       Navigator.push(
         context,
@@ -107,35 +136,49 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
-    final subtitleHeight = screenHeight * 0.7;
-
     return Scaffold(
-      backgroundColor: const Color(0xFF2E7D32),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF2E7D32),
-        elevation: 0,
-        title: const Text(
-          '🎤 録音モード',
-          style: TextStyle(color: Colors.white),
-        ),
-        iconTheme: const IconThemeData(color: Colors.white),
+      backgroundColor: const Color(0xFF001042),
+      appBar: const CustomAppBar(
+        title: 'レコーディングモード',
+        backgroundColor: Color(0xFF001042),
+        titleColor: Colors.white,
+        iconColor: Colors.white,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+      body: SafeArea(
         child: Column(
           children: [
             const SizedBox(height: 20),
-            Stack(
-              alignment: Alignment.center,
+            if (countdownValue != null)
+              Text(
+                countdownValue == 0 ? 'Go!' : countdownValue.toString(),
+                style: const TextStyle(
+                  fontSize: 80,
+                  color: Colors.white70,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+              child: SingleChildScrollView(
+                child: Text(
+                  subtitleText,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 GestureDetector(
                   onTap: () {
-                    if (_isRecording) {
-                      _stopRecording();
-                    } else {
-                      _startCountdownAndRecord();
-                    }
+                    _isRecording
+                        ? _stopRecording()
+                        : _startCountdownAndRecord();
                   },
                   child: Container(
                     width: 80,
@@ -148,43 +191,15 @@ class _RecordingOnlyModeState extends State<RecordingOnlyMode> {
                     child: const Icon(Icons.mic, color: Colors.white, size: 40),
                   ),
                 ),
-                if (countdownValue != null)
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      countdownValue == 0 ? 'Go!' : countdownValue.toString(),
-                      style: const TextStyle(
-                        fontSize: 200,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(81, 18, 6, 181),
-                      ),
-                    ),
-                  ),
+                const SizedBox(width: 40),
+                IconButton(
+                  icon: const Icon(Icons.restart_alt,
+                      size: 36, color: Colors.white),
+                  onPressed: _reset,
+                ),
               ],
             ),
-            const SizedBox(height: 20),
-            IconButton(
-              icon:
-                  const Icon(Icons.restart_alt, size: 32, color: Colors.white),
-              onPressed: _reset,
-            ),
-            const SizedBox(height: 20),
-            Container(
-              height: subtitleHeight,
-              width: double.infinity,
-              padding: const EdgeInsets.all(12.0),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFDF6E3),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Scrollbar(
-                child: SingleChildScrollView(
-                  child: SubtitlesWidget(
-                    subtitleText: widget.material.scriptPath,
-                  ),
-                ),
-              ),
-            ),
+            const SizedBox(height: 40),
           ],
         ),
       ),

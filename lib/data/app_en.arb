@@ -1,0 +1,22 @@
+{
+  "@@locale": "en",
+  "appTitle": "Shadow Speak",
+  "settings": "Settings",
+  "fontSize": "Font Size",
+  "language": "Language",
+  "theme": "Theme",
+  "selectLevel": "Select Level",
+  "levelStarterTitle": "Starter (〜50 words)",
+  "levelStarterDesc": "Short sentences, beginner words (Junior high level)",
+  "levelBasicTitle": "Basic (〜80 words)",
+  "levelBasicDesc": "Everyday expressions, basic vocabulary",
+  "levelIntermediateTitle": "Intermediate (〜100 words)",
+  "levelIntermediateDesc": "Great for conversation and speech training",
+  "levelUpperTitle": "Upper (〜130 words)",
+  "levelUpperDesc": "Challenging sentence structures",
+  "levelAdvancedTitle": "Advanced (〜150 words)",
+  "levelAdvancedDesc": "Full-scale English practice (over 1 minute)",
+  "levelSelectTitle": "Select your level"
+
+}
+

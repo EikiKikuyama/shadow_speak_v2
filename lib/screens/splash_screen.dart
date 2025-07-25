@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'level_home_screen.dart'; // ← あとで作る第1階層
+import 'main_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (_) => const LevelHomeScreen()),
+        MaterialPageRoute(builder: (_) => const MainScreen()),
       );
     });
   }

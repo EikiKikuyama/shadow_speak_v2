@@ -9,6 +9,8 @@ class SampleWaveformWidget extends StatefulWidget {
   final double height;
   final double progress; // 0.0〜1.0
   final bool isAsset;
+  final bool showComparison;
+  final String? comparisonAssetPath;
 
   const SampleWaveformWidget({
     super.key,
@@ -16,6 +18,8 @@ class SampleWaveformWidget extends StatefulWidget {
     required this.height,
     required this.progress,
     this.isAsset = false,
+    this.showComparison = false,
+    this.comparisonAssetPath,
   });
 
   @override

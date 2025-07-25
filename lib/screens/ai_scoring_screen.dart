@@ -1,21 +1,22 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../models/material_model.dart';
-import '../widgets/score_widget.dart';
-import '../services/waveform_processor.dart';
-import '../services/whisper_api_service.dart';
-import '../utils/levenshtein_distance.dart';
-import 'dart:developer' as dev;
+import 'package:shadow_speak_v2/widgets/custom_app_bar.dart';
 
 class AiScoringScreen extends StatefulWidget {
-  final PracticeMaterial material;
-  final String recordedFilePath;
+  final double whisperScore;
+  final double prosodyScore;
+  final String referenceText;
+  final String transcribedText;
+  final String prosodyFeedback;
+  final String pronunciationFeedback;
 
   const AiScoringScreen({
     super.key,
-    required this.material,
-    required this.recordedFilePath,
+    required this.whisperScore,
+    required this.prosodyScore,
+    required this.referenceText,
+    required this.transcribedText,
+    required this.prosodyFeedback,
+    required this.pronunciationFeedback,
   });
 
   @override
@@ -23,181 +24,172 @@ class AiScoringScreen extends StatefulWidget {
 }
 
 class _AiScoringScreenState extends State<AiScoringScreen> {
-  double? prosodyScore;
-  double? whisperScore;
-  String? transcribedText;
-  String? correctScript;
-  List<TextSpan>? diffSpans;
-  String? prosodyFeedback;
-  String? grammarFeedback;
-
   @override
-  void initState() {
-    super.initState();
-    _loadScriptAndAnalyze();
-  }
+  Widget build(BuildContext context) {
+    final overallScore =
+        ((widget.whisperScore + widget.prosodyScore) / 2).round();
 
-  Future<void> _loadScriptAndAnalyze() async {
-    final scriptText = await rootBundle.loadString(widget.material.scriptPath);
+    return Scaffold(
+      backgroundColor: const Color(0xFF08254D),
+      appBar: const CustomAppBar(
+        title: 'AI採点フィードバック',
+        backgroundColor: Colors.transparent,
+        titleColor: Colors.white,
+        iconColor: Colors.white,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            // 波形エリア（仮）
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+              ),
+              child: AspectRatio(
+                aspectRatio: 3,
+                child: Center(
+                  child: Text(
+                    '波形表示（見本: 赤・あなた: 青）',
+                    style: TextStyle(color: Colors.black54),
+                  ),
+                ),
+              ),
+            ),
 
-    setState(() {
-      correctScript = scriptText.trim().toLowerCase();
-    });
+            // スコア表示エリア
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildScoreGauge("波形の正確さ", widget.prosodyScore),
+                _buildScoreGauge("単語認識", widget.whisperScore),
+                Column(
+                  children: [
+                    Text(
+                      '$overallScore 点',
+                      style: const TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Text(
+                      'Good Job',
+                      style: TextStyle(fontSize: 18, color: Colors.redAccent),
+                    )
+                  ],
+                ),
+              ],
+            ),
 
-    _analyzeProsody();
-    _transcribeWithWhisper(scriptText);
-  }
+            const SizedBox(height: 24),
 
-  Future<void> _analyzeProsody() async {
-    final fixedAudioPath = widget.material.audioPath.startsWith('assets/')
-        ? widget.material.audioPath
-        : 'assets/${widget.material.audioPath}';
+            // スクリプト比較
+            _buildSectionTitle('正解スクリプトとの比較'),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(12),
+              color: Colors.white,
+              child: RichText(
+                text: TextSpan(
+                  style: const TextStyle(fontSize: 14, color: Colors.black),
+                  children: _buildHighlightedDiff(
+                      widget.referenceText, widget.transcribedText),
+                ),
+              ),
+            ),
 
-    final score = await WaveformProcessor.calculateProsodyScore(
-      recordedFile: File(widget.recordedFilePath),
-      sampleAudioPath: fixedAudioPath,
-      isAsset: true,
-    );
+            const SizedBox(height: 24),
+            _buildSectionTitle('抑揚フィードバック'),
+            _buildFeedbackBox(widget.prosodyFeedback),
 
-    if (!mounted) return;
-    setState(() {
-      prosodyScore = score;
-      prosodyFeedback = generateProsodyFeedback(score);
-    });
-  }
-
-  Future<void> _transcribeWithWhisper(String scriptText) async {
-    final filePath = widget.recordedFilePath;
-
-    try {
-      final whisper = WhisperApiService();
-      final result = await whisper.transcribeAudio(filePath);
-
-      if (result == null) {
-        debugPrint('❌ Whisperから結果が返りませんでした');
-        return;
-      }
-
-      final whisperResult = result.trim().toLowerCase();
-      final correct = scriptText.trim().toLowerCase();
-
-      dev.log('📝 Whisper結果: $whisperResult');
-      dev.log('📘 正解スクリプト: $correct');
-
-      setState(() {
-        transcribedText = whisperResult;
-        whisperScore = calculateAccuracy(correct, whisperResult);
-        grammarFeedback = generateGrammarFeedback(whisperScore!);
-        diffSpans = buildDiffTextSpans(correct, whisperResult);
-      });
-    } catch (e) {
-      debugPrint('❌ Whisper実行中のエラー: $e');
-    }
-  }
-
-  List<TextSpan> buildDiffTextSpans(String correct, String actual) {
-    final List<TextSpan> spans = [];
-    final diff = levenshteinDiff(correct, actual);
-
-    for (var d in diff) {
-      spans.add(TextSpan(
-        text: d.char,
-        style: TextStyle(
-          color: d.type == DiffType.equal
-              ? Colors.black
-              : d.type == DiffType.insert
-                  ? Colors.green
-                  : Colors.red,
-          backgroundColor: d.type == DiffType.equal
-              ? null
-              : d.type == DiffType.insert
-                  ? Colors.green.shade100
-                  : Colors.red.shade100,
+            const SizedBox(height: 16),
+            _buildSectionTitle('発音フィードバック'),
+            _buildFeedbackBox(widget.pronunciationFeedback),
+          ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildScoreGauge(String label, double value) {
+    return Column(
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            SizedBox(
+              height: 60,
+              width: 60,
+              child: CircularProgressIndicator(
+                value: value / 100,
+                strokeWidth: 6,
+                backgroundColor: Colors.grey[300],
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.redAccent),
+              ),
+            ),
+            Text('${value.round()}%',
+                style: const TextStyle(color: Colors.white)),
+          ],
+        ),
+        const SizedBox(height: 8),
+        Text(label, style: const TextStyle(color: Colors.white)),
+      ],
+    );
+  }
+
+  Widget _buildSectionTitle(String title) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      margin: const EdgeInsets.only(bottom: 4),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+      ),
+    );
+  }
+
+  Widget _buildFeedbackBox(String feedback) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Text(
+        feedback,
+        style: const TextStyle(color: Colors.white),
+      ),
+    );
+  }
+
+  /// 差分ハイライト処理（ここは簡易）
+  List<TextSpan> _buildHighlightedDiff(String reference, String userText) {
+    final refWords = reference.split(' ');
+    final userWords = userText.split(' ');
+
+    List<TextSpan> spans = [];
+
+    for (int i = 0; i < refWords.length; i++) {
+      final ref = refWords[i];
+      final usr = (i < userWords.length) ? userWords[i] : "";
+
+      final match = ref.toLowerCase() == usr.toLowerCase();
+
+      spans.add(TextSpan(
+        text: '$usr ',
+        style: TextStyle(color: match ? Colors.black : Colors.red),
       ));
     }
 
     return spans;
-  }
-
-  String generateProsodyFeedback(double score) {
-    if (score >= 95) {
-      return "完璧です！ネイティブレベルの自然な抑揚が表現できています。";
-    } else if (score >= 85) {
-      return "非常に良いです！ごくわずかにリズムのズレがありますが、全体として自然です。";
-    } else if (score >= 75) {
-      return "良好です！一部の音節で抑揚が弱くなっています。";
-    } else if (score >= 65) {
-      return "安定していますが、抑揚が平坦に感じられる箇所があります。";
-    } else if (score >= 55) {
-      return "リズムは比較的整っていますが、全体的に抑揚が単調です。";
-    } else if (score >= 45) {
-      return "抑揚の欠如が目立ちます。音の高低を意識して練習してみましょう。";
-    } else if (score >= 30) {
-      return "リズム・抑揚ともにズレが多く、改善が必要です。短いフレーズ練習が有効です。";
-    } else {
-      return "全体的に平坦で、自然さが感じられません。声に強弱をつける練習から始めましょう。";
-    }
-  }
-
-  String generateGrammarFeedback(double score) {
-    if (score >= 95) {
-      return "ほぼ完全です。文法の誤りはほとんどありません。";
-    } else if (score >= 85) {
-      return "非常に正確です。細かな文法の不自然さがわずかにあります。";
-    } else if (score >= 75) {
-      return "おおむね正確ですが、少し文法ミスがあります。";
-    } else if (score >= 65) {
-      return "いくつかの文法ミスにより、意味が部分的に不明瞭です。";
-    } else if (score >= 50) {
-      return "文法エラーが目立ち、意味が伝わりづらい箇所があります。";
-    } else if (score >= 35) {
-      return "多くの文法的な誤りで、伝えたい内容が不明瞭になっています。";
-    } else {
-      return "文法が崩壊しており、ほとんど意味が伝わっていません。基礎文法の復習をおすすめします。";
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final isLoading =
-        prosodyScore == null || whisperScore == null || diffSpans == null;
-
-    return Scaffold(
-      appBar: AppBar(title: const Text('AI採点結果')),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 32),
-                    ScoreWidget(
-                      prosodyScore: prosodyScore!,
-                      whisperScore: whisperScore!,
-                    ),
-                    const SizedBox(height: 24),
-                    Text("🗣️ 発音フィードバック：$prosodyFeedback",
-                        style: const TextStyle(fontSize: 16)),
-                    const SizedBox(height: 16),
-                    Text("📘 文法フィードバック：$grammarFeedback",
-                        style: const TextStyle(fontSize: 16)),
-                    const SizedBox(height: 32),
-                    const Text('Whisper結果と正解スクリプト比較：',
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 12),
-                    RichText(
-                      text: TextSpan(
-                        children: diffSpans!,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-      ),
-    );
   }
 }

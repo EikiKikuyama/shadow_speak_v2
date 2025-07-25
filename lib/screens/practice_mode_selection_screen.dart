@@ -5,6 +5,7 @@ import '../providers/selected_material_provider.dart';
 import '../screens/practice_screen.dart';
 import '../data/practice_materials.dart';
 import '../models/material_model.dart';
+import '../widgets/custom_app_bar.dart';
 
 class PracticeModeSelectionScreen extends ConsumerWidget {
   final PracticeMaterial material;
@@ -15,17 +16,11 @@ class PracticeModeSelectionScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: const Color(0xFFF3F0FA),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFF3F0FA),
-        elevation: 0,
-        title: const Text(
-          "モードを選んでください",
-          style: TextStyle(
-            color: Colors.black87,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        iconTheme: const IconThemeData(color: Colors.black87),
+      appBar: const CustomAppBar(
+        title: "モードを選んでください",
+        backgroundColor: Color(0xFFF3F0FA),
+        titleColor: Colors.black87,
+        iconColor: Colors.black87,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -108,6 +103,25 @@ class PracticeModeSelectionScreen extends ConsumerWidget {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        selectedItemColor: Colors.deepPurple,
+        unselectedItemColor: Colors.grey,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacementNamed(context, '/home');
+          } else if (index == 1) {
+            Navigator.pushReplacementNamed(context, '/history');
+          } else if (index == 2) {
+            Navigator.pushReplacementNamed(context, '/progress');
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: '履歴'),
+          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: '進捗'),
+        ],
       ),
     );
   }

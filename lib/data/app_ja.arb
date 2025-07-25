@@ -1,0 +1,23 @@
+{
+  "@@locale": "ja",
+  "appTitle": "シャドースピーク",
+  "settings": "設定",
+  "fontSize": "フォントサイズ",
+  "language": "言語",
+  "theme": "テーマ",
+  "selectLevel": "レベル選択",
+  "levelStarterTitle": "Starter（〜50語）",
+  "levelStarterDesc": "短い文章・簡単な語彙・中1レベル単語",
+  "levelBasicTitle": "Basic（〜80語）",
+  "levelBasicDesc": "基本的な日常表現・中学生英語レベル",
+  "levelIntermediateTitle": "Intermediate（〜100語）",
+  "levelIntermediateDesc": "会話・スピーチの練習に最適",
+  "levelUpperTitle": "Upper（〜130語）",
+  "levelUpperDesc": "複雑な文構造にも挑戦できるレベル",
+  "levelAdvancedTitle": "Advanced（〜150語）",
+  "levelAdvancedDesc": "本格的な英語力が試されるレベル（1分超）",
+  "levelSelectTitle": "レベルを選んでください"
+
+}
+
+

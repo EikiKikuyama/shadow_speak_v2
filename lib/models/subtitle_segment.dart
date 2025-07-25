@@ -2,11 +2,13 @@ class SubtitleSegment {
   final double start;
   final double end;
   final String text;
+  final String translation;
 
   SubtitleSegment({
     required this.start,
     required this.end,
     required this.text,
+    this.translation = '', // 空でもOK
   });
 
   factory SubtitleSegment.fromJson(Map<String, dynamic> json) {
@@ -14,6 +16,7 @@ class SubtitleSegment {
       start: (json['start'] as num).toDouble(),
       end: (json['end'] as num).toDouble(),
       text: json['text'] as String,
+      translation: json['translation'] ?? '',
     );
   }
 }

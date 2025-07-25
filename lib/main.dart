@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'screens/splash_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter/services.dart'; // ← これが rootBundle の正体
+import 'package:flutter/services.dart';
+
+import 'package:shadow_speak_v2/settings/settings_controller.dart';
+import 'package:shadow_speak_v2/screens/splash_screen.dart';
+import 'package:shadow_speak_v2/screens/level_home_screen.dart';
+import 'package:shadow_speak_v2/screens/recording_history_screen.dart';
+import 'package:shadow_speak_v2/screens/progress_screen.dart';
+import '../gen_l10n/app_localizations.dart'; // 相対パス
+import 'package:shadow_speak_v2/settings/font_size/font_size_option.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,14 +40,52 @@ Future<void> main() async {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settingsController = ref.watch(settingsControllerProvider);
+    final scaleFactor = settingsController.fontSize.scaleFactor;
+
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // ← これが必須！
-      home: SplashScreen(),
+      // --- ローカライズ関連 ---
+      locale: settingsController.currentLocale,
+      supportedLocales: const [
+        Locale('en'),
+        Locale('ja'),
+      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+
+      // --- テーマ関連 ---
+      themeMode: settingsController.themeMode,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.indigo,
+        scaffoldBackgroundColor: Colors.white,
+        // ここにフォントや色の調整も入れていける
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.indigo,
+        scaffoldBackgroundColor: const Color(0xFF121212),
+      ),
+
+      // --- その他 ---
+      debugShowCheckedModeBanner: false,
+      builder: (context, child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(textScaleFactor: scaleFactor),
+          child: child!,
+        );
+      },
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/home': (context) => const LevelHomeScreen(),
+        '/history': (context) => const RecordingHistoryScreen(),
+        '/progress': (context) => const ProgressScreen(),
+      },
     );
   }
 }

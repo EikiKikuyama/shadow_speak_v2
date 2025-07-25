@@ -10,6 +10,10 @@ import '../widgets/sample_waveform_widget.dart';
 import '../widgets/subtitle_display.dart';
 import '../widgets/speed_selector.dart';
 import '../widgets/playback_controls.dart';
+import 'package:intl/intl.dart'; // ← DateFormat用
+import 'package:path_provider/path_provider.dart'; // ← getApplicationDocumentsDirectory用
+import 'dart:io';
+import '../widgets/custom_app_bar.dart'; // ← カスタムアプリバー用
 
 class OverlappingMode extends StatefulWidget {
   final PracticeMaterial material;
@@ -114,8 +118,28 @@ class _OverlappingModeState extends State<OverlappingMode> {
   }
 
   Future<void> _resume() async {
-    await _recorder.startRecording();
+    // 保存先パスを作成
+    final now = DateTime.now();
+    final timestamp = DateFormat('yyyyMMdd_HHmmss').format(now);
+    final dir = await getApplicationDocumentsDirectory();
+
+    // ファイル名を安全に（スペースや記号を避けるため）
+    final safeLevel = widget.material.level.replaceAll(' ', '_');
+    final safeTitle = widget.material.title.replaceAll(' ', '_');
+
+    final savePath = '${dir.path}/shadow_speak/recordings/'
+        '${safeLevel}_${safeTitle}_$timestamp.wav';
+
+    // 録音開始（ファイル名付き）
+    await _recorder.startRecording(
+      path: savePath,
+      level: widget.material.level,
+      title: widget.material.title,
+    );
+
+    // 音声再生
     await _audioService.resume();
+
     if (!mounted) return;
     setState(() {
       _isRecording = true;
@@ -145,7 +169,28 @@ class _OverlappingModeState extends State<OverlappingMode> {
       _hasPlayedOnce = true;
     });
 
-    await _recorder.startRecording();
+    Future<void> someFunction() async {
+      final now = DateTime.now();
+      final formatter = DateFormat('yyyyMMdd_HHmmss');
+      final timestamp = formatter.format(now);
+
+      final directory = await getApplicationDocumentsDirectory();
+      final saveDir = Directory('${directory.path}/shadow_speak/recordings');
+      if (!await saveDir.exists()) {
+        await saveDir.create(recursive: true);
+      }
+
+      final filename =
+          '${widget.material.level}_${widget.material.title}_$timestamp.wav';
+      final savePath = '${saveDir.path}/$filename';
+
+      await _recorder.startRecording(
+        path: savePath,
+        level: widget.material.level,
+        title: widget.material.title,
+      );
+    }
+
     await _audioService.setSpeed(_currentSpeed);
     await _audioService.prepareAndPlayLocalFile(sampleFilePath!, _currentSpeed);
 
@@ -180,99 +225,174 @@ class _OverlappingModeState extends State<OverlappingMode> {
     final screenHeight = MediaQuery.of(context).size.height;
     final subtitleHeight = screenHeight * 0.3;
 
+    final total = _audioService.totalDuration;
+    final progress = (total != null && total.inMilliseconds > 0)
+        ? _currentPosition.inMilliseconds / total.inMilliseconds
+        : 0.0;
+
     return Scaffold(
-      backgroundColor: const Color(0xFF2E7D32),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF2E7D32),
-        elevation: 0,
-        title: const Text(
-          '🎤 オーバーラッピングモード',
-          style: TextStyle(color: Colors.white),
-        ),
-        iconTheme: const IconThemeData(color: Colors.white),
+      backgroundColor: const Color(0xFF001F3F), // 🎨 統一された深紺色
+      appBar: const CustomAppBar(
+        title: '🎤 オーバーラッピングモード',
+        backgroundColor: Color(0xFF001F3F),
+        titleColor: Colors.white,
+        iconColor: Colors.white,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Container(
-              width: double.infinity,
-              height: 160,
-              color: const Color(0xFF212121),
-              child: Stack(
-                alignment: Alignment.center,
+
+      body: Column(
+        children: [
+          // 🔼 アイコンバナー（統一デザイン）
+          Container(
+            height: 100,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/icon.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          const SizedBox(height: 12),
+
+          Expanded(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
                 children: [
-                  if (sampleFilePath != null)
-                    Align(
+                  // 🔊 波形表示（白背景・中央に表示）
+                  Container(
+                    width: double.infinity,
+                    height: 160,
+                    color: Colors.white,
+                    child: Stack(
                       alignment: Alignment.center,
-                      child: ClipRect(
-                        child: SampleWaveformWidget(
-                          filePath: sampleFilePath!,
-                          height: 100,
-                          progress: _calculateProgress(),
+                      children: [
+                        if (sampleFilePath != null)
+                          ClipRect(
+                            child: SampleWaveformWidget(
+                              filePath: sampleFilePath!,
+                              height: 100,
+                              progress: progress,
+                            ),
+                          ),
+                        if (countdownValue != null)
+                          Text(
+                            countdownValue == 0
+                                ? 'Go!'
+                                : countdownValue.toString(),
+                            style: const TextStyle(
+                              fontSize: 48,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black, // 白背景に黒字
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+
+                  // 💬 波形下に字幕（1行仮表示）
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
+                    color: Colors.transparent,
+                    child: Center(
+                      child: Text(
+                        _currentSubtitle?.text ?? '',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.w500,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                  if (countdownValue != null)
-                    Text(
-                      countdownValue == 0 ? 'Go!' : countdownValue.toString(),
-                      style: const TextStyle(
-                        fontSize: 48,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                  ),
+
+                  // 📝 字幕全文表示（スクロール可能）
+                  Container(
+                    height: subtitleHeight,
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
+                    child: Scrollbar(
+                      child: SingleChildScrollView(
+                        child: _subtitles.isNotEmpty
+                            ? SubtitleDisplay(
+                                currentSubtitle: _currentSubtitle,
+                                allSubtitles: _subtitles,
+                              )
+                            : const Center(
+                                child: Text(
+                                  "字幕を読み込み中…",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
                       ),
                     ),
+                  ),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
-            PlaybackControls(
-              isPlaying: _isPlaying,
-              onPlayPauseToggle: () {
-                if (!_hasPlayedOnce) {
-                  _startCountdownAndPlay();
-                } else if (_isPlaying) {
-                  _pause();
-                } else {
-                  _resume();
-                }
-              },
-              onRestart: _handleReset,
-              onSeekForward: () => _audioService
-                  .seek(_currentPosition + const Duration(seconds: 5)),
-              onSeekBackward: () => _audioService
-                  .seek(_currentPosition - const Duration(seconds: 5)),
-            ),
-            const SizedBox(height: 20),
-            SpeedSelector(
-              currentSpeed: _currentSpeed,
-              onSpeedSelected: (speed) {
-                setState(() => _currentSpeed = speed);
-                _audioService.setSpeed(speed);
-              },
-            ),
-            const SizedBox(height: 20),
-            Container(
-              height: subtitleHeight,
-              width: double.infinity,
-              padding: const EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                color: const Color(0xFFFDF6E3),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Scrollbar(
-                child: SingleChildScrollView(
-                  child: _subtitles.isNotEmpty
-                      ? SubtitleDisplay(
-                          currentSubtitle: _currentSubtitle,
-                          allSubtitles: _subtitles,
-                        )
-                      : const Center(child: Text("字幕を読み込み中…")),
+          ),
+
+          // ⏯ 下部コントロール（再生・速度調整）
+          Padding(
+            padding: const EdgeInsets.only(bottom: 16.0),
+            child: Column(
+              children: [
+                if (total != null && total.inMilliseconds > 0)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Slider(
+                      value: _currentPosition.inMilliseconds
+                          .toDouble()
+                          .clamp(0, total.inMilliseconds.toDouble()),
+                      min: 0,
+                      max: total.inMilliseconds.toDouble(),
+                      activeColor: Colors.white,
+                      inactiveColor: Colors.white24,
+                      onChanged: (value) {
+                        setState(() {
+                          _currentPosition =
+                              Duration(milliseconds: value.toInt());
+                        });
+                      },
+                      onChangeEnd: (value) {
+                        _audioService
+                            .seek(Duration(milliseconds: value.toInt()));
+                      },
+                    ),
+                  ),
+                PlaybackControls(
+                  isPlaying: _isPlaying,
+                  onPlayPauseToggle: () {
+                    if (!_hasPlayedOnce) {
+                      _startCountdownAndPlay();
+                    } else if (_isPlaying) {
+                      _pause();
+                    } else {
+                      _resume();
+                    }
+                  },
+                  onRestart: _handleReset,
+                  onSeekForward: () => _audioService
+                      .seek(_currentPosition + const Duration(seconds: 5)),
+                  onSeekBackward: () => _audioService
+                      .seek(_currentPosition - const Duration(seconds: 5)),
                 ),
-              ),
+                const SizedBox(height: 12),
+                SpeedSelector(
+                  currentSpeed: _currentSpeed,
+                  onSpeedSelected: (speed) {
+                    setState(() => _currentSpeed = speed);
+                    _audioService.setSpeed(speed);
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

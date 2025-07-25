@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../models/material_model.dart';
 import '../../data/practice_materials.dart';
 import '../../screens/practice_mode_selection_screen.dart';
+import '../../widgets/custom_app_bar.dart';
 
 class MaterialSelectionScreen extends StatefulWidget {
   final String level;
@@ -30,6 +31,19 @@ class _MaterialSelectionScreenState extends State<MaterialSelectionScreen> {
     }).toList();
   }
 
+  int _currentIndex = 0;
+
+  void _onBottomNavTap(int index) {
+    setState(() => _currentIndex = index);
+    if (index == 0) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else if (index == 1) {
+      Navigator.pushReplacementNamed(context, '/history');
+    } else if (index == 2) {
+      Navigator.pushReplacementNamed(context, '/progress');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final recommended = filteredMaterials.take(2).toList();
@@ -37,12 +51,8 @@ class _MaterialSelectionScreenState extends State<MaterialSelectionScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text("${widget.level} の教材",
-            style: const TextStyle(color: Colors.black)),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
+      appBar: CustomAppBar(
+        title: "${widget.level} の教材",
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -66,6 +76,17 @@ class _MaterialSelectionScreenState extends State<MaterialSelectionScreen> {
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.deepPurple,
+        unselectedItemColor: Colors.grey,
+        onTap: _onBottomNavTap,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'ホーム'),
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: '履歴'),
+          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: '進捗'),
+        ],
       ),
     );
   }

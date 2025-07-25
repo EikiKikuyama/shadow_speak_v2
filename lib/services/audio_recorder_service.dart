@@ -6,6 +6,9 @@ import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:math';
 import 'package:intl/intl.dart';
+import 'dart:io'; // ← FileやDirectoryを使っている場合
+
+import 'package:flutter/material.dart';
 
 class AudioRecorderService {
   final AudioRecorder _recorder = AudioRecorder();
@@ -18,6 +21,7 @@ class AudioRecorderService {
 
   String? get getRecordedFilePath => recordedFilePath;
 
+  // 🔊 振幅ストリーム（0〜1に正規化）
   Stream<double> get amplitudeStream => _recorder
           .onAmplitudeChanged(const Duration(milliseconds: 100))
           .map((event) {
@@ -35,12 +39,18 @@ class AudioRecorderService {
         return value;
       });
 
-  Future<void> startRecording({String? path}) async {
+  // 🎙️ 録音開始
+  Future<void> startRecording({
+    required String level,
+    required String title,
+    String? path,
+  }) async {
     try {
       final bool hasPermission = await _recorder.hasPermission();
       if (!hasPermission) throw Exception("録音の許可がありません");
 
-      final savePath = path ?? await getSavePath(); // ✅ ここで自動生成もOKに
+      final savePath =
+          path ?? await getSavePath(level: level, title: title); // ← 自動生成
       _filePath = savePath;
 
       await _recorder.start(
@@ -63,6 +73,7 @@ class AudioRecorderService {
     }
   }
 
+  // 🛑 録音停止
   Future<String?> stopRecording() async {
     try {
       String? filePath = await _recorder.stop();
@@ -72,7 +83,6 @@ class AudioRecorderService {
       if (filePath != null) {
         recordedFilePath = filePath;
 
-        // ✅ ここに追加！
         final size = await File(filePath).length();
         dev.log("📦 録音ファイルサイズ: $size bytes");
       }
@@ -89,8 +99,12 @@ class AudioRecorderService {
     }
   }
 
-// 末尾に追加（または static メソッドにしてもOK）
-  Future<String> getSavePath() async {
+  // 📁 パス生成
+  // 📁 パス生成（安全なファイル名）
+  Future<String> getSavePath({
+    required String level,
+    required String title,
+  }) async {
     final dir = await getApplicationDocumentsDirectory();
     final recordingDir = Directory('${dir.path}/shadow_speak/recordings');
 
@@ -99,9 +113,15 @@ class AudioRecorderService {
     }
 
     final timestamp = DateFormat('yyyyMMdd_HHmmss').format(DateTime.now());
-    return '${recordingDir.path}/recording_$timestamp.wav';
+
+    // スペース → ハイフン に変換してセパレータを __ に統一
+    final safeLevel = level.replaceAll(' ', '-');
+    final safeTitle = title.replaceAll(' ', '-');
+
+    return '${recordingDir.path}/$safeLevel\_\_${safeTitle}\_\_${timestamp}.wav';
   }
 
+  // 📊 波形抽出
   Future<List<double>> extractWaveform(
       File file, Duration audioDuration) async {
     final List<double> waveform = [];
@@ -109,13 +129,12 @@ class AudioRecorderService {
       final Uint8List data = await file.readAsBytes();
       int totalSamples = data.length ~/ 2;
 
-      // ✅ durationが0秒なら安全にスキップ
       if (audioDuration.inSeconds == 0) {
         dev.log("⚠️ audioDurationが0秒のため波形抽出をスキップします。");
         return [];
       }
 
-      int desiredSamples = audioDuration.inSeconds * 10; // ← 分解能（10〜50が推奨）
+      int desiredSamples = audioDuration.inSeconds * 10;
       int groupSize = (totalSamples / desiredSamples).ceil();
 
       final ByteData byteData = ByteData.sublistView(data);
@@ -126,9 +145,8 @@ class AudioRecorderService {
         int count = 0;
 
         for (int j = i; j < end; j++) {
-          int sample = byteData.getInt16(j * 2, Endian.little); // 16bit PCM
-          double normalized =
-              sample.abs() / 327.68; // 正規化（-32768〜+32767 → ±100.0）
+          int sample = byteData.getInt16(j * 2, Endian.little);
+          double normalized = sample.abs() / 327.68;
           sum += normalized;
           count++;
         }
@@ -136,7 +154,6 @@ class AudioRecorderService {
         waveform.add(count > 0 ? sum / count : 0.0);
       }
 
-      // ✅ デバッグログ（状態確認）
       if (waveform.isEmpty) {
         dev.log("⚠️ waveformが空です。抽出に失敗した可能性があります。");
       } else {
@@ -152,9 +169,11 @@ class AudioRecorderService {
     return waveform;
   }
 
+  Future<void> stop() async {
+    await stopRecording();
+  }
+
   void dispose() {
     _stateSubscription?.cancel();
   }
-
-  start({required String path}) {}
 }
