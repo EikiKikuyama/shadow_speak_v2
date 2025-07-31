@@ -6,9 +6,7 @@ import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:math';
 import 'package:intl/intl.dart';
-import 'dart:io'; // ← FileやDirectoryを使っている場合
-
-import 'package:flutter/material.dart';
+// ← FileやDirectoryを使っている場合
 
 class AudioRecorderService {
   final AudioRecorder _recorder = AudioRecorder();

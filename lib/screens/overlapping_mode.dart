@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/material_model.dart';
 import '../models/subtitle_segment.dart';
 import '../services/audio_recorder_service.dart';
@@ -10,21 +11,21 @@ import '../widgets/sample_waveform_widget.dart';
 import '../widgets/subtitle_display.dart';
 import '../widgets/speed_selector.dart';
 import '../widgets/playback_controls.dart';
-import 'package:intl/intl.dart'; // ← DateFormat用
-import 'package:path_provider/path_provider.dart'; // ← getApplicationDocumentsDirectory用
-import 'dart:io';
-import '../widgets/custom_app_bar.dart'; // ← カスタムアプリバー用
+import 'package:intl/intl.dart';
+import 'package:path_provider/path_provider.dart';
+import '../widgets/custom_app_bar.dart';
+import '../settings/settings_controller.dart';
 
-class OverlappingMode extends StatefulWidget {
+class OverlappingMode extends ConsumerStatefulWidget {
   final PracticeMaterial material;
 
   const OverlappingMode({super.key, required this.material});
 
   @override
-  State<OverlappingMode> createState() => _OverlappingModeState();
+  ConsumerState<OverlappingMode> createState() => _OverlappingModeState();
 }
 
-class _OverlappingModeState extends State<OverlappingMode> {
+class _OverlappingModeState extends ConsumerState<OverlappingMode> {
   final AudioRecorderService _recorder = AudioRecorderService();
   final AudioPlayerService _audioService = AudioPlayerService();
 
@@ -118,26 +119,22 @@ class _OverlappingModeState extends State<OverlappingMode> {
   }
 
   Future<void> _resume() async {
-    // 保存先パスを作成
     final now = DateTime.now();
     final timestamp = DateFormat('yyyyMMdd_HHmmss').format(now);
     final dir = await getApplicationDocumentsDirectory();
 
-    // ファイル名を安全に（スペースや記号を避けるため）
     final safeLevel = widget.material.level.replaceAll(' ', '_');
     final safeTitle = widget.material.title.replaceAll(' ', '_');
 
     final savePath = '${dir.path}/shadow_speak/recordings/'
         '${safeLevel}_${safeTitle}_$timestamp.wav';
 
-    // 録音開始（ファイル名付き）
     await _recorder.startRecording(
       path: savePath,
       level: widget.material.level,
       title: widget.material.title,
     );
 
-    // 音声再生
     await _audioService.resume();
 
     if (!mounted) return;
@@ -169,28 +166,6 @@ class _OverlappingModeState extends State<OverlappingMode> {
       _hasPlayedOnce = true;
     });
 
-    Future<void> someFunction() async {
-      final now = DateTime.now();
-      final formatter = DateFormat('yyyyMMdd_HHmmss');
-      final timestamp = formatter.format(now);
-
-      final directory = await getApplicationDocumentsDirectory();
-      final saveDir = Directory('${directory.path}/shadow_speak/recordings');
-      if (!await saveDir.exists()) {
-        await saveDir.create(recursive: true);
-      }
-
-      final filename =
-          '${widget.material.level}_${widget.material.title}_$timestamp.wav';
-      final savePath = '${saveDir.path}/$filename';
-
-      await _recorder.startRecording(
-        path: savePath,
-        level: widget.material.level,
-        title: widget.material.title,
-      );
-    }
-
     await _audioService.setSpeed(_currentSpeed);
     await _audioService.prepareAndPlayLocalFile(sampleFilePath!, _currentSpeed);
 
@@ -205,11 +180,6 @@ class _OverlappingModeState extends State<OverlappingMode> {
     });
   }
 
-  double _calculateProgress() {
-    final total = _audioService.totalDuration?.inMilliseconds ?? 1;
-    return _currentPosition.inMilliseconds / total;
-  }
-
   @override
   void dispose() {
     _recorder.dispose();
@@ -222,6 +192,15 @@ class _OverlappingModeState extends State<OverlappingMode> {
 
   @override
   Widget build(BuildContext context) {
+    final settingsController = ref.watch(settingsControllerProvider);
+    final isDark = settingsController.isDarkMode;
+
+    final backgroundColor =
+        isDark ? const Color(0xFF001F3F) : const Color(0xFFF4F1FA);
+    final textColor = isDark ? Colors.white : Colors.black;
+    final sliderActiveColor = isDark ? Colors.white : Colors.black;
+    final sliderInactiveColor = isDark ? Colors.white24 : Colors.black26;
+
     final screenHeight = MediaQuery.of(context).size.height;
     final subtitleHeight = screenHeight * 0.3;
 
@@ -231,35 +210,21 @@ class _OverlappingModeState extends State<OverlappingMode> {
         : 0.0;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF001F3F), // 🎨 統一された深紺色
-      appBar: const CustomAppBar(
+      backgroundColor: backgroundColor,
+      appBar: CustomAppBar(
         title: '🎤 オーバーラッピングモード',
-        backgroundColor: Color(0xFF001F3F),
-        titleColor: Colors.white,
-        iconColor: Colors.white,
+        backgroundColor: backgroundColor,
+        titleColor: textColor,
+        iconColor: textColor,
       ),
-
       body: Column(
         children: [
-          // 🔼 アイコンバナー（統一デザイン）
-          Container(
-            height: 100,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/icon.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
           const SizedBox(height: 12),
-
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  // 🔊 波形表示（白背景・中央に表示）
                   Container(
                     width: double.infinity,
                     height: 160,
@@ -283,24 +248,21 @@ class _OverlappingModeState extends State<OverlappingMode> {
                             style: const TextStyle(
                               fontSize: 48,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black, // 白背景に黒字
+                              color: Colors.black,
                             ),
                           ),
                       ],
                     ),
                   ),
-
-                  // 💬 波形下に字幕（1行仮表示）
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16.0, vertical: 8.0),
-                    color: Colors.transparent,
                     child: Center(
                       child: Text(
                         _currentSubtitle?.text ?? '',
-                        style: const TextStyle(
-                          color: Colors.white,
+                        style: TextStyle(
+                          color: textColor,
                           fontSize: 18.0,
                           fontWeight: FontWeight.w500,
                         ),
@@ -308,35 +270,29 @@ class _OverlappingModeState extends State<OverlappingMode> {
                       ),
                     ),
                   ),
-
-                  // 📝 字幕全文表示（スクロール可能）
                   Container(
                     height: subtitleHeight,
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(
                         horizontal: 16.0, vertical: 8.0),
-                    child: Scrollbar(
-                      child: SingleChildScrollView(
-                        child: _subtitles.isNotEmpty
-                            ? SubtitleDisplay(
-                                currentSubtitle: _currentSubtitle,
-                                allSubtitles: _subtitles,
-                              )
-                            : const Center(
-                                child: Text(
-                                  "字幕を読み込み中…",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ),
-                      ),
-                    ),
+                    child: _subtitles.isNotEmpty
+                        ? SubtitleDisplay(
+                            currentSubtitle: _currentSubtitle,
+                            allSubtitles: _subtitles,
+                            highlightColor: Colors.blue,
+                            defaultColor: textColor,
+                          )
+                        : Center(
+                            child: Text(
+                              "字幕を読み込み中…",
+                              style: TextStyle(color: textColor),
+                            ),
+                          ),
                   ),
                 ],
               ),
             ),
           ),
-
-          // ⏯ 下部コントロール（再生・速度調整）
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: Column(
@@ -350,8 +306,8 @@ class _OverlappingModeState extends State<OverlappingMode> {
                           .clamp(0, total.inMilliseconds.toDouble()),
                       min: 0,
                       max: total.inMilliseconds.toDouble(),
-                      activeColor: Colors.white,
-                      inactiveColor: Colors.white24,
+                      activeColor: sliderActiveColor,
+                      inactiveColor: sliderInactiveColor,
                       onChanged: (value) {
                         setState(() {
                           _currentPosition =

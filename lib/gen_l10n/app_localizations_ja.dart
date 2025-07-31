@@ -30,31 +30,31 @@ class AppLocalizationsJa extends AppLocalizations {
   String get levelStarterTitle => 'Starter（〜50語）';
 
   @override
-  String get levelStarterDesc => '短い文章・簡単な語彙・中1レベル単語';
+  String get levelStarterDesc => '超初級。短くてわかりやすい文章で発音練習を始めたい方に。';
 
   @override
   String get levelBasicTitle => 'Basic（〜80語）';
 
   @override
-  String get levelBasicDesc => '基本的な日常表現・中学生英語レベル';
+  String get levelBasicDesc => '基礎力をつけたい方へ。中学英語レベルの会話文で耳と口を慣らします。';
 
   @override
   String get levelIntermediateTitle => 'Intermediate（〜100語）';
 
   @override
-  String get levelIntermediateDesc => '会話・スピーチの練習に最適';
+  String get levelIntermediateDesc => '少し長めの英文に挑戦。スピーチ練習にもぴったりのレベルです。';
 
   @override
   String get levelUpperTitle => 'Upper（〜130語）';
 
   @override
-  String get levelUpperDesc => '複雑な文構造にも挑戦できるレベル';
+  String get levelUpperDesc => '接続詞や複雑な構文が登場。聞く・話すの力をさらに伸ばします。';
 
   @override
   String get levelAdvancedTitle => 'Advanced（〜150語）';
 
   @override
-  String get levelAdvancedDesc => '本格的な英語力が試されるレベル（1分超）';
+  String get levelAdvancedDesc => '本物の英語スピーチに挑戦。1分以上の実践的な素材を収録。';
 
   @override
   String get levelSelectTitle => 'レベルを選んでください';

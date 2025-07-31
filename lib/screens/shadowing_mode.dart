@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../models/material_model.dart';
 import '../models/subtitle_segment.dart';
 import '../services/audio_player_service.dart';
@@ -9,17 +10,18 @@ import '../widgets/sample_waveform_widget.dart';
 import '../widgets/speed_selector.dart';
 import '../widgets/playback_controls.dart';
 import '../widgets/custom_app_bar.dart';
+import '../settings/settings_controller.dart';
 
-class ShadowingMode extends StatefulWidget {
+class ShadowingMode extends ConsumerStatefulWidget {
   final PracticeMaterial material;
 
   const ShadowingMode({super.key, required this.material});
 
   @override
-  State<ShadowingMode> createState() => _ShadowingModeState();
+  ConsumerState<ShadowingMode> createState() => _ShadowingModeState();
 }
 
-class _ShadowingModeState extends State<ShadowingMode> {
+class _ShadowingModeState extends ConsumerState<ShadowingMode> {
   final AudioPlayerService _audioService = AudioPlayerService();
   bool _isResetting = false;
   bool _hasPlayedOnce = false;
@@ -139,19 +141,26 @@ class _ShadowingModeState extends State<ShadowingMode> {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
+    final settingsController = ref.watch(settingsControllerProvider);
+    final isDarkMode = settingsController.isDarkMode;
+    final backgroundColor = isDarkMode ? const Color(0xFF001F3F) : Colors.white;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
+    final subtitleBoxColor = isDarkMode ? Colors.white10 : Colors.grey[200];
+    final sliderActiveColor = isDarkMode ? Colors.white : Colors.black;
+    final sliderInactiveColor = isDarkMode ? Colors.white24 : Colors.black26;
+
     final total = _audioService.totalDuration;
     final progress = (total != null && total.inMilliseconds > 0)
         ? _currentPosition.inMilliseconds / total.inMilliseconds
         : 0.0;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF001F3F),
-      appBar: const CustomAppBar(
+      backgroundColor: backgroundColor,
+      appBar: CustomAppBar(
         title: '🗣 シャドーイングモード',
-        backgroundColor: Color(0xFF001F3F),
-        titleColor: Colors.white,
-        iconColor: Colors.white,
+        backgroundColor: backgroundColor,
+        titleColor: textColor,
+        iconColor: textColor,
       ),
       body: Column(
         children: [
@@ -171,14 +180,14 @@ class _ShadowingModeState extends State<ShadowingMode> {
               padding: const EdgeInsets.all(12.0),
               margin: const EdgeInsets.symmetric(horizontal: 16.0),
               decoration: BoxDecoration(
-                color: Colors.white10,
+                color: subtitleBoxColor,
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(color: Colors.white24),
               ),
               child: Text(
                 _randomTip,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: textColor,
                   fontSize: 14,
                   fontStyle: FontStyle.italic,
                 ),
@@ -197,10 +206,10 @@ class _ShadowingModeState extends State<ShadowingMode> {
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Text(
                         _currentSubtitle!.translation,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w500,
-                          color: Colors.white,
+                          color: textColor,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -208,7 +217,7 @@ class _ShadowingModeState extends State<ShadowingMode> {
                   Container(
                     width: double.infinity,
                     height: 160,
-                    color: Colors.white,
+                    color: isDarkMode ? Colors.white : Colors.black,
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
@@ -225,10 +234,10 @@ class _ShadowingModeState extends State<ShadowingMode> {
                             countdownValue == 0
                                 ? 'Go!'
                                 : countdownValue.toString(),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 48,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: isDarkMode ? Colors.black : Colors.white,
                             ),
                           ),
                       ],
@@ -251,8 +260,8 @@ class _ShadowingModeState extends State<ShadowingMode> {
                           .clamp(0, total.inMilliseconds.toDouble()),
                       min: 0,
                       max: total.inMilliseconds.toDouble(),
-                      activeColor: Colors.white,
-                      inactiveColor: Colors.white24,
+                      activeColor: sliderActiveColor,
+                      inactiveColor: sliderInactiveColor,
                       onChanged: (value) {
                         setState(() {
                           _currentPosition =

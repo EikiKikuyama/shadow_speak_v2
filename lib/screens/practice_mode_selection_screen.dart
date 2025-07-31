@@ -3,9 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/practice_mode_provider.dart';
 import '../providers/selected_material_provider.dart';
 import '../screens/practice_screen.dart';
-import '../data/practice_materials.dart';
 import '../models/material_model.dart';
 import '../widgets/custom_app_bar.dart';
+import '../settings/settings_controller.dart'; // ✅ 追加
 
 class PracticeModeSelectionScreen extends ConsumerWidget {
   final PracticeMaterial material;
@@ -14,13 +14,22 @@ class PracticeModeSelectionScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isDarkMode = ref.watch(settingsControllerProvider).isDarkMode;
+
+    final backgroundColor =
+        isDarkMode ? const Color(0xFF001042) : const Color(0xFFF3F0FA);
+    final appBarColor =
+        isDarkMode ? const Color(0xFF0C1A3E) : const Color(0xFFF3F0FA);
+    final titleColor = isDarkMode ? Colors.white : Colors.black87;
+    final iconColor = isDarkMode ? Colors.white : Colors.black87;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F0FA),
-      appBar: const CustomAppBar(
+      backgroundColor: backgroundColor,
+      appBar: CustomAppBar(
         title: "モードを選んでください",
-        backgroundColor: Color(0xFFF3F0FA),
-        titleColor: Colors.black87,
-        iconColor: Colors.black87,
+        backgroundColor: appBarColor,
+        titleColor: titleColor,
+        iconColor: iconColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -28,86 +37,42 @@ class PracticeModeSelectionScreen extends ConsumerWidget {
           children: [
             _buildModeCard(
               title: 'Auto Mode',
-              description: '全モードを自動で順に練習できます',
+              description: '全モードを自動で順番に練習できるモード',
               icon: Icons.autorenew,
-              onTap: () {
-                ref.read(practiceModeProvider.notifier).state =
-                    PracticeMode.listening;
-                ref.read(selectedMaterialProvider.notifier).state = material;
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const PracticeScreen()),
-                );
-              },
+              onTap: () => _navigate(context, ref, PracticeMode.listening),
             ),
             _buildModeCard(
               title: 'Listening',
-              description: '聞き取りに集中するモードです',
+              description: '音声を聞き取り、内容を理解することに集中するモード',
               icon: Icons.headphones,
-              onTap: () {
-                ref.read(practiceModeProvider.notifier).state =
-                    PracticeMode.listening;
-                ref.read(selectedMaterialProvider.notifier).state = material;
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const PracticeScreen()),
-                );
-              },
+              onTap: () => _navigate(context, ref, PracticeMode.listening),
             ),
             _buildModeCard(
               title: 'Overlapping',
-              description: '同時に音声を重ねて発音します',
+              description: '字幕を見ながら、聞こえた音声にぴったり合わせて同時に発音するモード',
               icon: Icons.surround_sound,
-              onTap: () {
-                ref.read(practiceModeProvider.notifier).state =
-                    PracticeMode.overlapping;
-                ref.read(selectedMaterialProvider.notifier).state = material;
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const PracticeScreen()),
-                );
-              },
+              onTap: () => _navigate(context, ref, PracticeMode.overlapping),
             ),
             _buildModeCard(
               title: 'Shadowing',
-              description: '一拍遅れてマネする発音練習です',
+              description: '聞こえた音声のすぐあとに続いて、真似して発音する練習モード',
               icon: Icons.repeat,
-              onTap: () {
-                ref.read(practiceModeProvider.notifier).state =
-                    PracticeMode.shadowing;
-                ref.read(selectedMaterialProvider.notifier).state = material;
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const PracticeScreen()),
-                );
-              },
+              onTap: () => _navigate(context, ref, PracticeMode.shadowing),
             ),
             _buildModeCard(
               title: 'Recording Only',
-              description: '録音だけを行うシンプルなモード',
+              description: '音声を聞かず、自分の発音だけを録音するモード',
               icon: Icons.mic,
-              onTap: () {
-                ref.read(practiceModeProvider.notifier).state =
-                    PracticeMode.recordingOnly;
-                ref.read(selectedMaterialProvider.notifier).state = material;
-
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const PracticeScreen()),
-                );
-              },
+              onTap: () => _navigate(context, ref, PracticeMode.recordingOnly),
             ),
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: isDarkMode ? const Color(0xFF0C1A3E) : Colors.white,
         currentIndex: 0,
-        selectedItemColor: Colors.deepPurple,
-        unselectedItemColor: Colors.grey,
+        selectedItemColor: isDarkMode ? Colors.white : Colors.deepPurple,
+        unselectedItemColor: isDarkMode ? Colors.white70 : Colors.grey,
         onTap: (index) {
           if (index == 0) {
             Navigator.pushReplacementNamed(context, '/home');
@@ -126,6 +91,15 @@ class PracticeModeSelectionScreen extends ConsumerWidget {
     );
   }
 
+  void _navigate(BuildContext context, WidgetRef ref, PracticeMode mode) {
+    ref.read(practiceModeProvider.notifier).state = mode;
+    ref.read(selectedMaterialProvider.notifier).state = material;
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => const PracticeScreen()),
+    );
+  }
+
   Widget _buildModeCard({
     required String title,
     required String description,
@@ -133,7 +107,7 @@ class PracticeModeSelectionScreen extends ConsumerWidget {
     required VoidCallback onTap,
   }) {
     return Card(
-      color: Colors.white,
+      color: Colors.white, // ✅ ダークでも白固定
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
@@ -156,8 +130,8 @@ class PracticeModeSelectionScreen extends ConsumerWidget {
                     Text(
                       title,
                       style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
                         color: Colors.black87,
                       ),
                     ),
@@ -166,13 +140,14 @@ class PracticeModeSelectionScreen extends ConsumerWidget {
                       description,
                       style: const TextStyle(
                         fontSize: 14,
-                        color: Colors.black54,
+                        color: Colors.black87,
                       ),
                     ),
                   ],
                 ),
               ),
-              const Icon(Icons.chevron_right, color: Colors.grey),
+              const Icon(Icons.chevron_right,
+                  color: Color.fromARGB(255, 20, 19, 19)),
             ],
           ),
         ),

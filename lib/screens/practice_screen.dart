@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shadow_speak_v2/models/material_model.dart';
 import '../providers/practice_mode_provider.dart';
 import '../providers/selected_material_provider.dart';
 import 'listening_mode.dart';
@@ -32,8 +31,6 @@ class PracticeScreen extends ConsumerWidget {
         return OverlappingMode(material: material);
       case PracticeMode.recordingOnly:
         return RecordingOnlyMode(material: material);
-      default:
-        return const Center(child: Text("⚠ モードが選択されていません"));
     }
   }
 }

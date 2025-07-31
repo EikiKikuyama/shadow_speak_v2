@@ -1,17 +1,20 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:path_provider/path_provider.dart';
-import '../widgets/custom_app_bar.dart';
 
-class ProgressScreen extends StatefulWidget {
+import '../widgets/custom_app_bar.dart';
+import '../settings/settings_controller.dart';
+
+class ProgressScreen extends ConsumerStatefulWidget {
   const ProgressScreen({super.key});
 
   @override
-  State<ProgressScreen> createState() => _ProgressScreenState();
+  ConsumerState<ProgressScreen> createState() => _ProgressScreenState();
 }
 
-class _ProgressScreenState extends State<ProgressScreen> {
+class _ProgressScreenState extends ConsumerState<ProgressScreen> {
   Set<DateTime> practicedDays = {};
   int totalDays = 0;
   int streak = 0;
@@ -88,13 +91,22 @@ class _ProgressScreenState extends State<ProgressScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = ref.watch(settingsControllerProvider).isDarkMode;
+    final weekendColor = isDarkMode ? Colors.grey[300]! : Colors.grey;
+    final backgroundColor =
+        isDarkMode ? const Color(0xFF102542) : const Color(0xFFF8F3FA);
+    final cardColor = Colors.white;
+    final textColor = isDarkMode ? Colors.white : Colors.black87; // ←ここ！
+    final appBarColor = isDarkMode ? const Color(0xFF0C1A3E) : Colors.white;
+    final iconColor = isDarkMode ? Colors.white : Colors.black;
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F3FA),
-      appBar: const CustomAppBar(
+      backgroundColor: backgroundColor,
+      appBar: CustomAppBar(
         title: '進歩',
-        backgroundColor: Colors.white,
-        titleColor: Colors.black,
-        iconColor: Colors.black,
+        backgroundColor: appBarColor,
+        titleColor: iconColor,
+        iconColor: iconColor,
       ),
       body: Column(
         children: [
@@ -103,23 +115,23 @@ class _ProgressScreenState extends State<ProgressScreen> {
             lastDay: DateTime.utc(2030, 12, 31),
             focusedDay: DateTime.now(),
             calendarFormat: CalendarFormat.month,
-            headerStyle: const HeaderStyle(
+            headerStyle: HeaderStyle(
               formatButtonVisible: false,
               titleCentered: true,
-              titleTextStyle: TextStyle(color: Colors.black87, fontSize: 16),
+              titleTextStyle: TextStyle(color: textColor, fontSize: 16),
             ),
-            daysOfWeekStyle: const DaysOfWeekStyle(
-              weekendStyle: TextStyle(color: Colors.grey),
-              weekdayStyle: TextStyle(color: Colors.black87),
+            daysOfWeekStyle: DaysOfWeekStyle(
+              weekendStyle: TextStyle(color: weekendColor),
+              weekdayStyle: TextStyle(color: textColor),
             ),
-            calendarStyle: const CalendarStyle(
-              todayDecoration: BoxDecoration(
+            calendarStyle: CalendarStyle(
+              todayDecoration: const BoxDecoration(
                 color: Color(0xFFD1C4E9),
                 shape: BoxShape.circle,
               ),
-              defaultTextStyle: TextStyle(color: Colors.black87),
-              weekendTextStyle: TextStyle(color: Colors.grey),
-              markerDecoration: BoxDecoration(color: Colors.transparent),
+              defaultTextStyle: TextStyle(color: textColor),
+              weekendTextStyle: TextStyle(color: weekendColor),
+              markerDecoration: const BoxDecoration(color: Colors.transparent),
             ),
             calendarBuilders: CalendarBuilders(
               markerBuilder: (context, date, events) {
@@ -150,16 +162,18 @@ class _ProgressScreenState extends State<ProgressScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildInfoRow('🔥', '練習継続日数', '$streak 日'),
-                _buildInfoRow('📊', '練習した日数', '$totalDays 日'),
-                _buildInfoRow('🗓', '今月の練習日数', '$thisMonthUniqueDays 日'),
-                _buildInfoRow('🎙', '今月の録音回数', '$thisMonthRecordingCount 回'),
+                _buildInfoRow('🔥', '練習継続日数', '$streak 日', textColor),
+                _buildInfoRow('📊', '練習した日数', '$totalDays 日', textColor),
+                _buildInfoRow(
+                    '🗓', '今月の練習日数', '$thisMonthUniqueDays 日', textColor),
+                _buildInfoRow(
+                    '🎙', '今月の録音回数', '$thisMonthRecordingCount 回', textColor),
                 const SizedBox(height: 12),
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Colors.white,
+                    color: cardColor,
                   ),
                   child: Row(
                     children: [
@@ -169,8 +183,10 @@ class _ProgressScreenState extends State<ProgressScreen> {
                       Expanded(
                         child: Text(
                           'アドバイス: $advice',
-                          style: const TextStyle(
-                              fontSize: 14, color: Colors.black87),
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black, // ← ここだけ黒に固定！
+                          ),
                         ),
                       ),
                     ],
@@ -184,17 +200,18 @@ class _ProgressScreenState extends State<ProgressScreen> {
     );
   }
 
-  Widget _buildInfoRow(String icon, String label, String value) {
+  Widget _buildInfoRow(
+      String icon, String label, String value, Color textColor) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6.0),
       child: Row(
         children: [
-          Text(icon, style: const TextStyle(fontSize: 20)),
+          Text(icon, style: TextStyle(fontSize: 20, color: textColor)),
           const SizedBox(width: 8),
           Text('$label: ',
-              style:
-                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          Text(value, style: const TextStyle(fontSize: 16)),
+              style: TextStyle(
+                  fontSize: 16, fontWeight: FontWeight.bold, color: textColor)),
+          Text(value, style: TextStyle(fontSize: 16, color: textColor)),
         ],
       ),
     );

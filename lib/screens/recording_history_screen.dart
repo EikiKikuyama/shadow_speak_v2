@@ -3,20 +3,24 @@ import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/custom_app_bar.dart';
+import '../settings/settings_controller.dart'; // ✅ ダークモード判定用
 
-class RecordingHistoryScreen extends StatefulWidget {
+class RecordingHistoryScreen extends ConsumerStatefulWidget {
   const RecordingHistoryScreen({super.key});
 
   @override
-  State<RecordingHistoryScreen> createState() => _RecordingHistoryScreenState();
+  ConsumerState<RecordingHistoryScreen> createState() =>
+      _RecordingHistoryScreenState();
 }
 
-class _RecordingHistoryScreenState extends State<RecordingHistoryScreen> {
+class _RecordingHistoryScreenState
+    extends ConsumerState<RecordingHistoryScreen> {
   List<Map<String, dynamic>> recordings = [];
   Set<String> favoritePaths = {};
   final player = AudioPlayer();
@@ -30,7 +34,7 @@ class _RecordingHistoryScreenState extends State<RecordingHistoryScreen> {
   Future<void> _loadFavorites() async {
     final prefs = await SharedPreferences.getInstance();
     favoritePaths = prefs.getStringList('favorites')?.toSet() ?? {};
-    setState(() {}); // 再描画のため
+    setState(() {});
   }
 
   Future<void> _saveFavorites() async {
@@ -57,12 +61,10 @@ class _RecordingHistoryScreenState extends State<RecordingHistoryScreen> {
       String level = '未設定';
       String title = '未設定';
 
-      // __ で分割（例: Starter__Introduction__20250724_155025）
-      final doubleUnderscoreParts = filename.split('__');
-      if (doubleUnderscoreParts.length >= 3) {
-        level = _convertLevel(doubleUnderscoreParts[0]);
-        title = doubleUnderscoreParts[1].replaceAll('-', ' ').trim();
-        // date = doubleUnderscoreParts[2]（今回は使わない）
+      final parts = filename.split('__');
+      if (parts.length >= 3) {
+        level = _convertLevel(parts[0]);
+        title = parts[1].replaceAll('-', ' ').trim();
       }
 
       return {
@@ -116,7 +118,7 @@ class _RecordingHistoryScreenState extends State<RecordingHistoryScreen> {
   Future<void> _deleteRecording(int index) async {
     final path = recordings[index]['path'];
 
-    await player.stop(); // 再生停止
+    await player.stop();
     final file = File(path);
     if (await file.exists()) {
       await file.delete();
@@ -133,10 +135,7 @@ class _RecordingHistoryScreenState extends State<RecordingHistoryScreen> {
   Future<void> _playRecording(String path) async {
     final file = File(path);
 
-    debugPrint('📄 _playRecording(): $path');
-
     if (!await file.exists()) {
-      debugPrint('❌ ファイルが存在しません');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('ファイルが見つかりません')),
       );
@@ -144,12 +143,8 @@ class _RecordingHistoryScreenState extends State<RecordingHistoryScreen> {
     }
 
     await player.stop();
-    debugPrint('⏹️ 再生停止済み');
-
     await Future.delayed(const Duration(milliseconds: 200));
-
     await player.play(DeviceFileSource(path));
-    debugPrint('▶️ 再生開始！');
   }
 
   @override
@@ -160,16 +155,26 @@ class _RecordingHistoryScreenState extends State<RecordingHistoryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = ref.watch(settingsControllerProvider).isDarkMode;
+
+    final backgroundColor =
+        isDarkMode ? const Color(0xFF102542) : Colors.purple[50];
+    final appBarColor =
+        isDarkMode ? const Color(0xFF0C1A3E) : const Color(0xFFF3F0FA);
+    final titleColor = isDarkMode ? Colors.white : Colors.black87;
+    final iconColor = isDarkMode ? Colors.white : Colors.black87;
+
     return Scaffold(
-      backgroundColor: Colors.purple[50],
-      appBar: const CustomAppBar(
+      backgroundColor: backgroundColor,
+      appBar: CustomAppBar(
         title: '録音履歴',
-        backgroundColor: Color.fromARGB(255, 227, 227, 227),
-        titleColor: Color.fromARGB(255, 0, 0, 0),
-        iconColor: Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: appBarColor,
+        titleColor: titleColor,
+        iconColor: iconColor,
       ),
       body: recordings.isEmpty
-          ? const Center(child: Text('録音が見つかりません。'))
+          ? const Center(
+              child: Text('録音が見つかりません。', style: TextStyle(color: Colors.white)))
           : ListView.builder(
               itemCount: recordings.length,
               itemBuilder: (context, index) {
@@ -185,14 +190,18 @@ class _RecordingHistoryScreenState extends State<RecordingHistoryScreen> {
                   ),
                   onDismissed: (_) => _deleteRecording(index),
                   child: Card(
+                    color: Colors.white,
                     elevation: 4,
                     margin:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     child: ListTile(
-                      title:
-                          Text('レベル: ${item['level']} / 教材: ${item['title']}'),
+                      title: Text(
+                        'レベル: ${item['level']} / 教材: ${item['title']}',
+                        style: const TextStyle(color: Colors.black87),
+                      ),
                       subtitle: Text(
                         'スコア: ${item['score']}点\n日付: ${DateFormat('yyyy/MM/dd HH:mm').format(item['date'])}',
+                        style: const TextStyle(color: Colors.black87),
                       ),
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -202,12 +211,15 @@ class _RecordingHistoryScreenState extends State<RecordingHistoryScreen> {
                               item['isFavorite']
                                   ? Icons.star
                                   : Icons.star_border,
-                              color: item['isFavorite'] ? Colors.amber : null,
+                              color: item['isFavorite']
+                                  ? Colors.amber
+                                  : Colors.grey,
                             ),
                             onPressed: () => _toggleFavorite(index),
                           ),
                           IconButton(
-                            icon: const Icon(Icons.play_arrow),
+                            icon: const Icon(Icons.play_arrow,
+                                color: Colors.black87),
                             onPressed: () => _playRecording(item['path']),
                           ),
                         ],

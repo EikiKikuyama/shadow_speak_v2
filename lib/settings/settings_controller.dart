@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'font_size/font_size_option.dart';
 import 'locale/locale_option.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingsController with ChangeNotifier {
   // === 現在の設定状態 ===
   FontSizeOption _fontSize = FontSizeOption.medium;
   LocaleOption _localeOption = LocaleOption.system;
-  ThemeMode _themeMode = ThemeMode.system;
+  bool _isDarkMode = false;
 
   // === Getter ===
   FontSizeOption get fontSize => _fontSize;
   LocaleOption get localeOption => _localeOption;
-  ThemeMode get themeMode => _themeMode;
+  bool get isDarkMode => _isDarkMode;
   Locale? get currentLocale => _localeOption.toLocale;
 
   // === 初期設定の読み込み ===
@@ -21,7 +21,7 @@ class SettingsController with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     _fontSize = FontSizeOption.values[prefs.getInt('fontSize') ?? 1];
     _localeOption = LocaleOption.values[prefs.getInt('locale') ?? 0];
-    _themeMode = _stringToThemeMode(prefs.getString('themeMode') ?? 'system');
+    _isDarkMode = prefs.getBool('isDarkMode') ?? false;
   }
 
   // === 設定の更新 ===
@@ -39,42 +39,18 @@ class SettingsController with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setThemeMode(ThemeMode newMode) async {
-    _themeMode = newMode;
+  Future<void> setDarkMode(bool value) async {
+    _isDarkMode = value;
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('themeMode', _themeModeToString(newMode));
+    await prefs.setBool('isDarkMode', value);
     notifyListeners();
-  }
-
-  // === 内部ユーティリティ ===
-  ThemeMode _stringToThemeMode(String value) {
-    switch (value) {
-      case 'light':
-        return ThemeMode.light;
-      case 'dark':
-        return ThemeMode.dark;
-      default:
-        return ThemeMode.system;
-    }
-  }
-
-  String _themeModeToString(ThemeMode mode) {
-    switch (mode) {
-      case ThemeMode.light:
-        return 'light';
-      case ThemeMode.dark:
-        return 'dark';
-      case ThemeMode.system:
-      default:
-        return 'system';
-    }
   }
 }
 
-// === Riverpodプロバイダ ===
+// === Riverpod プロバイダ ===
 final settingsControllerProvider =
     ChangeNotifierProvider<SettingsController>((ref) {
   final controller = SettingsController();
-  controller.loadSettings(); // Future だが Fire-and-forget
+  controller.loadSettings(); // 初期設定を読み込む（非同期だけど fire-and-forget）
   return controller;
 });

@@ -5,10 +5,10 @@ import 'package:flutter/services.dart';
 
 import 'package:shadow_speak_v2/settings/settings_controller.dart';
 import 'package:shadow_speak_v2/screens/splash_screen.dart';
-import 'package:shadow_speak_v2/screens/level_home_screen.dart';
+import 'package:shadow_speak_v2/screens/main_screen.dart'; // ← MainScreen を使う！
 import 'package:shadow_speak_v2/screens/recording_history_screen.dart';
 import 'package:shadow_speak_v2/screens/progress_screen.dart';
-import '../gen_l10n/app_localizations.dart'; // 相対パス
+import '../gen_l10n/app_localizations.dart';
 import 'package:shadow_speak_v2/settings/font_size/font_size_option.dart';
 
 Future<void> main() async {
@@ -27,9 +27,8 @@ Future<void> main() async {
     print('❌ dotenv 読み込み失敗: $e');
   }
 
-  // ✅ assetの確認コードをここに追加！
+  // ✅ assetの確認コード（お好みで削除可）
   final assetPath = 'assets/audio/announcement.wav';
-
   try {
     await rootBundle.load(assetPath);
     print('✅ asset読み込み成功: $assetPath');
@@ -49,27 +48,13 @@ class MyApp extends ConsumerWidget {
     final scaleFactor = settingsController.fontSize.scaleFactor;
 
     return MaterialApp(
-      // --- ローカライズ関連 ---
+      // --- ローカライズ ---
       locale: settingsController.currentLocale,
       supportedLocales: const [
         Locale('en'),
         Locale('ja'),
       ],
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-
-      // --- テーマ関連 ---
-      themeMode: settingsController.themeMode,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.indigo,
-        scaffoldBackgroundColor: Colors.white,
-        // ここにフォントや色の調整も入れていける
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.indigo,
-        scaffoldBackgroundColor: const Color(0xFF121212),
-      ),
 
       // --- その他 ---
       debugShowCheckedModeBanner: false,
@@ -82,7 +67,7 @@ class MyApp extends ConsumerWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const SplashScreen(),
-        '/home': (context) => const LevelHomeScreen(),
+        '/home': (context) => const MainScreen(), // ✅ ここが MainScreen に！
         '/history': (context) => const RecordingHistoryScreen(),
         '/progress': (context) => const ProgressScreen(),
       },

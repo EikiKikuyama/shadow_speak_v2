@@ -2,6 +2,29 @@
 
 import '../models/material_model.dart';
 
+// 日本語表示レベル → 英語レベルへ変換
+String mapLevelToEnglish(String level) {
+  switch (level) {
+    case 'スターター':
+    case 'スターター（〜50語）':
+      return 'Starter';
+    case 'ベーシック':
+    case 'ベーシック（〜100語）':
+      return 'Basic';
+    case '中級':
+    case '中級（〜150語）':
+      return 'Intermediate';
+    case '上級':
+    case '上級（〜200語）':
+      return 'Upper';
+    case '最上級':
+    case '最上級（〜300語）':
+      return 'Advanced';
+    default:
+      return level;
+  }
+}
+
 List<PracticeMaterial> allMaterials = [
   PracticeMaterial(
     id: 'TrainAnnouncement',

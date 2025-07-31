@@ -5,8 +5,10 @@ import '../widgets/sample_waveform_widget.dart';
 import '../screens/ai_scoring_screen.dart';
 import '../services/subtitle_loader.dart';
 import '../widgets/custom_app_bar.dart';
+import '../settings/settings_controller.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart'; // ← 追加
 
-class WavWaveformScreen extends StatefulWidget {
+class WavWaveformScreen extends ConsumerStatefulWidget {
   final String wavFilePath;
   final PracticeMaterial material;
 
@@ -17,10 +19,10 @@ class WavWaveformScreen extends StatefulWidget {
   });
 
   @override
-  State<WavWaveformScreen> createState() => _WavWaveformScreenState();
+  ConsumerState<WavWaveformScreen> createState() => _WavWaveformScreenState();
 }
 
-class _WavWaveformScreenState extends State<WavWaveformScreen> {
+class _WavWaveformScreenState extends ConsumerState<WavWaveformScreen> {
   final AudioPlayerService _audioService = AudioPlayerService();
   bool _isPlaying = false;
   String? _copiedSamplePath;
@@ -63,10 +65,10 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
       final data = await loadSubtitles(filename);
       if (!mounted) return;
       setState(() {
-        subtitleText = data.map((s) => s.text).join('\n'); // 全文を表示用に連結
+        subtitleText = data.map((s) => s.text).join('\n');
       });
     } catch (e) {
-      debugPrint('❌ 字幕読み込み失敗: $e');
+      debugPrint('❌ 字幕読み込み失敗: \$e');
       setState(() {
         subtitleText = '字幕の読み込みに失敗しました。';
       });
@@ -96,6 +98,12 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = ref.watch(settingsControllerProvider).isDarkMode;
+    final backgroundColor = isDark ? const Color(0xFF001f3f) : Colors.white;
+    final textColor = isDark ? Colors.white : Colors.black;
+    final waveformBackground1 = isDark ? Colors.white : Colors.black;
+    final waveformBackground2 = isDark ? Colors.black : Colors.grey[200]!;
+
     final screenHeight = MediaQuery.of(context).size.height;
     final availableHeight =
         screenHeight - MediaQuery.of(context).padding.top - 64;
@@ -123,14 +131,13 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFF001f3f), // 紺背景
-      appBar: const CustomAppBar(
+      backgroundColor: backgroundColor,
+      appBar: CustomAppBar(
         title: '自己チェックシート',
-        backgroundColor: Color(0xFF001f3f),
-        titleColor: Colors.white,
-        iconColor: Colors.white,
+        backgroundColor: backgroundColor,
+        titleColor: textColor,
+        iconColor: textColor,
       ),
-
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
@@ -138,12 +145,12 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text('あなたの音声の波形',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
+              Text('あなたの音声の波形',
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, color: textColor)),
               const SizedBox(height: 8),
               buildWaveformContainer(
-                background: Colors.white,
+                background: waveformBackground1,
                 child: SampleWaveformWidget(
                   filePath: widget.wavFilePath,
                   isAsset: false,
@@ -152,13 +159,13 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              const Text('見本の音声の波形',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
+              Text('見本の音声の波形',
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, color: textColor)),
               const SizedBox(height: 8),
               _copiedSamplePath != null
                   ? buildWaveformContainer(
-                      background: Colors.black,
+                      background: waveformBackground2,
                       child: SampleWaveformWidget(
                         filePath: _copiedSamplePath!,
                         isAsset: false,
@@ -167,9 +174,9 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
                       ),
                     )
                   : buildWaveformContainer(
-                      background: Colors.black,
-                      child: const Center(
-                        child: CircularProgressIndicator(color: Colors.white),
+                      background: waveformBackground2,
+                      child: Center(
+                        child: CircularProgressIndicator(color: textColor),
                       ),
                     ),
               const SizedBox(height: 24),
@@ -178,13 +185,12 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
                 children: [
                   IconButton(
                     icon: Icon(_isPlaying ? Icons.pause : Icons.play_arrow,
-                        color: Colors.white, size: 36),
+                        color: textColor, size: 36),
                     onPressed: _isPlaying ? _pause : _play,
                   ),
                   const SizedBox(width: 24),
                   IconButton(
-                    icon:
-                        const Icon(Icons.replay, color: Colors.white, size: 32),
+                    icon: Icon(Icons.replay, color: textColor, size: 32),
                     onPressed: _reset,
                   ),
                 ],
@@ -196,8 +202,7 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
                 child: Text(
                   subtitleText,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                      color: Colors.white, fontSize: 16, height: 1.4),
+                  style: TextStyle(color: textColor, fontSize: 16, height: 1.4),
                 ),
               ),
               const SizedBox(height: 16),
@@ -224,16 +229,16 @@ class _WavWaveformScreenState extends State<WavWaveformScreen> {
                     );
                   },
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.white),
+                    side: BorderSide(color: textColor),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: const Text(
+                  child: Text(
                     'AI採点モードへ →',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: textColor,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),

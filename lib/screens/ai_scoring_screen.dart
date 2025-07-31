@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shadow_speak_v2/settings/settings_controller.dart';
 import 'package:shadow_speak_v2/widgets/custom_app_bar.dart';
 
-class AiScoringScreen extends StatefulWidget {
+class AiScoringScreen extends ConsumerStatefulWidget {
   final double whisperScore;
   final double prosodyScore;
   final String referenceText;
@@ -20,22 +22,32 @@ class AiScoringScreen extends StatefulWidget {
   });
 
   @override
-  State<AiScoringScreen> createState() => _AiScoringScreenState();
+  ConsumerState<AiScoringScreen> createState() => _AiScoringScreenState();
 }
 
-class _AiScoringScreenState extends State<AiScoringScreen> {
+class _AiScoringScreenState extends ConsumerState<AiScoringScreen> {
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = ref.watch(settingsControllerProvider).isDarkMode;
+
+    final backgroundColor =
+        isDarkMode ? const Color(0xFF08254D) : const Color(0xFFF3F0FA);
+    final textColor = isDarkMode ? Colors.white : Colors.black87;
+    final cardColor = Colors.white;
+    final sectionTitleColor = isDarkMode ? Colors.black : Colors.black;
+    final diffMismatchColor = Colors.red;
+
     final overallScore =
         ((widget.whisperScore + widget.prosodyScore) / 2).round();
 
     return Scaffold(
-      backgroundColor: const Color(0xFF08254D),
-      appBar: const CustomAppBar(
+      backgroundColor: backgroundColor,
+      appBar: CustomAppBar(
         title: 'AI採点フィードバック',
-        backgroundColor: Colors.transparent,
-        titleColor: Colors.white,
-        iconColor: Colors.white,
+        backgroundColor:
+            isDarkMode ? const Color(0xFF0C1A3E) : const Color(0xFFF3F0FA),
+        titleColor: textColor,
+        iconColor: textColor,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
@@ -46,7 +58,7 @@ class _AiScoringScreenState extends State<AiScoringScreen> {
               margin: const EdgeInsets.symmetric(vertical: 16),
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: cardColor,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: AspectRatio(
@@ -64,16 +76,16 @@ class _AiScoringScreenState extends State<AiScoringScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildScoreGauge("波形の正確さ", widget.prosodyScore),
-                _buildScoreGauge("単語認識", widget.whisperScore),
+                _buildScoreGauge("波形の正確さ", widget.prosodyScore, textColor),
+                _buildScoreGauge("単語認識", widget.whisperScore, textColor),
                 Column(
                   children: [
                     Text(
                       '$overallScore 点',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: textColor,
                       ),
                     ),
                     const Text(
@@ -87,35 +99,34 @@ class _AiScoringScreenState extends State<AiScoringScreen> {
 
             const SizedBox(height: 24),
 
-            // スクリプト比較
-            _buildSectionTitle('正解スクリプトとの比較'),
+            _buildSectionTitle('正解スクリプトとの比較', cardColor, sectionTitleColor),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(12),
-              color: Colors.white,
+              color: cardColor,
               child: RichText(
                 text: TextSpan(
-                  style: const TextStyle(fontSize: 14, color: Colors.black),
-                  children: _buildHighlightedDiff(
-                      widget.referenceText, widget.transcribedText),
+                  style: TextStyle(fontSize: 14, color: textColor),
+                  children: _buildHighlightedDiff(widget.referenceText,
+                      widget.transcribedText, textColor, diffMismatchColor),
                 ),
               ),
             ),
 
             const SizedBox(height: 24),
-            _buildSectionTitle('抑揚フィードバック'),
-            _buildFeedbackBox(widget.prosodyFeedback),
+            _buildSectionTitle('抑揚フィードバック', cardColor, sectionTitleColor),
+            _buildFeedbackBox(widget.prosodyFeedback, textColor),
 
             const SizedBox(height: 16),
-            _buildSectionTitle('発音フィードバック'),
-            _buildFeedbackBox(widget.pronunciationFeedback),
+            _buildSectionTitle('発音フィードバック', cardColor, sectionTitleColor),
+            _buildFeedbackBox(widget.pronunciationFeedback, textColor),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildScoreGauge(String label, double value) {
+  Widget _buildScoreGauge(String label, double value, Color textColor) {
     return Column(
       children: [
         Stack(
@@ -128,35 +139,36 @@ class _AiScoringScreenState extends State<AiScoringScreen> {
                 value: value / 100,
                 strokeWidth: 6,
                 backgroundColor: Colors.grey[300],
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.redAccent),
+                valueColor:
+                    const AlwaysStoppedAnimation<Color>(Colors.redAccent),
               ),
             ),
-            Text('${value.round()}%',
-                style: const TextStyle(color: Colors.white)),
+            Text('${value.round()}%', style: TextStyle(color: textColor)),
           ],
         ),
         const SizedBox(height: 8),
-        Text(label, style: const TextStyle(color: Colors.white)),
+        Text(label, style: TextStyle(color: textColor)),
       ],
     );
   }
 
-  Widget _buildSectionTitle(String title) {
+  Widget _buildSectionTitle(String title, Color cardColor, Color textColor) {
     return Container(
       alignment: Alignment.centerLeft,
       margin: const EdgeInsets.only(bottom: 4),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: cardColor,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+        child: Text(title,
+            style: TextStyle(fontWeight: FontWeight.bold, color: textColor)),
       ),
     );
   }
 
-  Widget _buildFeedbackBox(String feedback) {
+  Widget _buildFeedbackBox(String feedback, Color textColor) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
@@ -166,13 +178,13 @@ class _AiScoringScreenState extends State<AiScoringScreen> {
       ),
       child: Text(
         feedback,
-        style: const TextStyle(color: Colors.white),
+        style: TextStyle(color: textColor),
       ),
     );
   }
 
-  /// 差分ハイライト処理（ここは簡易）
-  List<TextSpan> _buildHighlightedDiff(String reference, String userText) {
+  List<TextSpan> _buildHighlightedDiff(String reference, String userText,
+      Color matchColor, Color mismatchColor) {
     final refWords = reference.split(' ');
     final userWords = userText.split(' ');
 
@@ -186,7 +198,7 @@ class _AiScoringScreenState extends State<AiScoringScreen> {
 
       spans.add(TextSpan(
         text: '$usr ',
-        style: TextStyle(color: match ? Colors.black : Colors.red),
+        style: TextStyle(color: match ? matchColor : mismatchColor),
       ));
     }
 
