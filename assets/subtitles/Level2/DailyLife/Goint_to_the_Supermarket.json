@@ -1,0 +1,634 @@
+{
+  "text": " On Saturdays, I go to the supermarket near my house. I make a shopping list before I leave. I usually buy vegetables, fruits, eggs, and milk. Sometimes, I get snacks or ice cream as a treat. The store is not too crowded in the morning. After shopping, I walk home with my bags. It's a good way to save money and stay healthy. I enjoy this weekly routine.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 3.06,
+      "text": " On Saturdays, I go to the supermarket near my house.",
+      "tokens": [
+        50364,
+        1282,
+        8803,
+        82,
+        11,
+        286,
+        352,
+        281,
+        264,
+        25180,
+        2651,
+        452,
+        1782,
+        13,
+        50564
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10625165995984974,
+      "compression_ratio": 1.5063829787234042,
+      "no_speech_prob": 0.0878060832619667,
+      "words": [
+        {
+          "word": " On",
+          "start": 0.0,
+          "end": 0.32,
+          "probability": 0.8876805901527405
+        },
+        {
+          "word": " Saturdays,",
+          "start": 0.32,
+          "end": 1.02,
+          "probability": 0.9574948847293854
+        },
+        {
+          "word": " I",
+          "start": 1.18,
+          "end": 1.28,
+          "probability": 0.9963169097900391
+        },
+        {
+          "word": " go",
+          "start": 1.28,
+          "end": 1.42,
+          "probability": 0.9977023005485535
+        },
+        {
+          "word": " to",
+          "start": 1.42,
+          "end": 1.54,
+          "probability": 0.9965586066246033
+        },
+        {
+          "word": " the",
+          "start": 1.54,
+          "end": 1.66,
+          "probability": 0.9964547157287598
+        },
+        {
+          "word": " supermarket",
+          "start": 1.66,
+          "end": 2.16,
+          "probability": 0.9900830984115601
+        },
+        {
+          "word": " near",
+          "start": 2.16,
+          "end": 2.48,
+          "probability": 0.997170627117157
+        },
+        {
+          "word": " my",
+          "start": 2.48,
+          "end": 2.68,
+          "probability": 0.9983489513397217
+        },
+        {
+          "word": " house.",
+          "start": 2.68,
+          "end": 3.06,
+          "probability": 0.999363362789154
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 3.7,
+      "end": 6.14,
+      "text": " I make a shopping list before I leave.",
+      "tokens": [
+        50564,
+        286,
+        652,
+        257,
+        8688,
+        1329,
+        949,
+        286,
+        1856,
+        13,
+        50716
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10625165995984974,
+      "compression_ratio": 1.5063829787234042,
+      "no_speech_prob": 0.0878060832619667,
+      "words": [
+        {
+          "word": " I",
+          "start": 3.7,
+          "end": 4.24,
+          "probability": 0.9939125776290894
+        },
+        {
+          "word": " make",
+          "start": 4.24,
+          "end": 4.38,
+          "probability": 0.9971181154251099
+        },
+        {
+          "word": " a",
+          "start": 4.38,
+          "end": 4.52,
+          "probability": 0.9991150498390198
+        },
+        {
+          "word": " shopping",
+          "start": 4.52,
+          "end": 4.82,
+          "probability": 0.9946030974388123
+        },
+        {
+          "word": " list",
+          "start": 4.82,
+          "end": 5.1,
+          "probability": 0.9986914992332458
+        },
+        {
+          "word": " before",
+          "start": 5.1,
+          "end": 5.52,
+          "probability": 0.9190335869789124
+        },
+        {
+          "word": " I",
+          "start": 5.52,
+          "end": 5.78,
+          "probability": 0.9973546266555786
+        },
+        {
+          "word": " leave.",
+          "start": 5.78,
+          "end": 6.14,
+          "probability": 0.9995706677436829
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 6.94,
+      "end": 10.22,
+      "text": " I usually buy vegetables, fruits, eggs, and milk.",
+      "tokens": [
+        50716,
+        286,
+        2673,
+        2256,
+        9320,
+        11,
+        12148,
+        11,
+        6466,
+        11,
+        293,
+        5392,
+        13,
+        50924
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10625165995984974,
+      "compression_ratio": 1.5063829787234042,
+      "no_speech_prob": 0.0878060832619667,
+      "words": [
+        {
+          "word": " I",
+          "start": 6.94,
+          "end": 7.24,
+          "probability": 0.9932364821434021
+        },
+        {
+          "word": " usually",
+          "start": 7.24,
+          "end": 7.54,
+          "probability": 0.9981378316879272
+        },
+        {
+          "word": " buy",
+          "start": 7.54,
+          "end": 7.82,
+          "probability": 0.9951139092445374
+        },
+        {
+          "word": " vegetables,",
+          "start": 7.82,
+          "end": 8.24,
+          "probability": 0.9867821931838989
+        },
+        {
+          "word": " fruits,",
+          "start": 8.72,
+          "end": 8.88,
+          "probability": 0.9585302472114563
+        },
+        {
+          "word": " eggs,",
+          "start": 9.24,
+          "end": 9.52,
+          "probability": 0.9929991960525513
+        },
+        {
+          "word": " and",
+          "start": 9.78,
+          "end": 9.98,
+          "probability": 0.9969395399093628
+        },
+        {
+          "word": " milk.",
+          "start": 9.98,
+          "end": 10.22,
+          "probability": 0.9969979524612427
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 11.24,
+      "end": 14.0,
+      "text": " Sometimes, I get snacks or ice cream as a treat.",
+      "tokens": [
+        50924,
+        4803,
+        11,
+        286,
+        483,
+        16160,
+        420,
+        4435,
+        4689,
+        382,
+        257,
+        2387,
+        13,
+        51116
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10625165995984974,
+      "compression_ratio": 1.5063829787234042,
+      "no_speech_prob": 0.0878060832619667,
+      "words": [
+        {
+          "word": " Sometimes,",
+          "start": 11.24,
+          "end": 11.8,
+          "probability": 0.9948493838310242
+        },
+        {
+          "word": " I",
+          "start": 12.14,
+          "end": 12.22,
+          "probability": 0.9992998838424683
+        },
+        {
+          "word": " get",
+          "start": 12.22,
+          "end": 12.36,
+          "probability": 0.9991856217384338
+        },
+        {
+          "word": " snacks",
+          "start": 12.36,
+          "end": 12.7,
+          "probability": 0.9794070720672607
+        },
+        {
+          "word": " or",
+          "start": 12.7,
+          "end": 13.02,
+          "probability": 0.9975696206092834
+        },
+        {
+          "word": " ice",
+          "start": 13.02,
+          "end": 13.26,
+          "probability": 0.9988477230072021
+        },
+        {
+          "word": " cream",
+          "start": 13.26,
+          "end": 13.5,
+          "probability": 0.9594680666923523
+        },
+        {
+          "word": " as",
+          "start": 13.5,
+          "end": 13.7,
+          "probability": 0.9983781576156616
+        },
+        {
+          "word": " a",
+          "start": 13.7,
+          "end": 13.8,
+          "probability": 0.9996311664581299
+        },
+        {
+          "word": " treat.",
+          "start": 13.8,
+          "end": 14.0,
+          "probability": 0.9988790154457092
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 0,
+      "start": 14.88,
+      "end": 16.94,
+      "text": " The store is not too crowded in the morning.",
+      "tokens": [
+        51116,
+        440,
+        3531,
+        307,
+        406,
+        886,
+        21634,
+        294,
+        264,
+        2446,
+        13,
+        51260
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10625165995984974,
+      "compression_ratio": 1.5063829787234042,
+      "no_speech_prob": 0.0878060832619667,
+      "words": [
+        {
+          "word": " The",
+          "start": 14.88,
+          "end": 15.28,
+          "probability": 0.9872879981994629
+        },
+        {
+          "word": " store",
+          "start": 15.28,
+          "end": 15.5,
+          "probability": 0.9953845143318176
+        },
+        {
+          "word": " is",
+          "start": 15.5,
+          "end": 15.68,
+          "probability": 0.9962483048439026
+        },
+        {
+          "word": " not",
+          "start": 15.68,
+          "end": 15.84,
+          "probability": 0.9992258548736572
+        },
+        {
+          "word": " too",
+          "start": 15.84,
+          "end": 16.04,
+          "probability": 0.9969107508659363
+        },
+        {
+          "word": " crowded",
+          "start": 16.04,
+          "end": 16.34,
+          "probability": 0.998565137386322
+        },
+        {
+          "word": " in",
+          "start": 16.34,
+          "end": 16.58,
+          "probability": 0.9984533786773682
+        },
+        {
+          "word": " the",
+          "start": 16.58,
+          "end": 16.66,
+          "probability": 0.9994063377380371
+        },
+        {
+          "word": " morning.",
+          "start": 16.66,
+          "end": 16.94,
+          "probability": 0.9989558458328247
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "seek": 0,
+      "start": 17.78,
+      "end": 20.24,
+      "text": " After shopping, I walk home with my bags.",
+      "tokens": [
+        51260,
+        2381,
+        8688,
+        11,
+        286,
+        1792,
+        1280,
+        365,
+        452,
+        10405,
+        13,
+        51424
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10625165995984974,
+      "compression_ratio": 1.5063829787234042,
+      "no_speech_prob": 0.0878060832619667,
+      "words": [
+        {
+          "word": " After",
+          "start": 17.78,
+          "end": 18.28,
+          "probability": 0.9724460244178772
+        },
+        {
+          "word": " shopping,",
+          "start": 18.28,
+          "end": 18.66,
+          "probability": 0.9964079260826111
+        },
+        {
+          "word": " I",
+          "start": 19.02,
+          "end": 19.12,
+          "probability": 0.9994372725486755
+        },
+        {
+          "word": " walk",
+          "start": 19.12,
+          "end": 19.32,
+          "probability": 0.9977391958236694
+        },
+        {
+          "word": " home",
+          "start": 19.32,
+          "end": 19.52,
+          "probability": 0.999819815158844
+        },
+        {
+          "word": " with",
+          "start": 19.52,
+          "end": 19.68,
+          "probability": 0.9997270703315735
+        },
+        {
+          "word": " my",
+          "start": 19.68,
+          "end": 19.84,
+          "probability": 0.9991750121116638
+        },
+        {
+          "word": " bags.",
+          "start": 19.84,
+          "end": 20.24,
+          "probability": 0.9384624361991882
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "seek": 0,
+      "start": 21.0,
+      "end": 23.46,
+      "text": " It's a good way to save money and stay healthy.",
+      "tokens": [
+        51424,
+        467,
+        311,
+        257,
+        665,
+        636,
+        281,
+        3155,
+        1460,
+        293,
+        1754,
+        4627,
+        13,
+        51588
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10625165995984974,
+      "compression_ratio": 1.5063829787234042,
+      "no_speech_prob": 0.0878060832619667,
+      "words": [
+        {
+          "word": " It's",
+          "start": 21.0,
+          "end": 21.56,
+          "probability": 0.9919274151325226
+        },
+        {
+          "word": " a",
+          "start": 21.56,
+          "end": 21.62,
+          "probability": 0.9995675683021545
+        },
+        {
+          "word": " good",
+          "start": 21.62,
+          "end": 21.74,
+          "probability": 0.9985673427581787
+        },
+        {
+          "word": " way",
+          "start": 21.74,
+          "end": 21.94,
+          "probability": 0.9990584254264832
+        },
+        {
+          "word": " to",
+          "start": 21.94,
+          "end": 22.1,
+          "probability": 0.999675989151001
+        },
+        {
+          "word": " save",
+          "start": 22.1,
+          "end": 22.3,
+          "probability": 0.9983269572257996
+        },
+        {
+          "word": " money",
+          "start": 22.3,
+          "end": 22.64,
+          "probability": 0.9992994070053101
+        },
+        {
+          "word": " and",
+          "start": 22.64,
+          "end": 22.92,
+          "probability": 0.9893224835395813
+        },
+        {
+          "word": " stay",
+          "start": 22.92,
+          "end": 23.14,
+          "probability": 0.9989186525344849
+        },
+        {
+          "word": " healthy.",
+          "start": 23.14,
+          "end": 23.46,
+          "probability": 0.9992320537567139
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "seek": 0,
+      "start": 24.26,
+      "end": 26.0,
+      "text": " I enjoy this weekly routine.",
+      "tokens": [
+        51588,
+        286,
+        2103,
+        341,
+        12460,
+        9927,
+        13,
+        51712
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10625165995984974,
+      "compression_ratio": 1.5063829787234042,
+      "no_speech_prob": 0.0878060832619667,
+      "words": [
+        {
+          "word": " I",
+          "start": 24.26,
+          "end": 24.72,
+          "probability": 0.9940429329872131
+        },
+        {
+          "word": " enjoy",
+          "start": 24.72,
+          "end": 25.0,
+          "probability": 0.9882150888442993
+        },
+        {
+          "word": " this",
+          "start": 25.0,
+          "end": 25.26,
+          "probability": 0.9988164901733398
+        },
+        {
+          "word": " weekly",
+          "start": 25.26,
+          "end": 25.58,
+          "probability": 0.9911425113677979
+        },
+        {
+          "word": " routine.",
+          "start": 25.58,
+          "end": 26.0,
+          "probability": 0.9990360736846924
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

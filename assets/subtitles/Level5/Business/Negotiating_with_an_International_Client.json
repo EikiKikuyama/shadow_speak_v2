@@ -1,0 +1,1177 @@
+{
+  "text": " Last month, I traveled to Singapore to meet with an important client our company had been trying to secure a long-term partnership with them during the meeting. I presented our proposal in detail, highlighting our strengths and explaining how we could support their goals. The client raised concerns about pricing and delivery timelines, so I listened carefully and offered flexible options, I said, we understand your needs, and we're open to adjusting the plan to fit your schedule. After a few rounds of discussion, we finally found a solution that worked for both sides.AT the end, the client shook my hand and said, we look forward to working with you. It was a challenging negotiation, but being prepared and respectful helped build trust, this experience taught me that successful business relationships are built on communication, patience, and flexibility.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 4.6,
+      "text": " Last month, I traveled to Singapore to meet with an important client our company had been",
+      "tokens": [
+        50364,
+        5264,
+        1618,
+        11,
+        286,
+        16147,
+        281,
+        14491,
+        281,
+        1677,
+        365,
+        364,
+        1021,
+        6423,
+        527,
+        2237,
+        632,
+        668,
+        50592
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09889167288075322,
+      "compression_ratio": 1.647239263803681,
+      "no_speech_prob": 0.06909041106700897,
+      "words": [
+        {
+          "word": " Last",
+          "start": 0.0,
+          "end": 0.34,
+          "probability": 0.6946834921836853
+        },
+        {
+          "word": " month,",
+          "start": 0.34,
+          "end": 0.76,
+          "probability": 0.996039628982544
+        },
+        {
+          "word": " I",
+          "start": 1.14,
+          "end": 1.22,
+          "probability": 0.9940701127052307
+        },
+        {
+          "word": " traveled",
+          "start": 1.22,
+          "end": 1.56,
+          "probability": 0.8376950621604919
+        },
+        {
+          "word": " to",
+          "start": 1.56,
+          "end": 1.76,
+          "probability": 0.9974639415740967
+        },
+        {
+          "word": " Singapore",
+          "start": 1.76,
+          "end": 2.06,
+          "probability": 0.9728842377662659
+        },
+        {
+          "word": " to",
+          "start": 2.06,
+          "end": 2.4,
+          "probability": 0.9985111355781555
+        },
+        {
+          "word": " meet",
+          "start": 2.4,
+          "end": 2.56,
+          "probability": 0.9989509582519531
+        },
+        {
+          "word": " with",
+          "start": 2.56,
+          "end": 2.74,
+          "probability": 0.9981135129928589
+        },
+        {
+          "word": " an",
+          "start": 2.74,
+          "end": 2.86,
+          "probability": 0.9967094659805298
+        },
+        {
+          "word": " important",
+          "start": 2.86,
+          "end": 3.24,
+          "probability": 0.9933672547340393
+        },
+        {
+          "word": " client",
+          "start": 3.24,
+          "end": 3.64,
+          "probability": 0.997899055480957
+        },
+        {
+          "word": " our",
+          "start": 3.64,
+          "end": 3.86,
+          "probability": 0.5283271670341492
+        },
+        {
+          "word": " company",
+          "start": 3.86,
+          "end": 4.2,
+          "probability": 0.9970243573188782
+        },
+        {
+          "word": " had",
+          "start": 4.2,
+          "end": 4.46,
+          "probability": 0.9974873065948486
+        },
+        {
+          "word": " been",
+          "start": 4.46,
+          "end": 4.6,
+          "probability": 0.9994149208068848
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 4.6,
+      "end": 7.84,
+      "text": " trying to secure a long-term partnership with them during the meeting.",
+      "tokens": [
+        50592,
+        1382,
+        281,
+        7144,
+        257,
+        938,
+        12,
+        7039,
+        9982,
+        365,
+        552,
+        1830,
+        264,
+        3440,
+        13,
+        50768
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09889167288075322,
+      "compression_ratio": 1.647239263803681,
+      "no_speech_prob": 0.06909041106700897,
+      "words": [
+        {
+          "word": " trying",
+          "start": 4.6,
+          "end": 4.88,
+          "probability": 0.9983856678009033
+        },
+        {
+          "word": " to",
+          "start": 4.88,
+          "end": 5.08,
+          "probability": 0.9993224143981934
+        },
+        {
+          "word": " secure",
+          "start": 5.08,
+          "end": 5.42,
+          "probability": 0.9975581169128418
+        },
+        {
+          "word": " a",
+          "start": 5.42,
+          "end": 5.6,
+          "probability": 0.9977285265922546
+        },
+        {
+          "word": " long",
+          "start": 5.6,
+          "end": 5.82,
+          "probability": 0.997657299041748
+        },
+        {
+          "word": "-term",
+          "start": 5.82,
+          "end": 6.04,
+          "probability": 0.918798416852951
+        },
+        {
+          "word": " partnership",
+          "start": 6.04,
+          "end": 6.62,
+          "probability": 0.9988324046134949
+        },
+        {
+          "word": " with",
+          "start": 6.62,
+          "end": 6.84,
+          "probability": 0.9983198046684265
+        },
+        {
+          "word": " them",
+          "start": 6.84,
+          "end": 7.1,
+          "probability": 0.998777449131012
+        },
+        {
+          "word": " during",
+          "start": 7.1,
+          "end": 7.4,
+          "probability": 0.8779110908508301
+        },
+        {
+          "word": " the",
+          "start": 7.4,
+          "end": 7.56,
+          "probability": 0.997730553150177
+        },
+        {
+          "word": " meeting.",
+          "start": 7.56,
+          "end": 7.84,
+          "probability": 0.9968519806861877
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 8.28,
+      "end": 13.06,
+      "text": " I presented our proposal in detail, highlighting our strengths and explaining how we could support",
+      "tokens": [
+        50768,
+        286,
+        8212,
+        527,
+        11494,
+        294,
+        2607,
+        11,
+        26551,
+        527,
+        16986,
+        293,
+        13468,
+        577,
+        321,
+        727,
+        1406,
+        51016
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09889167288075322,
+      "compression_ratio": 1.647239263803681,
+      "no_speech_prob": 0.06909041106700897,
+      "words": [
+        {
+          "word": " I",
+          "start": 8.28,
+          "end": 8.34,
+          "probability": 0.9654802680015564
+        },
+        {
+          "word": " presented",
+          "start": 8.34,
+          "end": 8.72,
+          "probability": 0.9971988201141357
+        },
+        {
+          "word": " our",
+          "start": 8.72,
+          "end": 8.92,
+          "probability": 0.9973379969596863
+        },
+        {
+          "word": " proposal",
+          "start": 8.92,
+          "end": 9.32,
+          "probability": 0.998128354549408
+        },
+        {
+          "word": " in",
+          "start": 9.32,
+          "end": 9.6,
+          "probability": 0.9959847927093506
+        },
+        {
+          "word": " detail,",
+          "start": 9.6,
+          "end": 10.02,
+          "probability": 0.9974167346954346
+        },
+        {
+          "word": " highlighting",
+          "start": 10.48,
+          "end": 10.78,
+          "probability": 0.9966333508491516
+        },
+        {
+          "word": " our",
+          "start": 10.78,
+          "end": 11.04,
+          "probability": 0.9992262125015259
+        },
+        {
+          "word": " strengths",
+          "start": 11.04,
+          "end": 11.36,
+          "probability": 0.9978381991386414
+        },
+        {
+          "word": " and",
+          "start": 11.36,
+          "end": 11.7,
+          "probability": 0.9795549511909485
+        },
+        {
+          "word": " explaining",
+          "start": 11.7,
+          "end": 12.18,
+          "probability": 0.9982171654701233
+        },
+        {
+          "word": " how",
+          "start": 12.18,
+          "end": 12.46,
+          "probability": 0.9994440674781799
+        },
+        {
+          "word": " we",
+          "start": 12.46,
+          "end": 12.6,
+          "probability": 0.9989784955978394
+        },
+        {
+          "word": " could",
+          "start": 12.6,
+          "end": 12.74,
+          "probability": 0.9973618388175964
+        },
+        {
+          "word": " support",
+          "start": 12.74,
+          "end": 13.06,
+          "probability": 0.9985761642456055
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 13.06,
+      "end": 18.04,
+      "text": " their goals. The client raised concerns about pricing and delivery timelines, so I listened",
+      "tokens": [
+        51016,
+        641,
+        5493,
+        13,
+        440,
+        6423,
+        6005,
+        7389,
+        466,
+        17621,
+        293,
+        8982,
+        45886,
+        11,
+        370,
+        286,
+        13207,
+        51264
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09889167288075322,
+      "compression_ratio": 1.647239263803681,
+      "no_speech_prob": 0.06909041106700897,
+      "words": [
+        {
+          "word": " their",
+          "start": 13.06,
+          "end": 13.28,
+          "probability": 0.9961850047111511
+        },
+        {
+          "word": " goals.",
+          "start": 13.28,
+          "end": 13.64,
+          "probability": 0.9992138147354126
+        },
+        {
+          "word": " The",
+          "start": 13.9,
+          "end": 13.9,
+          "probability": 0.869840145111084
+        },
+        {
+          "word": " client",
+          "start": 13.9,
+          "end": 14.2,
+          "probability": 0.9971356391906738
+        },
+        {
+          "word": " raised",
+          "start": 14.2,
+          "end": 14.52,
+          "probability": 0.9959676265716553
+        },
+        {
+          "word": " concerns",
+          "start": 14.52,
+          "end": 15.04,
+          "probability": 0.9992615580558777
+        },
+        {
+          "word": " about",
+          "start": 15.04,
+          "end": 15.34,
+          "probability": 0.9997085928916931
+        },
+        {
+          "word": " pricing",
+          "start": 15.34,
+          "end": 15.78,
+          "probability": 0.9988987445831299
+        },
+        {
+          "word": " and",
+          "start": 15.78,
+          "end": 16.08,
+          "probability": 0.9977912902832031
+        },
+        {
+          "word": " delivery",
+          "start": 16.08,
+          "end": 16.44,
+          "probability": 0.9992807507514954
+        },
+        {
+          "word": " timelines,",
+          "start": 16.44,
+          "end": 17.0,
+          "probability": 0.9853045344352722
+        },
+        {
+          "word": " so",
+          "start": 17.44,
+          "end": 17.66,
+          "probability": 0.9747041463851929
+        },
+        {
+          "word": " I",
+          "start": 17.66,
+          "end": 17.76,
+          "probability": 0.9914604425430298
+        },
+        {
+          "word": " listened",
+          "start": 17.76,
+          "end": 18.04,
+          "probability": 0.9944158792495728
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 0,
+      "start": 18.04,
+      "end": 23.38,
+      "text": " carefully and offered flexible options, I said, we understand your needs, and we're open to",
+      "tokens": [
+        51264,
+        7500,
+        293,
+        8059,
+        11358,
+        3956,
+        11,
+        286,
+        848,
+        11,
+        321,
+        1223,
+        428,
+        2203,
+        11,
+        293,
+        321,
+        434,
+        1269,
+        281,
+        51528
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09889167288075322,
+      "compression_ratio": 1.647239263803681,
+      "no_speech_prob": 0.06909041106700897,
+      "words": [
+        {
+          "word": " carefully",
+          "start": 18.04,
+          "end": 18.5,
+          "probability": 0.9970904588699341
+        },
+        {
+          "word": " and",
+          "start": 18.5,
+          "end": 18.82,
+          "probability": 0.9982095956802368
+        },
+        {
+          "word": " offered",
+          "start": 18.82,
+          "end": 19.1,
+          "probability": 0.9978232383728027
+        },
+        {
+          "word": " flexible",
+          "start": 19.1,
+          "end": 19.58,
+          "probability": 0.9850543737411499
+        },
+        {
+          "word": " options,",
+          "start": 19.58,
+          "end": 20.06,
+          "probability": 0.9975706934928894
+        },
+        {
+          "word": " I",
+          "start": 20.44,
+          "end": 20.56,
+          "probability": 0.9610437750816345
+        },
+        {
+          "word": " said,",
+          "start": 20.56,
+          "end": 20.84,
+          "probability": 0.9974870681762695
+        },
+        {
+          "word": " we",
+          "start": 21.2,
+          "end": 21.3,
+          "probability": 0.5872687101364136
+        },
+        {
+          "word": " understand",
+          "start": 21.3,
+          "end": 21.72,
+          "probability": 0.9821992516517639
+        },
+        {
+          "word": " your",
+          "start": 21.72,
+          "end": 21.96,
+          "probability": 0.9598982930183411
+        },
+        {
+          "word": " needs,",
+          "start": 21.96,
+          "end": 22.34,
+          "probability": 0.9993471503257751
+        },
+        {
+          "word": " and",
+          "start": 22.7,
+          "end": 22.84,
+          "probability": 0.9965513944625854
+        },
+        {
+          "word": " we're",
+          "start": 22.84,
+          "end": 22.98,
+          "probability": 0.8105520606040955
+        },
+        {
+          "word": " open",
+          "start": 22.98,
+          "end": 23.22,
+          "probability": 0.9980834722518921
+        },
+        {
+          "word": " to",
+          "start": 23.22,
+          "end": 23.38,
+          "probability": 0.9996798038482666
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "seek": 0,
+      "start": 23.38,
+      "end": 29.14,
+      "text": " adjusting the plan to fit your schedule. After a few rounds of discussion, we finally found a",
+      "tokens": [
+        51528,
+        23559,
+        264,
+        1393,
+        281,
+        3318,
+        428,
+        7567,
+        13,
+        2381,
+        257,
+        1326,
+        13757,
+        295,
+        5017,
+        11,
+        321,
+        2721,
+        1352,
+        257,
+        51816
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09889167288075322,
+      "compression_ratio": 1.647239263803681,
+      "no_speech_prob": 0.06909041106700897,
+      "words": [
+        {
+          "word": " adjusting",
+          "start": 23.38,
+          "end": 23.76,
+          "probability": 0.9975293278694153
+        },
+        {
+          "word": " the",
+          "start": 23.76,
+          "end": 23.98,
+          "probability": 0.9990471005439758
+        },
+        {
+          "word": " plan",
+          "start": 23.98,
+          "end": 24.26,
+          "probability": 0.9957946538925171
+        },
+        {
+          "word": " to",
+          "start": 24.26,
+          "end": 24.46,
+          "probability": 0.9984580278396606
+        },
+        {
+          "word": " fit",
+          "start": 24.46,
+          "end": 24.6,
+          "probability": 0.8600507378578186
+        },
+        {
+          "word": " your",
+          "start": 24.6,
+          "end": 24.8,
+          "probability": 0.9994738698005676
+        },
+        {
+          "word": " schedule.",
+          "start": 24.8,
+          "end": 25.16,
+          "probability": 0.9996774196624756
+        },
+        {
+          "word": " After",
+          "start": 26.12,
+          "end": 26.52,
+          "probability": 0.9632543325424194
+        },
+        {
+          "word": " a",
+          "start": 26.52,
+          "end": 26.66,
+          "probability": 0.9969524145126343
+        },
+        {
+          "word": " few",
+          "start": 26.66,
+          "end": 26.84,
+          "probability": 0.9996389150619507
+        },
+        {
+          "word": " rounds",
+          "start": 26.84,
+          "end": 27.08,
+          "probability": 0.9952701926231384
+        },
+        {
+          "word": " of",
+          "start": 27.08,
+          "end": 27.24,
+          "probability": 0.9994670748710632
+        },
+        {
+          "word": " discussion,",
+          "start": 27.24,
+          "end": 27.74,
+          "probability": 0.9991081357002258
+        },
+        {
+          "word": " we",
+          "start": 28.14,
+          "end": 28.26,
+          "probability": 0.9972617626190186
+        },
+        {
+          "word": " finally",
+          "start": 28.26,
+          "end": 28.66,
+          "probability": 0.9945517182350159
+        },
+        {
+          "word": " found",
+          "start": 28.66,
+          "end": 28.98,
+          "probability": 0.9989748001098633
+        },
+        {
+          "word": " a",
+          "start": 28.98,
+          "end": 29.14,
+          "probability": 0.9994242191314697
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "seek": 2914,
+      "start": 29.14,
+      "end": 34.36,
+      "text": " solution that worked for both sides.AT the end, the client shook my hand and said, we look",
+      "tokens": [
+        50364,
+        3827,
+        300,
+        2732,
+        337,
+        1293,
+        4881,
+        13,
+        2218,
+        264,
+        917,
+        11,
+        264,
+        6423,
+        28438,
+        452,
+        1011,
+        293,
+        848,
+        11,
+        321,
+        574,
+        50628
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.11397772249968155,
+      "compression_ratio": 1.5352112676056338,
+      "no_speech_prob": 0.00986130814999342,
+      "words": [
+        {
+          "word": " solution",
+          "start": 29.14,
+          "end": 29.56,
+          "probability": 0.23622940480709076
+        },
+        {
+          "word": " that",
+          "start": 29.56,
+          "end": 29.78,
+          "probability": 0.9938777089118958
+        },
+        {
+          "word": " worked",
+          "start": 29.78,
+          "end": 30.06,
+          "probability": 0.9977765679359436
+        },
+        {
+          "word": " for",
+          "start": 30.06,
+          "end": 30.22,
+          "probability": 0.9983285069465637
+        },
+        {
+          "word": " both",
+          "start": 30.22,
+          "end": 30.44,
+          "probability": 0.9954571723937988
+        },
+        {
+          "word": " sides",
+          "start": 30.44,
+          "end": 30.84,
+          "probability": 0.9937418103218079
+        },
+        {
+          "word": ".AT",
+          "start": 30.84,
+          "end": 31.42,
+          "probability": 0.5778884738683701
+        },
+        {
+          "word": " the",
+          "start": 31.42,
+          "end": 31.64,
+          "probability": 0.9082239270210266
+        },
+        {
+          "word": " end,",
+          "start": 31.64,
+          "end": 32.0,
+          "probability": 0.9849724173545837
+        },
+        {
+          "word": " the",
+          "start": 32.2,
+          "end": 32.28,
+          "probability": 0.9832744002342224
+        },
+        {
+          "word": " client",
+          "start": 32.28,
+          "end": 32.56,
+          "probability": 0.9565082788467407
+        },
+        {
+          "word": " shook",
+          "start": 32.56,
+          "end": 32.8,
+          "probability": 0.9978364109992981
+        },
+        {
+          "word": " my",
+          "start": 32.8,
+          "end": 33.0,
+          "probability": 0.9989117383956909
+        },
+        {
+          "word": " hand",
+          "start": 33.0,
+          "end": 33.26,
+          "probability": 0.9981046915054321
+        },
+        {
+          "word": " and",
+          "start": 33.26,
+          "end": 33.42,
+          "probability": 0.9956613183021545
+        },
+        {
+          "word": " said,",
+          "start": 33.42,
+          "end": 33.72,
+          "probability": 0.9992926120758057
+        },
+        {
+          "word": " we",
+          "start": 34.08,
+          "end": 34.18,
+          "probability": 0.09832717478275299
+        },
+        {
+          "word": " look",
+          "start": 34.18,
+          "end": 34.36,
+          "probability": 0.9929848313331604
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "seek": 2914,
+      "start": 34.36,
+      "end": 40.18,
+      "text": " forward to working with you. It was a challenging negotiation, but being prepared and respectful",
+      "tokens": [
+        50628,
+        2128,
+        281,
+        1364,
+        365,
+        291,
+        13,
+        467,
+        390,
+        257,
+        7595,
+        27573,
+        11,
+        457,
+        885,
+        4927,
+        293,
+        26205,
+        50920
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.11397772249968155,
+      "compression_ratio": 1.5352112676056338,
+      "no_speech_prob": 0.00986130814999342,
+      "words": [
+        {
+          "word": " forward",
+          "start": 34.36,
+          "end": 34.7,
+          "probability": 0.9979668259620667
+        },
+        {
+          "word": " to",
+          "start": 34.7,
+          "end": 34.88,
+          "probability": 0.9993913173675537
+        },
+        {
+          "word": " working",
+          "start": 34.88,
+          "end": 35.16,
+          "probability": 0.9992062449455261
+        },
+        {
+          "word": " with",
+          "start": 35.16,
+          "end": 35.42,
+          "probability": 0.999521017074585
+        },
+        {
+          "word": " you.",
+          "start": 35.42,
+          "end": 35.64,
+          "probability": 0.9966613054275513
+        },
+        {
+          "word": " It",
+          "start": 36.5,
+          "end": 36.78,
+          "probability": 0.9519659876823425
+        },
+        {
+          "word": " was",
+          "start": 36.78,
+          "end": 36.88,
+          "probability": 0.9991718530654907
+        },
+        {
+          "word": " a",
+          "start": 36.88,
+          "end": 37.0,
+          "probability": 0.9993321299552917
+        },
+        {
+          "word": " challenging",
+          "start": 37.0,
+          "end": 37.4,
+          "probability": 0.99776291847229
+        },
+        {
+          "word": " negotiation,",
+          "start": 37.4,
+          "end": 38.26,
+          "probability": 0.9978076815605164
+        },
+        {
+          "word": " but",
+          "start": 38.68,
+          "end": 38.78,
+          "probability": 0.9982649683952332
+        },
+        {
+          "word": " being",
+          "start": 38.78,
+          "end": 39.0,
+          "probability": 0.996356725692749
+        },
+        {
+          "word": " prepared",
+          "start": 39.0,
+          "end": 39.46,
+          "probability": 0.9975528120994568
+        },
+        {
+          "word": " and",
+          "start": 39.46,
+          "end": 39.66,
+          "probability": 0.9990662932395935
+        },
+        {
+          "word": " respectful",
+          "start": 39.66,
+          "end": 40.18,
+          "probability": 0.9984667301177979
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "seek": 2914,
+      "start": 40.18,
+      "end": 45.22,
+      "text": " helped build trust, this experience taught me that successful business relationships are built on",
+      "tokens": [
+        50920,
+        4254,
+        1322,
+        3361,
+        11,
+        341,
+        1752,
+        5928,
+        385,
+        300,
+        4406,
+        1606,
+        6159,
+        366,
+        3094,
+        322,
+        51168
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.11397772249968155,
+      "compression_ratio": 1.5352112676056338,
+      "no_speech_prob": 0.00986130814999342,
+      "words": [
+        {
+          "word": " helped",
+          "start": 40.18,
+          "end": 40.56,
+          "probability": 0.9969092011451721
+        },
+        {
+          "word": " build",
+          "start": 40.56,
+          "end": 40.82,
+          "probability": 0.9963755011558533
+        },
+        {
+          "word": " trust,",
+          "start": 40.82,
+          "end": 41.16,
+          "probability": 0.998045802116394
+        },
+        {
+          "word": " this",
+          "start": 41.48,
+          "end": 41.56,
+          "probability": 0.9749566316604614
+        },
+        {
+          "word": " experience",
+          "start": 41.56,
+          "end": 42.14,
+          "probability": 0.9953770637512207
+        },
+        {
+          "word": " taught",
+          "start": 42.14,
+          "end": 42.46,
+          "probability": 0.9998127818107605
+        },
+        {
+          "word": " me",
+          "start": 42.46,
+          "end": 42.66,
+          "probability": 0.9990309476852417
+        },
+        {
+          "word": " that",
+          "start": 42.66,
+          "end": 42.82,
+          "probability": 0.999187171459198
+        },
+        {
+          "word": " successful",
+          "start": 42.82,
+          "end": 43.3,
+          "probability": 0.9922099113464355
+        },
+        {
+          "word": " business",
+          "start": 43.3,
+          "end": 43.74,
+          "probability": 0.9961733222007751
+        },
+        {
+          "word": " relationships",
+          "start": 43.74,
+          "end": 44.52,
+          "probability": 0.9979216456413269
+        },
+        {
+          "word": " are",
+          "start": 44.52,
+          "end": 44.8,
+          "probability": 0.9970158338546753
+        },
+        {
+          "word": " built",
+          "start": 44.8,
+          "end": 45.04,
+          "probability": 0.9991075396537781
+        },
+        {
+          "word": " on",
+          "start": 45.04,
+          "end": 45.22,
+          "probability": 0.9741346836090088
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "seek": 2914,
+      "start": 45.22,
+      "end": 47.92,
+      "text": " communication, patience, and flexibility.",
+      "tokens": [
+        51168,
+        6101,
+        11,
+        14826,
+        11,
+        293,
+        12635,
+        13,
+        51360
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.11397772249968155,
+      "compression_ratio": 1.5352112676056338,
+      "no_speech_prob": 0.00986130814999342,
+      "words": [
+        {
+          "word": " communication,",
+          "start": 45.22,
+          "end": 45.84,
+          "probability": 0.998315691947937
+        },
+        {
+          "word": " patience,",
+          "start": 46.42,
+          "end": 46.74,
+          "probability": 0.9655587077140808
+        },
+        {
+          "word": " and",
+          "start": 47.2,
+          "end": 47.36,
+          "probability": 0.9981603026390076
+        },
+        {
+          "word": " flexibility.",
+          "start": 47.36,
+          "end": 47.92,
+          "probability": 0.9969068169593811
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

@@ -1,0 +1,998 @@
+{
+  "text": " Helen Keller was a girl who could not see or hear. When she was very young, she got sick and lost both senses. Her world was silent and dark. But with the help of her teacher and Sullivan, she learned to communicate. At first, it was very hard. And used hand signs to spell words. One day, Helen understood that the word water meant the cool liquid on her hand. That moment changed her life. She started to learn more and more. Later, Helen went to college and gave speeches to help others. Her story shows that learning is always possible, even when life is hard. She never gave up.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 2.54,
+      "text": " Helen Keller was a girl who could not see or hear.",
+      "tokens": [
+        50364,
+        26294,
+        48352,
+        390,
+        257,
+        2013,
+        567,
+        727,
+        406,
+        536,
+        420,
+        1568,
+        13,
+        50548
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16602263677687873,
+      "compression_ratio": 1.5766129032258065,
+      "no_speech_prob": 0.05096113681793213,
+      "words": [
+        {
+          "word": " Helen",
+          "start": 0.0,
+          "end": 0.44,
+          "probability": 0.9579582810401917
+        },
+        {
+          "word": " Keller",
+          "start": 0.44,
+          "end": 0.68,
+          "probability": 0.9657158851623535
+        },
+        {
+          "word": " was",
+          "start": 0.68,
+          "end": 0.98,
+          "probability": 0.9979654550552368
+        },
+        {
+          "word": " a",
+          "start": 0.98,
+          "end": 1.1,
+          "probability": 0.9988842606544495
+        },
+        {
+          "word": " girl",
+          "start": 1.1,
+          "end": 1.32,
+          "probability": 0.9983648657798767
+        },
+        {
+          "word": " who",
+          "start": 1.32,
+          "end": 1.54,
+          "probability": 0.9985049962997437
+        },
+        {
+          "word": " could",
+          "start": 1.54,
+          "end": 1.66,
+          "probability": 0.9939519762992859
+        },
+        {
+          "word": " not",
+          "start": 1.66,
+          "end": 1.82,
+          "probability": 0.9990260601043701
+        },
+        {
+          "word": " see",
+          "start": 1.82,
+          "end": 2.1,
+          "probability": 0.9979569911956787
+        },
+        {
+          "word": " or",
+          "start": 2.1,
+          "end": 2.3,
+          "probability": 0.9959371089935303
+        },
+        {
+          "word": " hear.",
+          "start": 2.3,
+          "end": 2.54,
+          "probability": 0.9989742040634155
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 3.2200000000000006,
+      "end": 6.74,
+      "text": " When she was very young, she got sick and lost both senses.",
+      "tokens": [
+        50548,
+        1133,
+        750,
+        390,
+        588,
+        2037,
+        11,
+        750,
+        658,
+        4998,
+        293,
+        2731,
+        1293,
+        17057,
+        13,
+        50764
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16602263677687873,
+      "compression_ratio": 1.5766129032258065,
+      "no_speech_prob": 0.05096113681793213,
+      "words": [
+        {
+          "word": " When",
+          "start": 3.2200000000000006,
+          "end": 3.74,
+          "probability": 0.9720616340637207
+        },
+        {
+          "word": " she",
+          "start": 3.74,
+          "end": 3.9,
+          "probability": 0.9992458820343018
+        },
+        {
+          "word": " was",
+          "start": 3.9,
+          "end": 4.04,
+          "probability": 0.9996675252914429
+        },
+        {
+          "word": " very",
+          "start": 4.04,
+          "end": 4.3,
+          "probability": 0.9991766810417175
+        },
+        {
+          "word": " young,",
+          "start": 4.3,
+          "end": 4.68,
+          "probability": 0.9996803998947144
+        },
+        {
+          "word": " she",
+          "start": 4.98,
+          "end": 5.04,
+          "probability": 0.9973013997077942
+        },
+        {
+          "word": " got",
+          "start": 5.04,
+          "end": 5.24,
+          "probability": 0.9992014765739441
+        },
+        {
+          "word": " sick",
+          "start": 5.24,
+          "end": 5.5,
+          "probability": 0.9986791014671326
+        },
+        {
+          "word": " and",
+          "start": 5.5,
+          "end": 5.72,
+          "probability": 0.9990732669830322
+        },
+        {
+          "word": " lost",
+          "start": 5.72,
+          "end": 5.92,
+          "probability": 0.9983469247817993
+        },
+        {
+          "word": " both",
+          "start": 5.92,
+          "end": 6.26,
+          "probability": 0.9986575841903687
+        },
+        {
+          "word": " senses.",
+          "start": 6.26,
+          "end": 6.74,
+          "probability": 0.9962217807769775
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 7.7,
+      "end": 9.32,
+      "text": " Her world was silent and dark.",
+      "tokens": [
+        50764,
+        3204,
+        1002,
+        390,
+        12784,
+        293,
+        2877,
+        13,
+        50890
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16602263677687873,
+      "compression_ratio": 1.5766129032258065,
+      "no_speech_prob": 0.05096113681793213,
+      "words": [
+        {
+          "word": " Her",
+          "start": 7.7,
+          "end": 8.08,
+          "probability": 0.9803967475891113
+        },
+        {
+          "word": " world",
+          "start": 8.08,
+          "end": 8.32,
+          "probability": 0.9985029697418213
+        },
+        {
+          "word": " was",
+          "start": 8.32,
+          "end": 8.5,
+          "probability": 0.9992969036102295
+        },
+        {
+          "word": " silent",
+          "start": 8.5,
+          "end": 8.82,
+          "probability": 0.9974320530891418
+        },
+        {
+          "word": " and",
+          "start": 8.82,
+          "end": 9.06,
+          "probability": 0.9982736110687256
+        },
+        {
+          "word": " dark.",
+          "start": 9.06,
+          "end": 9.32,
+          "probability": 0.997772753238678
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 10.22,
+      "end": 13.88,
+      "text": " But with the help of her teacher and Sullivan, she learned to communicate.",
+      "tokens": [
+        50890,
+        583,
+        365,
+        264,
+        854,
+        295,
+        720,
+        5027,
+        293,
+        37226,
+        11,
+        750,
+        3264,
+        281,
+        7890,
+        13,
+        51120
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16602263677687873,
+      "compression_ratio": 1.5766129032258065,
+      "no_speech_prob": 0.05096113681793213,
+      "words": [
+        {
+          "word": " But",
+          "start": 10.22,
+          "end": 10.54,
+          "probability": 0.9907524585723877
+        },
+        {
+          "word": " with",
+          "start": 10.54,
+          "end": 10.68,
+          "probability": 0.9940491914749146
+        },
+        {
+          "word": " the",
+          "start": 10.68,
+          "end": 10.8,
+          "probability": 0.998691737651825
+        },
+        {
+          "word": " help",
+          "start": 10.8,
+          "end": 10.96,
+          "probability": 0.9995564818382263
+        },
+        {
+          "word": " of",
+          "start": 10.96,
+          "end": 11.12,
+          "probability": 0.9981221556663513
+        },
+        {
+          "word": " her",
+          "start": 11.12,
+          "end": 11.24,
+          "probability": 0.9980646967887878
+        },
+        {
+          "word": " teacher",
+          "start": 11.24,
+          "end": 11.6,
+          "probability": 0.997660756111145
+        },
+        {
+          "word": " and",
+          "start": 11.6,
+          "end": 12.08,
+          "probability": 0.8230894804000854
+        },
+        {
+          "word": " Sullivan,",
+          "start": 12.08,
+          "end": 12.5,
+          "probability": 0.9888138175010681
+        },
+        {
+          "word": " she",
+          "start": 12.86,
+          "end": 12.98,
+          "probability": 0.9976813793182373
+        },
+        {
+          "word": " learned",
+          "start": 12.98,
+          "end": 13.18,
+          "probability": 0.9670102596282959
+        },
+        {
+          "word": " to",
+          "start": 13.18,
+          "end": 13.36,
+          "probability": 0.9994544386863708
+        },
+        {
+          "word": " communicate.",
+          "start": 13.36,
+          "end": 13.88,
+          "probability": 0.9969084858894348
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 0,
+      "start": 14.72,
+      "end": 16.8,
+      "text": " At first, it was very hard.",
+      "tokens": [
+        51120,
+        1711,
+        700,
+        11,
+        309,
+        390,
+        588,
+        1152,
+        13,
+        51262
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16602263677687873,
+      "compression_ratio": 1.5766129032258065,
+      "no_speech_prob": 0.05096113681793213,
+      "words": [
+        {
+          "word": " At",
+          "start": 14.72,
+          "end": 15.24,
+          "probability": 0.9667389988899231
+        },
+        {
+          "word": " first,",
+          "start": 15.24,
+          "end": 15.68,
+          "probability": 0.9991752505302429
+        },
+        {
+          "word": " it",
+          "start": 15.92,
+          "end": 16.0,
+          "probability": 0.9970235228538513
+        },
+        {
+          "word": " was",
+          "start": 16.0,
+          "end": 16.12,
+          "probability": 0.9995917677879333
+        },
+        {
+          "word": " very",
+          "start": 16.12,
+          "end": 16.4,
+          "probability": 0.999062716960907
+        },
+        {
+          "word": " hard.",
+          "start": 16.4,
+          "end": 16.8,
+          "probability": 0.9989972710609436
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "seek": 0,
+      "start": 17.74,
+      "end": 19.52,
+      "text": " And used hand signs to spell words.",
+      "tokens": [
+        51262,
+        400,
+        1143,
+        1011,
+        7880,
+        281,
+        9827,
+        2283,
+        13,
+        51406
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16602263677687873,
+      "compression_ratio": 1.5766129032258065,
+      "no_speech_prob": 0.05096113681793213,
+      "words": [
+        {
+          "word": " And",
+          "start": 17.74,
+          "end": 17.98,
+          "probability": 0.9030645489692688
+        },
+        {
+          "word": " used",
+          "start": 17.98,
+          "end": 18.18,
+          "probability": 0.987429678440094
+        },
+        {
+          "word": " hand",
+          "start": 18.18,
+          "end": 18.42,
+          "probability": 0.9138628244400024
+        },
+        {
+          "word": " signs",
+          "start": 18.42,
+          "end": 18.68,
+          "probability": 0.7983387112617493
+        },
+        {
+          "word": " to",
+          "start": 18.68,
+          "end": 19.0,
+          "probability": 0.9994114637374878
+        },
+        {
+          "word": " spell",
+          "start": 19.0,
+          "end": 19.2,
+          "probability": 0.9984810948371887
+        },
+        {
+          "word": " words.",
+          "start": 19.2,
+          "end": 19.52,
+          "probability": 0.9962244033813477
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "seek": 0,
+      "start": 20.74,
+      "end": 24.72,
+      "text": " One day, Helen understood that the word water meant the cool liquid on her hand.",
+      "tokens": [
+        51406,
+        1485,
+        786,
+        11,
+        26294,
+        7320,
+        300,
+        264,
+        1349,
+        1281,
+        4140,
+        264,
+        1627,
+        6553,
+        322,
+        720,
+        1011,
+        13,
+        51656
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16602263677687873,
+      "compression_ratio": 1.5766129032258065,
+      "no_speech_prob": 0.05096113681793213,
+      "words": [
+        {
+          "word": " One",
+          "start": 20.74,
+          "end": 20.92,
+          "probability": 0.9744687676429749
+        },
+        {
+          "word": " day,",
+          "start": 20.92,
+          "end": 21.2,
+          "probability": 0.9990944862365723
+        },
+        {
+          "word": " Helen",
+          "start": 21.58,
+          "end": 21.74,
+          "probability": 0.9947161078453064
+        },
+        {
+          "word": " understood",
+          "start": 21.74,
+          "end": 22.22,
+          "probability": 0.9912851452827454
+        },
+        {
+          "word": " that",
+          "start": 22.22,
+          "end": 22.48,
+          "probability": 0.9986926913261414
+        },
+        {
+          "word": " the",
+          "start": 22.48,
+          "end": 22.6,
+          "probability": 0.9945188164710999
+        },
+        {
+          "word": " word",
+          "start": 22.6,
+          "end": 22.78,
+          "probability": 0.9399923086166382
+        },
+        {
+          "word": " water",
+          "start": 22.78,
+          "end": 23.1,
+          "probability": 0.4838566482067108
+        },
+        {
+          "word": " meant",
+          "start": 23.1,
+          "end": 23.32,
+          "probability": 0.9972182512283325
+        },
+        {
+          "word": " the",
+          "start": 23.32,
+          "end": 23.48,
+          "probability": 0.9683471322059631
+        },
+        {
+          "word": " cool",
+          "start": 23.48,
+          "end": 23.7,
+          "probability": 0.9629517793655396
+        },
+        {
+          "word": " liquid",
+          "start": 23.7,
+          "end": 24.0,
+          "probability": 0.9959143996238708
+        },
+        {
+          "word": " on",
+          "start": 24.0,
+          "end": 24.2,
+          "probability": 0.9964480400085449
+        },
+        {
+          "word": " her",
+          "start": 24.2,
+          "end": 24.36,
+          "probability": 0.9989099502563477
+        },
+        {
+          "word": " hand.",
+          "start": 24.36,
+          "end": 24.72,
+          "probability": 0.9984317421913147
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "seek": 0,
+      "start": 25.38,
+      "end": 27.04,
+      "text": " That moment changed her life.",
+      "tokens": [
+        51656,
+        663,
+        1623,
+        3105,
+        720,
+        993,
+        13,
+        51778
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16602263677687873,
+      "compression_ratio": 1.5766129032258065,
+      "no_speech_prob": 0.05096113681793213,
+      "words": [
+        {
+          "word": " That",
+          "start": 25.38,
+          "end": 25.86,
+          "probability": 0.9937098026275635
+        },
+        {
+          "word": " moment",
+          "start": 25.86,
+          "end": 26.16,
+          "probability": 0.9984038472175598
+        },
+        {
+          "word": " changed",
+          "start": 26.16,
+          "end": 26.54,
+          "probability": 0.9978801012039185
+        },
+        {
+          "word": " her",
+          "start": 26.54,
+          "end": 26.74,
+          "probability": 0.9993600249290466
+        },
+        {
+          "word": " life.",
+          "start": 26.74,
+          "end": 27.04,
+          "probability": 0.9993541836738586
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "seek": 2704,
+      "start": 27.76,
+      "end": 29.66,
+      "text": " She started to learn more and more.",
+      "tokens": [
+        50414,
+        1240,
+        1409,
+        281,
+        1466,
+        544,
+        293,
+        544,
+        13,
+        50544
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16121280670166016,
+      "compression_ratio": 1.3840579710144927,
+      "no_speech_prob": 0.010269496589899063,
+      "words": [
+        {
+          "word": " She",
+          "start": 27.76,
+          "end": 28.32,
+          "probability": 0.5865155458450317
+        },
+        {
+          "word": " started",
+          "start": 28.32,
+          "end": 28.62,
+          "probability": 0.9928593635559082
+        },
+        {
+          "word": " to",
+          "start": 28.62,
+          "end": 28.84,
+          "probability": 0.9990044236183167
+        },
+        {
+          "word": " learn",
+          "start": 28.84,
+          "end": 29.0,
+          "probability": 0.9981881976127625
+        },
+        {
+          "word": " more",
+          "start": 29.0,
+          "end": 29.26,
+          "probability": 0.9989461302757263
+        },
+        {
+          "word": " and",
+          "start": 29.26,
+          "end": 29.42,
+          "probability": 0.9977849721908569
+        },
+        {
+          "word": " more.",
+          "start": 29.42,
+          "end": 29.66,
+          "probability": 0.9995484948158264
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "seek": 2704,
+      "start": 30.62,
+      "end": 33.76,
+      "text": " Later, Helen went to college and gave speeches to help others.",
+      "tokens": [
+        50544,
+        11965,
+        11,
+        26294,
+        1437,
+        281,
+        3859,
+        293,
+        2729,
+        29982,
+        281,
+        854,
+        2357,
+        13,
+        50752
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16121280670166016,
+      "compression_ratio": 1.3840579710144927,
+      "no_speech_prob": 0.010269496589899063,
+      "words": [
+        {
+          "word": " Later,",
+          "start": 30.62,
+          "end": 31.06,
+          "probability": 0.9908552169799805
+        },
+        {
+          "word": " Helen",
+          "start": 31.44,
+          "end": 31.58,
+          "probability": 0.9871535897254944
+        },
+        {
+          "word": " went",
+          "start": 31.58,
+          "end": 31.78,
+          "probability": 0.9988596439361572
+        },
+        {
+          "word": " to",
+          "start": 31.78,
+          "end": 31.92,
+          "probability": 0.9997456669807434
+        },
+        {
+          "word": " college",
+          "start": 31.92,
+          "end": 32.24,
+          "probability": 0.9957736134529114
+        },
+        {
+          "word": " and",
+          "start": 32.24,
+          "end": 32.46,
+          "probability": 0.9984511137008667
+        },
+        {
+          "word": " gave",
+          "start": 32.46,
+          "end": 32.62,
+          "probability": 0.9946925044059753
+        },
+        {
+          "word": " speeches",
+          "start": 32.62,
+          "end": 32.96,
+          "probability": 0.9993755221366882
+        },
+        {
+          "word": " to",
+          "start": 32.96,
+          "end": 33.26,
+          "probability": 0.9994571805000305
+        },
+        {
+          "word": " help",
+          "start": 33.26,
+          "end": 33.4,
+          "probability": 0.9984991550445557
+        },
+        {
+          "word": " others.",
+          "start": 33.4,
+          "end": 33.76,
+          "probability": 0.9978927969932556
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "seek": 2704,
+      "start": 34.76,
+      "end": 38.56,
+      "text": " Her story shows that learning is always possible, even when life is hard.",
+      "tokens": [
+        50752,
+        3204,
+        1657,
+        3110,
+        300,
+        2539,
+        307,
+        1009,
+        1944,
+        11,
+        754,
+        562,
+        993,
+        307,
+        1152,
+        13,
+        50990
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16121280670166016,
+      "compression_ratio": 1.3840579710144927,
+      "no_speech_prob": 0.010269496589899063,
+      "words": [
+        {
+          "word": " Her",
+          "start": 34.76,
+          "end": 35.02,
+          "probability": 0.9745917916297913
+        },
+        {
+          "word": " story",
+          "start": 35.02,
+          "end": 35.32,
+          "probability": 0.9824156761169434
+        },
+        {
+          "word": " shows",
+          "start": 35.32,
+          "end": 35.64,
+          "probability": 0.9982544779777527
+        },
+        {
+          "word": " that",
+          "start": 35.64,
+          "end": 35.82,
+          "probability": 0.9990725517272949
+        },
+        {
+          "word": " learning",
+          "start": 35.82,
+          "end": 36.1,
+          "probability": 0.9955704808235168
+        },
+        {
+          "word": " is",
+          "start": 36.1,
+          "end": 36.32,
+          "probability": 0.9988861680030823
+        },
+        {
+          "word": " always",
+          "start": 36.32,
+          "end": 36.62,
+          "probability": 0.9974470138549805
+        },
+        {
+          "word": " possible,",
+          "start": 36.62,
+          "end": 37.18,
+          "probability": 0.9984196424484253
+        },
+        {
+          "word": " even",
+          "start": 37.5,
+          "end": 37.68,
+          "probability": 0.9986685514450073
+        },
+        {
+          "word": " when",
+          "start": 37.68,
+          "end": 37.86,
+          "probability": 0.998740017414093
+        },
+        {
+          "word": " life",
+          "start": 37.86,
+          "end": 38.1,
+          "probability": 0.9987898468971252
+        },
+        {
+          "word": " is",
+          "start": 38.1,
+          "end": 38.3,
+          "probability": 0.9992684721946716
+        },
+        {
+          "word": " hard.",
+          "start": 38.3,
+          "end": 38.56,
+          "probability": 0.9985826015472412
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "seek": 2704,
+      "start": 39.48,
+      "end": 40.58,
+      "text": " She never gave up.",
+      "tokens": [
+        50990,
+        1240,
+        1128,
+        2729,
+        493,
+        13,
+        51090
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16121280670166016,
+      "compression_ratio": 1.3840579710144927,
+      "no_speech_prob": 0.010269496589899063,
+      "words": [
+        {
+          "word": " She",
+          "start": 39.48,
+          "end": 39.78,
+          "probability": 0.9919406771659851
+        },
+        {
+          "word": " never",
+          "start": 39.78,
+          "end": 40.06,
+          "probability": 0.9960793852806091
+        },
+        {
+          "word": " gave",
+          "start": 40.06,
+          "end": 40.26,
+          "probability": 0.9990440011024475
+        },
+        {
+          "word": " up.",
+          "start": 40.26,
+          "end": 40.58,
+          "probability": 0.9993041753768921
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

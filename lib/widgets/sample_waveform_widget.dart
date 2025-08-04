@@ -11,6 +11,8 @@ class SampleWaveformWidget extends StatefulWidget {
   final bool isAsset;
   final bool showComparison;
   final String? comparisonAssetPath;
+  final int sampleRate;
+  final int displaySeconds;
 
   const SampleWaveformWidget({
     super.key,
@@ -20,6 +22,8 @@ class SampleWaveformWidget extends StatefulWidget {
     this.isAsset = false,
     this.showComparison = false,
     this.comparisonAssetPath,
+    this.sampleRate = 112, // 👈 ここを追加
+    this.displaySeconds = 4, // 👈 ここも追加
   });
 
   @override
@@ -37,7 +41,7 @@ class _SampleWaveformWidgetState extends State<SampleWaveformWidget> {
   }
 
   Future<void> _loadAndPrepare() async {
-    try {
+    try {} finally {
       final player = AudioPlayer();
       await player.setFilePath(widget.filePath);
       final duration = player.duration ?? Duration.zero;
@@ -45,23 +49,30 @@ class _SampleWaveformWidgetState extends State<SampleWaveformWidget> {
 
       List<double> raw = widget.isAsset
           ? await extractWaveformFromAssets(widget.filePath)
-          : extractWaveform(File(widget.filePath));
+          : await extractWaveform(File(widget.filePath)); // ✅ ここに await を追加
 
       if (raw.isEmpty) {
         debugPrint("⚠️ 波形が空です（${widget.filePath}）");
       }
 
-      final processed = processWaveform(raw); // ✅ ← 波形間引き処理を復活！
+      // 正規化＋間引き
+      final processed = processWaveform(raw, duration.inMilliseconds / 1000.0);
+
+      // 固定フレームレートで表示範囲を制限（例：1秒 = 100フレーム）
+      const int framesPerSecond = 100;
+      final int displayLength = widget.displaySeconds * framesPerSecond;
+
+      // ここを↓こう変える（切り取りなしで全体渡す）
+      final List<double> clipped = processed;
+
+      debugPrint("🎧 duration: ${duration.inMilliseconds} ms");
+      debugPrint("🎧 normalized.length: ${processed.length}");
+      debugPrint("🎧 displayLength: $displayLength");
+      debugPrint("🎧 clipped.length: ${clipped.length}");
 
       setState(() {
         _audioDuration = duration;
-        _waveformFuture = Future.value(processed);
-      });
-    } catch (e) {
-      debugPrint("❌ 波形読み込みエラー: $e");
-      setState(() {
-        _audioDuration = Duration.zero;
-        _waveformFuture = Future.value([]);
+        _waveformFuture = Future.value(clipped);
       });
     }
   }
@@ -91,6 +102,8 @@ class _SampleWaveformWidgetState extends State<SampleWaveformWidget> {
               amplitudes: waveform,
               maxAmplitude: maxAmplitude,
               progress: widget.progress,
+              samplesPerSecond: widget.sampleRate,
+              displaySeconds: widget.displaySeconds,
             ),
           ),
         );

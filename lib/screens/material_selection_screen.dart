@@ -33,8 +33,8 @@ class _MaterialSelectionScreenState
     if (level.contains('ベーシック') || level.contains('Basic')) return 'Basic';
     if (level.contains('中級') || level.contains('Intermediate'))
       return 'Intermediate';
-    if (level.contains('上級') && !level.contains('最')) return 'Upper';
-    if (level.contains('最上級') || level.contains('Advanced')) return 'Advanced';
+    if (level.contains('上級') && !level.contains('最')) return 'Advanced';
+    if (level.contains('最上級') || level.contains('Advanced')) return 'Master';
     final trimmed = level.split('（').first.trim();
     return trimmed;
   }

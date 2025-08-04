@@ -1,0 +1,330 @@
+{
+  "text": " Attention passengers. The train to Central City will now depart from Platform 4 instead of Platform 2. Please make your way to Platform 4. We apologize for the sudden change and thank you for your understanding.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 1.22,
+      "text": " Attention passengers.",
+      "tokens": [
+        50364,
+        31858,
+        18436,
+        13,
+        50464
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16954894941680285,
+      "compression_ratio": 1.3973509933774835,
+      "no_speech_prob": 0.04665809124708176,
+      "words": [
+        {
+          "word": " Attention",
+          "start": 0.0,
+          "end": 0.6,
+          "probability": 0.5887671113014221
+        },
+        {
+          "word": " passengers.",
+          "start": 0.6,
+          "end": 1.22,
+          "probability": 0.8889942765235901
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 1.9,
+      "end": 6.54,
+      "text": " The train to Central City will now depart from Platform 4 instead of Platform 2.",
+      "tokens": [
+        50464,
+        440,
+        3847,
+        281,
+        9701,
+        4392,
+        486,
+        586,
+        9110,
+        490,
+        28707,
+        1017,
+        2602,
+        295,
+        28707,
+        568,
+        13,
+        50714
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16954894941680285,
+      "compression_ratio": 1.3973509933774835,
+      "no_speech_prob": 0.04665809124708176,
+      "words": [
+        {
+          "word": " The",
+          "start": 1.9,
+          "end": 2.54,
+          "probability": 0.9864343404769897
+        },
+        {
+          "word": " train",
+          "start": 2.54,
+          "end": 2.78,
+          "probability": 0.5623898506164551
+        },
+        {
+          "word": " to",
+          "start": 2.78,
+          "end": 2.92,
+          "probability": 0.8123373985290527
+        },
+        {
+          "word": " Central",
+          "start": 2.92,
+          "end": 3.22,
+          "probability": 0.8054841756820679
+        },
+        {
+          "word": " City",
+          "start": 3.22,
+          "end": 3.54,
+          "probability": 0.9797952175140381
+        },
+        {
+          "word": " will",
+          "start": 3.54,
+          "end": 3.72,
+          "probability": 0.9969958066940308
+        },
+        {
+          "word": " now",
+          "start": 3.72,
+          "end": 3.92,
+          "probability": 0.9954417943954468
+        },
+        {
+          "word": " depart",
+          "start": 3.92,
+          "end": 4.2,
+          "probability": 0.9983591437339783
+        },
+        {
+          "word": " from",
+          "start": 4.2,
+          "end": 4.48,
+          "probability": 0.9987735152244568
+        },
+        {
+          "word": " Platform",
+          "start": 4.48,
+          "end": 4.86,
+          "probability": 0.7740426063537598
+        },
+        {
+          "word": " 4",
+          "start": 4.86,
+          "end": 5.24,
+          "probability": 0.836198091506958
+        },
+        {
+          "word": " instead",
+          "start": 5.24,
+          "end": 5.62,
+          "probability": 0.9942043423652649
+        },
+        {
+          "word": " of",
+          "start": 5.62,
+          "end": 5.78,
+          "probability": 0.9996945858001709
+        },
+        {
+          "word": " Platform",
+          "start": 5.78,
+          "end": 6.16,
+          "probability": 0.9560010433197021
+        },
+        {
+          "word": " 2.",
+          "start": 6.16,
+          "end": 6.54,
+          "probability": 0.9763873219490051
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 7.220000000000001,
+      "end": 9.32,
+      "text": " Please make your way to Platform 4.",
+      "tokens": [
+        50714,
+        2555,
+        652,
+        428,
+        636,
+        281,
+        28707,
+        1017,
+        13,
+        50864
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16954894941680285,
+      "compression_ratio": 1.3973509933774835,
+      "no_speech_prob": 0.04665809124708176,
+      "words": [
+        {
+          "word": " Please",
+          "start": 7.220000000000001,
+          "end": 7.86,
+          "probability": 0.9892500638961792
+        },
+        {
+          "word": " make",
+          "start": 7.86,
+          "end": 8.02,
+          "probability": 0.9810464978218079
+        },
+        {
+          "word": " your",
+          "start": 8.02,
+          "end": 8.2,
+          "probability": 0.9949157238006592
+        },
+        {
+          "word": " way",
+          "start": 8.2,
+          "end": 8.36,
+          "probability": 0.9995936751365662
+        },
+        {
+          "word": " to",
+          "start": 8.36,
+          "end": 8.5,
+          "probability": 0.9990039467811584
+        },
+        {
+          "word": " Platform",
+          "start": 8.5,
+          "end": 8.86,
+          "probability": 0.9703146815299988
+        },
+        {
+          "word": " 4.",
+          "start": 8.86,
+          "end": 9.32,
+          "probability": 0.987906813621521
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 10.0,
+      "end": 13.56,
+      "text": " We apologize for the sudden change and thank you for your understanding.",
+      "tokens": [
+        50864,
+        492,
+        12328,
+        337,
+        264,
+        3990,
+        1319,
+        293,
+        1309,
+        291,
+        337,
+        428,
+        3701,
+        13,
+        51064
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.16954894941680285,
+      "compression_ratio": 1.3973509933774835,
+      "no_speech_prob": 0.04665809124708176,
+      "words": [
+        {
+          "word": " We",
+          "start": 10.0,
+          "end": 10.54,
+          "probability": 0.9913011193275452
+        },
+        {
+          "word": " apologize",
+          "start": 10.54,
+          "end": 11.04,
+          "probability": 0.946308434009552
+        },
+        {
+          "word": " for",
+          "start": 11.04,
+          "end": 11.36,
+          "probability": 0.9996028542518616
+        },
+        {
+          "word": " the",
+          "start": 11.36,
+          "end": 11.48,
+          "probability": 0.9867216348648071
+        },
+        {
+          "word": " sudden",
+          "start": 11.48,
+          "end": 11.74,
+          "probability": 0.999707043170929
+        },
+        {
+          "word": " change",
+          "start": 11.74,
+          "end": 12.08,
+          "probability": 0.9975143671035767
+        },
+        {
+          "word": " and",
+          "start": 12.08,
+          "end": 12.34,
+          "probability": 0.9501514434814453
+        },
+        {
+          "word": " thank",
+          "start": 12.34,
+          "end": 12.56,
+          "probability": 0.9849445223808289
+        },
+        {
+          "word": " you",
+          "start": 12.56,
+          "end": 12.7,
+          "probability": 0.9981809854507446
+        },
+        {
+          "word": " for",
+          "start": 12.7,
+          "end": 12.84,
+          "probability": 0.9995039701461792
+        },
+        {
+          "word": " your",
+          "start": 12.84,
+          "end": 12.96,
+          "probability": 0.9974201917648315
+        },
+        {
+          "word": " understanding.",
+          "start": 12.96,
+          "end": 13.56,
+          "probability": 0.9983283877372742
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

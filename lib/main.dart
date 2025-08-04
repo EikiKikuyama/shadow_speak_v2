@@ -28,12 +28,23 @@ Future<void> main() async {
   }
 
   // ✅ assetの確認コード（お好みで削除可）
-  final assetPath = 'assets/audio/announcement.wav';
+  final subtitlePath =
+      'assets/subtitles/Level1/Announcement/Simple_Station_Announcement.json';
+  final audioPath =
+      'assets/audio/Level1/Announcement/Simple_Station_Announcement.wav';
+
   try {
-    await rootBundle.load(assetPath);
-    print('✅ asset読み込み成功: $assetPath');
+    await rootBundle.loadString(subtitlePath);
+    print('✅ JSON asset読み込み成功: $subtitlePath');
   } catch (error) {
-    print('❌ asset読み込み失敗: $assetPath → $error');
+    print('❌ JSON asset読み込み失敗: $subtitlePath → $error');
+  }
+
+  try {
+    await rootBundle.load(audioPath);
+    print('✅ WAV asset読み込み成功: $audioPath');
+  } catch (error) {
+    print('❌ WAV asset読み込み失敗: $audioPath → $error');
   }
 
   runApp(const ProviderScope(child: MyApp()));

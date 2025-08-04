@@ -1,0 +1,5 @@
+Title: Platform Change Notice
+WordCount: 58
+
+Script:
+Attention passengers. The train to Central City will now depart from platform 4 instead of platform 2. Please make your way to platform 4. We apologize for the sudden change and thank you for your understanding.

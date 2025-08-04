@@ -16,8 +16,9 @@ class WaveformProcessor {
 
       final sampleWave = isAsset
           ? await extractWaveformFromAssets(sampleAudioPath)
-          : extractWaveform(File(sampleAudioPath));
-      final recordedWave = extractWaveform(recordedFile);
+          : await extractWaveform(File(sampleAudioPath));
+
+      final recordedWave = await extractWaveform(recordedFile);
 
       print('✅ 見本波形サンプル数: ${sampleWave.length}');
       print('✅ 録音波形サンプル数: ${recordedWave.length}');
@@ -62,24 +63,30 @@ class WaveformProcessor {
   static List<double> _normalize(List<double> values) {
     if (values.isEmpty) return [];
 
-    // 平均と標準偏差を計算
     final mean = values.reduce((a, b) => a + b) / values.length;
     final stdDev = sqrt(
       values.map((e) => pow(e - mean, 2)).reduce((a, b) => a + b) /
           values.length,
     );
 
-    if (stdDev == 0) return List.filled(values.length, 0.0); // フラット対策
+    if (stdDev == 0) return List.filled(values.length, 0.0);
 
     // Zスコア正規化
     final zNormalized = values.map((e) => (e - mean) / stdDev).toList();
 
-    // ダウンサンプリング（10個に1つ）
+    // ダウンサンプリング（例：10個に1つ）
+    const int downSampleRate = 10;
     final downSampled = <double>[];
-    for (int i = 0; i < zNormalized.length; i += 10) {
+    for (int i = 0; i < zNormalized.length; i += downSampleRate) {
       downSampled.add(zNormalized[i]);
     }
 
-    return downSampled;
+    // 💡 ここで「表示する長さ（4秒分）」だけに制限
+    const int displayDurationSec = 4;
+    const int originalSampleRate = 44100;
+    final int displayLength =
+        (displayDurationSec * originalSampleRate) ~/ downSampleRate;
+
+    return downSampled.sublist(0, min(displayLength, downSampled.length));
   }
 }

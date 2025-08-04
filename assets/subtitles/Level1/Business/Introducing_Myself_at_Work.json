@@ -1,0 +1,244 @@
+{
+  "text": " Hello, my name is Serred. I work in the marketing team. This is my first week here. Nice to meet you all. I'm excited to work with everyone.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 5.62,
+      "text": " Hello, my name is Serred. I work in the marketing team. This is my first week here. Nice to meet you all.",
+      "tokens": [
+        50364,
+        2425,
+        11,
+        452,
+        1315,
+        307,
+        4210,
+        986,
+        13,
+        286,
+        589,
+        294,
+        264,
+        6370,
+        1469,
+        13,
+        639,
+        307,
+        452,
+        700,
+        1243,
+        510,
+        13,
+        5490,
+        281,
+        1677,
+        291,
+        439,
+        13,
+        50644
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.19517244943758336,
+      "compression_ratio": 1.2173913043478262,
+      "no_speech_prob": 0.07547290623188019,
+      "words": [
+        {
+          "word": " Hello,",
+          "start": 0.0,
+          "end": 0.48,
+          "probability": 0.9202029705047607
+        },
+        {
+          "word": " my",
+          "start": 0.78,
+          "end": 0.96,
+          "probability": 0.9440430402755737
+        },
+        {
+          "word": " name",
+          "start": 0.96,
+          "end": 1.16,
+          "probability": 0.9994006156921387
+        },
+        {
+          "word": " is",
+          "start": 1.16,
+          "end": 1.36,
+          "probability": 0.9985632300376892
+        },
+        {
+          "word": " Serred.",
+          "start": 1.36,
+          "end": 1.66,
+          "probability": 0.4711555242538452
+        },
+        {
+          "word": " I",
+          "start": 1.96,
+          "end": 2.04,
+          "probability": 0.9919831156730652
+        },
+        {
+          "word": " work",
+          "start": 2.04,
+          "end": 2.22,
+          "probability": 0.999518871307373
+        },
+        {
+          "word": " in",
+          "start": 2.22,
+          "end": 2.38,
+          "probability": 0.9903828501701355
+        },
+        {
+          "word": " the",
+          "start": 2.38,
+          "end": 2.48,
+          "probability": 0.9638139605522156
+        },
+        {
+          "word": " marketing",
+          "start": 2.48,
+          "end": 2.74,
+          "probability": 0.9506339430809021
+        },
+        {
+          "word": " team.",
+          "start": 2.74,
+          "end": 3.16,
+          "probability": 0.9990050196647644
+        },
+        {
+          "word": " This",
+          "start": 3.38,
+          "end": 3.46,
+          "probability": 0.9913210272789001
+        },
+        {
+          "word": " is",
+          "start": 3.46,
+          "end": 3.58,
+          "probability": 0.9990285634994507
+        },
+        {
+          "word": " my",
+          "start": 3.58,
+          "end": 3.74,
+          "probability": 0.998166024684906
+        },
+        {
+          "word": " first",
+          "start": 3.74,
+          "end": 4.08,
+          "probability": 0.993946373462677
+        },
+        {
+          "word": " week",
+          "start": 4.08,
+          "end": 4.26,
+          "probability": 0.9901273250579834
+        },
+        {
+          "word": " here.",
+          "start": 4.26,
+          "end": 4.58,
+          "probability": 0.9969595670700073
+        },
+        {
+          "word": " Nice",
+          "start": 4.7,
+          "end": 4.88,
+          "probability": 0.9881166219711304
+        },
+        {
+          "word": " to",
+          "start": 4.88,
+          "end": 5.06,
+          "probability": 0.9987700581550598
+        },
+        {
+          "word": " meet",
+          "start": 5.06,
+          "end": 5.2,
+          "probability": 0.9979548454284668
+        },
+        {
+          "word": " you",
+          "start": 5.2,
+          "end": 5.38,
+          "probability": 0.997259259223938
+        },
+        {
+          "word": " all.",
+          "start": 5.38,
+          "end": 5.62,
+          "probability": 0.9268661141395569
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 5.74,
+      "end": 7.4,
+      "text": " I'm excited to work with everyone.",
+      "tokens": [
+        50644,
+        286,
+        478,
+        2919,
+        281,
+        589,
+        365,
+        1518,
+        13,
+        50744
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.19517244943758336,
+      "compression_ratio": 1.2173913043478262,
+      "no_speech_prob": 0.07547290623188019,
+      "words": [
+        {
+          "word": " I'm",
+          "start": 5.74,
+          "end": 6.06,
+          "probability": 0.980649322271347
+        },
+        {
+          "word": " excited",
+          "start": 6.06,
+          "end": 6.36,
+          "probability": 0.9980291724205017
+        },
+        {
+          "word": " to",
+          "start": 6.36,
+          "end": 6.58,
+          "probability": 0.9994565844535828
+        },
+        {
+          "word": " work",
+          "start": 6.58,
+          "end": 6.74,
+          "probability": 0.9991891980171204
+        },
+        {
+          "word": " with",
+          "start": 6.74,
+          "end": 6.98,
+          "probability": 0.999352753162384
+        },
+        {
+          "word": " everyone.",
+          "start": 6.98,
+          "end": 7.4,
+          "probability": 0.9947260022163391
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

@@ -1,0 +1,374 @@
+{
+  "text": " When I started studying English, I didn't know how to begin. I made a small goal, learn five words a day. After a few weeks, I started to feel better. Reaching goals gives me confidence. Now I enjoy studying.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 2.88,
+      "text": " When I started studying English, I didn't know how to begin.",
+      "tokens": [
+        50364,
+        1133,
+        286,
+        1409,
+        7601,
+        3669,
+        11,
+        286,
+        994,
+        380,
+        458,
+        577,
+        281,
+        1841,
+        13,
+        50560
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1674722194671631,
+      "compression_ratio": 1.3506493506493507,
+      "no_speech_prob": 0.14245468378067017,
+      "words": [
+        {
+          "word": " When",
+          "start": 0.0,
+          "end": 0.28,
+          "probability": 0.7136422395706177
+        },
+        {
+          "word": " I",
+          "start": 0.28,
+          "end": 0.42,
+          "probability": 0.9785308241844177
+        },
+        {
+          "word": " started",
+          "start": 0.42,
+          "end": 0.74,
+          "probability": 0.9912629127502441
+        },
+        {
+          "word": " studying",
+          "start": 0.74,
+          "end": 1.12,
+          "probability": 0.9966332316398621
+        },
+        {
+          "word": " English,",
+          "start": 1.12,
+          "end": 1.56,
+          "probability": 0.983315110206604
+        },
+        {
+          "word": " I",
+          "start": 1.86,
+          "end": 1.98,
+          "probability": 0.9975993037223816
+        },
+        {
+          "word": " didn't",
+          "start": 1.98,
+          "end": 2.2,
+          "probability": 0.9963787496089935
+        },
+        {
+          "word": " know",
+          "start": 2.2,
+          "end": 2.32,
+          "probability": 0.998795747756958
+        },
+        {
+          "word": " how",
+          "start": 2.32,
+          "end": 2.46,
+          "probability": 0.9987255930900574
+        },
+        {
+          "word": " to",
+          "start": 2.46,
+          "end": 2.58,
+          "probability": 0.9994966983795166
+        },
+        {
+          "word": " begin.",
+          "start": 2.58,
+          "end": 2.88,
+          "probability": 0.9973570704460144
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 3.98,
+      "end": 6.52,
+      "text": " I made a small goal, learn five words a day.",
+      "tokens": [
+        50560,
+        286,
+        1027,
+        257,
+        1359,
+        3387,
+        11,
+        1466,
+        1732,
+        2283,
+        257,
+        786,
+        13,
+        50736
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1674722194671631,
+      "compression_ratio": 1.3506493506493507,
+      "no_speech_prob": 0.14245468378067017,
+      "words": [
+        {
+          "word": " I",
+          "start": 3.98,
+          "end": 4.12,
+          "probability": 0.8727923631668091
+        },
+        {
+          "word": " made",
+          "start": 4.12,
+          "end": 4.28,
+          "probability": 0.9976293444633484
+        },
+        {
+          "word": " a",
+          "start": 4.28,
+          "end": 4.4,
+          "probability": 0.9992806315422058
+        },
+        {
+          "word": " small",
+          "start": 4.4,
+          "end": 4.62,
+          "probability": 0.9984027743339539
+        },
+        {
+          "word": " goal,",
+          "start": 4.62,
+          "end": 4.96,
+          "probability": 0.9930863380432129
+        },
+        {
+          "word": " learn",
+          "start": 5.36,
+          "end": 5.5,
+          "probability": 0.748940646648407
+        },
+        {
+          "word": " five",
+          "start": 5.5,
+          "end": 5.8,
+          "probability": 0.6341339349746704
+        },
+        {
+          "word": " words",
+          "start": 5.8,
+          "end": 6.06,
+          "probability": 0.9986733198165894
+        },
+        {
+          "word": " a",
+          "start": 6.06,
+          "end": 6.22,
+          "probability": 0.9996168613433838
+        },
+        {
+          "word": " day.",
+          "start": 6.22,
+          "end": 6.52,
+          "probability": 0.9996939897537231
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 7.260000000000001,
+      "end": 9.74,
+      "text": " After a few weeks, I started to feel better.",
+      "tokens": [
+        50736,
+        2381,
+        257,
+        1326,
+        3259,
+        11,
+        286,
+        1409,
+        281,
+        841,
+        1101,
+        13,
+        50900
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1674722194671631,
+      "compression_ratio": 1.3506493506493507,
+      "no_speech_prob": 0.14245468378067017,
+      "words": [
+        {
+          "word": " After",
+          "start": 7.260000000000001,
+          "end": 7.78,
+          "probability": 0.9909043908119202
+        },
+        {
+          "word": " a",
+          "start": 7.78,
+          "end": 7.9,
+          "probability": 0.9979128241539001
+        },
+        {
+          "word": " few",
+          "start": 7.9,
+          "end": 8.06,
+          "probability": 0.9993707537651062
+        },
+        {
+          "word": " weeks,",
+          "start": 8.06,
+          "end": 8.44,
+          "probability": 0.9984706044197083
+        },
+        {
+          "word": " I",
+          "start": 8.66,
+          "end": 8.76,
+          "probability": 0.9988025426864624
+        },
+        {
+          "word": " started",
+          "start": 8.76,
+          "end": 9.04,
+          "probability": 0.9983289837837219
+        },
+        {
+          "word": " to",
+          "start": 9.04,
+          "end": 9.22,
+          "probability": 0.9993165731430054
+        },
+        {
+          "word": " feel",
+          "start": 9.22,
+          "end": 9.38,
+          "probability": 0.99907386302948
+        },
+        {
+          "word": " better.",
+          "start": 9.38,
+          "end": 9.74,
+          "probability": 0.9990758895874023
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 10.86,
+      "end": 12.34,
+      "text": " Reaching goals gives me confidence.",
+      "tokens": [
+        50900,
+        1300,
+        2834,
+        5493,
+        2709,
+        385,
+        6687,
+        13,
+        51036
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1674722194671631,
+      "compression_ratio": 1.3506493506493507,
+      "no_speech_prob": 0.14245468378067017,
+      "words": [
+        {
+          "word": " Reaching",
+          "start": 10.86,
+          "end": 11.12,
+          "probability": 0.8845603764057159
+        },
+        {
+          "word": " goals",
+          "start": 11.12,
+          "end": 11.5,
+          "probability": 0.9905322790145874
+        },
+        {
+          "word": " gives",
+          "start": 11.5,
+          "end": 11.68,
+          "probability": 0.9950459003448486
+        },
+        {
+          "word": " me",
+          "start": 11.68,
+          "end": 11.86,
+          "probability": 0.9996566772460938
+        },
+        {
+          "word": " confidence.",
+          "start": 11.86,
+          "end": 12.34,
+          "probability": 0.9648724794387817
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 0,
+      "start": 13.22,
+      "end": 14.6,
+      "text": " Now I enjoy studying.",
+      "tokens": [
+        51036,
+        823,
+        286,
+        2103,
+        7601,
+        13,
+        51136
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1674722194671631,
+      "compression_ratio": 1.3506493506493507,
+      "no_speech_prob": 0.14245468378067017,
+      "words": [
+        {
+          "word": " Now",
+          "start": 13.22,
+          "end": 13.74,
+          "probability": 0.9938303828239441
+        },
+        {
+          "word": " I",
+          "start": 13.74,
+          "end": 13.92,
+          "probability": 0.9820634126663208
+        },
+        {
+          "word": " enjoy",
+          "start": 13.92,
+          "end": 14.16,
+          "probability": 0.998286783695221
+        },
+        {
+          "word": " studying.",
+          "start": 14.16,
+          "end": 14.6,
+          "probability": 0.9989091157913208
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

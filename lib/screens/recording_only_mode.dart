@@ -38,10 +38,9 @@ class _RecordingOnlyModeState extends ConsumerState<RecordingOnlyMode> {
   Future<void> _loadSubtitle() async {
     try {
       final filename = widget.material.scriptPath
-          .split('/')
-          .last
-          .replaceAll('.txt', '')
-          .replaceAll('.json', '');
+          .replaceFirst('assets/subtitles/', '') // パス先頭だけ削除
+          .replaceAll('.json', '')
+          .replaceAll('.txt', '');
 
       final data = await loadSubtitles(filename);
       if (!mounted) return;
@@ -168,7 +167,7 @@ class _RecordingOnlyModeState extends ConsumerState<RecordingOnlyMode> {
         child: Column(
           children: [
             Container(
-              height: 100,
+              height: 120,
               width: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(

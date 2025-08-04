@@ -64,10 +64,9 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
 
   Future<void> _loadSubtitle() async {
     final filename = widget.material.scriptPath
-        .split('/')
-        .last
-        .replaceAll('.txt', '')
-        .replaceAll('.json', '');
+        .replaceFirst('assets/subtitles/', '') // パス先頭だけ削除
+        .replaceAll('.json', '')
+        .replaceAll('.txt', '');
 
     final data = await loadSubtitles(filename);
     setState(() {
@@ -129,7 +128,7 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
       body: Column(
         children: [
           Container(
-            height: 100,
+            height: 120,
             width: double.infinity,
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -154,6 +153,8 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
                               filePath: sampleFilePath!,
                               height: 100,
                               progress: progress,
+                              sampleRate: 100, // 60 samples per second
+                              displaySeconds: 4, // 1 second of audio
                             ),
                           )
                         : const Center(child: CircularProgressIndicator()),

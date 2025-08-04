@@ -1,0 +1,5 @@
+Title: Simple Station Announcement
+WordCount: 30
+
+Script:
+The next train will arrive in three minutes. Please wait behind the yellow line. Thank you for using our station.

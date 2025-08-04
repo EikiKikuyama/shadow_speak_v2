@@ -1,0 +1,791 @@
+{
+  "text": " Every weekday, I wake up at 6.30 a.m. and start my morning routine. First, I take a quick shower to feel refreshed. Then, I prepare breakfast, usually toast and eggs, and enjoy a cup of coffee. After eating, I brush my teeth and get dressed for work. I check the news on my phone while waiting for the train. Sometimes, the train is delayed, so I leave home early to avoid being late. Mornings can be hectic, but having a routine helps me stay organized and ready for the day.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 4.06,
+      "text": " Every weekday, I wake up at 6.30 a.m. and start my morning routine.",
+      "tokens": [
+        50364,
+        2048,
+        1243,
+        810,
+        11,
+        286,
+        6634,
+        493,
+        412,
+        1386,
+        13,
+        3446,
+        257,
+        13,
+        76,
+        13,
+        293,
+        722,
+        452,
+        2446,
+        9927,
+        13,
+        50584
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.11856226163489797,
+      "compression_ratio": 1.5238095238095237,
+      "no_speech_prob": 0.07527884095907211,
+      "words": [
+        {
+          "word": " Every",
+          "start": 0.0,
+          "end": 0.38,
+          "probability": 0.33309975266456604
+        },
+        {
+          "word": " weekday,",
+          "start": 0.38,
+          "end": 0.9,
+          "probability": 0.973466694355011
+        },
+        {
+          "word": " I",
+          "start": 1.2,
+          "end": 1.26,
+          "probability": 0.9916471242904663
+        },
+        {
+          "word": " wake",
+          "start": 1.26,
+          "end": 1.42,
+          "probability": 0.9983861446380615
+        },
+        {
+          "word": " up",
+          "start": 1.42,
+          "end": 1.6,
+          "probability": 0.9986984729766846
+        },
+        {
+          "word": " at",
+          "start": 1.6,
+          "end": 1.72,
+          "probability": 0.9988815188407898
+        },
+        {
+          "word": " 6",
+          "start": 1.72,
+          "end": 1.9,
+          "probability": 0.9861674904823303
+        },
+        {
+          "word": ".30",
+          "start": 1.9,
+          "end": 2.32,
+          "probability": 0.9258359968662262
+        },
+        {
+          "word": " a",
+          "start": 2.32,
+          "end": 2.5,
+          "probability": 0.3604777157306671
+        },
+        {
+          "word": ".m.",
+          "start": 2.5,
+          "end": 2.7,
+          "probability": 0.9942322075366974
+        },
+        {
+          "word": " and",
+          "start": 2.86,
+          "end": 2.94,
+          "probability": 0.9716891646385193
+        },
+        {
+          "word": " start",
+          "start": 2.94,
+          "end": 3.16,
+          "probability": 0.9983140230178833
+        },
+        {
+          "word": " my",
+          "start": 3.16,
+          "end": 3.38,
+          "probability": 0.9942659735679626
+        },
+        {
+          "word": " morning",
+          "start": 3.38,
+          "end": 3.64,
+          "probability": 0.9951776266098022
+        },
+        {
+          "word": " routine.",
+          "start": 3.64,
+          "end": 4.06,
+          "probability": 0.9993404746055603
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 5.18,
+      "end": 7.74,
+      "text": " First, I take a quick shower to feel refreshed.",
+      "tokens": [
+        50620,
+        2386,
+        11,
+        286,
+        747,
+        257,
+        1702,
+        10128,
+        281,
+        841,
+        46330,
+        13,
+        50756
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.11856226163489797,
+      "compression_ratio": 1.5238095238095237,
+      "no_speech_prob": 0.07527884095907211,
+      "words": [
+        {
+          "word": " First,",
+          "start": 5.18,
+          "end": 5.48,
+          "probability": 0.9801503419876099
+        },
+        {
+          "word": " I",
+          "start": 5.84,
+          "end": 5.94,
+          "probability": 0.9978170394897461
+        },
+        {
+          "word": " take",
+          "start": 5.94,
+          "end": 6.1,
+          "probability": 0.99873286485672
+        },
+        {
+          "word": " a",
+          "start": 6.1,
+          "end": 6.26,
+          "probability": 0.9984034895896912
+        },
+        {
+          "word": " quick",
+          "start": 6.26,
+          "end": 6.42,
+          "probability": 0.9989609718322754
+        },
+        {
+          "word": " shower",
+          "start": 6.42,
+          "end": 6.78,
+          "probability": 0.9982256293296814
+        },
+        {
+          "word": " to",
+          "start": 6.78,
+          "end": 6.98,
+          "probability": 0.998387336730957
+        },
+        {
+          "word": " feel",
+          "start": 6.98,
+          "end": 7.18,
+          "probability": 0.9992419481277466
+        },
+        {
+          "word": " refreshed.",
+          "start": 7.18,
+          "end": 7.74,
+          "probability": 0.993037760257721
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 8.58,
+      "end": 13.56,
+      "text": " Then, I prepare breakfast, usually toast and eggs, and enjoy a cup of coffee.",
+      "tokens": [
+        50800,
+        1396,
+        11,
+        286,
+        5940,
+        8201,
+        11,
+        2673,
+        15354,
+        293,
+        6466,
+        11,
+        293,
+        2103,
+        257,
+        4414,
+        295,
+        4982,
+        13,
+        51048
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.11856226163489797,
+      "compression_ratio": 1.5238095238095237,
+      "no_speech_prob": 0.07527884095907211,
+      "words": [
+        {
+          "word": " Then,",
+          "start": 8.58,
+          "end": 9.06,
+          "probability": 0.9621854424476624
+        },
+        {
+          "word": " I",
+          "start": 9.32,
+          "end": 9.42,
+          "probability": 0.998847484588623
+        },
+        {
+          "word": " prepare",
+          "start": 9.42,
+          "end": 9.7,
+          "probability": 0.9932823181152344
+        },
+        {
+          "word": " breakfast,",
+          "start": 9.7,
+          "end": 10.18,
+          "probability": 0.9980886578559875
+        },
+        {
+          "word": " usually",
+          "start": 10.66,
+          "end": 10.96,
+          "probability": 0.9960671067237854
+        },
+        {
+          "word": " toast",
+          "start": 10.96,
+          "end": 11.28,
+          "probability": 0.9918465614318848
+        },
+        {
+          "word": " and",
+          "start": 11.28,
+          "end": 11.64,
+          "probability": 0.9329133033752441
+        },
+        {
+          "word": " eggs,",
+          "start": 11.64,
+          "end": 11.96,
+          "probability": 0.9861750602722168
+        },
+        {
+          "word": " and",
+          "start": 12.24,
+          "end": 12.46,
+          "probability": 0.9977908134460449
+        },
+        {
+          "word": " enjoy",
+          "start": 12.46,
+          "end": 12.74,
+          "probability": 0.9982839226722717
+        },
+        {
+          "word": " a",
+          "start": 12.74,
+          "end": 12.9,
+          "probability": 0.9987444877624512
+        },
+        {
+          "word": " cup",
+          "start": 12.9,
+          "end": 13.06,
+          "probability": 0.9994545578956604
+        },
+        {
+          "word": " of",
+          "start": 13.06,
+          "end": 13.24,
+          "probability": 0.9992978572845459
+        },
+        {
+          "word": " coffee.",
+          "start": 13.24,
+          "end": 13.56,
+          "probability": 0.998619794845581
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 14.58,
+      "end": 17.56,
+      "text": " After eating, I brush my teeth and get dressed for work.",
+      "tokens": [
+        51092,
+        2381,
+        3936,
+        11,
+        286,
+        5287,
+        452,
+        7798,
+        293,
+        483,
+        12386,
+        337,
+        589,
+        13,
+        51244
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.11856226163489797,
+      "compression_ratio": 1.5238095238095237,
+      "no_speech_prob": 0.07527884095907211,
+      "words": [
+        {
+          "word": " After",
+          "start": 14.58,
+          "end": 14.94,
+          "probability": 0.970382034778595
+        },
+        {
+          "word": " eating,",
+          "start": 14.94,
+          "end": 15.2,
+          "probability": 0.9962525367736816
+        },
+        {
+          "word": " I",
+          "start": 15.56,
+          "end": 15.66,
+          "probability": 0.9988595247268677
+        },
+        {
+          "word": " brush",
+          "start": 15.66,
+          "end": 15.88,
+          "probability": 0.9980515241622925
+        },
+        {
+          "word": " my",
+          "start": 15.88,
+          "end": 16.12,
+          "probability": 0.9992825388908386
+        },
+        {
+          "word": " teeth",
+          "start": 16.12,
+          "end": 16.34,
+          "probability": 0.99982088804245
+        },
+        {
+          "word": " and",
+          "start": 16.34,
+          "end": 16.66,
+          "probability": 0.9959654808044434
+        },
+        {
+          "word": " get",
+          "start": 16.66,
+          "end": 16.8,
+          "probability": 0.9996322393417358
+        },
+        {
+          "word": " dressed",
+          "start": 16.8,
+          "end": 17.02,
+          "probability": 0.9962005019187927
+        },
+        {
+          "word": " for",
+          "start": 17.02,
+          "end": 17.28,
+          "probability": 0.9996115565299988
+        },
+        {
+          "word": " work.",
+          "start": 17.28,
+          "end": 17.56,
+          "probability": 0.9995167255401611
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 0,
+      "start": 18.58,
+      "end": 20.94,
+      "text": " I check the news on my phone while waiting for the train.",
+      "tokens": [
+        51288,
+        286,
+        1520,
+        264,
+        2583,
+        322,
+        452,
+        2593,
+        1339,
+        3806,
+        337,
+        264,
+        3847,
+        13,
+        51416
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.11856226163489797,
+      "compression_ratio": 1.5238095238095237,
+      "no_speech_prob": 0.07527884095907211,
+      "words": [
+        {
+          "word": " I",
+          "start": 18.58,
+          "end": 18.74,
+          "probability": 0.9887131452560425
+        },
+        {
+          "word": " check",
+          "start": 18.74,
+          "end": 18.9,
+          "probability": 0.9971741437911987
+        },
+        {
+          "word": " the",
+          "start": 18.9,
+          "end": 19.12,
+          "probability": 0.9991839528083801
+        },
+        {
+          "word": " news",
+          "start": 19.12,
+          "end": 19.32,
+          "probability": 0.9903241395950317
+        },
+        {
+          "word": " on",
+          "start": 19.32,
+          "end": 19.44,
+          "probability": 0.9990092515945435
+        },
+        {
+          "word": " my",
+          "start": 19.44,
+          "end": 19.6,
+          "probability": 0.9993570446968079
+        },
+        {
+          "word": " phone",
+          "start": 19.6,
+          "end": 19.9,
+          "probability": 0.9997628331184387
+        },
+        {
+          "word": " while",
+          "start": 19.9,
+          "end": 20.1,
+          "probability": 0.9985264539718628
+        },
+        {
+          "word": " waiting",
+          "start": 20.1,
+          "end": 20.36,
+          "probability": 0.9980499744415283
+        },
+        {
+          "word": " for",
+          "start": 20.36,
+          "end": 20.54,
+          "probability": 0.9997393488883972
+        },
+        {
+          "word": " the",
+          "start": 20.54,
+          "end": 20.68,
+          "probability": 0.9986036419868469
+        },
+        {
+          "word": " train.",
+          "start": 20.68,
+          "end": 20.94,
+          "probability": 0.9989956021308899
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "seek": 0,
+      "start": 22.08,
+      "end": 26.02,
+      "text": " Sometimes, the train is delayed, so I leave home early to avoid being late.",
+      "tokens": [
+        51464,
+        4803,
+        11,
+        264,
+        3847,
+        307,
+        20268,
+        11,
+        370,
+        286,
+        1856,
+        1280,
+        2440,
+        281,
+        5042,
+        885,
+        3469,
+        13,
+        51668
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.11856226163489797,
+      "compression_ratio": 1.5238095238095237,
+      "no_speech_prob": 0.07527884095907211,
+      "words": [
+        {
+          "word": " Sometimes,",
+          "start": 22.08,
+          "end": 22.56,
+          "probability": 0.9855872392654419
+        },
+        {
+          "word": " the",
+          "start": 22.9,
+          "end": 22.98,
+          "probability": 0.9978744983673096
+        },
+        {
+          "word": " train",
+          "start": 22.98,
+          "end": 23.2,
+          "probability": 0.9980759620666504
+        },
+        {
+          "word": " is",
+          "start": 23.2,
+          "end": 23.38,
+          "probability": 0.999237060546875
+        },
+        {
+          "word": " delayed,",
+          "start": 23.38,
+          "end": 23.7,
+          "probability": 0.9992064833641052
+        },
+        {
+          "word": " so",
+          "start": 24.02,
+          "end": 24.18,
+          "probability": 0.9986108541488647
+        },
+        {
+          "word": " I",
+          "start": 24.18,
+          "end": 24.32,
+          "probability": 0.9981520771980286
+        },
+        {
+          "word": " leave",
+          "start": 24.32,
+          "end": 24.48,
+          "probability": 0.9982518553733826
+        },
+        {
+          "word": " home",
+          "start": 24.48,
+          "end": 24.72,
+          "probability": 0.9995402097702026
+        },
+        {
+          "word": " early",
+          "start": 24.72,
+          "end": 25.02,
+          "probability": 0.9995026588439941
+        },
+        {
+          "word": " to",
+          "start": 25.02,
+          "end": 25.22,
+          "probability": 0.9990649819374084
+        },
+        {
+          "word": " avoid",
+          "start": 25.22,
+          "end": 25.46,
+          "probability": 0.9995430707931519
+        },
+        {
+          "word": " being",
+          "start": 25.46,
+          "end": 25.74,
+          "probability": 0.9988862872123718
+        },
+        {
+          "word": " late.",
+          "start": 25.74,
+          "end": 26.02,
+          "probability": 0.9992796778678894
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "seek": 2602,
+      "start": 27.24,
+      "end": 32.0,
+      "text": " Mornings can be hectic, but having a routine helps me stay organized and ready for the day.",
+      "tokens": [
+        50372,
+        17967,
+        82,
+        393,
+        312,
+        415,
+        15518,
+        11,
+        457,
+        1419,
+        257,
+        9927,
+        3665,
+        385,
+        1754,
+        9983,
+        293,
+        1919,
+        337,
+        264,
+        786,
+        13,
+        50668
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2568966746330261,
+      "compression_ratio": 1.1097560975609757,
+      "no_speech_prob": 0.01807917095720768,
+      "words": [
+        {
+          "word": " Mornings",
+          "start": 27.24,
+          "end": 27.68,
+          "probability": 0.6505664438009262
+        },
+        {
+          "word": " can",
+          "start": 27.68,
+          "end": 27.78,
+          "probability": 0.9950724244117737
+        },
+        {
+          "word": " be",
+          "start": 27.78,
+          "end": 27.94,
+          "probability": 0.997637152671814
+        },
+        {
+          "word": " hectic,",
+          "start": 27.94,
+          "end": 28.28,
+          "probability": 0.9550769031047821
+        },
+        {
+          "word": " but",
+          "start": 28.66,
+          "end": 28.76,
+          "probability": 0.9958677291870117
+        },
+        {
+          "word": " having",
+          "start": 28.76,
+          "end": 29.04,
+          "probability": 0.9957793951034546
+        },
+        {
+          "word": " a",
+          "start": 29.04,
+          "end": 29.2,
+          "probability": 0.9978708028793335
+        },
+        {
+          "word": " routine",
+          "start": 29.2,
+          "end": 29.52,
+          "probability": 0.9976276755332947
+        },
+        {
+          "word": " helps",
+          "start": 29.52,
+          "end": 30.02,
+          "probability": 0.9980242252349854
+        },
+        {
+          "word": " me",
+          "start": 30.02,
+          "end": 30.2,
+          "probability": 0.9943261742591858
+        },
+        {
+          "word": " stay",
+          "start": 30.2,
+          "end": 30.42,
+          "probability": 0.9982948899269104
+        },
+        {
+          "word": " organized",
+          "start": 30.42,
+          "end": 30.92,
+          "probability": 0.9540523290634155
+        },
+        {
+          "word": " and",
+          "start": 30.92,
+          "end": 31.22,
+          "probability": 0.9968186616897583
+        },
+        {
+          "word": " ready",
+          "start": 31.22,
+          "end": 31.44,
+          "probability": 0.9981610178947449
+        },
+        {
+          "word": " for",
+          "start": 31.44,
+          "end": 31.64,
+          "probability": 0.9983460903167725
+        },
+        {
+          "word": " the",
+          "start": 31.64,
+          "end": 31.78,
+          "probability": 0.9981520771980286
+        },
+        {
+          "word": " day.",
+          "start": 31.78,
+          "end": 32.0,
+          "probability": 0.9977983832359314
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

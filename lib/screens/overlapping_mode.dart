@@ -82,10 +82,9 @@ class _OverlappingModeState extends ConsumerState<OverlappingMode> {
 
   Future<void> _loadSubtitle() async {
     final filename = widget.material.scriptPath
-        .split('/')
-        .last
-        .replaceAll('.txt', '')
-        .replaceAll('.json', '');
+        .replaceFirst('assets/subtitles/', '') // パス先頭だけ削除
+        .replaceAll('.json', '')
+        .replaceAll('.txt', '');
 
     final data = await loadSubtitles(filename);
     setState(() {
@@ -225,6 +224,16 @@ class _OverlappingModeState extends ConsumerState<OverlappingMode> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
+                  Container(
+                    height: 120,
+                    width: double.infinity,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/icon.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                   Container(
                     width: double.infinity,
                     height: 160,

@@ -1,0 +1,1200 @@
+{
+  "text": " Over the past few months, I've realized how important it is to maintain a healthy balance between work and personal life. When I first started my job, I used to work late every night, thinking it would help me succeed faster. But I soon found myself feeling tired, unmotivated, and disconnected from my friends and family. One day, I decided to make a change. I began setting boundaries, turning off my work phone after 7pm and dedicating time each weekend to hobbies I enjoy, like reading and hiking. Not only did my mood improve, but I also became more productive during working hours. I've learned that success isn't just about how many hours you put in at the office, it's also about how well you take care of yourself. In the end, striking that balance leads to a happier and more sustainable lifestyle, both professionally and personally.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 6.36,
+      "text": " Over the past few months, I've realized how important it is to maintain a healthy balance between work and personal life.",
+      "tokens": [
+        50364,
+        4886,
+        264,
+        1791,
+        1326,
+        2493,
+        11,
+        286,
+        600,
+        5334,
+        577,
+        1021,
+        309,
+        307,
+        281,
+        6909,
+        257,
+        4627,
+        4772,
+        1296,
+        589,
+        293,
+        2973,
+        993,
+        13,
+        50714
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1098268682306463,
+      "compression_ratio": 1.4896265560165975,
+      "no_speech_prob": 0.03742528334259987,
+      "words": [
+        {
+          "word": " Over",
+          "start": 0.0,
+          "end": 0.36,
+          "probability": 0.7882734537124634
+        },
+        {
+          "word": " the",
+          "start": 0.36,
+          "end": 0.48,
+          "probability": 0.9994009733200073
+        },
+        {
+          "word": " past",
+          "start": 0.48,
+          "end": 0.72,
+          "probability": 0.9951763153076172
+        },
+        {
+          "word": " few",
+          "start": 0.72,
+          "end": 1.02,
+          "probability": 0.9991391897201538
+        },
+        {
+          "word": " months,",
+          "start": 1.02,
+          "end": 1.36,
+          "probability": 0.9986666440963745
+        },
+        {
+          "word": " I've",
+          "start": 1.72,
+          "end": 1.9,
+          "probability": 0.9858037829399109
+        },
+        {
+          "word": " realized",
+          "start": 1.9,
+          "end": 2.18,
+          "probability": 0.8843954205513
+        },
+        {
+          "word": " how",
+          "start": 2.18,
+          "end": 2.48,
+          "probability": 0.997929573059082
+        },
+        {
+          "word": " important",
+          "start": 2.48,
+          "end": 2.9,
+          "probability": 0.998306155204773
+        },
+        {
+          "word": " it",
+          "start": 2.9,
+          "end": 3.08,
+          "probability": 0.9981983304023743
+        },
+        {
+          "word": " is",
+          "start": 3.08,
+          "end": 3.26,
+          "probability": 0.9978349804878235
+        },
+        {
+          "word": " to",
+          "start": 3.26,
+          "end": 3.38,
+          "probability": 0.9987733960151672
+        },
+        {
+          "word": " maintain",
+          "start": 3.38,
+          "end": 3.7,
+          "probability": 0.9991644620895386
+        },
+        {
+          "word": " a",
+          "start": 3.7,
+          "end": 3.92,
+          "probability": 0.9996651411056519
+        },
+        {
+          "word": " healthy",
+          "start": 3.92,
+          "end": 4.16,
+          "probability": 0.994164764881134
+        },
+        {
+          "word": " balance",
+          "start": 4.16,
+          "end": 4.54,
+          "probability": 0.9996644258499146
+        },
+        {
+          "word": " between",
+          "start": 4.54,
+          "end": 4.96,
+          "probability": 0.9989355206489563
+        },
+        {
+          "word": " work",
+          "start": 4.96,
+          "end": 5.3,
+          "probability": 0.9968730807304382
+        },
+        {
+          "word": " and",
+          "start": 5.3,
+          "end": 5.44,
+          "probability": 0.9967515468597412
+        },
+        {
+          "word": " personal",
+          "start": 5.44,
+          "end": 5.84,
+          "probability": 0.9990229606628418
+        },
+        {
+          "word": " life.",
+          "start": 5.84,
+          "end": 6.36,
+          "probability": 0.9994472861289978
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 6.9,
+      "end": 12.6,
+      "text": " When I first started my job, I used to work late every night, thinking it would help me succeed faster.",
+      "tokens": [
+        50714,
+        1133,
+        286,
+        700,
+        1409,
+        452,
+        1691,
+        11,
+        286,
+        1143,
+        281,
+        589,
+        3469,
+        633,
+        1818,
+        11,
+        1953,
+        309,
+        576,
+        854,
+        385,
+        7754,
+        4663,
+        13,
+        51039
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1098268682306463,
+      "compression_ratio": 1.4896265560165975,
+      "no_speech_prob": 0.03742528334259987,
+      "words": [
+        {
+          "word": " When",
+          "start": 6.9,
+          "end": 7.46,
+          "probability": 0.9867607355117798
+        },
+        {
+          "word": " I",
+          "start": 7.46,
+          "end": 7.58,
+          "probability": 0.9907267093658447
+        },
+        {
+          "word": " first",
+          "start": 7.58,
+          "end": 7.8,
+          "probability": 0.9987242817878723
+        },
+        {
+          "word": " started",
+          "start": 7.8,
+          "end": 8.22,
+          "probability": 0.9980341792106628
+        },
+        {
+          "word": " my",
+          "start": 8.22,
+          "end": 8.4,
+          "probability": 0.9989945292472839
+        },
+        {
+          "word": " job,",
+          "start": 8.4,
+          "end": 8.68,
+          "probability": 0.9993504881858826
+        },
+        {
+          "word": " I",
+          "start": 9.0,
+          "end": 9.08,
+          "probability": 0.9980954527854919
+        },
+        {
+          "word": " used",
+          "start": 9.08,
+          "end": 9.3,
+          "probability": 0.9972589015960693
+        },
+        {
+          "word": " to",
+          "start": 9.3,
+          "end": 9.42,
+          "probability": 0.9995377063751221
+        },
+        {
+          "word": " work",
+          "start": 9.42,
+          "end": 9.58,
+          "probability": 0.9926350712776184
+        },
+        {
+          "word": " late",
+          "start": 9.58,
+          "end": 9.82,
+          "probability": 0.9996732473373413
+        },
+        {
+          "word": " every",
+          "start": 9.82,
+          "end": 10.12,
+          "probability": 0.9956081509590149
+        },
+        {
+          "word": " night,",
+          "start": 10.12,
+          "end": 10.42,
+          "probability": 0.9981613755226135
+        },
+        {
+          "word": " thinking",
+          "start": 10.78,
+          "end": 10.98,
+          "probability": 0.9976348876953125
+        },
+        {
+          "word": " it",
+          "start": 10.98,
+          "end": 11.2,
+          "probability": 0.9969050288200378
+        },
+        {
+          "word": " would",
+          "start": 11.2,
+          "end": 11.3,
+          "probability": 0.9991945624351501
+        },
+        {
+          "word": " help",
+          "start": 11.3,
+          "end": 11.48,
+          "probability": 0.9966211318969727
+        },
+        {
+          "word": " me",
+          "start": 11.48,
+          "end": 11.66,
+          "probability": 0.9981794357299805
+        },
+        {
+          "word": " succeed",
+          "start": 11.66,
+          "end": 12.02,
+          "probability": 0.9987680315971375
+        },
+        {
+          "word": " faster.",
+          "start": 12.02,
+          "end": 12.6,
+          "probability": 0.997799813747406
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 13.38,
+      "end": 18.74,
+      "text": " But I soon found myself feeling tired, unmotivated, and disconnected from my friends and family.",
+      "tokens": [
+        51039,
+        583,
+        286,
+        2321,
+        1352,
+        2059,
+        2633,
+        5868,
+        11,
+        19334,
+        310,
+        592,
+        770,
+        11,
+        293,
+        29426,
+        490,
+        452,
+        1855,
+        293,
+        1605,
+        13,
+        51339
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1098268682306463,
+      "compression_ratio": 1.4896265560165975,
+      "no_speech_prob": 0.03742528334259987,
+      "words": [
+        {
+          "word": " But",
+          "start": 13.38,
+          "end": 13.8,
+          "probability": 0.9874541759490967
+        },
+        {
+          "word": " I",
+          "start": 13.8,
+          "end": 13.92,
+          "probability": 0.9971854090690613
+        },
+        {
+          "word": " soon",
+          "start": 13.92,
+          "end": 14.12,
+          "probability": 0.9997288584709167
+        },
+        {
+          "word": " found",
+          "start": 14.12,
+          "end": 14.34,
+          "probability": 0.9988732933998108
+        },
+        {
+          "word": " myself",
+          "start": 14.34,
+          "end": 14.72,
+          "probability": 0.9354947805404663
+        },
+        {
+          "word": " feeling",
+          "start": 14.72,
+          "end": 15.12,
+          "probability": 0.9988377690315247
+        },
+        {
+          "word": " tired,",
+          "start": 15.12,
+          "end": 15.56,
+          "probability": 0.9976044297218323
+        },
+        {
+          "word": " unmotivated,",
+          "start": 15.82,
+          "end": 16.46,
+          "probability": 0.9821679890155792
+        },
+        {
+          "word": " and",
+          "start": 16.68,
+          "end": 16.86,
+          "probability": 0.9986364245414734
+        },
+        {
+          "word": " disconnected",
+          "start": 16.86,
+          "end": 17.32,
+          "probability": 0.9952729344367981
+        },
+        {
+          "word": " from",
+          "start": 17.32,
+          "end": 17.66,
+          "probability": 0.9989097118377686
+        },
+        {
+          "word": " my",
+          "start": 17.66,
+          "end": 17.82,
+          "probability": 0.9995434880256653
+        },
+        {
+          "word": " friends",
+          "start": 17.82,
+          "end": 18.14,
+          "probability": 0.9886854887008667
+        },
+        {
+          "word": " and",
+          "start": 18.14,
+          "end": 18.34,
+          "probability": 0.9950006604194641
+        },
+        {
+          "word": " family.",
+          "start": 18.34,
+          "end": 18.74,
+          "probability": 0.9991700649261475
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 19.66,
+      "end": 22.04,
+      "text": " One day, I decided to make a change.",
+      "tokens": [
+        51339,
+        1485,
+        786,
+        11,
+        286,
+        3047,
+        281,
+        652,
+        257,
+        1319,
+        13,
+        51504
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1098268682306463,
+      "compression_ratio": 1.4896265560165975,
+      "no_speech_prob": 0.03742528334259987,
+      "words": [
+        {
+          "word": " One",
+          "start": 19.66,
+          "end": 20.04,
+          "probability": 0.9772082567214966
+        },
+        {
+          "word": " day,",
+          "start": 20.04,
+          "end": 20.32,
+          "probability": 0.9981270432472229
+        },
+        {
+          "word": " I",
+          "start": 20.6,
+          "end": 20.66,
+          "probability": 0.9988732933998108
+        },
+        {
+          "word": " decided",
+          "start": 20.66,
+          "end": 20.98,
+          "probability": 0.9988940358161926
+        },
+        {
+          "word": " to",
+          "start": 20.98,
+          "end": 21.22,
+          "probability": 0.9997701048851013
+        },
+        {
+          "word": " make",
+          "start": 21.22,
+          "end": 21.38,
+          "probability": 0.9989309906959534
+        },
+        {
+          "word": " a",
+          "start": 21.38,
+          "end": 21.5,
+          "probability": 0.9993316531181335
+        },
+        {
+          "word": " change.",
+          "start": 21.5,
+          "end": 22.04,
+          "probability": 0.9983470439910889
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 2204,
+      "start": 22.62,
+      "end": 31.22,
+      "text": " I began setting boundaries, turning off my work phone after 7pm and dedicating time each weekend to hobbies I enjoy, like reading and hiking.",
+      "tokens": [
+        50414,
+        286,
+        4283,
+        3287,
+        13180,
+        11,
+        6246,
+        766,
+        452,
+        589,
+        2593,
+        934,
+        1614,
+        14395,
+        293,
+        4172,
+        30541,
+        565,
+        1184,
+        6711,
+        281,
+        35750,
+        286,
+        2103,
+        11,
+        411,
+        3760,
+        293,
+        23784,
+        13,
+        50864
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.03622592196745031,
+      "compression_ratio": 1.5446808510638297,
+      "no_speech_prob": 0.16568873822689056,
+      "words": [
+        {
+          "word": " I",
+          "start": 22.62,
+          "end": 23.16,
+          "probability": 0.8281723856925964
+        },
+        {
+          "word": " began",
+          "start": 23.16,
+          "end": 23.44,
+          "probability": 0.9890479445457458
+        },
+        {
+          "word": " setting",
+          "start": 23.44,
+          "end": 23.84,
+          "probability": 0.992251455783844
+        },
+        {
+          "word": " boundaries,",
+          "start": 23.84,
+          "end": 24.32,
+          "probability": 0.9800513982772827
+        },
+        {
+          "word": " turning",
+          "start": 24.82,
+          "end": 25.02,
+          "probability": 0.9979735016822815
+        },
+        {
+          "word": " off",
+          "start": 25.02,
+          "end": 25.24,
+          "probability": 0.9975520968437195
+        },
+        {
+          "word": " my",
+          "start": 25.24,
+          "end": 25.42,
+          "probability": 0.9990571141242981
+        },
+        {
+          "word": " work",
+          "start": 25.42,
+          "end": 25.7,
+          "probability": 0.9038255214691162
+        },
+        {
+          "word": " phone",
+          "start": 25.7,
+          "end": 25.96,
+          "probability": 0.955725908279419
+        },
+        {
+          "word": " after",
+          "start": 25.96,
+          "end": 26.36,
+          "probability": 0.9966498017311096
+        },
+        {
+          "word": " 7pm",
+          "start": 26.36,
+          "end": 27.1,
+          "probability": 0.7604262828826904
+        },
+        {
+          "word": " and",
+          "start": 27.1,
+          "end": 27.36,
+          "probability": 0.994475781917572
+        },
+        {
+          "word": " dedicating",
+          "start": 27.36,
+          "end": 27.76,
+          "probability": 0.985753744840622
+        },
+        {
+          "word": " time",
+          "start": 27.76,
+          "end": 28.16,
+          "probability": 0.995747983455658
+        },
+        {
+          "word": " each",
+          "start": 28.16,
+          "end": 28.46,
+          "probability": 0.9968256950378418
+        },
+        {
+          "word": " weekend",
+          "start": 28.46,
+          "end": 28.82,
+          "probability": 0.9954161643981934
+        },
+        {
+          "word": " to",
+          "start": 28.82,
+          "end": 29.04,
+          "probability": 0.9975389242172241
+        },
+        {
+          "word": " hobbies",
+          "start": 29.04,
+          "end": 29.26,
+          "probability": 0.9288297295570374
+        },
+        {
+          "word": " I",
+          "start": 29.26,
+          "end": 29.5,
+          "probability": 0.9899283051490784
+        },
+        {
+          "word": " enjoy,",
+          "start": 29.5,
+          "end": 29.84,
+          "probability": 0.9929215312004089
+        },
+        {
+          "word": " like",
+          "start": 30.18,
+          "end": 30.36,
+          "probability": 0.996100902557373
+        },
+        {
+          "word": " reading",
+          "start": 30.36,
+          "end": 30.6,
+          "probability": 0.9929077625274658
+        },
+        {
+          "word": " and",
+          "start": 30.6,
+          "end": 30.92,
+          "probability": 0.9955808520317078
+        },
+        {
+          "word": " hiking.",
+          "start": 30.92,
+          "end": 31.22,
+          "probability": 0.993614137172699
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "seek": 2204,
+      "start": 32.08,
+      "end": 36.58,
+      "text": " Not only did my mood improve, but I also became more productive during working hours.",
+      "tokens": [
+        50864,
+        1726,
+        787,
+        630,
+        452,
+        9268,
+        3470,
+        11,
+        457,
+        286,
+        611,
+        3062,
+        544,
+        13304,
+        1830,
+        1364,
+        2496,
+        13,
+        51139
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.03622592196745031,
+      "compression_ratio": 1.5446808510638297,
+      "no_speech_prob": 0.16568873822689056,
+      "words": [
+        {
+          "word": " Not",
+          "start": 32.08,
+          "end": 32.54,
+          "probability": 0.9729008674621582
+        },
+        {
+          "word": " only",
+          "start": 32.54,
+          "end": 32.8,
+          "probability": 0.9988755583763123
+        },
+        {
+          "word": " did",
+          "start": 32.8,
+          "end": 32.98,
+          "probability": 0.9992577433586121
+        },
+        {
+          "word": " my",
+          "start": 32.98,
+          "end": 33.16,
+          "probability": 0.9970320463180542
+        },
+        {
+          "word": " mood",
+          "start": 33.16,
+          "end": 33.36,
+          "probability": 0.9701712727546692
+        },
+        {
+          "word": " improve,",
+          "start": 33.36,
+          "end": 33.78,
+          "probability": 0.988835871219635
+        },
+        {
+          "word": " but",
+          "start": 34.1,
+          "end": 34.16,
+          "probability": 0.9955530762672424
+        },
+        {
+          "word": " I",
+          "start": 34.16,
+          "end": 34.28,
+          "probability": 0.9974969029426575
+        },
+        {
+          "word": " also",
+          "start": 34.28,
+          "end": 34.56,
+          "probability": 0.9994102716445923
+        },
+        {
+          "word": " became",
+          "start": 34.56,
+          "end": 34.88,
+          "probability": 0.9986885190010071
+        },
+        {
+          "word": " more",
+          "start": 34.88,
+          "end": 35.12,
+          "probability": 0.9988835453987122
+        },
+        {
+          "word": " productive",
+          "start": 35.12,
+          "end": 35.5,
+          "probability": 0.9994550347328186
+        },
+        {
+          "word": " during",
+          "start": 35.5,
+          "end": 35.88,
+          "probability": 0.9983589053153992
+        },
+        {
+          "word": " working",
+          "start": 35.88,
+          "end": 36.22,
+          "probability": 0.9918355941772461
+        },
+        {
+          "word": " hours.",
+          "start": 36.22,
+          "end": 36.58,
+          "probability": 0.998915433883667
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "seek": 2204,
+      "start": 37.58,
+      "end": 43.96,
+      "text": " I've learned that success isn't just about how many hours you put in at the office, it's also about how well you take care of yourself.",
+      "tokens": [
+        51139,
+        286,
+        600,
+        3264,
+        300,
+        2245,
+        1943,
+        380,
+        445,
+        466,
+        577,
+        867,
+        2496,
+        291,
+        829,
+        294,
+        412,
+        264,
+        3398,
+        11,
+        309,
+        311,
+        611,
+        466,
+        577,
+        731,
+        291,
+        747,
+        1127,
+        295,
+        1803,
+        13,
+        51514
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.03622592196745031,
+      "compression_ratio": 1.5446808510638297,
+      "no_speech_prob": 0.16568873822689056,
+      "words": [
+        {
+          "word": " I've",
+          "start": 37.58,
+          "end": 37.96,
+          "probability": 0.9814412593841553
+        },
+        {
+          "word": " learned",
+          "start": 37.96,
+          "end": 38.12,
+          "probability": 0.9917833805084229
+        },
+        {
+          "word": " that",
+          "start": 38.12,
+          "end": 38.3,
+          "probability": 0.999047577381134
+        },
+        {
+          "word": " success",
+          "start": 38.3,
+          "end": 38.7,
+          "probability": 0.9969801306724548
+        },
+        {
+          "word": " isn't",
+          "start": 38.7,
+          "end": 39.1,
+          "probability": 0.9992727339267731
+        },
+        {
+          "word": " just",
+          "start": 39.1,
+          "end": 39.26,
+          "probability": 0.9994643330574036
+        },
+        {
+          "word": " about",
+          "start": 39.26,
+          "end": 39.54,
+          "probability": 0.9995638728141785
+        },
+        {
+          "word": " how",
+          "start": 39.54,
+          "end": 39.76,
+          "probability": 0.9968875050544739
+        },
+        {
+          "word": " many",
+          "start": 39.76,
+          "end": 39.92,
+          "probability": 0.9987990856170654
+        },
+        {
+          "word": " hours",
+          "start": 39.92,
+          "end": 40.24,
+          "probability": 0.9996219873428345
+        },
+        {
+          "word": " you",
+          "start": 40.24,
+          "end": 40.46,
+          "probability": 0.9986763596534729
+        },
+        {
+          "word": " put",
+          "start": 40.46,
+          "end": 40.64,
+          "probability": 0.9909953474998474
+        },
+        {
+          "word": " in",
+          "start": 40.64,
+          "end": 40.78,
+          "probability": 0.9963125586509705
+        },
+        {
+          "word": " at",
+          "start": 40.78,
+          "end": 40.9,
+          "probability": 0.9953407049179077
+        },
+        {
+          "word": " the",
+          "start": 40.9,
+          "end": 41.02,
+          "probability": 0.9974091649055481
+        },
+        {
+          "word": " office,",
+          "start": 41.02,
+          "end": 41.34,
+          "probability": 0.9960915446281433
+        },
+        {
+          "word": " it's",
+          "start": 41.78,
+          "end": 42.0,
+          "probability": 0.9912064969539642
+        },
+        {
+          "word": " also",
+          "start": 42.0,
+          "end": 42.24,
+          "probability": 0.9974740147590637
+        },
+        {
+          "word": " about",
+          "start": 42.24,
+          "end": 42.46,
+          "probability": 0.9997908473014832
+        },
+        {
+          "word": " how",
+          "start": 42.46,
+          "end": 42.68,
+          "probability": 0.9965972304344177
+        },
+        {
+          "word": " well",
+          "start": 42.68,
+          "end": 42.86,
+          "probability": 0.9832859635353088
+        },
+        {
+          "word": " you",
+          "start": 42.86,
+          "end": 43.0,
+          "probability": 0.9981143474578857
+        },
+        {
+          "word": " take",
+          "start": 43.0,
+          "end": 43.18,
+          "probability": 0.9987836480140686
+        },
+        {
+          "word": " care",
+          "start": 43.18,
+          "end": 43.44,
+          "probability": 0.9997021555900574
+        },
+        {
+          "word": " of",
+          "start": 43.44,
+          "end": 43.6,
+          "probability": 0.9997580647468567
+        },
+        {
+          "word": " yourself.",
+          "start": 43.6,
+          "end": 43.96,
+          "probability": 0.9982688426971436
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "seek": 4396,
+      "start": 44.64,
+      "end": 51.28,
+      "text": " In the end, striking that balance leads to a happier and more sustainable lifestyle, both professionally and personally.",
+      "tokens": [
+        50414,
+        682,
+        264,
+        917,
+        11,
+        18559,
+        300,
+        4772,
+        6689,
+        281,
+        257,
+        20423,
+        293,
+        544,
+        11235,
+        11716,
+        11,
+        1293,
+        27941,
+        293,
+        5665,
+        13,
+        50764
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.06320389111836751,
+      "compression_ratio": 1.2371134020618557,
+      "no_speech_prob": 0.4565063416957855,
+      "words": [
+        {
+          "word": " In",
+          "start": 44.64,
+          "end": 45.24,
+          "probability": 0.7443657517433167
+        },
+        {
+          "word": " the",
+          "start": 45.24,
+          "end": 45.4,
+          "probability": 0.9969407320022583
+        },
+        {
+          "word": " end,",
+          "start": 45.4,
+          "end": 45.74,
+          "probability": 0.9961997866630554
+        },
+        {
+          "word": " striking",
+          "start": 45.96,
+          "end": 46.26,
+          "probability": 0.9927552342414856
+        },
+        {
+          "word": " that",
+          "start": 46.26,
+          "end": 46.48,
+          "probability": 0.9988240599632263
+        },
+        {
+          "word": " balance",
+          "start": 46.48,
+          "end": 46.78,
+          "probability": 0.9960313439369202
+        },
+        {
+          "word": " leads",
+          "start": 46.78,
+          "end": 47.06,
+          "probability": 0.9937862157821655
+        },
+        {
+          "word": " to",
+          "start": 47.06,
+          "end": 47.3,
+          "probability": 0.9995889067649841
+        },
+        {
+          "word": " a",
+          "start": 47.3,
+          "end": 47.4,
+          "probability": 0.9980903267860413
+        },
+        {
+          "word": " happier",
+          "start": 47.4,
+          "end": 47.74,
+          "probability": 0.9963299632072449
+        },
+        {
+          "word": " and",
+          "start": 47.74,
+          "end": 48.0,
+          "probability": 0.9949030876159668
+        },
+        {
+          "word": " more",
+          "start": 48.0,
+          "end": 48.18,
+          "probability": 0.9992414712905884
+        },
+        {
+          "word": " sustainable",
+          "start": 48.18,
+          "end": 48.7,
+          "probability": 0.9886089563369751
+        },
+        {
+          "word": " lifestyle,",
+          "start": 48.7,
+          "end": 49.32,
+          "probability": 0.9722070693969727
+        },
+        {
+          "word": " both",
+          "start": 49.74,
+          "end": 49.9,
+          "probability": 0.9975550770759583
+        },
+        {
+          "word": " professionally",
+          "start": 49.9,
+          "end": 50.46,
+          "probability": 0.9983863830566406
+        },
+        {
+          "word": " and",
+          "start": 50.46,
+          "end": 50.78,
+          "probability": 0.9975305199623108
+        },
+        {
+          "word": " personally.",
+          "start": 50.78,
+          "end": 51.28,
+          "probability": 0.9944129586219788
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

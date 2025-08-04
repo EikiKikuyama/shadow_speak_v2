@@ -1,0 +1,5 @@
+Title: Train Maintenance Announcement
+WordCount: 122
+
+Script:
+Good morning, passengers. We would like to inform you that train number 102 bound for Riverside is currently undergoing maintenance. As a result, it will depart approximately 10 minutes later than scheduled. We understand that delays may affect your plans and sincerely apologize for the inconvenience. Please check the digital displays or ask station staff for updated information. Thank you for your understanding and for choosing our service today.

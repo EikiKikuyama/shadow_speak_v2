@@ -1,0 +1,436 @@
+{
+  "text": " Every morning, I do a short stretch. I raise my arms, touch my toes, and turn my neck slowly. It takes only 5 minutes. This helps me feel awake and ready for the day. I started this routine last month, and now I feel more active and happy.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 2.2,
+      "text": " Every morning, I do a short stretch.",
+      "tokens": [
+        50364,
+        2048,
+        2446,
+        11,
+        286,
+        360,
+        257,
+        2099,
+        5985,
+        13,
+        50514
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.14056611061096191,
+      "compression_ratio": 1.4311377245508983,
+      "no_speech_prob": 0.03571956232190132,
+      "words": [
+        {
+          "word": " Every",
+          "start": 0.0,
+          "end": 0.42,
+          "probability": 0.7671990394592285
+        },
+        {
+          "word": " morning,",
+          "start": 0.42,
+          "end": 0.76,
+          "probability": 0.9969218373298645
+        },
+        {
+          "word": " I",
+          "start": 1.1,
+          "end": 1.18,
+          "probability": 0.9919273853302002
+        },
+        {
+          "word": " do",
+          "start": 1.18,
+          "end": 1.32,
+          "probability": 0.9987217783927917
+        },
+        {
+          "word": " a",
+          "start": 1.32,
+          "end": 1.42,
+          "probability": 0.9991710186004639
+        },
+        {
+          "word": " short",
+          "start": 1.42,
+          "end": 1.6,
+          "probability": 0.9978679418563843
+        },
+        {
+          "word": " stretch.",
+          "start": 1.6,
+          "end": 2.2,
+          "probability": 0.9989926218986511
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 2.8000000000000003,
+      "end": 6.5,
+      "text": " I raise my arms, touch my toes, and turn my neck slowly.",
+      "tokens": [
+        50514,
+        286,
+        5300,
+        452,
+        5812,
+        11,
+        2557,
+        452,
+        14681,
+        11,
+        293,
+        1261,
+        452,
+        6189,
+        5692,
+        13,
+        50739
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.14056611061096191,
+      "compression_ratio": 1.4311377245508983,
+      "no_speech_prob": 0.03571956232190132,
+      "words": [
+        {
+          "word": " I",
+          "start": 2.8000000000000003,
+          "end": 3.32,
+          "probability": 0.9940105080604553
+        },
+        {
+          "word": " raise",
+          "start": 3.32,
+          "end": 3.52,
+          "probability": 0.9884583353996277
+        },
+        {
+          "word": " my",
+          "start": 3.52,
+          "end": 3.74,
+          "probability": 0.9995699524879456
+        },
+        {
+          "word": " arms,",
+          "start": 3.74,
+          "end": 4.1,
+          "probability": 0.998054027557373
+        },
+        {
+          "word": " touch",
+          "start": 4.38,
+          "end": 4.54,
+          "probability": 0.9971398115158081
+        },
+        {
+          "word": " my",
+          "start": 4.54,
+          "end": 4.74,
+          "probability": 0.9992886781692505
+        },
+        {
+          "word": " toes,",
+          "start": 4.74,
+          "end": 5.08,
+          "probability": 0.9989696741104126
+        },
+        {
+          "word": " and",
+          "start": 5.38,
+          "end": 5.58,
+          "probability": 0.9960253238677979
+        },
+        {
+          "word": " turn",
+          "start": 5.58,
+          "end": 5.74,
+          "probability": 0.9860607385635376
+        },
+        {
+          "word": " my",
+          "start": 5.74,
+          "end": 5.94,
+          "probability": 0.9979304075241089
+        },
+        {
+          "word": " neck",
+          "start": 5.94,
+          "end": 6.12,
+          "probability": 0.7635780572891235
+        },
+        {
+          "word": " slowly.",
+          "start": 6.12,
+          "end": 6.5,
+          "probability": 0.9615187644958496
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 7.4,
+      "end": 8.9,
+      "text": " It takes only 5 minutes.",
+      "tokens": [
+        50739,
+        467,
+        2516,
+        787,
+        1025,
+        2077,
+        13,
+        50864
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.14056611061096191,
+      "compression_ratio": 1.4311377245508983,
+      "no_speech_prob": 0.03571956232190132,
+      "words": [
+        {
+          "word": " It",
+          "start": 7.4,
+          "end": 7.8,
+          "probability": 0.9903488159179688
+        },
+        {
+          "word": " takes",
+          "start": 7.8,
+          "end": 7.96,
+          "probability": 0.9973918199539185
+        },
+        {
+          "word": " only",
+          "start": 7.96,
+          "end": 8.3,
+          "probability": 0.9968156218528748
+        },
+        {
+          "word": " 5",
+          "start": 8.3,
+          "end": 8.64,
+          "probability": 0.5373048186302185
+        },
+        {
+          "word": " minutes.",
+          "start": 8.64,
+          "end": 8.9,
+          "probability": 0.9883468747138977
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 9.86,
+      "end": 12.16,
+      "text": " This helps me feel awake and ready for the day.",
+      "tokens": [
+        50864,
+        639,
+        3665,
+        385,
+        841,
+        15994,
+        293,
+        1919,
+        337,
+        264,
+        786,
+        13,
+        51014
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.14056611061096191,
+      "compression_ratio": 1.4311377245508983,
+      "no_speech_prob": 0.03571956232190132,
+      "words": [
+        {
+          "word": " This",
+          "start": 9.86,
+          "end": 10.26,
+          "probability": 0.9894405007362366
+        },
+        {
+          "word": " helps",
+          "start": 10.26,
+          "end": 10.48,
+          "probability": 0.9987443685531616
+        },
+        {
+          "word": " me",
+          "start": 10.48,
+          "end": 10.66,
+          "probability": 0.9979236125946045
+        },
+        {
+          "word": " feel",
+          "start": 10.66,
+          "end": 10.9,
+          "probability": 0.9961334466934204
+        },
+        {
+          "word": " awake",
+          "start": 10.9,
+          "end": 11.16,
+          "probability": 0.9944767355918884
+        },
+        {
+          "word": " and",
+          "start": 11.16,
+          "end": 11.4,
+          "probability": 0.9974440336227417
+        },
+        {
+          "word": " ready",
+          "start": 11.4,
+          "end": 11.58,
+          "probability": 0.9987395405769348
+        },
+        {
+          "word": " for",
+          "start": 11.58,
+          "end": 11.8,
+          "probability": 0.9989207983016968
+        },
+        {
+          "word": " the",
+          "start": 11.8,
+          "end": 11.94,
+          "probability": 0.9987882971763611
+        },
+        {
+          "word": " day.",
+          "start": 11.94,
+          "end": 12.16,
+          "probability": 0.9994282126426697
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 0,
+      "start": 13.08,
+      "end": 17.04,
+      "text": " I started this routine last month, and now I feel more active and happy.",
+      "tokens": [
+        51014,
+        286,
+        1409,
+        341,
+        9927,
+        1036,
+        1618,
+        11,
+        293,
+        586,
+        286,
+        841,
+        544,
+        4967,
+        293,
+        2055,
+        13,
+        51264
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.14056611061096191,
+      "compression_ratio": 1.4311377245508983,
+      "no_speech_prob": 0.03571956232190132,
+      "words": [
+        {
+          "word": " I",
+          "start": 13.08,
+          "end": 13.36,
+          "probability": 0.9973785877227783
+        },
+        {
+          "word": " started",
+          "start": 13.36,
+          "end": 13.64,
+          "probability": 0.9962100982666016
+        },
+        {
+          "word": " this",
+          "start": 13.64,
+          "end": 13.86,
+          "probability": 0.9982682466506958
+        },
+        {
+          "word": " routine",
+          "start": 13.86,
+          "end": 14.2,
+          "probability": 0.9991527795791626
+        },
+        {
+          "word": " last",
+          "start": 14.2,
+          "end": 14.5,
+          "probability": 0.9948256015777588
+        },
+        {
+          "word": " month,",
+          "start": 14.5,
+          "end": 14.88,
+          "probability": 0.9971413016319275
+        },
+        {
+          "word": " and",
+          "start": 15.28,
+          "end": 15.42,
+          "probability": 0.9927815794944763
+        },
+        {
+          "word": " now",
+          "start": 15.42,
+          "end": 15.58,
+          "probability": 0.9969766139984131
+        },
+        {
+          "word": " I",
+          "start": 15.58,
+          "end": 15.72,
+          "probability": 0.9945149421691895
+        },
+        {
+          "word": " feel",
+          "start": 15.72,
+          "end": 15.9,
+          "probability": 0.9987922310829163
+        },
+        {
+          "word": " more",
+          "start": 15.9,
+          "end": 16.14,
+          "probability": 0.9985378980636597
+        },
+        {
+          "word": " active",
+          "start": 16.14,
+          "end": 16.5,
+          "probability": 0.997835099697113
+        },
+        {
+          "word": " and",
+          "start": 16.5,
+          "end": 16.7,
+          "probability": 0.9980508089065552
+        },
+        {
+          "word": " happy.",
+          "start": 16.7,
+          "end": 17.04,
+          "probability": 0.9984524250030518
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

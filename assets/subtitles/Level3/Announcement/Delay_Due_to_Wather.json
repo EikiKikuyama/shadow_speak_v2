@@ -1,0 +1,403 @@
+{
+  "text": " Ladies and gentlemen, due to heavy rain, all trains on the green line are experiencing delays of up to 15 minutes. We apologize for any inconvenience this may cause. Please listen for further announcements or check the information board for updates. Thank you for your patience.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 6.44,
+      "text": " Ladies and gentlemen, due to heavy rain, all trains on the green line are experiencing delays of up to 15 minutes.",
+      "tokens": [
+        50364,
+        17084,
+        293,
+        11669,
+        11,
+        3462,
+        281,
+        4676,
+        4830,
+        11,
+        439,
+        16329,
+        322,
+        264,
+        3092,
+        1622,
+        366,
+        11139,
+        28610,
+        295,
+        493,
+        281,
+        2119,
+        2077,
+        13,
+        50739
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.13899553975751322,
+      "compression_ratio": 1.455497382198953,
+      "no_speech_prob": 0.012164043262600899,
+      "words": [
+        {
+          "word": " Ladies",
+          "start": 0.0,
+          "end": 0.44,
+          "probability": 0.9500633478164673
+        },
+        {
+          "word": " and",
+          "start": 0.44,
+          "end": 0.68,
+          "probability": 0.9929800629615784
+        },
+        {
+          "word": " gentlemen,",
+          "start": 0.68,
+          "end": 1.1,
+          "probability": 0.8351288437843323
+        },
+        {
+          "word": " due",
+          "start": 1.44,
+          "end": 1.54,
+          "probability": 0.9766409993171692
+        },
+        {
+          "word": " to",
+          "start": 1.54,
+          "end": 1.68,
+          "probability": 0.9994423985481262
+        },
+        {
+          "word": " heavy",
+          "start": 1.68,
+          "end": 1.9,
+          "probability": 0.9887187480926514
+        },
+        {
+          "word": " rain,",
+          "start": 1.9,
+          "end": 2.24,
+          "probability": 0.990079402923584
+        },
+        {
+          "word": " all",
+          "start": 2.6,
+          "end": 2.72,
+          "probability": 0.9844977259635925
+        },
+        {
+          "word": " trains",
+          "start": 2.72,
+          "end": 2.98,
+          "probability": 0.9833352565765381
+        },
+        {
+          "word": " on",
+          "start": 2.98,
+          "end": 3.2,
+          "probability": 0.9993657469749451
+        },
+        {
+          "word": " the",
+          "start": 3.2,
+          "end": 3.34,
+          "probability": 0.9979378581047058
+        },
+        {
+          "word": " green",
+          "start": 3.34,
+          "end": 3.56,
+          "probability": 0.8141716718673706
+        },
+        {
+          "word": " line",
+          "start": 3.56,
+          "end": 3.86,
+          "probability": 0.9729228615760803
+        },
+        {
+          "word": " are",
+          "start": 3.86,
+          "end": 4.18,
+          "probability": 0.997432291507721
+        },
+        {
+          "word": " experiencing",
+          "start": 4.18,
+          "end": 4.78,
+          "probability": 0.9975282549858093
+        },
+        {
+          "word": " delays",
+          "start": 4.78,
+          "end": 5.18,
+          "probability": 0.9996395111083984
+        },
+        {
+          "word": " of",
+          "start": 5.18,
+          "end": 5.44,
+          "probability": 0.9306148886680603
+        },
+        {
+          "word": " up",
+          "start": 5.44,
+          "end": 5.58,
+          "probability": 0.9984992742538452
+        },
+        {
+          "word": " to",
+          "start": 5.58,
+          "end": 5.72,
+          "probability": 0.9939813017845154
+        },
+        {
+          "word": " 15",
+          "start": 5.72,
+          "end": 6.08,
+          "probability": 0.9510233402252197
+        },
+        {
+          "word": " minutes.",
+          "start": 6.08,
+          "end": 6.44,
+          "probability": 0.9929473400115967
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 7.1,
+      "end": 10.24,
+      "text": " We apologize for any inconvenience this may cause.",
+      "tokens": [
+        50739,
+        492,
+        12328,
+        337,
+        604,
+        28752,
+        1182,
+        341,
+        815,
+        3082,
+        13,
+        50929
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.13899553975751322,
+      "compression_ratio": 1.455497382198953,
+      "no_speech_prob": 0.012164043262600899,
+      "words": [
+        {
+          "word": " We",
+          "start": 7.1,
+          "end": 7.74,
+          "probability": 0.9913085699081421
+        },
+        {
+          "word": " apologize",
+          "start": 7.74,
+          "end": 8.28,
+          "probability": 0.9425992369651794
+        },
+        {
+          "word": " for",
+          "start": 8.28,
+          "end": 8.58,
+          "probability": 0.9994200468063354
+        },
+        {
+          "word": " any",
+          "start": 8.58,
+          "end": 8.86,
+          "probability": 0.9980929493904114
+        },
+        {
+          "word": " inconvenience",
+          "start": 8.86,
+          "end": 9.54,
+          "probability": 0.9949073791503906
+        },
+        {
+          "word": " this",
+          "start": 9.54,
+          "end": 9.74,
+          "probability": 0.9982380867004395
+        },
+        {
+          "word": " may",
+          "start": 9.74,
+          "end": 9.92,
+          "probability": 0.9977359771728516
+        },
+        {
+          "word": " cause.",
+          "start": 9.92,
+          "end": 10.24,
+          "probability": 0.9970840811729431
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 11.32,
+      "end": 15.1,
+      "text": " Please listen for further announcements or check the information board for updates.",
+      "tokens": [
+        50929,
+        2555,
+        2140,
+        337,
+        3052,
+        23785,
+        420,
+        1520,
+        264,
+        1589,
+        3150,
+        337,
+        9205,
+        13,
+        51174
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.13899553975751322,
+      "compression_ratio": 1.455497382198953,
+      "no_speech_prob": 0.012164043262600899,
+      "words": [
+        {
+          "word": " Please",
+          "start": 11.32,
+          "end": 11.6,
+          "probability": 0.9935963153839111
+        },
+        {
+          "word": " listen",
+          "start": 11.6,
+          "end": 11.96,
+          "probability": 0.99063640832901
+        },
+        {
+          "word": " for",
+          "start": 11.96,
+          "end": 12.18,
+          "probability": 0.9980514049530029
+        },
+        {
+          "word": " further",
+          "start": 12.18,
+          "end": 12.5,
+          "probability": 0.9975461363792419
+        },
+        {
+          "word": " announcements",
+          "start": 12.5,
+          "end": 12.94,
+          "probability": 0.9935740828514099
+        },
+        {
+          "word": " or",
+          "start": 12.94,
+          "end": 13.28,
+          "probability": 0.9777370095252991
+        },
+        {
+          "word": " check",
+          "start": 13.28,
+          "end": 13.48,
+          "probability": 0.9973813891410828
+        },
+        {
+          "word": " the",
+          "start": 13.48,
+          "end": 13.7,
+          "probability": 0.9971300959587097
+        },
+        {
+          "word": " information",
+          "start": 13.7,
+          "end": 14.16,
+          "probability": 0.8517577052116394
+        },
+        {
+          "word": " board",
+          "start": 14.16,
+          "end": 14.5,
+          "probability": 0.9916018843650818
+        },
+        {
+          "word": " for",
+          "start": 14.5,
+          "end": 14.7,
+          "probability": 0.9994465708732605
+        },
+        {
+          "word": " updates.",
+          "start": 14.7,
+          "end": 15.1,
+          "probability": 0.9990248680114746
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 15.86,
+      "end": 17.3,
+      "text": " Thank you for your patience.",
+      "tokens": [
+        51174,
+        1044,
+        291,
+        337,
+        428,
+        14826,
+        13,
+        51284
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.13899553975751322,
+      "compression_ratio": 1.455497382198953,
+      "no_speech_prob": 0.012164043262600899,
+      "words": [
+        {
+          "word": " Thank",
+          "start": 15.86,
+          "end": 16.5,
+          "probability": 0.9923582673072815
+        },
+        {
+          "word": " you",
+          "start": 16.5,
+          "end": 16.66,
+          "probability": 0.9624167084693909
+        },
+        {
+          "word": " for",
+          "start": 16.66,
+          "end": 16.8,
+          "probability": 0.9955765008926392
+        },
+        {
+          "word": " your",
+          "start": 16.8,
+          "end": 16.92,
+          "probability": 0.994541585445404
+        },
+        {
+          "word": " patience.",
+          "start": 16.92,
+          "end": 17.3,
+          "probability": 0.9961541295051575
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

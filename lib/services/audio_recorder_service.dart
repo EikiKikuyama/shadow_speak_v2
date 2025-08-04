@@ -132,7 +132,7 @@ class AudioRecorderService {
         return [];
       }
 
-      int desiredSamples = audioDuration.inSeconds * 10;
+      int desiredSamples = audioDuration.inSeconds * 100;
       int groupSize = (totalSamples / desiredSamples).ceil();
 
       final ByteData byteData = ByteData.sublistView(data);

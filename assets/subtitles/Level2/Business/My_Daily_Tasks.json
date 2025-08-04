@@ -1,0 +1,442 @@
+{
+  "text": " Every day, I start work at 9 a.m. I check my emails and reply to clients then, I join a short team meeting. I spend most of the day making reports or working on presentations. I take a lunch break at noon.at6pm, I finish my work and go home.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 4.68,
+      "text": " Every day, I start work at 9 a.m. I check my emails and reply to clients then,",
+      "tokens": [
+        50364,
+        2048,
+        786,
+        11,
+        286,
+        722,
+        589,
+        412,
+        1722,
+        257,
+        13,
+        76,
+        13,
+        286,
+        1520,
+        452,
+        12524,
+        293,
+        16972,
+        281,
+        6982,
+        550,
+        11,
+        50607
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.24374851710359816,
+      "compression_ratio": 1.4518072289156627,
+      "no_speech_prob": 0.027768028900027275,
+      "words": [
+        {
+          "word": " Every",
+          "start": 0.0,
+          "end": 0.4,
+          "probability": 0.6920998692512512
+        },
+        {
+          "word": " day,",
+          "start": 0.4,
+          "end": 0.66,
+          "probability": 0.9944012761116028
+        },
+        {
+          "word": " I",
+          "start": 1.0,
+          "end": 1.1,
+          "probability": 0.9918355941772461
+        },
+        {
+          "word": " start",
+          "start": 1.1,
+          "end": 1.3,
+          "probability": 0.997780978679657
+        },
+        {
+          "word": " work",
+          "start": 1.3,
+          "end": 1.52,
+          "probability": 0.9948422312736511
+        },
+        {
+          "word": " at",
+          "start": 1.52,
+          "end": 1.72,
+          "probability": 0.9987882971763611
+        },
+        {
+          "word": " 9",
+          "start": 1.72,
+          "end": 1.98,
+          "probability": 0.9257622957229614
+        },
+        {
+          "word": " a",
+          "start": 1.98,
+          "end": 2.12,
+          "probability": 0.30093276500701904
+        },
+        {
+          "word": ".m.",
+          "start": 2.12,
+          "end": 2.28,
+          "probability": 0.9967425763607025
+        },
+        {
+          "word": " I",
+          "start": 2.28,
+          "end": 2.4,
+          "probability": 0.9501392841339111
+        },
+        {
+          "word": " check",
+          "start": 2.4,
+          "end": 2.6,
+          "probability": 0.9959614872932434
+        },
+        {
+          "word": " my",
+          "start": 2.6,
+          "end": 2.84,
+          "probability": 0.9976894855499268
+        },
+        {
+          "word": " emails",
+          "start": 2.84,
+          "end": 3.2,
+          "probability": 0.9683327078819275
+        },
+        {
+          "word": " and",
+          "start": 3.2,
+          "end": 3.5,
+          "probability": 0.9963871240615845
+        },
+        {
+          "word": " reply",
+          "start": 3.5,
+          "end": 3.8,
+          "probability": 0.9937333464622498
+        },
+        {
+          "word": " to",
+          "start": 3.8,
+          "end": 3.94,
+          "probability": 0.9971733093261719
+        },
+        {
+          "word": " clients",
+          "start": 3.94,
+          "end": 4.3,
+          "probability": 0.9976611137390137
+        },
+        {
+          "word": " then,",
+          "start": 4.3,
+          "end": 4.68,
+          "probability": 0.7165651917457581
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 4.96,
+      "end": 6.26,
+      "text": " I join a short team meeting.",
+      "tokens": [
+        50607,
+        286,
+        3917,
+        257,
+        2099,
+        1469,
+        3440,
+        13,
+        50692
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.24374851710359816,
+      "compression_ratio": 1.4518072289156627,
+      "no_speech_prob": 0.027768028900027275,
+      "words": [
+        {
+          "word": " I",
+          "start": 4.96,
+          "end": 5.1,
+          "probability": 0.8621009588241577
+        },
+        {
+          "word": " join",
+          "start": 5.1,
+          "end": 5.32,
+          "probability": 0.9896981120109558
+        },
+        {
+          "word": " a",
+          "start": 5.32,
+          "end": 5.46,
+          "probability": 0.9987045526504517
+        },
+        {
+          "word": " short",
+          "start": 5.46,
+          "end": 5.66,
+          "probability": 0.9961399435997009
+        },
+        {
+          "word": " team",
+          "start": 5.66,
+          "end": 5.96,
+          "probability": 0.9300424456596375
+        },
+        {
+          "word": " meeting.",
+          "start": 5.96,
+          "end": 6.26,
+          "probability": 0.9834228754043579
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 6.56,
+      "end": 9.88,
+      "text": " I spend most of the day making reports or working on presentations.",
+      "tokens": [
+        50692,
+        286,
+        3496,
+        881,
+        295,
+        264,
+        786,
+        1455,
+        7122,
+        420,
+        1364,
+        322,
+        18964,
+        13,
+        50876
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.24374851710359816,
+      "compression_ratio": 1.4518072289156627,
+      "no_speech_prob": 0.027768028900027275,
+      "words": [
+        {
+          "word": " I",
+          "start": 6.56,
+          "end": 6.76,
+          "probability": 0.9935949444770813
+        },
+        {
+          "word": " spend",
+          "start": 6.76,
+          "end": 7.0,
+          "probability": 0.9937645196914673
+        },
+        {
+          "word": " most",
+          "start": 7.0,
+          "end": 7.32,
+          "probability": 0.9965159893035889
+        },
+        {
+          "word": " of",
+          "start": 7.32,
+          "end": 7.48,
+          "probability": 0.9981790781021118
+        },
+        {
+          "word": " the",
+          "start": 7.48,
+          "end": 7.58,
+          "probability": 0.9986012578010559
+        },
+        {
+          "word": " day",
+          "start": 7.58,
+          "end": 7.74,
+          "probability": 0.9983289837837219
+        },
+        {
+          "word": " making",
+          "start": 7.74,
+          "end": 8.0,
+          "probability": 0.971010148525238
+        },
+        {
+          "word": " reports",
+          "start": 8.0,
+          "end": 8.42,
+          "probability": 0.9964389801025391
+        },
+        {
+          "word": " or",
+          "start": 8.42,
+          "end": 8.74,
+          "probability": 0.9554721713066101
+        },
+        {
+          "word": " working",
+          "start": 8.74,
+          "end": 9.06,
+          "probability": 0.9942378997802734
+        },
+        {
+          "word": " on",
+          "start": 9.06,
+          "end": 9.24,
+          "probability": 0.9989867806434631
+        },
+        {
+          "word": " presentations.",
+          "start": 9.24,
+          "end": 9.88,
+          "probability": 0.9960706233978271
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 10.28,
+      "end": 14.82,
+      "text": " I take a lunch break at noon.at6pm, I finish my work and go home.",
+      "tokens": [
+        50876,
+        286,
+        747,
+        257,
+        6349,
+        1821,
+        412,
+        24040,
+        13,
+        267,
+        21,
+        14395,
+        11,
+        286,
+        2413,
+        452,
+        589,
+        293,
+        352,
+        1280,
+        13,
+        51112
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.24374851710359816,
+      "compression_ratio": 1.4518072289156627,
+      "no_speech_prob": 0.027768028900027275,
+      "words": [
+        {
+          "word": " I",
+          "start": 10.28,
+          "end": 10.42,
+          "probability": 0.9950454235076904
+        },
+        {
+          "word": " take",
+          "start": 10.42,
+          "end": 10.6,
+          "probability": 0.9974442720413208
+        },
+        {
+          "word": " a",
+          "start": 10.6,
+          "end": 10.76,
+          "probability": 0.9984571933746338
+        },
+        {
+          "word": " lunch",
+          "start": 10.76,
+          "end": 10.96,
+          "probability": 0.9744521975517273
+        },
+        {
+          "word": " break",
+          "start": 10.96,
+          "end": 11.22,
+          "probability": 0.985699474811554
+        },
+        {
+          "word": " at",
+          "start": 11.22,
+          "end": 11.44,
+          "probability": 0.9972527623176575
+        },
+        {
+          "word": " noon",
+          "start": 11.44,
+          "end": 11.62,
+          "probability": 0.8431470394134521
+        },
+        {
+          "word": ".at6pm,",
+          "start": 11.62,
+          "end": 12.94,
+          "probability": 0.6758344918489456
+        },
+        {
+          "word": " I",
+          "start": 13.32,
+          "end": 13.4,
+          "probability": 0.9916354417800903
+        },
+        {
+          "word": " finish",
+          "start": 13.4,
+          "end": 13.64,
+          "probability": 0.9925016164779663
+        },
+        {
+          "word": " my",
+          "start": 13.64,
+          "end": 13.86,
+          "probability": 0.9982736110687256
+        },
+        {
+          "word": " work",
+          "start": 13.86,
+          "end": 14.14,
+          "probability": 0.9990085959434509
+        },
+        {
+          "word": " and",
+          "start": 14.14,
+          "end": 14.32,
+          "probability": 0.9923182725906372
+        },
+        {
+          "word": " go",
+          "start": 14.32,
+          "end": 14.46,
+          "probability": 0.9984532594680786
+        },
+        {
+          "word": " home.",
+          "start": 14.46,
+          "end": 14.82,
+          "probability": 0.9997190833091736
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

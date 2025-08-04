@@ -1,0 +1,5 @@
+Title: Setting Goals
+WordCount: 60
+
+Script:
+When I started studying English, I didn’t know how to begin. I made a small goal: learn five words a day. After a few weeks, I started to feel better. Reaching goals gives me confidence. Now I enjoy studying.

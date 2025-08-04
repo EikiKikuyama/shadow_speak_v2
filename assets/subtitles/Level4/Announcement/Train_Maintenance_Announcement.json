@@ -1,0 +1,585 @@
+{
+  "text": " Good morning, passengers. We would like to inform you that Train No. 102 bound for Riverside is currently undergoing maintenance. As a result, it will depart approximately 10 minutes later than scheduled. We understand that delays may affect your plans and sincerely apologize for the inconvenience. Please check the digital displays or ask station staff for updated information. Thank you for your understanding and for choosing our service today.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 6.76,
+      "text": " Good morning, passengers. We would like to inform you that Train No. 102 bound for Riverside is",
+      "tokens": [
+        50364,
+        2205,
+        2446,
+        11,
+        18436,
+        13,
+        492,
+        576,
+        411,
+        281,
+        1356,
+        291,
+        300,
+        28029,
+        883,
+        13,
+        45937,
+        5472,
+        337,
+        36646,
+        482,
+        307,
+        50700
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10142850351857614,
+      "compression_ratio": 1.5830388692579505,
+      "no_speech_prob": 0.03976331651210785,
+      "words": [
+        {
+          "word": " Good",
+          "start": 0.0,
+          "end": 0.3,
+          "probability": 0.8601545095443726
+        },
+        {
+          "word": " morning,",
+          "start": 0.3,
+          "end": 0.64,
+          "probability": 0.8033682107925415
+        },
+        {
+          "word": " passengers.",
+          "start": 1.04,
+          "end": 1.46,
+          "probability": 0.9036025404930115
+        },
+        {
+          "word": " We",
+          "start": 2.26,
+          "end": 2.84,
+          "probability": 0.9938761591911316
+        },
+        {
+          "word": " would",
+          "start": 2.84,
+          "end": 2.98,
+          "probability": 0.9974134564399719
+        },
+        {
+          "word": " like",
+          "start": 2.98,
+          "end": 3.14,
+          "probability": 0.9990041851997375
+        },
+        {
+          "word": " to",
+          "start": 3.14,
+          "end": 3.34,
+          "probability": 0.9995262622833252
+        },
+        {
+          "word": " inform",
+          "start": 3.34,
+          "end": 3.68,
+          "probability": 0.9993962049484253
+        },
+        {
+          "word": " you",
+          "start": 3.68,
+          "end": 3.92,
+          "probability": 0.9951116442680359
+        },
+        {
+          "word": " that",
+          "start": 3.92,
+          "end": 4.08,
+          "probability": 0.9989558458328247
+        },
+        {
+          "word": " Train",
+          "start": 4.08,
+          "end": 4.34,
+          "probability": 0.5727043747901917
+        },
+        {
+          "word": " No.",
+          "start": 4.34,
+          "end": 4.5,
+          "probability": 0.41714170575141907
+        },
+        {
+          "word": " 102",
+          "start": 4.68,
+          "end": 5.18,
+          "probability": 0.9741109609603882
+        },
+        {
+          "word": " bound",
+          "start": 5.18,
+          "end": 5.78,
+          "probability": 0.5753893852233887
+        },
+        {
+          "word": " for",
+          "start": 5.78,
+          "end": 5.98,
+          "probability": 0.9946528673171997
+        },
+        {
+          "word": " Riverside",
+          "start": 5.98,
+          "end": 6.5,
+          "probability": 0.9402731657028198
+        },
+        {
+          "word": " is",
+          "start": 6.5,
+          "end": 6.76,
+          "probability": 0.9960412979125977
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 6.76,
+      "end": 12.58,
+      "text": " currently undergoing maintenance. As a result, it will depart approximately 10 minutes later than",
+      "tokens": [
+        50700,
+        4362,
+        40033,
+        11258,
+        13,
+        1018,
+        257,
+        1874,
+        11,
+        309,
+        486,
+        9110,
+        10447,
+        1266,
+        2077,
+        1780,
+        813,
+        50992
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10142850351857614,
+      "compression_ratio": 1.5830388692579505,
+      "no_speech_prob": 0.03976331651210785,
+      "words": [
+        {
+          "word": " currently",
+          "start": 6.76,
+          "end": 7.1,
+          "probability": 0.9991908669471741
+        },
+        {
+          "word": " undergoing",
+          "start": 7.1,
+          "end": 7.64,
+          "probability": 0.9958629608154297
+        },
+        {
+          "word": " maintenance.",
+          "start": 7.64,
+          "end": 8.08,
+          "probability": 0.9985987544059753
+        },
+        {
+          "word": " As",
+          "start": 8.88,
+          "end": 9.44,
+          "probability": 0.9952687621116638
+        },
+        {
+          "word": " a",
+          "start": 9.44,
+          "end": 9.54,
+          "probability": 0.9995484948158264
+        },
+        {
+          "word": " result,",
+          "start": 9.54,
+          "end": 9.94,
+          "probability": 0.9997410178184509
+        },
+        {
+          "word": " it",
+          "start": 10.26,
+          "end": 10.34,
+          "probability": 0.9913039207458496
+        },
+        {
+          "word": " will",
+          "start": 10.34,
+          "end": 10.44,
+          "probability": 0.9978561997413635
+        },
+        {
+          "word": " depart",
+          "start": 10.44,
+          "end": 10.7,
+          "probability": 0.9781230092048645
+        },
+        {
+          "word": " approximately",
+          "start": 10.7,
+          "end": 11.34,
+          "probability": 0.9940910935401917
+        },
+        {
+          "word": " 10",
+          "start": 11.34,
+          "end": 11.76,
+          "probability": 0.7805192470550537
+        },
+        {
+          "word": " minutes",
+          "start": 11.76,
+          "end": 12.02,
+          "probability": 0.9960334897041321
+        },
+        {
+          "word": " later",
+          "start": 12.02,
+          "end": 12.38,
+          "probability": 0.9981868863105774
+        },
+        {
+          "word": " than",
+          "start": 12.38,
+          "end": 12.58,
+          "probability": 0.9967229962348938
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 12.58,
+      "end": 19.02,
+      "text": " scheduled. We understand that delays may affect your plans and sincerely apologize for the inconvenience.",
+      "tokens": [
+        50992,
+        15678,
+        13,
+        492,
+        1223,
+        300,
+        28610,
+        815,
+        3345,
+        428,
+        5482,
+        293,
+        30694,
+        12328,
+        337,
+        264,
+        28752,
+        1182,
+        13,
+        51316
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10142850351857614,
+      "compression_ratio": 1.5830388692579505,
+      "no_speech_prob": 0.03976331651210785,
+      "words": [
+        {
+          "word": " scheduled.",
+          "start": 12.58,
+          "end": 12.98,
+          "probability": 0.9987391829490662
+        },
+        {
+          "word": " We",
+          "start": 13.76,
+          "end": 14.24,
+          "probability": 0.9963933825492859
+        },
+        {
+          "word": " understand",
+          "start": 14.24,
+          "end": 14.66,
+          "probability": 0.9992693066596985
+        },
+        {
+          "word": " that",
+          "start": 14.66,
+          "end": 14.96,
+          "probability": 0.9995834231376648
+        },
+        {
+          "word": " delays",
+          "start": 14.96,
+          "end": 15.24,
+          "probability": 0.9937591552734375
+        },
+        {
+          "word": " may",
+          "start": 15.24,
+          "end": 15.54,
+          "probability": 0.9981164932250977
+        },
+        {
+          "word": " affect",
+          "start": 15.54,
+          "end": 15.82,
+          "probability": 0.9943842887878418
+        },
+        {
+          "word": " your",
+          "start": 15.82,
+          "end": 16.02,
+          "probability": 0.9985370635986328
+        },
+        {
+          "word": " plans",
+          "start": 16.02,
+          "end": 16.42,
+          "probability": 0.9984354376792908
+        },
+        {
+          "word": " and",
+          "start": 16.42,
+          "end": 16.74,
+          "probability": 0.9715865254402161
+        },
+        {
+          "word": " sincerely",
+          "start": 16.74,
+          "end": 17.2,
+          "probability": 0.9955400824546814
+        },
+        {
+          "word": " apologize",
+          "start": 17.2,
+          "end": 17.82,
+          "probability": 0.9742209315299988
+        },
+        {
+          "word": " for",
+          "start": 17.82,
+          "end": 18.2,
+          "probability": 0.999411940574646
+        },
+        {
+          "word": " the",
+          "start": 18.2,
+          "end": 18.32,
+          "probability": 0.9972443580627441
+        },
+        {
+          "word": " inconvenience.",
+          "start": 18.32,
+          "end": 19.02,
+          "probability": 0.9976406395435333
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 19.78,
+      "end": 24.06,
+      "text": " Please check the digital displays or ask station staff for updated information.",
+      "tokens": [
+        51364,
+        2555,
+        1520,
+        264,
+        4562,
+        20119,
+        420,
+        1029,
+        5214,
+        3525,
+        337,
+        10588,
+        1589,
+        13,
+        51572
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10142850351857614,
+      "compression_ratio": 1.5830388692579505,
+      "no_speech_prob": 0.03976331651210785,
+      "words": [
+        {
+          "word": " Please",
+          "start": 19.78,
+          "end": 20.3,
+          "probability": 0.9955462217330933
+        },
+        {
+          "word": " check",
+          "start": 20.3,
+          "end": 20.54,
+          "probability": 0.9970736503601074
+        },
+        {
+          "word": " the",
+          "start": 20.54,
+          "end": 20.74,
+          "probability": 0.9969584941864014
+        },
+        {
+          "word": " digital",
+          "start": 20.74,
+          "end": 21.02,
+          "probability": 0.9173868894577026
+        },
+        {
+          "word": " displays",
+          "start": 21.02,
+          "end": 21.56,
+          "probability": 0.9941546320915222
+        },
+        {
+          "word": " or",
+          "start": 21.56,
+          "end": 21.88,
+          "probability": 0.9925894737243652
+        },
+        {
+          "word": " ask",
+          "start": 21.88,
+          "end": 22.14,
+          "probability": 0.8025937080383301
+        },
+        {
+          "word": " station",
+          "start": 22.14,
+          "end": 22.52,
+          "probability": 0.9463571310043335
+        },
+        {
+          "word": " staff",
+          "start": 22.52,
+          "end": 22.94,
+          "probability": 0.998339056968689
+        },
+        {
+          "word": " for",
+          "start": 22.94,
+          "end": 23.14,
+          "probability": 0.9993197917938232
+        },
+        {
+          "word": " updated",
+          "start": 23.14,
+          "end": 23.48,
+          "probability": 0.9948075413703918
+        },
+        {
+          "word": " information.",
+          "start": 23.48,
+          "end": 24.06,
+          "probability": 0.9996918439865112
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 0,
+      "start": 25.06,
+      "end": 28.02,
+      "text": " Thank you for your understanding and for choosing our service today.",
+      "tokens": [
+        51620,
+        1044,
+        291,
+        337,
+        428,
+        3701,
+        293,
+        337,
+        10875,
+        527,
+        2643,
+        965,
+        13,
+        51768
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10142850351857614,
+      "compression_ratio": 1.5830388692579505,
+      "no_speech_prob": 0.03976331651210785,
+      "words": [
+        {
+          "word": " Thank",
+          "start": 25.06,
+          "end": 25.44,
+          "probability": 0.9963118433952332
+        },
+        {
+          "word": " you",
+          "start": 25.44,
+          "end": 25.58,
+          "probability": 0.9936439990997314
+        },
+        {
+          "word": " for",
+          "start": 25.58,
+          "end": 25.72,
+          "probability": 0.998766303062439
+        },
+        {
+          "word": " your",
+          "start": 25.72,
+          "end": 25.84,
+          "probability": 0.998304009437561
+        },
+        {
+          "word": " understanding",
+          "start": 25.84,
+          "end": 26.42,
+          "probability": 0.9976800084114075
+        },
+        {
+          "word": " and",
+          "start": 26.42,
+          "end": 26.78,
+          "probability": 0.9571341276168823
+        },
+        {
+          "word": " for",
+          "start": 26.78,
+          "end": 26.94,
+          "probability": 0.9994606375694275
+        },
+        {
+          "word": " choosing",
+          "start": 26.94,
+          "end": 27.22,
+          "probability": 0.9971615076065063
+        },
+        {
+          "word": " our",
+          "start": 27.22,
+          "end": 27.4,
+          "probability": 0.9970495700836182
+        },
+        {
+          "word": " service",
+          "start": 27.4,
+          "end": 27.7,
+          "probability": 0.9874504804611206
+        },
+        {
+          "word": " today.",
+          "start": 27.7,
+          "end": 28.02,
+          "probability": 0.9980363249778748
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

@@ -75,10 +75,9 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
 
   Future<void> _loadSubtitle() async {
     final filename = widget.material.scriptPath
-        .split('/')
-        .last
-        .replaceAll('.txt', '')
-        .replaceAll('.json', '');
+        .replaceFirst('assets/subtitles/', '') // パス先頭だけ削除
+        .replaceAll('.json', '')
+        .replaceAll('.txt', '');
     final data = await loadSubtitles(filename);
     setState(() {
       _subtitles = data;
@@ -165,7 +164,7 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
       body: Column(
         children: [
           Container(
-            height: 100,
+            height: 120,
             width: double.infinity,
             decoration: const BoxDecoration(
               image: DecorationImage(

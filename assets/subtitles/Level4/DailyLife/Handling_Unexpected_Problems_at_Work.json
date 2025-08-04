@@ -1,0 +1,1019 @@
+{
+  "text": " Today started like any other day, but everything changed when I got to the office. As soon as I sat down, I realized that my computer wasn't working properly. I tried restarting it several times, but nothing helped. I had an important presentation to finish, so I quickly asked a colleague if I could borrow theirs. Thankfully, they said yes. While I was working, my manager came over and asked for an update. I explained the situation, and she appreciated how I handled the problem. Although it was stressful, I managed to stay calm and finish everything on time. This kind of situation reminds me that unexpected problems will always happen, but the way we respond makes all the difference.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 4.26,
+      "text": " Today started like any other day, but everything changed when I got to the office.",
+      "tokens": [
+        50364,
+        2692,
+        1409,
+        411,
+        604,
+        661,
+        786,
+        11,
+        457,
+        1203,
+        3105,
+        562,
+        286,
+        658,
+        281,
+        264,
+        3398,
+        13,
+        50576
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.06910491230511906,
+      "compression_ratio": 1.5492424242424243,
+      "no_speech_prob": 0.07219265401363373,
+      "words": [
+        {
+          "word": " Today",
+          "start": 0.0,
+          "end": 0.38,
+          "probability": 0.5962832570075989
+        },
+        {
+          "word": " started",
+          "start": 0.38,
+          "end": 0.72,
+          "probability": 0.984505832195282
+        },
+        {
+          "word": " like",
+          "start": 0.72,
+          "end": 0.98,
+          "probability": 0.9976100921630859
+        },
+        {
+          "word": " any",
+          "start": 0.98,
+          "end": 1.26,
+          "probability": 0.9977757334709167
+        },
+        {
+          "word": " other",
+          "start": 1.26,
+          "end": 1.48,
+          "probability": 0.9992243051528931
+        },
+        {
+          "word": " day,",
+          "start": 1.48,
+          "end": 1.8,
+          "probability": 0.9995080232620239
+        },
+        {
+          "word": " but",
+          "start": 2.08,
+          "end": 2.16,
+          "probability": 0.9971985816955566
+        },
+        {
+          "word": " everything",
+          "start": 2.16,
+          "end": 2.5,
+          "probability": 0.9975908994674683
+        },
+        {
+          "word": " changed",
+          "start": 2.5,
+          "end": 3.06,
+          "probability": 0.9982470273971558
+        },
+        {
+          "word": " when",
+          "start": 3.06,
+          "end": 3.24,
+          "probability": 0.998777449131012
+        },
+        {
+          "word": " I",
+          "start": 3.24,
+          "end": 3.36,
+          "probability": 0.984686553478241
+        },
+        {
+          "word": " got",
+          "start": 3.36,
+          "end": 3.52,
+          "probability": 0.9978635907173157
+        },
+        {
+          "word": " to",
+          "start": 3.52,
+          "end": 3.68,
+          "probability": 0.9987264275550842
+        },
+        {
+          "word": " the",
+          "start": 3.68,
+          "end": 3.8,
+          "probability": 0.9966392517089844
+        },
+        {
+          "word": " office.",
+          "start": 3.8,
+          "end": 4.26,
+          "probability": 0.9984739422798157
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 5.0,
+      "end": 9.34,
+      "text": " As soon as I sat down, I realized that my computer wasn't working properly.",
+      "tokens": [
+        50624,
+        1018,
+        2321,
+        382,
+        286,
+        3227,
+        760,
+        11,
+        286,
+        5334,
+        300,
+        452,
+        3820,
+        2067,
+        380,
+        1364,
+        6108,
+        13,
+        50832
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.06910491230511906,
+      "compression_ratio": 1.5492424242424243,
+      "no_speech_prob": 0.07219265401363373,
+      "words": [
+        {
+          "word": " As",
+          "start": 5.0,
+          "end": 5.44,
+          "probability": 0.9878857135772705
+        },
+        {
+          "word": " soon",
+          "start": 5.44,
+          "end": 5.62,
+          "probability": 0.9995033740997314
+        },
+        {
+          "word": " as",
+          "start": 5.62,
+          "end": 5.8,
+          "probability": 0.9963304400444031
+        },
+        {
+          "word": " I",
+          "start": 5.8,
+          "end": 5.9,
+          "probability": 0.9964596629142761
+        },
+        {
+          "word": " sat",
+          "start": 5.9,
+          "end": 6.1,
+          "probability": 0.999535322189331
+        },
+        {
+          "word": " down,",
+          "start": 6.1,
+          "end": 6.5,
+          "probability": 0.9992461204528809
+        },
+        {
+          "word": " I",
+          "start": 6.8,
+          "end": 6.86,
+          "probability": 0.9974257349967957
+        },
+        {
+          "word": " realized",
+          "start": 6.86,
+          "end": 7.24,
+          "probability": 0.959816575050354
+        },
+        {
+          "word": " that",
+          "start": 7.24,
+          "end": 7.5,
+          "probability": 0.9922958612442017
+        },
+        {
+          "word": " my",
+          "start": 7.5,
+          "end": 7.66,
+          "probability": 0.998440682888031
+        },
+        {
+          "word": " computer",
+          "start": 7.66,
+          "end": 8.1,
+          "probability": 0.9992103576660156
+        },
+        {
+          "word": " wasn't",
+          "start": 8.1,
+          "end": 8.5,
+          "probability": 0.9967914819717407
+        },
+        {
+          "word": " working",
+          "start": 8.5,
+          "end": 8.8,
+          "probability": 0.9994592070579529
+        },
+        {
+          "word": " properly.",
+          "start": 8.8,
+          "end": 9.34,
+          "probability": 0.9996261596679688
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 10.32,
+      "end": 13.44,
+      "text": " I tried restarting it several times, but nothing helped.",
+      "tokens": [
+        50880,
+        286,
+        3031,
+        21022,
+        278,
+        309,
+        2940,
+        1413,
+        11,
+        457,
+        1825,
+        4254,
+        13,
+        51036
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.06910491230511906,
+      "compression_ratio": 1.5492424242424243,
+      "no_speech_prob": 0.07219265401363373,
+      "words": [
+        {
+          "word": " I",
+          "start": 10.32,
+          "end": 10.56,
+          "probability": 0.9962521195411682
+        },
+        {
+          "word": " tried",
+          "start": 10.56,
+          "end": 10.84,
+          "probability": 0.9976860284805298
+        },
+        {
+          "word": " restarting",
+          "start": 10.84,
+          "end": 11.42,
+          "probability": 0.9924488663673401
+        },
+        {
+          "word": " it",
+          "start": 11.42,
+          "end": 11.52,
+          "probability": 0.9682013392448425
+        },
+        {
+          "word": " several",
+          "start": 11.52,
+          "end": 11.78,
+          "probability": 0.9998351335525513
+        },
+        {
+          "word": " times,",
+          "start": 11.78,
+          "end": 12.26,
+          "probability": 0.9990956783294678
+        },
+        {
+          "word": " but",
+          "start": 12.58,
+          "end": 12.7,
+          "probability": 0.9989218711853027
+        },
+        {
+          "word": " nothing",
+          "start": 12.7,
+          "end": 13.0,
+          "probability": 0.9974052309989929
+        },
+        {
+          "word": " helped.",
+          "start": 13.0,
+          "end": 13.44,
+          "probability": 0.996056318283081
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 14.32,
+      "end": 19.22,
+      "text": " I had an important presentation to finish, so I quickly asked a colleague if I could borrow theirs.",
+      "tokens": [
+        51080,
+        286,
+        632,
+        364,
+        1021,
+        5860,
+        281,
+        2413,
+        11,
+        370,
+        286,
+        2661,
+        2351,
+        257,
+        13532,
+        498,
+        286,
+        727,
+        11172,
+        22760,
+        13,
+        51332
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.06910491230511906,
+      "compression_ratio": 1.5492424242424243,
+      "no_speech_prob": 0.07219265401363373,
+      "words": [
+        {
+          "word": " I",
+          "start": 14.32,
+          "end": 14.6,
+          "probability": 0.9916792511940002
+        },
+        {
+          "word": " had",
+          "start": 14.6,
+          "end": 14.74,
+          "probability": 0.9993207454681396
+        },
+        {
+          "word": " an",
+          "start": 14.74,
+          "end": 14.86,
+          "probability": 0.9983135461807251
+        },
+        {
+          "word": " important",
+          "start": 14.86,
+          "end": 15.18,
+          "probability": 0.9978398084640503
+        },
+        {
+          "word": " presentation",
+          "start": 15.18,
+          "end": 15.88,
+          "probability": 0.9990409016609192
+        },
+        {
+          "word": " to",
+          "start": 15.88,
+          "end": 16.1,
+          "probability": 0.9988613128662109
+        },
+        {
+          "word": " finish,",
+          "start": 16.1,
+          "end": 16.42,
+          "probability": 0.9986552000045776
+        },
+        {
+          "word": " so",
+          "start": 16.76,
+          "end": 16.96,
+          "probability": 0.9987022876739502
+        },
+        {
+          "word": " I",
+          "start": 16.96,
+          "end": 17.08,
+          "probability": 0.9969306588172913
+        },
+        {
+          "word": " quickly",
+          "start": 17.08,
+          "end": 17.36,
+          "probability": 0.9984702467918396
+        },
+        {
+          "word": " asked",
+          "start": 17.36,
+          "end": 17.66,
+          "probability": 0.9980669617652893
+        },
+        {
+          "word": " a",
+          "start": 17.66,
+          "end": 17.84,
+          "probability": 0.9911524653434753
+        },
+        {
+          "word": " colleague",
+          "start": 17.84,
+          "end": 18.22,
+          "probability": 0.9989481568336487
+        },
+        {
+          "word": " if",
+          "start": 18.22,
+          "end": 18.44,
+          "probability": 0.9984283447265625
+        },
+        {
+          "word": " I",
+          "start": 18.44,
+          "end": 18.52,
+          "probability": 0.9944486618041992
+        },
+        {
+          "word": " could",
+          "start": 18.52,
+          "end": 18.68,
+          "probability": 0.9989250302314758
+        },
+        {
+          "word": " borrow",
+          "start": 18.68,
+          "end": 18.96,
+          "probability": 0.9986531734466553
+        },
+        {
+          "word": " theirs.",
+          "start": 18.96,
+          "end": 19.22,
+          "probability": 0.9983269572257996
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 0,
+      "start": 20.3,
+      "end": 26.22,
+      "text": " Thankfully, they said yes. While I was working, my manager came over and asked for an update.",
+      "tokens": [
+        51380,
+        28344,
+        11,
+        436,
+        848,
+        2086,
+        13,
+        3987,
+        286,
+        390,
+        1364,
+        11,
+        452,
+        6598,
+        1361,
+        670,
+        293,
+        2351,
+        337,
+        364,
+        5623,
+        13,
+        51676
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.06910491230511906,
+      "compression_ratio": 1.5492424242424243,
+      "no_speech_prob": 0.07219265401363373,
+      "words": [
+        {
+          "word": " Thankfully,",
+          "start": 20.3,
+          "end": 20.82,
+          "probability": 0.9487018585205078
+        },
+        {
+          "word": " they",
+          "start": 21.16,
+          "end": 21.28,
+          "probability": 0.9963653087615967
+        },
+        {
+          "word": " said",
+          "start": 21.28,
+          "end": 21.52,
+          "probability": 0.9992660880088806
+        },
+        {
+          "word": " yes.",
+          "start": 21.52,
+          "end": 21.92,
+          "probability": 0.8583714962005615
+        },
+        {
+          "word": " While",
+          "start": 22.84,
+          "end": 23.1,
+          "probability": 0.9427732825279236
+        },
+        {
+          "word": " I",
+          "start": 23.1,
+          "end": 23.22,
+          "probability": 0.9973874688148499
+        },
+        {
+          "word": " was",
+          "start": 23.22,
+          "end": 23.4,
+          "probability": 0.9996962547302246
+        },
+        {
+          "word": " working,",
+          "start": 23.4,
+          "end": 23.72,
+          "probability": 0.9994794726371765
+        },
+        {
+          "word": " my",
+          "start": 24.08,
+          "end": 24.18,
+          "probability": 0.9975702166557312
+        },
+        {
+          "word": " manager",
+          "start": 24.18,
+          "end": 24.54,
+          "probability": 0.9962995648384094
+        },
+        {
+          "word": " came",
+          "start": 24.54,
+          "end": 24.82,
+          "probability": 0.9988320469856262
+        },
+        {
+          "word": " over",
+          "start": 24.82,
+          "end": 25.1,
+          "probability": 0.999476969242096
+        },
+        {
+          "word": " and",
+          "start": 25.1,
+          "end": 25.26,
+          "probability": 0.9990712404251099
+        },
+        {
+          "word": " asked",
+          "start": 25.26,
+          "end": 25.52,
+          "probability": 0.9989816546440125
+        },
+        {
+          "word": " for",
+          "start": 25.52,
+          "end": 25.76,
+          "probability": 0.9985260963439941
+        },
+        {
+          "word": " an",
+          "start": 25.76,
+          "end": 25.9,
+          "probability": 0.997355580329895
+        },
+        {
+          "word": " update.",
+          "start": 25.9,
+          "end": 26.22,
+          "probability": 0.9979797005653381
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "seek": 2622,
+      "start": 26.86,
+      "end": 31.06,
+      "text": " I explained the situation, and she appreciated how I handled the problem.",
+      "tokens": [
+        50412,
+        286,
+        8825,
+        264,
+        2590,
+        11,
+        293,
+        750,
+        17169,
+        577,
+        286,
+        18033,
+        264,
+        1154,
+        13,
+        50604
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1264674509725263,
+      "compression_ratio": 1.5,
+      "no_speech_prob": 0.08939395099878311,
+      "words": [
+        {
+          "word": " I",
+          "start": 26.86,
+          "end": 27.42,
+          "probability": 0.5714497566223145
+        },
+        {
+          "word": " explained",
+          "start": 27.42,
+          "end": 27.8,
+          "probability": 0.9169285297393799
+        },
+        {
+          "word": " the",
+          "start": 27.8,
+          "end": 28.02,
+          "probability": 0.7958664298057556
+        },
+        {
+          "word": " situation,",
+          "start": 28.02,
+          "end": 28.6,
+          "probability": 0.9974604845046997
+        },
+        {
+          "word": " and",
+          "start": 29.0,
+          "end": 29.1,
+          "probability": 0.9960999488830566
+        },
+        {
+          "word": " she",
+          "start": 29.1,
+          "end": 29.28,
+          "probability": 0.9983073472976685
+        },
+        {
+          "word": " appreciated",
+          "start": 29.28,
+          "end": 29.86,
+          "probability": 0.9945067763328552
+        },
+        {
+          "word": " how",
+          "start": 29.86,
+          "end": 30.08,
+          "probability": 0.9988046884536743
+        },
+        {
+          "word": " I",
+          "start": 30.08,
+          "end": 30.2,
+          "probability": 0.9906778335571289
+        },
+        {
+          "word": " handled",
+          "start": 30.2,
+          "end": 30.48,
+          "probability": 0.9970619082450867
+        },
+        {
+          "word": " the",
+          "start": 30.48,
+          "end": 30.62,
+          "probability": 0.9982665777206421
+        },
+        {
+          "word": " problem.",
+          "start": 30.62,
+          "end": 31.06,
+          "probability": 0.9980207681655884
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "seek": 2622,
+      "start": 31.72,
+      "end": 35.96,
+      "text": " Although it was stressful, I managed to stay calm and finish everything on time.",
+      "tokens": [
+        50648,
+        5780,
+        309,
+        390,
+        19108,
+        11,
+        286,
+        6453,
+        281,
+        1754,
+        7151,
+        293,
+        2413,
+        1203,
+        322,
+        565,
+        13,
+        50852
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1264674509725263,
+      "compression_ratio": 1.5,
+      "no_speech_prob": 0.08939395099878311,
+      "words": [
+        {
+          "word": " Although",
+          "start": 31.72,
+          "end": 32.28,
+          "probability": 0.9824817776679993
+        },
+        {
+          "word": " it",
+          "start": 32.28,
+          "end": 32.46,
+          "probability": 0.9971575736999512
+        },
+        {
+          "word": " was",
+          "start": 32.46,
+          "end": 32.58,
+          "probability": 0.9991151690483093
+        },
+        {
+          "word": " stressful,",
+          "start": 32.58,
+          "end": 32.98,
+          "probability": 0.9985010623931885
+        },
+        {
+          "word": " I",
+          "start": 33.36,
+          "end": 33.46,
+          "probability": 0.9975932240486145
+        },
+        {
+          "word": " managed",
+          "start": 33.46,
+          "end": 33.74,
+          "probability": 0.9908278584480286
+        },
+        {
+          "word": " to",
+          "start": 33.74,
+          "end": 33.98,
+          "probability": 0.998690664768219
+        },
+        {
+          "word": " stay",
+          "start": 33.98,
+          "end": 34.2,
+          "probability": 0.9983420372009277
+        },
+        {
+          "word": " calm",
+          "start": 34.2,
+          "end": 34.5,
+          "probability": 0.9991598129272461
+        },
+        {
+          "word": " and",
+          "start": 34.5,
+          "end": 34.7,
+          "probability": 0.9985281229019165
+        },
+        {
+          "word": " finish",
+          "start": 34.7,
+          "end": 34.96,
+          "probability": 0.9871469736099243
+        },
+        {
+          "word": " everything",
+          "start": 34.96,
+          "end": 35.4,
+          "probability": 0.997891366481781
+        },
+        {
+          "word": " on",
+          "start": 35.4,
+          "end": 35.62,
+          "probability": 0.9979752898216248
+        },
+        {
+          "word": " time.",
+          "start": 35.62,
+          "end": 35.96,
+          "probability": 0.9960150122642517
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "seek": 2622,
+      "start": 36.88,
+      "end": 42.72,
+      "text": " This kind of situation reminds me that unexpected problems will always happen, but the way we respond makes",
+      "tokens": [
+        50900,
+        639,
+        733,
+        295,
+        2590,
+        12025,
+        385,
+        300,
+        13106,
+        2740,
+        486,
+        1009,
+        1051,
+        11,
+        457,
+        264,
+        636,
+        321,
+        4196,
+        1669,
+        51192
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1264674509725263,
+      "compression_ratio": 1.5,
+      "no_speech_prob": 0.08939395099878311,
+      "words": [
+        {
+          "word": " This",
+          "start": 36.88,
+          "end": 37.22,
+          "probability": 0.9876264929771423
+        },
+        {
+          "word": " kind",
+          "start": 37.22,
+          "end": 37.44,
+          "probability": 0.9960674047470093
+        },
+        {
+          "word": " of",
+          "start": 37.44,
+          "end": 37.58,
+          "probability": 0.9980435371398926
+        },
+        {
+          "word": " situation",
+          "start": 37.58,
+          "end": 38.12,
+          "probability": 0.9962978959083557
+        },
+        {
+          "word": " reminds",
+          "start": 38.12,
+          "end": 38.5,
+          "probability": 0.9983453750610352
+        },
+        {
+          "word": " me",
+          "start": 38.5,
+          "end": 38.78,
+          "probability": 0.9991540908813477
+        },
+        {
+          "word": " that",
+          "start": 38.78,
+          "end": 38.94,
+          "probability": 0.9994614720344543
+        },
+        {
+          "word": " unexpected",
+          "start": 38.94,
+          "end": 39.44,
+          "probability": 0.9944480657577515
+        },
+        {
+          "word": " problems",
+          "start": 39.44,
+          "end": 40.04,
+          "probability": 0.9987055063247681
+        },
+        {
+          "word": " will",
+          "start": 40.04,
+          "end": 40.32,
+          "probability": 0.9989867806434631
+        },
+        {
+          "word": " always",
+          "start": 40.32,
+          "end": 40.62,
+          "probability": 0.9984554052352905
+        },
+        {
+          "word": " happen,",
+          "start": 40.62,
+          "end": 41.04,
+          "probability": 0.9978926777839661
+        },
+        {
+          "word": " but",
+          "start": 41.48,
+          "end": 41.6,
+          "probability": 0.9941600561141968
+        },
+        {
+          "word": " the",
+          "start": 41.6,
+          "end": 41.72,
+          "probability": 0.9986830353736877
+        },
+        {
+          "word": " way",
+          "start": 41.72,
+          "end": 41.86,
+          "probability": 0.9994657635688782
+        },
+        {
+          "word": " we",
+          "start": 41.86,
+          "end": 42.0,
+          "probability": 0.9983919262886047
+        },
+        {
+          "word": " respond",
+          "start": 42.0,
+          "end": 42.36,
+          "probability": 0.9921699166297913
+        },
+        {
+          "word": " makes",
+          "start": 42.36,
+          "end": 42.72,
+          "probability": 0.9970080256462097
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "seek": 2622,
+      "start": 42.72,
+      "end": 43.46,
+      "text": " all the difference.",
+      "tokens": [
+        51192,
+        439,
+        264,
+        2649,
+        13,
+        51392
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1264674509725263,
+      "compression_ratio": 1.5,
+      "no_speech_prob": 0.08939395099878311,
+      "words": [
+        {
+          "word": " all",
+          "start": 42.72,
+          "end": 42.98,
+          "probability": 0.9953793287277222
+        },
+        {
+          "word": " the",
+          "start": 42.98,
+          "end": 43.12,
+          "probability": 0.9947502017021179
+        },
+        {
+          "word": " difference.",
+          "start": 43.12,
+          "end": 43.46,
+          "probability": 0.9980257749557495
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

@@ -12,7 +12,7 @@ class SpeedSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final speeds = [0.8, 1.0, 1.2];
+    final speeds = [0.6, 0.75, 1.0, 1.2];
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

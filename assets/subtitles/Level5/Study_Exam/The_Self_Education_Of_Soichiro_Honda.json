@@ -1,0 +1,1224 @@
+{
+  "text": " Suitshi Rohanda, the visionary founder of Honda Motor Company, never received a formal higher education. Born into a modest family, he dropped out of school at a young age but cultivated a deep passion for engineering. Instead of textbooks, he immersed himself in hands-on experience, often dismantling machines to understand their mechanics. Determined to compete on a global scale, he recognized the importance of learning beyond technical skills. Though not fluent in English, Honda studied foreign manuals meticulously and valued cross-cultural understanding. He surrounded himself with experts and never hesitated to ask questions. His relentless curiosity and willingness to fail set him apart. Success represents the 1% of your work which results from the 99% that is called failure, he once remarked. History exemplifies that true education stems not from institutions but from a relentless drive to grow, explore, and persevere.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 5.92,
+      "text": " Suitshi Rohanda, the visionary founder of Honda Motor Company, never received a formal higher education.",
+      "tokens": [
+        50364,
+        2746,
+        1208,
+        4954,
+        27490,
+        5575,
+        11,
+        264,
+        49442,
+        14917,
+        295,
+        26989,
+        18495,
+        13918,
+        11,
+        1128,
+        4613,
+        257,
+        9860,
+        2946,
+        3309,
+        13,
+        50656
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1395375755395782,
+      "compression_ratio": 1.5305343511450382,
+      "no_speech_prob": 0.013126674108207226,
+      "words": [
+        {
+          "word": " Suitshi",
+          "start": 0.0,
+          "end": 0.6,
+          "probability": 0.2532433122396469
+        },
+        {
+          "word": " Rohanda,",
+          "start": 0.6,
+          "end": 1.04,
+          "probability": 0.5715420544147491
+        },
+        {
+          "word": " the",
+          "start": 1.38,
+          "end": 1.44,
+          "probability": 0.9877360463142395
+        },
+        {
+          "word": " visionary",
+          "start": 1.44,
+          "end": 1.78,
+          "probability": 0.9875659346580505
+        },
+        {
+          "word": " founder",
+          "start": 1.78,
+          "end": 2.22,
+          "probability": 0.9935611486434937
+        },
+        {
+          "word": " of",
+          "start": 2.22,
+          "end": 2.52,
+          "probability": 0.9991102814674377
+        },
+        {
+          "word": " Honda",
+          "start": 2.52,
+          "end": 2.72,
+          "probability": 0.8870381712913513
+        },
+        {
+          "word": " Motor",
+          "start": 2.72,
+          "end": 3.0,
+          "probability": 0.8405248522758484
+        },
+        {
+          "word": " Company,",
+          "start": 3.0,
+          "end": 3.44,
+          "probability": 0.972682774066925
+        },
+        {
+          "word": " never",
+          "start": 3.88,
+          "end": 4.04,
+          "probability": 0.9973599314689636
+        },
+        {
+          "word": " received",
+          "start": 4.04,
+          "end": 4.42,
+          "probability": 0.9960746765136719
+        },
+        {
+          "word": " a",
+          "start": 4.42,
+          "end": 4.6,
+          "probability": 0.9984379410743713
+        },
+        {
+          "word": " formal",
+          "start": 4.6,
+          "end": 4.86,
+          "probability": 0.9957418441772461
+        },
+        {
+          "word": " higher",
+          "start": 4.86,
+          "end": 5.18,
+          "probability": 0.9563977718353271
+        },
+        {
+          "word": " education.",
+          "start": 5.18,
+          "end": 5.92,
+          "probability": 0.9986382126808167
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 6.78,
+      "end": 12.28,
+      "text": " Born into a modest family, he dropped out of school at a young age but cultivated a deep passion for",
+      "tokens": [
+        50708,
+        29808,
+        666,
+        257,
+        25403,
+        1605,
+        11,
+        415,
+        8119,
+        484,
+        295,
+        1395,
+        412,
+        257,
+        2037,
+        3205,
+        457,
+        46770,
+        257,
+        2452,
+        5418,
+        337,
+        50976
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1395375755395782,
+      "compression_ratio": 1.5305343511450382,
+      "no_speech_prob": 0.013126674108207226,
+      "words": [
+        {
+          "word": " Born",
+          "start": 6.78,
+          "end": 7.16,
+          "probability": 0.9784300327301025
+        },
+        {
+          "word": " into",
+          "start": 7.16,
+          "end": 7.42,
+          "probability": 0.9915577173233032
+        },
+        {
+          "word": " a",
+          "start": 7.42,
+          "end": 7.52,
+          "probability": 0.9982253909111023
+        },
+        {
+          "word": " modest",
+          "start": 7.52,
+          "end": 7.76,
+          "probability": 0.9887341260910034
+        },
+        {
+          "word": " family,",
+          "start": 7.76,
+          "end": 8.3,
+          "probability": 0.9997428059577942
+        },
+        {
+          "word": " he",
+          "start": 8.66,
+          "end": 8.76,
+          "probability": 0.9973216652870178
+        },
+        {
+          "word": " dropped",
+          "start": 8.76,
+          "end": 8.96,
+          "probability": 0.9930693507194519
+        },
+        {
+          "word": " out",
+          "start": 8.96,
+          "end": 9.22,
+          "probability": 0.9990277290344238
+        },
+        {
+          "word": " of",
+          "start": 9.22,
+          "end": 9.28,
+          "probability": 0.9993860721588135
+        },
+        {
+          "word": " school",
+          "start": 9.28,
+          "end": 9.58,
+          "probability": 0.999461829662323
+        },
+        {
+          "word": " at",
+          "start": 9.58,
+          "end": 9.84,
+          "probability": 0.9987258315086365
+        },
+        {
+          "word": " a",
+          "start": 9.84,
+          "end": 9.94,
+          "probability": 0.9993919134140015
+        },
+        {
+          "word": " young",
+          "start": 9.94,
+          "end": 10.08,
+          "probability": 0.9973551034927368
+        },
+        {
+          "word": " age",
+          "start": 10.08,
+          "end": 10.52,
+          "probability": 0.9997627139091492
+        },
+        {
+          "word": " but",
+          "start": 10.52,
+          "end": 10.7,
+          "probability": 0.9446075558662415
+        },
+        {
+          "word": " cultivated",
+          "start": 10.7,
+          "end": 11.2,
+          "probability": 0.9964948296546936
+        },
+        {
+          "word": " a",
+          "start": 11.2,
+          "end": 11.42,
+          "probability": 0.9986686706542969
+        },
+        {
+          "word": " deep",
+          "start": 11.42,
+          "end": 11.6,
+          "probability": 0.9929080009460449
+        },
+        {
+          "word": " passion",
+          "start": 11.6,
+          "end": 12.02,
+          "probability": 0.9976810216903687
+        },
+        {
+          "word": " for",
+          "start": 12.02,
+          "end": 12.28,
+          "probability": 0.9997931122779846
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 12.28,
+      "end": 18.54,
+      "text": " engineering. Instead of textbooks, he immersed himself in hands-on experience, often dismantling",
+      "tokens": [
+        50976,
+        7043,
+        13,
+        7156,
+        295,
+        33587,
+        11,
+        415,
+        35416,
+        3647,
+        294,
+        2377,
+        12,
+        266,
+        1752,
+        11,
+        2049,
+        30506,
+        1688,
+        51292
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1395375755395782,
+      "compression_ratio": 1.5305343511450382,
+      "no_speech_prob": 0.013126674108207226,
+      "words": [
+        {
+          "word": " engineering.",
+          "start": 12.28,
+          "end": 12.76,
+          "probability": 0.9978604912757874
+        },
+        {
+          "word": " Instead",
+          "start": 13.58,
+          "end": 14.18,
+          "probability": 0.992731511592865
+        },
+        {
+          "word": " of",
+          "start": 14.18,
+          "end": 14.36,
+          "probability": 0.9990032315254211
+        },
+        {
+          "word": " textbooks,",
+          "start": 14.36,
+          "end": 14.82,
+          "probability": 0.9711374044418335
+        },
+        {
+          "word": " he",
+          "start": 15.3,
+          "end": 15.4,
+          "probability": 0.9981970191001892
+        },
+        {
+          "word": " immersed",
+          "start": 15.4,
+          "end": 15.68,
+          "probability": 0.9809462428092957
+        },
+        {
+          "word": " himself",
+          "start": 15.68,
+          "end": 16.1,
+          "probability": 0.9985913634300232
+        },
+        {
+          "word": " in",
+          "start": 16.1,
+          "end": 16.34,
+          "probability": 0.9824516177177429
+        },
+        {
+          "word": " hands",
+          "start": 16.34,
+          "end": 16.58,
+          "probability": 0.9829597473144531
+        },
+        {
+          "word": "-on",
+          "start": 16.58,
+          "end": 16.7,
+          "probability": 0.9790082275867462
+        },
+        {
+          "word": " experience,",
+          "start": 16.7,
+          "end": 17.28,
+          "probability": 0.9842607378959656
+        },
+        {
+          "word": " often",
+          "start": 17.7,
+          "end": 17.98,
+          "probability": 0.9916468858718872
+        },
+        {
+          "word": " dismantling",
+          "start": 17.98,
+          "end": 18.54,
+          "probability": 0.995682030916214
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 18.54,
+      "end": 24.74,
+      "text": " machines to understand their mechanics. Determined to compete on a global scale, he recognized the",
+      "tokens": [
+        51292,
+        8379,
+        281,
+        1223,
+        641,
+        12939,
+        13,
+        4237,
+        966,
+        2001,
+        281,
+        11831,
+        322,
+        257,
+        4338,
+        4373,
+        11,
+        415,
+        9823,
+        264,
+        51600
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1395375755395782,
+      "compression_ratio": 1.5305343511450382,
+      "no_speech_prob": 0.013126674108207226,
+      "words": [
+        {
+          "word": " machines",
+          "start": 18.54,
+          "end": 18.94,
+          "probability": 0.9984365105628967
+        },
+        {
+          "word": " to",
+          "start": 18.94,
+          "end": 19.28,
+          "probability": 0.9992570281028748
+        },
+        {
+          "word": " understand",
+          "start": 19.28,
+          "end": 19.74,
+          "probability": 0.9976903200149536
+        },
+        {
+          "word": " their",
+          "start": 19.74,
+          "end": 19.96,
+          "probability": 0.9996057152748108
+        },
+        {
+          "word": " mechanics.",
+          "start": 19.96,
+          "end": 20.54,
+          "probability": 0.9977688789367676
+        },
+        {
+          "word": " Determined",
+          "start": 21.52,
+          "end": 22.06,
+          "probability": 0.9280705054601034
+        },
+        {
+          "word": " to",
+          "start": 22.06,
+          "end": 22.2,
+          "probability": 0.9994376301765442
+        },
+        {
+          "word": " compete",
+          "start": 22.2,
+          "end": 22.5,
+          "probability": 0.9890007972717285
+        },
+        {
+          "word": " on",
+          "start": 22.5,
+          "end": 22.72,
+          "probability": 0.9978708028793335
+        },
+        {
+          "word": " a",
+          "start": 22.72,
+          "end": 22.8,
+          "probability": 0.9990286827087402
+        },
+        {
+          "word": " global",
+          "start": 22.8,
+          "end": 23.08,
+          "probability": 0.9932524561882019
+        },
+        {
+          "word": " scale,",
+          "start": 23.08,
+          "end": 23.5,
+          "probability": 0.9992730021476746
+        },
+        {
+          "word": " he",
+          "start": 23.9,
+          "end": 24.0,
+          "probability": 0.9985693693161011
+        },
+        {
+          "word": " recognized",
+          "start": 24.0,
+          "end": 24.46,
+          "probability": 0.9053882956504822
+        },
+        {
+          "word": " the",
+          "start": 24.46,
+          "end": 24.74,
+          "probability": 0.9992258548736572
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 2474,
+      "start": 24.74,
+      "end": 30.48,
+      "text": " importance of learning beyond technical skills. Though not fluent in English, Honda studied foreign",
+      "tokens": [
+        50364,
+        7379,
+        295,
+        2539,
+        4399,
+        6191,
+        3942,
+        13,
+        10404,
+        406,
+        40799,
+        294,
+        3669,
+        11,
+        26989,
+        9454,
+        5329,
+        50652
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.07963722508128096,
+      "compression_ratio": 1.5,
+      "no_speech_prob": 0.003194156102836132,
+      "words": [
+        {
+          "word": " importance",
+          "start": 24.74,
+          "end": 25.18,
+          "probability": 0.5536299347877502
+        },
+        {
+          "word": " of",
+          "start": 25.18,
+          "end": 25.38,
+          "probability": 0.9977333545684814
+        },
+        {
+          "word": " learning",
+          "start": 25.38,
+          "end": 25.64,
+          "probability": 0.99594646692276
+        },
+        {
+          "word": " beyond",
+          "start": 25.64,
+          "end": 26.0,
+          "probability": 0.976255476474762
+        },
+        {
+          "word": " technical",
+          "start": 26.0,
+          "end": 26.48,
+          "probability": 0.9966506361961365
+        },
+        {
+          "word": " skills.",
+          "start": 26.48,
+          "end": 27.12,
+          "probability": 0.9988049268722534
+        },
+        {
+          "word": " Though",
+          "start": 27.8,
+          "end": 28.24,
+          "probability": 0.9768463969230652
+        },
+        {
+          "word": " not",
+          "start": 28.24,
+          "end": 28.4,
+          "probability": 0.996429979801178
+        },
+        {
+          "word": " fluent",
+          "start": 28.4,
+          "end": 28.7,
+          "probability": 0.9749040603637695
+        },
+        {
+          "word": " in",
+          "start": 28.7,
+          "end": 28.88,
+          "probability": 0.9989607334136963
+        },
+        {
+          "word": " English,",
+          "start": 28.88,
+          "end": 29.24,
+          "probability": 0.991419792175293
+        },
+        {
+          "word": " Honda",
+          "start": 29.64,
+          "end": 29.76,
+          "probability": 0.9290857911109924
+        },
+        {
+          "word": " studied",
+          "start": 29.76,
+          "end": 30.18,
+          "probability": 0.9847308397293091
+        },
+        {
+          "word": " foreign",
+          "start": 30.18,
+          "end": 30.48,
+          "probability": 0.9609605669975281
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "seek": 2474,
+      "start": 30.48,
+      "end": 36.56,
+      "text": " manuals meticulously and valued cross-cultural understanding. He surrounded himself with experts",
+      "tokens": [
+        50652,
+        9688,
+        82,
+        41566,
+        25038,
+        293,
+        22608,
+        3278,
+        12,
+        50155,
+        3701,
+        13,
+        634,
+        13221,
+        3647,
+        365,
+        8572,
+        50964
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.07963722508128096,
+      "compression_ratio": 1.5,
+      "no_speech_prob": 0.003194156102836132,
+      "words": [
+        {
+          "word": " manuals",
+          "start": 30.48,
+          "end": 31.04,
+          "probability": 0.9890910983085632
+        },
+        {
+          "word": " meticulously",
+          "start": 31.04,
+          "end": 31.74,
+          "probability": 0.9980672895908356
+        },
+        {
+          "word": " and",
+          "start": 31.74,
+          "end": 32.04,
+          "probability": 0.9783692955970764
+        },
+        {
+          "word": " valued",
+          "start": 32.04,
+          "end": 32.38,
+          "probability": 0.9948909282684326
+        },
+        {
+          "word": " cross",
+          "start": 32.38,
+          "end": 32.72,
+          "probability": 0.9854047894477844
+        },
+        {
+          "word": "-cultural",
+          "start": 32.72,
+          "end": 33.08,
+          "probability": 0.95685014128685
+        },
+        {
+          "word": " understanding.",
+          "start": 33.08,
+          "end": 33.8,
+          "probability": 0.9990468621253967
+        },
+        {
+          "word": " He",
+          "start": 34.42,
+          "end": 35.06,
+          "probability": 0.9943879246711731
+        },
+        {
+          "word": " surrounded",
+          "start": 35.06,
+          "end": 35.48,
+          "probability": 0.9722530245780945
+        },
+        {
+          "word": " himself",
+          "start": 35.48,
+          "end": 35.9,
+          "probability": 0.9970963001251221
+        },
+        {
+          "word": " with",
+          "start": 35.9,
+          "end": 36.2,
+          "probability": 0.9992793202400208
+        },
+        {
+          "word": " experts",
+          "start": 36.2,
+          "end": 36.56,
+          "probability": 0.9883184432983398
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "seek": 2474,
+      "start": 36.56,
+      "end": 43.14,
+      "text": " and never hesitated to ask questions. His relentless curiosity and willingness to fail set him apart.",
+      "tokens": [
+        50964,
+        293,
+        1128,
+        10453,
+        18266,
+        281,
+        1029,
+        1651,
+        13,
+        2812,
+        46136,
+        18769,
+        293,
+        25069,
+        281,
+        3061,
+        992,
+        796,
+        4936,
+        13,
+        51288
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.07963722508128096,
+      "compression_ratio": 1.5,
+      "no_speech_prob": 0.003194156102836132,
+      "words": [
+        {
+          "word": " and",
+          "start": 36.56,
+          "end": 36.92,
+          "probability": 0.5917837023735046
+        },
+        {
+          "word": " never",
+          "start": 36.92,
+          "end": 37.18,
+          "probability": 0.9989325404167175
+        },
+        {
+          "word": " hesitated",
+          "start": 37.18,
+          "end": 37.7,
+          "probability": 0.9904225766658783
+        },
+        {
+          "word": " to",
+          "start": 37.7,
+          "end": 37.9,
+          "probability": 0.9990531802177429
+        },
+        {
+          "word": " ask",
+          "start": 37.9,
+          "end": 38.08,
+          "probability": 0.9946187734603882
+        },
+        {
+          "word": " questions.",
+          "start": 38.08,
+          "end": 38.7,
+          "probability": 0.9977045655250549
+        },
+        {
+          "word": " His",
+          "start": 39.76,
+          "end": 40.0,
+          "probability": 0.9682390093803406
+        },
+        {
+          "word": " relentless",
+          "start": 40.0,
+          "end": 40.4,
+          "probability": 0.9932724237442017
+        },
+        {
+          "word": " curiosity",
+          "start": 40.4,
+          "end": 41.14,
+          "probability": 0.9924076795578003
+        },
+        {
+          "word": " and",
+          "start": 41.14,
+          "end": 41.52,
+          "probability": 0.9983699917793274
+        },
+        {
+          "word": " willingness",
+          "start": 41.52,
+          "end": 41.8,
+          "probability": 0.9985319375991821
+        },
+        {
+          "word": " to",
+          "start": 41.8,
+          "end": 42.18,
+          "probability": 0.9994072914123535
+        },
+        {
+          "word": " fail",
+          "start": 42.18,
+          "end": 42.42,
+          "probability": 0.9739198088645935
+        },
+        {
+          "word": " set",
+          "start": 42.42,
+          "end": 42.66,
+          "probability": 0.991163969039917
+        },
+        {
+          "word": " him",
+          "start": 42.66,
+          "end": 42.82,
+          "probability": 0.9992378950119019
+        },
+        {
+          "word": " apart.",
+          "start": 42.82,
+          "end": 43.14,
+          "probability": 0.9811028838157654
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "seek": 2474,
+      "start": 44.26,
+      "end": 50.24,
+      "text": " Success represents the 1% of your work which results from the 99% that is called failure, he once",
+      "tokens": [
+        51336,
+        23669,
+        8855,
+        264,
+        502,
+        4,
+        295,
+        428,
+        589,
+        597,
+        3542,
+        490,
+        264,
+        11803,
+        4,
+        300,
+        307,
+        1219,
+        7763,
+        11,
+        415,
+        1564,
+        51636
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.07963722508128096,
+      "compression_ratio": 1.5,
+      "no_speech_prob": 0.003194156102836132,
+      "words": [
+        {
+          "word": " Success",
+          "start": 44.26,
+          "end": 44.62,
+          "probability": 0.7349730730056763
+        },
+        {
+          "word": " represents",
+          "start": 44.62,
+          "end": 45.22,
+          "probability": 0.9938189387321472
+        },
+        {
+          "word": " the",
+          "start": 45.22,
+          "end": 45.44,
+          "probability": 0.9956537485122681
+        },
+        {
+          "word": " 1",
+          "start": 45.44,
+          "end": 45.66,
+          "probability": 0.7799761295318604
+        },
+        {
+          "word": "%",
+          "start": 45.66,
+          "end": 45.94,
+          "probability": 0.8546826839447021
+        },
+        {
+          "word": " of",
+          "start": 45.94,
+          "end": 46.12,
+          "probability": 0.99396812915802
+        },
+        {
+          "word": " your",
+          "start": 46.12,
+          "end": 46.26,
+          "probability": 0.9912844896316528
+        },
+        {
+          "word": " work",
+          "start": 46.26,
+          "end": 46.62,
+          "probability": 0.9984710812568665
+        },
+        {
+          "word": " which",
+          "start": 46.62,
+          "end": 46.78,
+          "probability": 0.9654950499534607
+        },
+        {
+          "word": " results",
+          "start": 46.78,
+          "end": 47.08,
+          "probability": 0.9930440783500671
+        },
+        {
+          "word": " from",
+          "start": 47.08,
+          "end": 47.38,
+          "probability": 0.9988671541213989
+        },
+        {
+          "word": " the",
+          "start": 47.38,
+          "end": 47.52,
+          "probability": 0.9979603290557861
+        },
+        {
+          "word": " 99",
+          "start": 47.52,
+          "end": 47.98,
+          "probability": 0.9921315312385559
+        },
+        {
+          "word": "%",
+          "start": 47.98,
+          "end": 48.44,
+          "probability": 0.9750559329986572
+        },
+        {
+          "word": " that",
+          "start": 48.44,
+          "end": 48.7,
+          "probability": 0.997943103313446
+        },
+        {
+          "word": " is",
+          "start": 48.7,
+          "end": 48.84,
+          "probability": 0.9842096567153931
+        },
+        {
+          "word": " called",
+          "start": 48.84,
+          "end": 49.04,
+          "probability": 0.9949200749397278
+        },
+        {
+          "word": " failure,",
+          "start": 49.04,
+          "end": 49.48,
+          "probability": 0.9294776320457458
+        },
+        {
+          "word": " he",
+          "start": 49.86,
+          "end": 49.96,
+          "probability": 0.9799216985702515
+        },
+        {
+          "word": " once",
+          "start": 49.96,
+          "end": 50.24,
+          "probability": 0.9963425993919373
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "seek": 5024,
+      "start": 50.24,
+      "end": 56.58,
+      "text": " remarked. History exemplifies that true education stems not from institutions but from a relentless",
+      "tokens": [
+        50364,
+        7942,
+        292,
+        13,
+        12486,
+        24112,
+        11221,
+        300,
+        2074,
+        3309,
+        27600,
+        406,
+        490,
+        8142,
+        457,
+        490,
+        257,
+        46136,
+        50688
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.23347416520118713,
+      "compression_ratio": 1.2660550458715596,
+      "no_speech_prob": 0.02500254660844803,
+      "words": [
+        {
+          "word": " remarked.",
+          "start": 50.24,
+          "end": 51.36,
+          "probability": 0.6116482764482498
+        },
+        {
+          "word": " History",
+          "start": 51.6,
+          "end": 52.04,
+          "probability": 0.6027963757514954
+        },
+        {
+          "word": " exemplifies",
+          "start": 52.04,
+          "end": 52.94,
+          "probability": 0.9943618178367615
+        },
+        {
+          "word": " that",
+          "start": 52.94,
+          "end": 53.16,
+          "probability": 0.9979269504547119
+        },
+        {
+          "word": " true",
+          "start": 53.16,
+          "end": 53.4,
+          "probability": 0.972080409526825
+        },
+        {
+          "word": " education",
+          "start": 53.4,
+          "end": 54.0,
+          "probability": 0.9769295454025269
+        },
+        {
+          "word": " stems",
+          "start": 54.0,
+          "end": 54.36,
+          "probability": 0.9911872744560242
+        },
+        {
+          "word": " not",
+          "start": 54.36,
+          "end": 54.72,
+          "probability": 0.9902982115745544
+        },
+        {
+          "word": " from",
+          "start": 54.72,
+          "end": 54.92,
+          "probability": 0.9904378056526184
+        },
+        {
+          "word": " institutions",
+          "start": 54.92,
+          "end": 55.54,
+          "probability": 0.9962611794471741
+        },
+        {
+          "word": " but",
+          "start": 55.54,
+          "end": 55.9,
+          "probability": 0.8876866698265076
+        },
+        {
+          "word": " from",
+          "start": 55.9,
+          "end": 56.1,
+          "probability": 0.9980182647705078
+        },
+        {
+          "word": " a",
+          "start": 56.1,
+          "end": 56.2,
+          "probability": 0.9990788698196411
+        },
+        {
+          "word": " relentless",
+          "start": 56.2,
+          "end": 56.58,
+          "probability": 0.994681179523468
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "seek": 5024,
+      "start": 56.58,
+      "end": 59.2,
+      "text": " drive to grow, explore, and persevere.",
+      "tokens": [
+        50688,
+        3332,
+        281,
+        1852,
+        11,
+        6839,
+        11,
+        293,
+        20607,
+        5887,
+        13,
+        50852
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.23347416520118713,
+      "compression_ratio": 1.2660550458715596,
+      "no_speech_prob": 0.02500254660844803,
+      "words": [
+        {
+          "word": " drive",
+          "start": 56.58,
+          "end": 56.9,
+          "probability": 0.9722344279289246
+        },
+        {
+          "word": " to",
+          "start": 56.9,
+          "end": 57.08,
+          "probability": 0.9632631540298462
+        },
+        {
+          "word": " grow,",
+          "start": 57.08,
+          "end": 57.32,
+          "probability": 0.9932721257209778
+        },
+        {
+          "word": " explore,",
+          "start": 57.74,
+          "end": 58.16,
+          "probability": 0.9964962601661682
+        },
+        {
+          "word": " and",
+          "start": 58.56,
+          "end": 58.66,
+          "probability": 0.9943243265151978
+        },
+        {
+          "word": " persevere.",
+          "start": 58.66,
+          "end": 59.2,
+          "probability": 0.9963680803775787
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

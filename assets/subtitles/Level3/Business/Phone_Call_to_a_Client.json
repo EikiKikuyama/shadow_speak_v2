@@ -1,0 +1,583 @@
+{
+  "text": " Hello, this is ShadowSpeakCompany. May I speak with Mr. Suzuki? Please, he's in a meeting? No problem. Could you ask him to call me back? My number is 555-3210. It's about the new design proposal. I'll also send a follow-up email. Thank you very much. Have a great day. Goodbye.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 2.2,
+      "text": " Hello, this is ShadowSpeakCompany.",
+      "tokens": [
+        50364,
+        2425,
+        11,
+        341,
+        307,
+        19036,
+        19588,
+        514,
+        34,
+        8586,
+        1325,
+        13,
+        50485
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2940829059865215,
+      "compression_ratio": 1.2930232558139534,
+      "no_speech_prob": 0.05723397433757782,
+      "words": [
+        {
+          "word": " Hello,",
+          "start": 0.0,
+          "end": 0.46,
+          "probability": 0.9171326756477356
+        },
+        {
+          "word": " this",
+          "start": 0.82,
+          "end": 1.02,
+          "probability": 0.9387235045433044
+        },
+        {
+          "word": " is",
+          "start": 1.02,
+          "end": 1.2,
+          "probability": 0.9964908957481384
+        },
+        {
+          "word": " ShadowSpeakCompany.",
+          "start": 1.2,
+          "end": 2.2,
+          "probability": 0.8230707844098409
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 2.42,
+      "end": 3.64,
+      "text": " May I speak with Mr. Suzuki?",
+      "tokens": [
+        50485,
+        1891,
+        286,
+        1710,
+        365,
+        2221,
+        13,
+        49457,
+        30,
+        50580
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2940829059865215,
+      "compression_ratio": 1.2930232558139534,
+      "no_speech_prob": 0.05723397433757782,
+      "words": [
+        {
+          "word": " May",
+          "start": 2.42,
+          "end": 2.52,
+          "probability": 0.9279676675796509
+        },
+        {
+          "word": " I",
+          "start": 2.52,
+          "end": 2.62,
+          "probability": 0.9863548874855042
+        },
+        {
+          "word": " speak",
+          "start": 2.62,
+          "end": 2.84,
+          "probability": 0.9914264678955078
+        },
+        {
+          "word": " with",
+          "start": 2.84,
+          "end": 3.06,
+          "probability": 0.9960761666297913
+        },
+        {
+          "word": " Mr.",
+          "start": 3.06,
+          "end": 3.34,
+          "probability": 0.9800074696540833
+        },
+        {
+          "word": " Suzuki?",
+          "start": 3.48,
+          "end": 3.64,
+          "probability": 0.959756076335907
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 4.22,
+      "end": 5.5,
+      "text": " Please, he's in a meeting?",
+      "tokens": [
+        50580,
+        2555,
+        11,
+        415,
+        311,
+        294,
+        257,
+        3440,
+        30,
+        50661
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2940829059865215,
+      "compression_ratio": 1.2930232558139534,
+      "no_speech_prob": 0.05723397433757782,
+      "words": [
+        {
+          "word": " Please,",
+          "start": 4.22,
+          "end": 4.44,
+          "probability": 0.9879419207572937
+        },
+        {
+          "word": " he's",
+          "start": 4.84,
+          "end": 5.1,
+          "probability": 0.9538549184799194
+        },
+        {
+          "word": " in",
+          "start": 5.1,
+          "end": 5.18,
+          "probability": 0.9953427314758301
+        },
+        {
+          "word": " a",
+          "start": 5.18,
+          "end": 5.26,
+          "probability": 0.9984683394432068
+        },
+        {
+          "word": " meeting?",
+          "start": 5.26,
+          "end": 5.5,
+          "probability": 0.9993453621864319
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 5.86,
+      "end": 6.38,
+      "text": " No problem.",
+      "tokens": [
+        50661,
+        883,
+        1154,
+        13,
+        50741
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2940829059865215,
+      "compression_ratio": 1.2930232558139534,
+      "no_speech_prob": 0.05723397433757782,
+      "words": [
+        {
+          "word": " No",
+          "start": 5.86,
+          "end": 5.98,
+          "probability": 0.9735447764396667
+        },
+        {
+          "word": " problem.",
+          "start": 5.98,
+          "end": 6.38,
+          "probability": 0.994767427444458
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 0,
+      "start": 7.38,
+      "end": 8.88,
+      "text": " Could you ask him to call me back?",
+      "tokens": [
+        50741,
+        7497,
+        291,
+        1029,
+        796,
+        281,
+        818,
+        385,
+        646,
+        30,
+        50827
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2940829059865215,
+      "compression_ratio": 1.2930232558139534,
+      "no_speech_prob": 0.05723397433757782,
+      "words": [
+        {
+          "word": " Could",
+          "start": 7.38,
+          "end": 7.6,
+          "probability": 0.973772406578064
+        },
+        {
+          "word": " you",
+          "start": 7.6,
+          "end": 7.74,
+          "probability": 0.9984126091003418
+        },
+        {
+          "word": " ask",
+          "start": 7.74,
+          "end": 8.0,
+          "probability": 0.9986609220504761
+        },
+        {
+          "word": " him",
+          "start": 8.0,
+          "end": 8.16,
+          "probability": 0.9985805749893188
+        },
+        {
+          "word": " to",
+          "start": 8.16,
+          "end": 8.28,
+          "probability": 0.9987420439720154
+        },
+        {
+          "word": " call",
+          "start": 8.28,
+          "end": 8.44,
+          "probability": 0.9581750631332397
+        },
+        {
+          "word": " me",
+          "start": 8.44,
+          "end": 8.58,
+          "probability": 0.9992287158966064
+        },
+        {
+          "word": " back?",
+          "start": 8.58,
+          "end": 8.88,
+          "probability": 0.9988969564437866
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "seek": 0,
+      "start": 9.22,
+      "end": 11.88,
+      "text": " My number is 555-3210.",
+      "tokens": [
+        50827,
+        1222,
+        1230,
+        307,
+        12330,
+        20,
+        12,
+        11440,
+        3279,
+        13,
+        50984
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2940829059865215,
+      "compression_ratio": 1.2930232558139534,
+      "no_speech_prob": 0.05723397433757782,
+      "words": [
+        {
+          "word": " My",
+          "start": 9.22,
+          "end": 9.34,
+          "probability": 0.9851083159446716
+        },
+        {
+          "word": " number",
+          "start": 9.34,
+          "end": 9.58,
+          "probability": 0.99647456407547
+        },
+        {
+          "word": " is",
+          "start": 9.58,
+          "end": 9.8,
+          "probability": 0.9962581396102905
+        },
+        {
+          "word": " 555",
+          "start": 9.8,
+          "end": 10.76,
+          "probability": 0.8279750645160675
+        },
+        {
+          "word": "-3210.",
+          "start": 10.76,
+          "end": 11.88,
+          "probability": 0.8935627738634745
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "seek": 0,
+      "start": 12.04,
+      "end": 13.66,
+      "text": " It's about the new design proposal.",
+      "tokens": [
+        50984,
+        467,
+        311,
+        466,
+        264,
+        777,
+        1715,
+        11494,
+        13,
+        51069
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2940829059865215,
+      "compression_ratio": 1.2930232558139534,
+      "no_speech_prob": 0.05723397433757782,
+      "words": [
+        {
+          "word": " It's",
+          "start": 12.04,
+          "end": 12.44,
+          "probability": 0.9847705364227295
+        },
+        {
+          "word": " about",
+          "start": 12.44,
+          "end": 12.6,
+          "probability": 0.9987087249755859
+        },
+        {
+          "word": " the",
+          "start": 12.6,
+          "end": 12.76,
+          "probability": 0.9918417930603027
+        },
+        {
+          "word": " new",
+          "start": 12.76,
+          "end": 12.9,
+          "probability": 0.9911366701126099
+        },
+        {
+          "word": " design",
+          "start": 12.9,
+          "end": 13.2,
+          "probability": 0.9705618619918823
+        },
+        {
+          "word": " proposal.",
+          "start": 13.2,
+          "end": 13.66,
+          "probability": 0.9013519883155823
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "seek": 0,
+      "start": 14.04,
+      "end": 15.64,
+      "text": " I'll also send a follow-up email.",
+      "tokens": [
+        51069,
+        286,
+        603,
+        611,
+        2845,
+        257,
+        1524,
+        12,
+        1010,
+        3796,
+        13,
+        51159
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2940829059865215,
+      "compression_ratio": 1.2930232558139534,
+      "no_speech_prob": 0.05723397433757782,
+      "words": [
+        {
+          "word": " I'll",
+          "start": 14.04,
+          "end": 14.28,
+          "probability": 0.9941776990890503
+        },
+        {
+          "word": " also",
+          "start": 14.28,
+          "end": 14.56,
+          "probability": 0.998225748538971
+        },
+        {
+          "word": " send",
+          "start": 14.56,
+          "end": 14.8,
+          "probability": 0.9979614019393921
+        },
+        {
+          "word": " a",
+          "start": 14.8,
+          "end": 14.9,
+          "probability": 0.996290922164917
+        },
+        {
+          "word": " follow",
+          "start": 14.9,
+          "end": 15.18,
+          "probability": 0.9949170351028442
+        },
+        {
+          "word": "-up",
+          "start": 15.18,
+          "end": 15.34,
+          "probability": 0.799142599105835
+        },
+        {
+          "word": " email.",
+          "start": 15.34,
+          "end": 15.64,
+          "probability": 0.9161458611488342
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "seek": 0,
+      "start": 15.88,
+      "end": 16.8,
+      "text": " Thank you very much.",
+      "tokens": [
+        51159,
+        1044,
+        291,
+        588,
+        709,
+        13,
+        51209
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2940829059865215,
+      "compression_ratio": 1.2930232558139534,
+      "no_speech_prob": 0.05723397433757782,
+      "words": [
+        {
+          "word": " Thank",
+          "start": 15.88,
+          "end": 16.0,
+          "probability": 0.9950384497642517
+        },
+        {
+          "word": " you",
+          "start": 16.0,
+          "end": 16.12,
+          "probability": 0.9919792413711548
+        },
+        {
+          "word": " very",
+          "start": 16.12,
+          "end": 16.32,
+          "probability": 0.9979725480079651
+        },
+        {
+          "word": " much.",
+          "start": 16.32,
+          "end": 16.8,
+          "probability": 0.9994437098503113
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "seek": 0,
+      "start": 16.92,
+      "end": 17.56,
+      "text": " Have a great day.",
+      "tokens": [
+        51209,
+        3560,
+        257,
+        869,
+        786,
+        13,
+        51259
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2940829059865215,
+      "compression_ratio": 1.2930232558139534,
+      "no_speech_prob": 0.05723397433757782,
+      "words": [
+        {
+          "word": " Have",
+          "start": 16.92,
+          "end": 17.0,
+          "probability": 0.9951432943344116
+        },
+        {
+          "word": " a",
+          "start": 17.0,
+          "end": 17.12,
+          "probability": 0.9984344840049744
+        },
+        {
+          "word": " great",
+          "start": 17.12,
+          "end": 17.3,
+          "probability": 0.9972482323646545
+        },
+        {
+          "word": " day.",
+          "start": 17.3,
+          "end": 17.56,
+          "probability": 0.9992885589599609
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "seek": 0,
+      "start": 17.72,
+      "end": 17.9,
+      "text": " Goodbye.",
+      "tokens": [
+        51259,
+        15528,
+        13,
+        51273
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2940829059865215,
+      "compression_ratio": 1.2930232558139534,
+      "no_speech_prob": 0.05723397433757782,
+      "words": [
+        {
+          "word": " Goodbye.",
+          "start": 17.72,
+          "end": 17.9,
+          "probability": 0.8546596765518188
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

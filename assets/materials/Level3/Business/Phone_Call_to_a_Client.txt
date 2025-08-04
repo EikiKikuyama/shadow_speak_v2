@@ -1,0 +1,5 @@
+Title: Phone Call to a Client
+WordCount: 78
+
+Script:
+Hello, this is Shadow Speak Company.May I speak with Mr. Suzuki, please?He’s in a meeting?No problem. Could you ask him to call me back?My number is 555-3210.It’s about the new design proposal.I’ll also send a follow-up email.Thank you very much.Have a great day.Goodbye.

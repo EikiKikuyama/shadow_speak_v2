@@ -1,0 +1,735 @@
+{
+  "text": " Tomorrow, I have an important job interview. I've spent the last few days researching the company and reviewing common interview questions. I practiced answering them in front of the mirror. I also updated my resume and printed extra copies. I chose a clean, professional outfit to word, I want to make a good first impression. Before going to bed, I packed my bag with everything I need. I'm a little nervous, but I believe I'm ready. This job is a great opportunity, and I want to show them my skills and enthusiasm.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 7.02,
+      "text": " Tomorrow, I have an important job interview. I've spent the last few days researching the company and reviewing common interview questions.",
+      "tokens": [
+        50364,
+        17499,
+        11,
+        286,
+        362,
+        364,
+        1021,
+        1691,
+        4049,
+        13,
+        286,
+        600,
+        4418,
+        264,
+        1036,
+        1326,
+        1708,
+        24176,
+        264,
+        2237,
+        293,
+        19576,
+        2689,
+        4049,
+        1651,
+        13,
+        50728
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1646124629651086,
+      "compression_ratio": 1.6818181818181819,
+      "no_speech_prob": 0.11762484908103943,
+      "words": [
+        {
+          "word": " Tomorrow,",
+          "start": 0.0,
+          "end": 0.54,
+          "probability": 0.8316577076911926
+        },
+        {
+          "word": " I",
+          "start": 0.94,
+          "end": 1.02,
+          "probability": 0.9898242354393005
+        },
+        {
+          "word": " have",
+          "start": 1.02,
+          "end": 1.14,
+          "probability": 0.9981762170791626
+        },
+        {
+          "word": " an",
+          "start": 1.14,
+          "end": 1.26,
+          "probability": 0.9972994923591614
+        },
+        {
+          "word": " important",
+          "start": 1.26,
+          "end": 1.6,
+          "probability": 0.9833341240882874
+        },
+        {
+          "word": " job",
+          "start": 1.6,
+          "end": 1.86,
+          "probability": 0.9882395267486572
+        },
+        {
+          "word": " interview.",
+          "start": 1.86,
+          "end": 2.32,
+          "probability": 0.9934206604957581
+        },
+        {
+          "word": " I've",
+          "start": 2.58,
+          "end": 2.86,
+          "probability": 0.8518550395965576
+        },
+        {
+          "word": " spent",
+          "start": 2.86,
+          "end": 3.04,
+          "probability": 0.9978378415107727
+        },
+        {
+          "word": " the",
+          "start": 3.04,
+          "end": 3.22,
+          "probability": 0.9980401396751404
+        },
+        {
+          "word": " last",
+          "start": 3.22,
+          "end": 3.46,
+          "probability": 0.9986938834190369
+        },
+        {
+          "word": " few",
+          "start": 3.46,
+          "end": 3.74,
+          "probability": 0.9986810088157654
+        },
+        {
+          "word": " days",
+          "start": 3.74,
+          "end": 3.94,
+          "probability": 0.9988646507263184
+        },
+        {
+          "word": " researching",
+          "start": 3.94,
+          "end": 4.54,
+          "probability": 0.9977723956108093
+        },
+        {
+          "word": " the",
+          "start": 4.54,
+          "end": 4.72,
+          "probability": 0.997698962688446
+        },
+        {
+          "word": " company",
+          "start": 4.72,
+          "end": 5.12,
+          "probability": 0.9982130527496338
+        },
+        {
+          "word": " and",
+          "start": 5.12,
+          "end": 5.4,
+          "probability": 0.984637439250946
+        },
+        {
+          "word": " reviewing",
+          "start": 5.4,
+          "end": 5.72,
+          "probability": 0.9951170682907104
+        },
+        {
+          "word": " common",
+          "start": 5.72,
+          "end": 6.12,
+          "probability": 0.9866542220115662
+        },
+        {
+          "word": " interview",
+          "start": 6.12,
+          "end": 6.48,
+          "probability": 0.9925332069396973
+        },
+        {
+          "word": " questions.",
+          "start": 6.48,
+          "end": 7.02,
+          "probability": 0.9947270750999451
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 7.4,
+      "end": 12.76,
+      "text": " I practiced answering them in front of the mirror. I also updated my resume and printed extra copies.",
+      "tokens": [
+        50728,
+        286,
+        19268,
+        13430,
+        552,
+        294,
+        1868,
+        295,
+        264,
+        8013,
+        13,
+        286,
+        611,
+        10588,
+        452,
+        15358,
+        293,
+        13567,
+        2857,
+        14341,
+        13,
+        51012
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1646124629651086,
+      "compression_ratio": 1.6818181818181819,
+      "no_speech_prob": 0.11762484908103943,
+      "words": [
+        {
+          "word": " I",
+          "start": 7.4,
+          "end": 7.5,
+          "probability": 0.9953599572181702
+        },
+        {
+          "word": " practiced",
+          "start": 7.5,
+          "end": 7.86,
+          "probability": 0.9012624025344849
+        },
+        {
+          "word": " answering",
+          "start": 7.86,
+          "end": 8.38,
+          "probability": 0.9931214451789856
+        },
+        {
+          "word": " them",
+          "start": 8.38,
+          "end": 8.6,
+          "probability": 0.9996271133422852
+        },
+        {
+          "word": " in",
+          "start": 8.6,
+          "end": 8.7,
+          "probability": 0.9971868395805359
+        },
+        {
+          "word": " front",
+          "start": 8.7,
+          "end": 8.88,
+          "probability": 0.993412435054779
+        },
+        {
+          "word": " of",
+          "start": 8.88,
+          "end": 9.06,
+          "probability": 0.9994434714317322
+        },
+        {
+          "word": " the",
+          "start": 9.06,
+          "end": 9.16,
+          "probability": 0.9499605894088745
+        },
+        {
+          "word": " mirror.",
+          "start": 9.16,
+          "end": 9.38,
+          "probability": 0.6377540230751038
+        },
+        {
+          "word": " I",
+          "start": 9.62,
+          "end": 9.88,
+          "probability": 0.9942644238471985
+        },
+        {
+          "word": " also",
+          "start": 9.88,
+          "end": 10.22,
+          "probability": 0.9989460110664368
+        },
+        {
+          "word": " updated",
+          "start": 10.22,
+          "end": 10.64,
+          "probability": 0.9965772032737732
+        },
+        {
+          "word": " my",
+          "start": 10.64,
+          "end": 10.84,
+          "probability": 0.9983639121055603
+        },
+        {
+          "word": " resume",
+          "start": 10.84,
+          "end": 11.26,
+          "probability": 0.9809668064117432
+        },
+        {
+          "word": " and",
+          "start": 11.26,
+          "end": 11.64,
+          "probability": 0.9809386730194092
+        },
+        {
+          "word": " printed",
+          "start": 11.64,
+          "end": 11.94,
+          "probability": 0.9961134195327759
+        },
+        {
+          "word": " extra",
+          "start": 11.94,
+          "end": 12.34,
+          "probability": 0.9899647831916809
+        },
+        {
+          "word": " copies.",
+          "start": 12.34,
+          "end": 12.76,
+          "probability": 0.9859381318092346
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 13.04,
+      "end": 21.06,
+      "text": " I chose a clean, professional outfit to word, I want to make a good first impression. Before going to bed, I packed my bag with everything I need.",
+      "tokens": [
+        51012,
+        286,
+        5111,
+        257,
+        2541,
+        11,
+        4843,
+        11263,
+        281,
+        1349,
+        11,
+        286,
+        528,
+        281,
+        652,
+        257,
+        665,
+        700,
+        9995,
+        13,
+        4546,
+        516,
+        281,
+        2901,
+        11,
+        286,
+        13265,
+        452,
+        3411,
+        365,
+        1203,
+        286,
+        643,
+        13,
+        51428
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1646124629651086,
+      "compression_ratio": 1.6818181818181819,
+      "no_speech_prob": 0.11762484908103943,
+      "words": [
+        {
+          "word": " I",
+          "start": 13.04,
+          "end": 13.22,
+          "probability": 0.9925364255905151
+        },
+        {
+          "word": " chose",
+          "start": 13.22,
+          "end": 13.44,
+          "probability": 0.9899526238441467
+        },
+        {
+          "word": " a",
+          "start": 13.44,
+          "end": 13.58,
+          "probability": 0.9985187649726868
+        },
+        {
+          "word": " clean,",
+          "start": 13.58,
+          "end": 13.84,
+          "probability": 0.9860827326774597
+        },
+        {
+          "word": " professional",
+          "start": 14.26,
+          "end": 14.68,
+          "probability": 0.9975078105926514
+        },
+        {
+          "word": " outfit",
+          "start": 14.68,
+          "end": 15.1,
+          "probability": 0.986223042011261
+        },
+        {
+          "word": " to",
+          "start": 15.1,
+          "end": 15.38,
+          "probability": 0.498610258102417
+        },
+        {
+          "word": " word,",
+          "start": 15.38,
+          "end": 15.54,
+          "probability": 0.48508939146995544
+        },
+        {
+          "word": " I",
+          "start": 15.78,
+          "end": 15.98,
+          "probability": 0.43178948760032654
+        },
+        {
+          "word": " want",
+          "start": 15.98,
+          "end": 16.14,
+          "probability": 0.9955248832702637
+        },
+        {
+          "word": " to",
+          "start": 16.14,
+          "end": 16.3,
+          "probability": 0.9990990161895752
+        },
+        {
+          "word": " make",
+          "start": 16.3,
+          "end": 16.44,
+          "probability": 0.9982001781463623
+        },
+        {
+          "word": " a",
+          "start": 16.44,
+          "end": 16.58,
+          "probability": 0.998601496219635
+        },
+        {
+          "word": " good",
+          "start": 16.58,
+          "end": 16.76,
+          "probability": 0.996612012386322
+        },
+        {
+          "word": " first",
+          "start": 16.76,
+          "end": 17.08,
+          "probability": 0.9816834926605225
+        },
+        {
+          "word": " impression.",
+          "start": 17.08,
+          "end": 17.6,
+          "probability": 0.9975917339324951
+        },
+        {
+          "word": " Before",
+          "start": 17.9,
+          "end": 18.12,
+          "probability": 0.9871082901954651
+        },
+        {
+          "word": " going",
+          "start": 18.12,
+          "end": 18.42,
+          "probability": 0.9992535710334778
+        },
+        {
+          "word": " to",
+          "start": 18.42,
+          "end": 18.58,
+          "probability": 0.9937619566917419
+        },
+        {
+          "word": " bed,",
+          "start": 18.58,
+          "end": 18.82,
+          "probability": 0.9979966282844543
+        },
+        {
+          "word": " I",
+          "start": 19.18,
+          "end": 19.3,
+          "probability": 0.997787594795227
+        },
+        {
+          "word": " packed",
+          "start": 19.3,
+          "end": 19.58,
+          "probability": 0.9812337160110474
+        },
+        {
+          "word": " my",
+          "start": 19.58,
+          "end": 19.76,
+          "probability": 0.9993413090705872
+        },
+        {
+          "word": " bag",
+          "start": 19.76,
+          "end": 20.0,
+          "probability": 0.9981359243392944
+        },
+        {
+          "word": " with",
+          "start": 20.0,
+          "end": 20.2,
+          "probability": 0.9990693926811218
+        },
+        {
+          "word": " everything",
+          "start": 20.2,
+          "end": 20.6,
+          "probability": 0.9985095858573914
+        },
+        {
+          "word": " I",
+          "start": 20.6,
+          "end": 20.8,
+          "probability": 0.9905102849006653
+        },
+        {
+          "word": " need.",
+          "start": 20.8,
+          "end": 21.06,
+          "probability": 0.9913457632064819
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 21.2,
+      "end": 28.52,
+      "text": " I'm a little nervous, but I believe I'm ready. This job is a great opportunity, and I want to show them my skills and enthusiasm.",
+      "tokens": [
+        51428,
+        286,
+        478,
+        257,
+        707,
+        6296,
+        11,
+        457,
+        286,
+        1697,
+        286,
+        478,
+        1919,
+        13,
+        639,
+        1691,
+        307,
+        257,
+        869,
+        2650,
+        11,
+        293,
+        286,
+        528,
+        281,
+        855,
+        552,
+        452,
+        3942,
+        293,
+        23417,
+        13,
+        51808
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1646124629651086,
+      "compression_ratio": 1.6818181818181819,
+      "no_speech_prob": 0.11762484908103943,
+      "words": [
+        {
+          "word": " I'm",
+          "start": 21.2,
+          "end": 21.56,
+          "probability": 0.9707795977592468
+        },
+        {
+          "word": " a",
+          "start": 21.56,
+          "end": 21.62,
+          "probability": 0.9991642236709595
+        },
+        {
+          "word": " little",
+          "start": 21.62,
+          "end": 21.82,
+          "probability": 0.996880054473877
+        },
+        {
+          "word": " nervous,",
+          "start": 21.82,
+          "end": 22.14,
+          "probability": 0.9992996454238892
+        },
+        {
+          "word": " but",
+          "start": 22.58,
+          "end": 22.74,
+          "probability": 0.986687958240509
+        },
+        {
+          "word": " I",
+          "start": 22.74,
+          "end": 22.86,
+          "probability": 0.9961673617362976
+        },
+        {
+          "word": " believe",
+          "start": 22.86,
+          "end": 23.12,
+          "probability": 0.997896671295166
+        },
+        {
+          "word": " I'm",
+          "start": 23.12,
+          "end": 23.36,
+          "probability": 0.995437741279602
+        },
+        {
+          "word": " ready.",
+          "start": 23.36,
+          "end": 23.56,
+          "probability": 0.9992372989654541
+        },
+        {
+          "word": " This",
+          "start": 23.74,
+          "end": 23.86,
+          "probability": 0.989693820476532
+        },
+        {
+          "word": " job",
+          "start": 23.86,
+          "end": 24.1,
+          "probability": 0.9997548460960388
+        },
+        {
+          "word": " is",
+          "start": 24.1,
+          "end": 24.26,
+          "probability": 0.9966115355491638
+        },
+        {
+          "word": " a",
+          "start": 24.26,
+          "end": 24.32,
+          "probability": 0.9990009665489197
+        },
+        {
+          "word": " great",
+          "start": 24.32,
+          "end": 24.52,
+          "probability": 0.9989573955535889
+        },
+        {
+          "word": " opportunity,",
+          "start": 24.52,
+          "end": 25.08,
+          "probability": 0.9993003606796265
+        },
+        {
+          "word": " and",
+          "start": 25.46,
+          "end": 25.64,
+          "probability": 0.99603670835495
+        },
+        {
+          "word": " I",
+          "start": 25.64,
+          "end": 25.72,
+          "probability": 0.9986452460289001
+        },
+        {
+          "word": " want",
+          "start": 25.72,
+          "end": 25.86,
+          "probability": 0.9989314675331116
+        },
+        {
+          "word": " to",
+          "start": 25.86,
+          "end": 26.0,
+          "probability": 0.9995598196983337
+        },
+        {
+          "word": " show",
+          "start": 26.0,
+          "end": 26.16,
+          "probability": 0.991248607635498
+        },
+        {
+          "word": " them",
+          "start": 26.16,
+          "end": 26.32,
+          "probability": 0.9972453117370605
+        },
+        {
+          "word": " my",
+          "start": 26.32,
+          "end": 26.5,
+          "probability": 0.9983153343200684
+        },
+        {
+          "word": " skills",
+          "start": 26.5,
+          "end": 26.8,
+          "probability": 0.9979181885719299
+        },
+        {
+          "word": " and",
+          "start": 26.8,
+          "end": 27.12,
+          "probability": 0.5582961440086365
+        },
+        {
+          "word": " enthusiasm.",
+          "start": 27.12,
+          "end": 28.52,
+          "probability": 0.7299834489822388
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

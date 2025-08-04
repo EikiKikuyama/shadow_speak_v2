@@ -1,0 +1,183 @@
+{
+  "text": " The next train will arrive in three minutes. Please wait behind the yellow line. Thank you for using our station.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 4.72,
+      "text": " The next train will arrive in three minutes. Please wait behind the yellow line.",
+      "tokens": [
+        50364,
+        440,
+        958,
+        3847,
+        486,
+        8881,
+        294,
+        1045,
+        2077,
+        13,
+        2555,
+        1699,
+        2261,
+        264,
+        5566,
+        1622,
+        13,
+        50600
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.25460985728672575,
+      "compression_ratio": 1.1770833333333333,
+      "no_speech_prob": 0.01580381952226162,
+      "words": [
+        {
+          "word": " The",
+          "start": 0.0,
+          "end": 0.28,
+          "probability": 0.8096221685409546
+        },
+        {
+          "word": " next",
+          "start": 0.28,
+          "end": 0.52,
+          "probability": 0.9975990653038025
+        },
+        {
+          "word": " train",
+          "start": 0.52,
+          "end": 0.84,
+          "probability": 0.9942627549171448
+        },
+        {
+          "word": " will",
+          "start": 0.84,
+          "end": 1.04,
+          "probability": 0.9988962411880493
+        },
+        {
+          "word": " arrive",
+          "start": 1.04,
+          "end": 1.32,
+          "probability": 0.9990426898002625
+        },
+        {
+          "word": " in",
+          "start": 1.32,
+          "end": 1.5,
+          "probability": 0.9988670349121094
+        },
+        {
+          "word": " three",
+          "start": 1.5,
+          "end": 1.74,
+          "probability": 0.6928763389587402
+        },
+        {
+          "word": " minutes.",
+          "start": 1.74,
+          "end": 2.0,
+          "probability": 0.9980429410934448
+        },
+        {
+          "word": " Please",
+          "start": 2.86,
+          "end": 3.38,
+          "probability": 0.9866583943367004
+        },
+        {
+          "word": " wait",
+          "start": 3.38,
+          "end": 3.6,
+          "probability": 0.9961291551589966
+        },
+        {
+          "word": " behind",
+          "start": 3.6,
+          "end": 3.96,
+          "probability": 0.996921956539154
+        },
+        {
+          "word": " the",
+          "start": 3.96,
+          "end": 4.16,
+          "probability": 0.9986120462417603
+        },
+        {
+          "word": " yellow",
+          "start": 4.16,
+          "end": 4.36,
+          "probability": 0.9848713278770447
+        },
+        {
+          "word": " line.",
+          "start": 4.36,
+          "end": 4.72,
+          "probability": 0.9965537786483765
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 5.5,
+      "end": 7.14,
+      "text": " Thank you for using our station.",
+      "tokens": [
+        50648,
+        1044,
+        291,
+        337,
+        1228,
+        527,
+        5214,
+        13,
+        51032
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.25460985728672575,
+      "compression_ratio": 1.1770833333333333,
+      "no_speech_prob": 0.01580381952226162,
+      "words": [
+        {
+          "word": " Thank",
+          "start": 5.5,
+          "end": 6.02,
+          "probability": 0.9887767434120178
+        },
+        {
+          "word": " you",
+          "start": 6.02,
+          "end": 6.14,
+          "probability": 0.9906904697418213
+        },
+        {
+          "word": " for",
+          "start": 6.14,
+          "end": 6.28,
+          "probability": 0.9990395903587341
+        },
+        {
+          "word": " using",
+          "start": 6.28,
+          "end": 6.52,
+          "probability": 0.9957095384597778
+        },
+        {
+          "word": " our",
+          "start": 6.52,
+          "end": 6.72,
+          "probability": 0.9972301125526428
+        },
+        {
+          "word": " station.",
+          "start": 6.72,
+          "end": 7.14,
+          "probability": 0.9708619117736816
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

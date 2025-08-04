@@ -1,0 +1,5 @@
+Title: Delay Due to Weather
+WordCount: 74
+
+Script:
+Ladies and gentlemen, due to heavy rain, all trains on the Green Line are experiencing delays of up to 15 minutes. We apologize for any inconvenience this may cause. Please listen for further announcements or check the information board for updates. Thank you for your patience.

@@ -1,0 +1,306 @@
+{
+  "text": " I study English every day. I read a book or listen to music. Sometimes I watch videos. I want to get better. A little study every day helps me learn.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 1.52,
+      "text": " I study English every day.",
+      "tokens": [
+        50364,
+        286,
+        2979,
+        3669,
+        633,
+        786,
+        13,
+        50491
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2583423075468644,
+      "compression_ratio": 1.2735042735042734,
+      "no_speech_prob": 0.14245158433914185,
+      "words": [
+        {
+          "word": " I",
+          "start": 0.0,
+          "end": 0.28,
+          "probability": 0.9465307593345642
+        },
+        {
+          "word": " study",
+          "start": 0.28,
+          "end": 0.52,
+          "probability": 0.98427814245224
+        },
+        {
+          "word": " English",
+          "start": 0.52,
+          "end": 0.9,
+          "probability": 0.9851389527320862
+        },
+        {
+          "word": " every",
+          "start": 0.9,
+          "end": 1.22,
+          "probability": 0.855717122554779
+        },
+        {
+          "word": " day.",
+          "start": 1.22,
+          "end": 1.52,
+          "probability": 0.9996663331985474
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 2.12,
+      "end": 4.16,
+      "text": " I read a book or listen to music.",
+      "tokens": [
+        50491,
+        286,
+        1401,
+        257,
+        1446,
+        420,
+        2140,
+        281,
+        1318,
+        13,
+        50626
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2583423075468644,
+      "compression_ratio": 1.2735042735042734,
+      "no_speech_prob": 0.14245158433914185,
+      "words": [
+        {
+          "word": " I",
+          "start": 2.12,
+          "end": 2.72,
+          "probability": 0.9973762035369873
+        },
+        {
+          "word": " read",
+          "start": 2.72,
+          "end": 2.88,
+          "probability": 0.9884202480316162
+        },
+        {
+          "word": " a",
+          "start": 2.88,
+          "end": 2.98,
+          "probability": 0.9996806383132935
+        },
+        {
+          "word": " book",
+          "start": 2.98,
+          "end": 3.14,
+          "probability": 0.9993908405303955
+        },
+        {
+          "word": " or",
+          "start": 3.14,
+          "end": 3.36,
+          "probability": 0.995933473110199
+        },
+        {
+          "word": " listen",
+          "start": 3.36,
+          "end": 3.62,
+          "probability": 0.8800908327102661
+        },
+        {
+          "word": " to",
+          "start": 3.62,
+          "end": 3.82,
+          "probability": 0.9994182586669922
+        },
+        {
+          "word": " music.",
+          "start": 3.82,
+          "end": 4.16,
+          "probability": 0.9988228678703308
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 5.16,
+      "end": 6.54,
+      "text": " Sometimes I watch videos.",
+      "tokens": [
+        50626,
+        4803,
+        286,
+        1159,
+        2145,
+        13,
+        50746
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2583423075468644,
+      "compression_ratio": 1.2735042735042734,
+      "no_speech_prob": 0.14245158433914185,
+      "words": [
+        {
+          "word": " Sometimes",
+          "start": 5.16,
+          "end": 5.68,
+          "probability": 0.9899972677230835
+        },
+        {
+          "word": " I",
+          "start": 5.68,
+          "end": 5.9,
+          "probability": 0.9948012828826904
+        },
+        {
+          "word": " watch",
+          "start": 5.9,
+          "end": 6.1,
+          "probability": 0.997607946395874
+        },
+        {
+          "word": " videos.",
+          "start": 6.1,
+          "end": 6.54,
+          "probability": 0.9975472092628479
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 7.46,
+      "end": 8.64,
+      "text": " I want to get better.",
+      "tokens": [
+        50746,
+        286,
+        528,
+        281,
+        483,
+        1101,
+        13,
+        50846
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2583423075468644,
+      "compression_ratio": 1.2735042735042734,
+      "no_speech_prob": 0.14245158433914185,
+      "words": [
+        {
+          "word": " I",
+          "start": 7.46,
+          "end": 7.88,
+          "probability": 0.9954349398612976
+        },
+        {
+          "word": " want",
+          "start": 7.88,
+          "end": 8.02,
+          "probability": 0.9985184073448181
+        },
+        {
+          "word": " to",
+          "start": 8.02,
+          "end": 8.18,
+          "probability": 0.9994527697563171
+        },
+        {
+          "word": " get",
+          "start": 8.18,
+          "end": 8.3,
+          "probability": 0.9985265731811523
+        },
+        {
+          "word": " better.",
+          "start": 8.3,
+          "end": 8.64,
+          "probability": 0.998515784740448
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 0,
+      "start": 9.52,
+      "end": 11.68,
+      "text": " A little study every day helps me learn.",
+      "tokens": [
+        50846,
+        316,
+        707,
+        2979,
+        633,
+        786,
+        3665,
+        385,
+        1466,
+        13,
+        50996
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.2583423075468644,
+      "compression_ratio": 1.2735042735042734,
+      "no_speech_prob": 0.14245158433914185,
+      "words": [
+        {
+          "word": " A",
+          "start": 9.52,
+          "end": 9.84,
+          "probability": 0.9895109534263611
+        },
+        {
+          "word": " little",
+          "start": 9.84,
+          "end": 10.0,
+          "probability": 0.9950953722000122
+        },
+        {
+          "word": " study",
+          "start": 10.0,
+          "end": 10.36,
+          "probability": 0.9966789484024048
+        },
+        {
+          "word": " every",
+          "start": 10.36,
+          "end": 10.7,
+          "probability": 0.9687390923500061
+        },
+        {
+          "word": " day",
+          "start": 10.7,
+          "end": 10.92,
+          "probability": 0.9995717406272888
+        },
+        {
+          "word": " helps",
+          "start": 10.92,
+          "end": 11.22,
+          "probability": 0.9977013468742371
+        },
+        {
+          "word": " me",
+          "start": 11.22,
+          "end": 11.42,
+          "probability": 0.9995239973068237
+        },
+        {
+          "word": " learn.",
+          "start": 11.42,
+          "end": 11.68,
+          "probability": 0.9988480806350708
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

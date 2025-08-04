@@ -47,11 +47,68 @@ flutter:
   generate: true
   uses-material-design: true
   assets:
+    - assets/
+
+
     - assets/image/
-    - assets/audio/
     - assets/scripts/
+
+    # audio
+    - assets/audio/
+    - assets/audio/Level1/Announcement/
+    - assets/audio/Level1/Business/
+    - assets/audio/Level1/DailyLife/
+    - assets/audio/Level1/Lifestyle_Health/
+    - assets/audio/Level1/Study_Exam/
+    - assets/audio/Level2/Announcement/
+    - assets/audio/Level2/Business/
+    - assets/audio/Level2/DailyLife/
+    - assets/audio/Level2/Lifestyle_Health/
+    - assets/audio/Level2/Study_Exam/
+    - assets/audio/Level3/Announcement/
+    - assets/audio/Level3/Business/
+    - assets/audio/Level3/DailyLife/
+    - assets/audio/Level3/Lifestyle_Health/
+    - assets/audio/Level3/Study_Exam/
+    - assets/audio/Level4/Announcement/
+    - assets/audio/Level4/Business/
+    - assets/audio/Level4/DailyLife/
+    - assets/audio/Level4/Lifestyle_Health/
+    - assets/audio/Level4/Study_Exam/
+    - assets/audio/Level5/Announcement/
+    - assets/audio/Level5/Business/
+    - assets/audio/Level5/DailyLife/
+    - assets/audio/Level5/Lifestyle_Health/
+    - assets/audio/Level5/Study_Exam/
+
+    # subtitles
     - assets/subtitles/
+    - assets/subtitles/Level1/Announcement/
+    - assets/subtitles/Level1/Business/
+    - assets/subtitles/Level1/DailyLife/
+    - assets/subtitles/Level1/Study_Exam/
+    - assets/subtitles/Level2/Announcement/
+    - assets/subtitles/Level2/Business/
+    - assets/subtitles/Level2/DailyLife/
+    - assets/subtitles/Level2/Lifestyle_Health/
+    - assets/subtitles/Level2/Study_Exam/
+    - assets/subtitles/Level3/Announcement/
+    - assets/subtitles/Level3/Business/
+    - assets/subtitles/Level3/DailyLife/
+    - assets/subtitles/Level3/Lifestyle_Health/
+    - assets/subtitles/Level3/Study_Exam/
+    - assets/subtitles/Level4/Announcement/
+    - assets/subtitles/Level4/Business/
+    - assets/subtitles/Level4/DailyLife/
+    - assets/subtitles/Level4/Lifestyle_Health/
+    - assets/subtitles/Level4/Study_Exam/
+    - assets/subtitles/Level5/Announcement/
+    - assets/subtitles/Level5/Business/
+    - assets/subtitles/Level5/DailyLife/
+    - assets/subtitles/Level5/Study_Exam/
     - .env
+
+
 
 flutter_icons:
   android: true

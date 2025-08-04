@@ -1,0 +1,5 @@
+Title: Emergency Train Delay Announcement
+WordCount: 151
+
+Script:
+Ladies and gentlemen, we sincerely apologize for the inconvenience. Due to an unexpected technical issue on the main line, all trains heading northbound are currently delayed. Our maintenance team is working hard to resolve the problem as quickly and safely as possible. At this time, we estimate that service will resume in approximately 30 minutes. In the meantime, we recommend using alternative transportation if you are in a hurry. Passengers who need assistance or have questions about their journey can speak with station staff at the information desk. We understand how frustrating delays can be, and we truly appreciate your patience and understanding. Please stay tuned for further announcements, and thank you for choosing our railway service.

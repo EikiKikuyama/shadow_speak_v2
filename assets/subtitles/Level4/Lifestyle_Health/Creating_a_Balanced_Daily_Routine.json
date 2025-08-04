@@ -1,0 +1,894 @@
+{
+  "text": " My life used to feel very rushed and stressful. I worked long hours, skipped meals, and stayed up late every night. One day, I decided to make a change. I now wake up early, eat breakfast, and take a short walk before starting work. During the day, I set timers to remind myself to stretch and drink water. At night, I stop using screens after 9 pm and read a book instead. These small steps help me feel calm and healthy. It's not easy every day, but I try to keep the routine. A balanced life takes effort, but it's worth it.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 2.38,
+      "text": " My life used to feel very rushed and stressful.",
+      "tokens": [
+        50364,
+        1222,
+        993,
+        1143,
+        281,
+        841,
+        588,
+        24421,
+        293,
+        19108,
+        13,
+        50532
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09224825245993477,
+      "compression_ratio": 1.623076923076923,
+      "no_speech_prob": 0.09629280120134354,
+      "words": [
+        {
+          "word": " My",
+          "start": 0.0,
+          "end": 0.3,
+          "probability": 0.20561902225017548
+        },
+        {
+          "word": " life",
+          "start": 0.3,
+          "end": 0.54,
+          "probability": 0.9917792677879333
+        },
+        {
+          "word": " used",
+          "start": 0.54,
+          "end": 0.8,
+          "probability": 0.9917911291122437
+        },
+        {
+          "word": " to",
+          "start": 0.8,
+          "end": 0.96,
+          "probability": 0.9997878670692444
+        },
+        {
+          "word": " feel",
+          "start": 0.96,
+          "end": 1.1,
+          "probability": 0.9965859651565552
+        },
+        {
+          "word": " very",
+          "start": 1.1,
+          "end": 1.42,
+          "probability": 0.9964442849159241
+        },
+        {
+          "word": " rushed",
+          "start": 1.42,
+          "end": 1.7,
+          "probability": 0.9348728060722351
+        },
+        {
+          "word": " and",
+          "start": 1.7,
+          "end": 1.94,
+          "probability": 0.9983599781990051
+        },
+        {
+          "word": " stressful.",
+          "start": 1.94,
+          "end": 2.38,
+          "probability": 0.9959806203842163
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 3.38,
+      "end": 7.04,
+      "text": " I worked long hours, skipped meals, and stayed up late every night.",
+      "tokens": [
+        50532,
+        286,
+        2732,
+        938,
+        2496,
+        11,
+        30193,
+        12832,
+        11,
+        293,
+        9181,
+        493,
+        3469,
+        633,
+        1818,
+        13,
+        50716
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09224825245993477,
+      "compression_ratio": 1.623076923076923,
+      "no_speech_prob": 0.09629280120134354,
+      "words": [
+        {
+          "word": " I",
+          "start": 3.38,
+          "end": 3.62,
+          "probability": 0.8522878885269165
+        },
+        {
+          "word": " worked",
+          "start": 3.62,
+          "end": 3.86,
+          "probability": 0.9889186024665833
+        },
+        {
+          "word": " long",
+          "start": 3.86,
+          "end": 4.04,
+          "probability": 0.9493628144264221
+        },
+        {
+          "word": " hours,",
+          "start": 4.04,
+          "end": 4.46,
+          "probability": 0.9983539581298828
+        },
+        {
+          "word": " skipped",
+          "start": 4.82,
+          "end": 4.98,
+          "probability": 0.9927763938903809
+        },
+        {
+          "word": " meals,",
+          "start": 4.98,
+          "end": 5.32,
+          "probability": 0.9977073669433594
+        },
+        {
+          "word": " and",
+          "start": 5.68,
+          "end": 5.8,
+          "probability": 0.9970589876174927
+        },
+        {
+          "word": " stayed",
+          "start": 5.8,
+          "end": 6.0,
+          "probability": 0.9931818842887878
+        },
+        {
+          "word": " up",
+          "start": 6.0,
+          "end": 6.22,
+          "probability": 0.9941873550415039
+        },
+        {
+          "word": " late",
+          "start": 6.22,
+          "end": 6.38,
+          "probability": 0.9995287656784058
+        },
+        {
+          "word": " every",
+          "start": 6.38,
+          "end": 6.7,
+          "probability": 0.9948023557662964
+        },
+        {
+          "word": " night.",
+          "start": 6.7,
+          "end": 7.04,
+          "probability": 0.9986912608146667
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 8.08,
+      "end": 10.28,
+      "text": " One day, I decided to make a change.",
+      "tokens": [
+        50764,
+        1485,
+        786,
+        11,
+        286,
+        3047,
+        281,
+        652,
+        257,
+        1319,
+        13,
+        50876
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09224825245993477,
+      "compression_ratio": 1.623076923076923,
+      "no_speech_prob": 0.09629280120134354,
+      "words": [
+        {
+          "word": " One",
+          "start": 8.08,
+          "end": 8.3,
+          "probability": 0.9707189798355103
+        },
+        {
+          "word": " day,",
+          "start": 8.3,
+          "end": 8.56,
+          "probability": 0.9989633560180664
+        },
+        {
+          "word": " I",
+          "start": 8.86,
+          "end": 8.92,
+          "probability": 0.9968841671943665
+        },
+        {
+          "word": " decided",
+          "start": 8.92,
+          "end": 9.22,
+          "probability": 0.9987865090370178
+        },
+        {
+          "word": " to",
+          "start": 9.22,
+          "end": 9.48,
+          "probability": 0.9995841383934021
+        },
+        {
+          "word": " make",
+          "start": 9.48,
+          "end": 9.64,
+          "probability": 0.998930037021637
+        },
+        {
+          "word": " a",
+          "start": 9.64,
+          "end": 9.76,
+          "probability": 0.9992615580558777
+        },
+        {
+          "word": " change.",
+          "start": 9.76,
+          "end": 10.28,
+          "probability": 0.9981545805931091
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 11.16,
+      "end": 15.62,
+      "text": " I now wake up early, eat breakfast, and take a short walk before starting work.",
+      "tokens": [
+        50924,
+        286,
+        586,
+        6634,
+        493,
+        2440,
+        11,
+        1862,
+        8201,
+        11,
+        293,
+        747,
+        257,
+        2099,
+        1792,
+        949,
+        2891,
+        589,
+        13,
+        51140
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09224825245993477,
+      "compression_ratio": 1.623076923076923,
+      "no_speech_prob": 0.09629280120134354,
+      "words": [
+        {
+          "word": " I",
+          "start": 11.16,
+          "end": 11.42,
+          "probability": 0.9898456335067749
+        },
+        {
+          "word": " now",
+          "start": 11.42,
+          "end": 11.6,
+          "probability": 0.9939718842506409
+        },
+        {
+          "word": " wake",
+          "start": 11.6,
+          "end": 11.78,
+          "probability": 0.9976612329483032
+        },
+        {
+          "word": " up",
+          "start": 11.78,
+          "end": 11.98,
+          "probability": 0.9994082450866699
+        },
+        {
+          "word": " early,",
+          "start": 11.98,
+          "end": 12.3,
+          "probability": 0.9993054866790771
+        },
+        {
+          "word": " eat",
+          "start": 12.6,
+          "end": 12.72,
+          "probability": 0.9987911581993103
+        },
+        {
+          "word": " breakfast,",
+          "start": 12.72,
+          "end": 13.12,
+          "probability": 0.998984158039093
+        },
+        {
+          "word": " and",
+          "start": 13.52,
+          "end": 13.64,
+          "probability": 0.998149037361145
+        },
+        {
+          "word": " take",
+          "start": 13.64,
+          "end": 13.82,
+          "probability": 0.9982628226280212
+        },
+        {
+          "word": " a",
+          "start": 13.82,
+          "end": 13.96,
+          "probability": 0.9996781349182129
+        },
+        {
+          "word": " short",
+          "start": 13.96,
+          "end": 14.16,
+          "probability": 0.9987087249755859
+        },
+        {
+          "word": " walk",
+          "start": 14.16,
+          "end": 14.44,
+          "probability": 0.9978298544883728
+        },
+        {
+          "word": " before",
+          "start": 14.44,
+          "end": 14.8,
+          "probability": 0.9984893798828125
+        },
+        {
+          "word": " starting",
+          "start": 14.8,
+          "end": 15.18,
+          "probability": 0.9943946599960327
+        },
+        {
+          "word": " work.",
+          "start": 15.18,
+          "end": 15.62,
+          "probability": 0.9986327290534973
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 0,
+      "start": 16.48,
+      "end": 20.38,
+      "text": " During the day, I set timers to remind myself to stretch and drink water.",
+      "tokens": [
+        51188,
+        6842,
+        264,
+        786,
+        11,
+        286,
+        992,
+        524,
+        433,
+        281,
+        4160,
+        2059,
+        281,
+        5985,
+        293,
+        2822,
+        1281,
+        13,
+        51384
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09224825245993477,
+      "compression_ratio": 1.623076923076923,
+      "no_speech_prob": 0.09629280120134354,
+      "words": [
+        {
+          "word": " During",
+          "start": 16.48,
+          "end": 16.78,
+          "probability": 0.9849280118942261
+        },
+        {
+          "word": " the",
+          "start": 16.78,
+          "end": 16.94,
+          "probability": 0.998724639415741
+        },
+        {
+          "word": " day,",
+          "start": 16.94,
+          "end": 17.18,
+          "probability": 0.9991363883018494
+        },
+        {
+          "word": " I",
+          "start": 17.48,
+          "end": 17.6,
+          "probability": 0.9990183115005493
+        },
+        {
+          "word": " set",
+          "start": 17.6,
+          "end": 17.78,
+          "probability": 0.989042341709137
+        },
+        {
+          "word": " timers",
+          "start": 17.78,
+          "end": 18.22,
+          "probability": 0.9776699244976044
+        },
+        {
+          "word": " to",
+          "start": 18.22,
+          "end": 18.38,
+          "probability": 0.9993374943733215
+        },
+        {
+          "word": " remind",
+          "start": 18.38,
+          "end": 18.62,
+          "probability": 0.9965496063232422
+        },
+        {
+          "word": " myself",
+          "start": 18.62,
+          "end": 19.14,
+          "probability": 0.9992623925209045
+        },
+        {
+          "word": " to",
+          "start": 19.14,
+          "end": 19.38,
+          "probability": 0.9993398785591125
+        },
+        {
+          "word": " stretch",
+          "start": 19.38,
+          "end": 19.62,
+          "probability": 0.9983090162277222
+        },
+        {
+          "word": " and",
+          "start": 19.62,
+          "end": 19.84,
+          "probability": 0.9905703067779541
+        },
+        {
+          "word": " drink",
+          "start": 19.84,
+          "end": 20.0,
+          "probability": 0.9985331296920776
+        },
+        {
+          "word": " water.",
+          "start": 20.0,
+          "end": 20.38,
+          "probability": 0.9994069337844849
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "seek": 0,
+      "start": 21.3,
+      "end": 25.44,
+      "text": " At night, I stop using screens after 9 pm and read a book instead.",
+      "tokens": [
+        51432,
+        1711,
+        1818,
+        11,
+        286,
+        1590,
+        1228,
+        11171,
+        934,
+        1722,
+        23023,
+        293,
+        1401,
+        257,
+        1446,
+        2602,
+        13,
+        51640
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09224825245993477,
+      "compression_ratio": 1.623076923076923,
+      "no_speech_prob": 0.09629280120134354,
+      "words": [
+        {
+          "word": " At",
+          "start": 21.3,
+          "end": 21.6,
+          "probability": 0.9889644384384155
+        },
+        {
+          "word": " night,",
+          "start": 21.6,
+          "end": 21.88,
+          "probability": 0.997710108757019
+        },
+        {
+          "word": " I",
+          "start": 22.18,
+          "end": 22.3,
+          "probability": 0.9990770816802979
+        },
+        {
+          "word": " stop",
+          "start": 22.3,
+          "end": 22.52,
+          "probability": 0.6882421374320984
+        },
+        {
+          "word": " using",
+          "start": 22.52,
+          "end": 22.86,
+          "probability": 0.998568058013916
+        },
+        {
+          "word": " screens",
+          "start": 22.86,
+          "end": 23.24,
+          "probability": 0.9932951331138611
+        },
+        {
+          "word": " after",
+          "start": 23.24,
+          "end": 23.66,
+          "probability": 0.9980192184448242
+        },
+        {
+          "word": " 9",
+          "start": 23.66,
+          "end": 23.92,
+          "probability": 0.9561286568641663
+        },
+        {
+          "word": " pm",
+          "start": 23.92,
+          "end": 24.3,
+          "probability": 0.31919923424720764
+        },
+        {
+          "word": " and",
+          "start": 24.3,
+          "end": 24.6,
+          "probability": 0.9905586242675781
+        },
+        {
+          "word": " read",
+          "start": 24.6,
+          "end": 24.74,
+          "probability": 0.9952067732810974
+        },
+        {
+          "word": " a",
+          "start": 24.74,
+          "end": 24.84,
+          "probability": 0.9985297918319702
+        },
+        {
+          "word": " book",
+          "start": 24.84,
+          "end": 25.0,
+          "probability": 0.9993552565574646
+        },
+        {
+          "word": " instead.",
+          "start": 25.0,
+          "end": 25.44,
+          "probability": 0.9928436875343323
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "seek": 0,
+      "start": 26.48,
+      "end": 28.64,
+      "text": " These small steps help me feel calm and healthy.",
+      "tokens": [
+        51688,
+        1981,
+        1359,
+        4439,
+        854,
+        385,
+        841,
+        7151,
+        293,
+        4627,
+        13,
+        51800
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.09224825245993477,
+      "compression_ratio": 1.623076923076923,
+      "no_speech_prob": 0.09629280120134354,
+      "words": [
+        {
+          "word": " These",
+          "start": 26.48,
+          "end": 26.72,
+          "probability": 0.9779781699180603
+        },
+        {
+          "word": " small",
+          "start": 26.72,
+          "end": 27.02,
+          "probability": 0.9986397624015808
+        },
+        {
+          "word": " steps",
+          "start": 27.02,
+          "end": 27.28,
+          "probability": 0.9961721301078796
+        },
+        {
+          "word": " help",
+          "start": 27.28,
+          "end": 27.52,
+          "probability": 0.9062153697013855
+        },
+        {
+          "word": " me",
+          "start": 27.52,
+          "end": 27.68,
+          "probability": 0.9992237091064453
+        },
+        {
+          "word": " feel",
+          "start": 27.68,
+          "end": 27.9,
+          "probability": 0.9968152642250061
+        },
+        {
+          "word": " calm",
+          "start": 27.9,
+          "end": 28.18,
+          "probability": 0.9819974303245544
+        },
+        {
+          "word": " and",
+          "start": 28.18,
+          "end": 28.34,
+          "probability": 0.9987151622772217
+        },
+        {
+          "word": " healthy.",
+          "start": 28.34,
+          "end": 28.64,
+          "probability": 0.9971427321434021
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "seek": 2864,
+      "start": 29.380000000000003,
+      "end": 32.46,
+      "text": " It's not easy every day, but I try to keep the routine.",
+      "tokens": [
+        50412,
+        467,
+        311,
+        406,
+        1858,
+        633,
+        786,
+        11,
+        457,
+        286,
+        853,
+        281,
+        1066,
+        264,
+        9927,
+        13,
+        50560
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1815616637468338,
+      "compression_ratio": 1.1555555555555554,
+      "no_speech_prob": 0.04191989451646805,
+      "words": [
+        {
+          "word": " It's",
+          "start": 29.380000000000003,
+          "end": 29.94,
+          "probability": 0.880400538444519
+        },
+        {
+          "word": " not",
+          "start": 29.94,
+          "end": 30.06,
+          "probability": 0.9969801306724548
+        },
+        {
+          "word": " easy",
+          "start": 30.06,
+          "end": 30.32,
+          "probability": 0.9967114925384521
+        },
+        {
+          "word": " every",
+          "start": 30.32,
+          "end": 30.62,
+          "probability": 0.8790662288665771
+        },
+        {
+          "word": " day,",
+          "start": 30.62,
+          "end": 30.88,
+          "probability": 0.9993159770965576
+        },
+        {
+          "word": " but",
+          "start": 31.16,
+          "end": 31.26,
+          "probability": 0.997980535030365
+        },
+        {
+          "word": " I",
+          "start": 31.26,
+          "end": 31.4,
+          "probability": 0.9936767220497131
+        },
+        {
+          "word": " try",
+          "start": 31.4,
+          "end": 31.58,
+          "probability": 0.7718027830123901
+        },
+        {
+          "word": " to",
+          "start": 31.58,
+          "end": 31.74,
+          "probability": 0.9964503049850464
+        },
+        {
+          "word": " keep",
+          "start": 31.74,
+          "end": 31.9,
+          "probability": 0.9993417859077454
+        },
+        {
+          "word": " the",
+          "start": 31.9,
+          "end": 32.1,
+          "probability": 0.9946081638336182
+        },
+        {
+          "word": " routine.",
+          "start": 32.1,
+          "end": 32.46,
+          "probability": 0.9981437921524048
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "seek": 2864,
+      "start": 33.32,
+      "end": 36.14,
+      "text": " A balanced life takes effort, but it's worth it.",
+      "tokens": [
+        50604,
+        316,
+        13902,
+        993,
+        2516,
+        4630,
+        11,
+        457,
+        309,
+        311,
+        3163,
+        309,
+        13,
+        50780
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.1815616637468338,
+      "compression_ratio": 1.1555555555555554,
+      "no_speech_prob": 0.04191989451646805,
+      "words": [
+        {
+          "word": " A",
+          "start": 33.32,
+          "end": 33.7,
+          "probability": 0.9812470078468323
+        },
+        {
+          "word": " balanced",
+          "start": 33.7,
+          "end": 34.0,
+          "probability": 0.9378063082695007
+        },
+        {
+          "word": " life",
+          "start": 34.0,
+          "end": 34.36,
+          "probability": 0.9900878071784973
+        },
+        {
+          "word": " takes",
+          "start": 34.36,
+          "end": 34.64,
+          "probability": 0.992803156375885
+        },
+        {
+          "word": " effort,",
+          "start": 34.64,
+          "end": 35.0,
+          "probability": 0.9898243546485901
+        },
+        {
+          "word": " but",
+          "start": 35.3,
+          "end": 35.44,
+          "probability": 0.9985153079032898
+        },
+        {
+          "word": " it's",
+          "start": 35.44,
+          "end": 35.66,
+          "probability": 0.9947948455810547
+        },
+        {
+          "word": " worth",
+          "start": 35.66,
+          "end": 35.86,
+          "probability": 0.9997945427894592
+        },
+        {
+          "word": " it.",
+          "start": 35.86,
+          "end": 36.14,
+          "probability": 0.9995707869529724
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

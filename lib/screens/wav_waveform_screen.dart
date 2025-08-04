@@ -57,11 +57,9 @@ class _WavWaveformScreenState extends ConsumerState<WavWaveformScreen> {
   Future<void> _loadSubtitle() async {
     try {
       final filename = widget.material.scriptPath
-          .split('/')
-          .last
-          .replaceAll('.txt', '')
-          .replaceAll('.json', '');
-
+          .replaceFirst('assets/subtitles/', '') // パス先頭だけ削除
+          .replaceAll('.json', '')
+          .replaceAll('.txt', '');
       final data = await loadSubtitles(filename);
       if (!mounted) return;
       setState(() {

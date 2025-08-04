@@ -1,0 +1,548 @@
+{
+  "text": " I work at a desk all day, so I try to stay healthy with small habits. I drink water instead of sweet drinks and take short walks during breaks. I also bring lunch from home, like rice and vegetables, to avoid fast food. These little choices help me feel better and stay focused. Health is not just about big changes, small ones count too.",
+  "segments": [
+    {
+      "id": 0,
+      "seek": 0,
+      "start": 0.0,
+      "end": 3.66,
+      "text": " I work at a desk all day, so I try to stay healthy with small habits.",
+      "tokens": [
+        50364,
+        286,
+        589,
+        412,
+        257,
+        10026,
+        439,
+        786,
+        11,
+        370,
+        286,
+        853,
+        281,
+        1754,
+        4627,
+        365,
+        1359,
+        14100,
+        13,
+        50604
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10403492791312081,
+      "compression_ratio": 1.5108695652173914,
+      "no_speech_prob": 0.015370022505521774,
+      "words": [
+        {
+          "word": " I",
+          "start": 0.0,
+          "end": 0.3,
+          "probability": 0.9814050793647766
+        },
+        {
+          "word": " work",
+          "start": 0.3,
+          "end": 0.46,
+          "probability": 0.9907557368278503
+        },
+        {
+          "word": " at",
+          "start": 0.46,
+          "end": 0.6,
+          "probability": 0.9983484745025635
+        },
+        {
+          "word": " a",
+          "start": 0.6,
+          "end": 0.68,
+          "probability": 0.9988558292388916
+        },
+        {
+          "word": " desk",
+          "start": 0.68,
+          "end": 0.92,
+          "probability": 0.9856843948364258
+        },
+        {
+          "word": " all",
+          "start": 0.92,
+          "end": 1.14,
+          "probability": 0.9978352189064026
+        },
+        {
+          "word": " day,",
+          "start": 1.14,
+          "end": 1.38,
+          "probability": 0.9910914301872253
+        },
+        {
+          "word": " so",
+          "start": 1.74,
+          "end": 1.86,
+          "probability": 0.9966341853141785
+        },
+        {
+          "word": " I",
+          "start": 1.86,
+          "end": 2.0,
+          "probability": 0.9941376447677612
+        },
+        {
+          "word": " try",
+          "start": 2.0,
+          "end": 2.2,
+          "probability": 0.9477853178977966
+        },
+        {
+          "word": " to",
+          "start": 2.2,
+          "end": 2.36,
+          "probability": 0.9985747337341309
+        },
+        {
+          "word": " stay",
+          "start": 2.36,
+          "end": 2.54,
+          "probability": 0.9995527863502502
+        },
+        {
+          "word": " healthy",
+          "start": 2.54,
+          "end": 2.84,
+          "probability": 0.9990637898445129
+        },
+        {
+          "word": " with",
+          "start": 2.84,
+          "end": 3.04,
+          "probability": 0.9989014863967896
+        },
+        {
+          "word": " small",
+          "start": 3.04,
+          "end": 3.3,
+          "probability": 0.9984288811683655
+        },
+        {
+          "word": " habits.",
+          "start": 3.3,
+          "end": 3.66,
+          "probability": 0.9930270314216614
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "seek": 0,
+      "start": 4.68,
+      "end": 8.42,
+      "text": " I drink water instead of sweet drinks and take short walks during breaks.",
+      "tokens": [
+        50604,
+        286,
+        2822,
+        1281,
+        2602,
+        295,
+        3844,
+        12142,
+        293,
+        747,
+        2099,
+        12896,
+        1830,
+        9857,
+        13,
+        50840
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10403492791312081,
+      "compression_ratio": 1.5108695652173914,
+      "no_speech_prob": 0.015370022505521774,
+      "words": [
+        {
+          "word": " I",
+          "start": 4.68,
+          "end": 5.0,
+          "probability": 0.9971779584884644
+        },
+        {
+          "word": " drink",
+          "start": 5.0,
+          "end": 5.18,
+          "probability": 0.9963597655296326
+        },
+        {
+          "word": " water",
+          "start": 5.18,
+          "end": 5.56,
+          "probability": 0.9986961483955383
+        },
+        {
+          "word": " instead",
+          "start": 5.56,
+          "end": 5.94,
+          "probability": 0.9958198070526123
+        },
+        {
+          "word": " of",
+          "start": 5.94,
+          "end": 6.16,
+          "probability": 0.9996137022972107
+        },
+        {
+          "word": " sweet",
+          "start": 6.16,
+          "end": 6.38,
+          "probability": 0.9952840209007263
+        },
+        {
+          "word": " drinks",
+          "start": 6.38,
+          "end": 6.68,
+          "probability": 0.989935576915741
+        },
+        {
+          "word": " and",
+          "start": 6.68,
+          "end": 7.02,
+          "probability": 0.9792807698249817
+        },
+        {
+          "word": " take",
+          "start": 7.02,
+          "end": 7.22,
+          "probability": 0.9961193799972534
+        },
+        {
+          "word": " short",
+          "start": 7.22,
+          "end": 7.46,
+          "probability": 0.9962636828422546
+        },
+        {
+          "word": " walks",
+          "start": 7.46,
+          "end": 7.78,
+          "probability": 0.9888076186180115
+        },
+        {
+          "word": " during",
+          "start": 7.78,
+          "end": 8.1,
+          "probability": 0.9993836879730225
+        },
+        {
+          "word": " breaks.",
+          "start": 8.1,
+          "end": 8.42,
+          "probability": 0.986676037311554
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "seek": 0,
+      "start": 9.5,
+      "end": 14.2,
+      "text": " I also bring lunch from home, like rice and vegetables, to avoid fast food.",
+      "tokens": [
+        50840,
+        286,
+        611,
+        1565,
+        6349,
+        490,
+        1280,
+        11,
+        411,
+        5090,
+        293,
+        9320,
+        11,
+        281,
+        5042,
+        2370,
+        1755,
+        13,
+        51120
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10403492791312081,
+      "compression_ratio": 1.5108695652173914,
+      "no_speech_prob": 0.015370022505521774,
+      "words": [
+        {
+          "word": " I",
+          "start": 9.5,
+          "end": 9.72,
+          "probability": 0.996674656867981
+        },
+        {
+          "word": " also",
+          "start": 9.72,
+          "end": 10.0,
+          "probability": 0.9992697834968567
+        },
+        {
+          "word": " bring",
+          "start": 10.0,
+          "end": 10.28,
+          "probability": 0.9987528324127197
+        },
+        {
+          "word": " lunch",
+          "start": 10.28,
+          "end": 10.48,
+          "probability": 0.9961148500442505
+        },
+        {
+          "word": " from",
+          "start": 10.48,
+          "end": 10.7,
+          "probability": 0.9988529682159424
+        },
+        {
+          "word": " home,",
+          "start": 10.7,
+          "end": 11.06,
+          "probability": 0.9996315240859985
+        },
+        {
+          "word": " like",
+          "start": 11.3,
+          "end": 11.52,
+          "probability": 0.9970090985298157
+        },
+        {
+          "word": " rice",
+          "start": 11.52,
+          "end": 11.78,
+          "probability": 0.9892719984054565
+        },
+        {
+          "word": " and",
+          "start": 11.78,
+          "end": 12.18,
+          "probability": 0.5571675896644592
+        },
+        {
+          "word": " vegetables,",
+          "start": 12.18,
+          "end": 12.58,
+          "probability": 0.995671272277832
+        },
+        {
+          "word": " to",
+          "start": 13.06,
+          "end": 13.16,
+          "probability": 0.9989094734191895
+        },
+        {
+          "word": " avoid",
+          "start": 13.16,
+          "end": 13.4,
+          "probability": 0.9987651109695435
+        },
+        {
+          "word": " fast",
+          "start": 13.4,
+          "end": 13.7,
+          "probability": 0.9967892169952393
+        },
+        {
+          "word": " food.",
+          "start": 13.7,
+          "end": 14.2,
+          "probability": 0.992634117603302
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "seek": 0,
+      "start": 14.88,
+      "end": 17.78,
+      "text": " These little choices help me feel better and stay focused.",
+      "tokens": [
+        51120,
+        1981,
+        707,
+        7994,
+        854,
+        385,
+        841,
+        1101,
+        293,
+        1754,
+        5178,
+        13,
+        51312
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.10403492791312081,
+      "compression_ratio": 1.5108695652173914,
+      "no_speech_prob": 0.015370022505521774,
+      "words": [
+        {
+          "word": " These",
+          "start": 14.88,
+          "end": 15.4,
+          "probability": 0.9902163743972778
+        },
+        {
+          "word": " little",
+          "start": 15.4,
+          "end": 15.62,
+          "probability": 0.9993249177932739
+        },
+        {
+          "word": " choices",
+          "start": 15.62,
+          "end": 16.0,
+          "probability": 0.9985101819038391
+        },
+        {
+          "word": " help",
+          "start": 16.0,
+          "end": 16.28,
+          "probability": 0.9306584596633911
+        },
+        {
+          "word": " me",
+          "start": 16.28,
+          "end": 16.44,
+          "probability": 0.9995550513267517
+        },
+        {
+          "word": " feel",
+          "start": 16.44,
+          "end": 16.64,
+          "probability": 0.995293915271759
+        },
+        {
+          "word": " better",
+          "start": 16.64,
+          "end": 16.94,
+          "probability": 0.999876856803894
+        },
+        {
+          "word": " and",
+          "start": 16.94,
+          "end": 17.2,
+          "probability": 0.9963429570198059
+        },
+        {
+          "word": " stay",
+          "start": 17.2,
+          "end": 17.42,
+          "probability": 0.9990869760513306
+        },
+        {
+          "word": " focused.",
+          "start": 17.42,
+          "end": 17.78,
+          "probability": 0.9944748282432556
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "seek": 1778,
+      "start": 18.68,
+      "end": 22.26,
+      "text": " Health is not just about big changes, small ones count too.",
+      "tokens": [
+        50364,
+        5912,
+        307,
+        406,
+        445,
+        466,
+        955,
+        2962,
+        11,
+        1359,
+        2306,
+        1207,
+        886,
+        13,
+        50584
+      ],
+      "temperature": 0.0,
+      "avg_logprob": -0.3840999901294708,
+      "compression_ratio": 0.9516129032258065,
+      "no_speech_prob": 0.27648863196372986,
+      "words": [
+        {
+          "word": " Health",
+          "start": 18.68,
+          "end": 19.2,
+          "probability": 0.09101330488920212
+        },
+        {
+          "word": " is",
+          "start": 19.2,
+          "end": 19.42,
+          "probability": 0.9772180914878845
+        },
+        {
+          "word": " not",
+          "start": 19.42,
+          "end": 19.6,
+          "probability": 0.9944348931312561
+        },
+        {
+          "word": " just",
+          "start": 19.6,
+          "end": 19.82,
+          "probability": 0.9978526830673218
+        },
+        {
+          "word": " about",
+          "start": 19.82,
+          "end": 20.08,
+          "probability": 0.9991143345832825
+        },
+        {
+          "word": " big",
+          "start": 20.08,
+          "end": 20.3,
+          "probability": 0.9827377200126648
+        },
+        {
+          "word": " changes,",
+          "start": 20.3,
+          "end": 20.72,
+          "probability": 0.9922338724136353
+        },
+        {
+          "word": " small",
+          "start": 21.14,
+          "end": 21.4,
+          "probability": 0.9836022853851318
+        },
+        {
+          "word": " ones",
+          "start": 21.4,
+          "end": 21.66,
+          "probability": 0.9932315349578857
+        },
+        {
+          "word": " count",
+          "start": 21.66,
+          "end": 21.96,
+          "probability": 0.9951689839363098
+        },
+        {
+          "word": " too.",
+          "start": 21.96,
+          "end": 22.26,
+          "probability": 0.8695510029792786
+        }
+      ]
+    }
+  ],
+  "language": "en"
+}

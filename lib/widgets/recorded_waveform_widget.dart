@@ -51,7 +51,8 @@ class RecordedWaveformWidget extends StatelessWidget {
   }
 
   Future<List<double>> _loadAndProcessWaveform() async {
-    final raw = extractWaveform(File(filePath));
-    return processWaveform(raw);
+    final raw = await extractWaveform(File(filePath)); // ✅ awaitを追加
+    return processWaveform(raw,
+        audioDuration.inMilliseconds / 1000.0); // これで raw は List<double> になってOK
   }
 }
