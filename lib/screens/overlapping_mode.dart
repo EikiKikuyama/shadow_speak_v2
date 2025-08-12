@@ -286,10 +286,13 @@ class _OverlappingModeState extends ConsumerState<OverlappingMode> {
                         horizontal: 16.0, vertical: 8.0),
                     child: _subtitles.isNotEmpty
                         ? SubtitleDisplay(
-                            currentSubtitle: _currentSubtitle,
+                            currentTime: _currentPosition,
                             allSubtitles: _subtitles,
                             highlightColor: Colors.blue,
                             defaultColor: textColor,
+                            abState: _isRecording
+                                ? ABRepeatState.selectingA
+                                : ABRepeatState.selectingB,
                           )
                         : Center(
                             child: Text(
