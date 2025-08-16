@@ -2,57 +2,77 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import '../painters/line_wave_painter.dart';
 import '../utils/waveform_extractor.dart';
-import 'dart:math';
 
-class RecordedWaveformWidget extends StatelessWidget {
-  final String filePath;
-  final Duration audioDuration;
+class RecordedWaveformWidget extends StatefulWidget {
+  final String filePath; // 録音WAVのパス
   final double height;
-  final double progress;
-  final bool isAsset;
+  final double progress; // 0.0〜1.0（親のpositionStreamから算出）
+  final bool isAsset; // assetsから読むならtrue
+  final int samplesPerSecond; // 200 = 5ms刻み
+  final int displaySeconds; // 可視窓（秒）
+  final Color waveColor; // 表示色
 
   const RecordedWaveformWidget({
     super.key,
     required this.filePath,
-    required this.audioDuration,
     required this.height,
     required this.progress,
     this.isAsset = false,
+    this.samplesPerSecond = 200,
+    this.displaySeconds = 4,
+    this.waveColor = Colors.blueAccent,
   });
+
+  @override
+  State<RecordedWaveformWidget> createState() => _RecordedWaveformWidgetState();
+}
+
+class _RecordedWaveformWidgetState extends State<RecordedWaveformWidget> {
+  late Future<List<double>> _waveF; // ← 一度だけ読む
+
+  @override
+  void initState() {
+    super.initState();
+    _waveF = _loadWaveform();
+  }
+
+  Future<List<double>> _loadWaveform() async {
+    try {
+      final pcm = widget.isAsset
+          ? await decodeWaveFromAssets(widget.filePath)
+          : await decodeWaveFromFile(File(widget.filePath));
+      return processWaveformUniform(pcm); // 0..1 / 5ms刻み
+    } catch (e) {
+      debugPrint("❌ [Recorded] 波形読み込み失敗: $e");
+      return const <double>[];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<double>>(
-      future: _loadAndProcessWaveform(),
-      builder: (context, snapshot) {
-        final waveform = snapshot.data;
-
-        if (waveform == null || waveform.isEmpty) {
-          debugPrint("⚠️ [Recorded] waveformがnullまたは空です。描画スキップ（$filePath）");
-          return const SizedBox();
+      future: _waveF,
+      builder: (context, snap) {
+        if (snap.connectionState != ConnectionState.done) {
+          return const Center(child: CircularProgressIndicator());
         }
-
-        final maxAmplitude =
-            waveform.any((e) => e > 0) ? waveform.reduce(max).abs() * 1.2 : 1.0;
+        final wf = snap.data ?? const <double>[];
+        if (wf.isEmpty) return const SizedBox.shrink();
 
         return SizedBox(
-          height: height,
+          height: widget.height,
           width: double.infinity,
           child: CustomPaint(
             painter: LineWavePainter(
-              amplitudes: waveform,
-              maxAmplitude: maxAmplitude,
-              progress: progress,
+              amplitudes: wf, // 0..1
+              progress: widget.progress, // 0..1
+              samplesPerSecond: widget.samplesPerSecond, // 200
+              displaySeconds: widget.displaySeconds, // 4
+              waveColor: widget.waveColor,
             ),
           ),
         );
       },
     );
-  }
-
-  Future<List<double>> _loadAndProcessWaveform() async {
-    final raw = await extractWaveform(File(filePath)); // ✅ awaitを追加
-    return processWaveform(raw,
-        audioDuration.inMilliseconds / 1000.0); // これで raw は List<double> になってOK
   }
 }

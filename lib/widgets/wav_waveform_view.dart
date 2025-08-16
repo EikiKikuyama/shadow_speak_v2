@@ -1,89 +1,78 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import '../services/audio_player_service.dart';
-import '../widgets/sample_waveform_widget.dart';
-import '../widgets/recorded_waveform_widget.dart';
+import '../painters/line_wave_painter.dart';
+import '../utils/waveform_extractor.dart';
 
-class WavWaveformView extends StatefulWidget {
-  final String sampleAssetPath;
-  final String recordedFilePath;
-  final AudioPlayerService audioPlayerService;
-  final double playbackSpeed;
+class RecordedWaveformWidget extends StatefulWidget {
+  final String filePath; // 録音WAVのパス
+  final double height;
+  final double progress; // 0.0〜1.0（親でpositionStreamから算出）
+  final bool isAsset;
+  final int samplesPerSecond; // 200 = 5ms刻み
+  final int displaySeconds; // 可視窓（秒）
+  final Color waveColor;
 
-  const WavWaveformView({
+  const RecordedWaveformWidget({
     super.key,
-    required this.sampleAssetPath,
-    required this.recordedFilePath,
-    required this.audioPlayerService,
-    required this.playbackSpeed,
+    required this.filePath,
+    required this.height,
+    required this.progress,
+    this.isAsset = false,
+    this.samplesPerSecond = 200,
+    this.displaySeconds = 4,
+    this.waveColor = Colors.blueAccent,
   });
 
   @override
-  State<WavWaveformView> createState() => _WavWaveformViewState();
+  State<RecordedWaveformWidget> createState() => _RecordedWaveformWidgetState();
 }
 
-class _WavWaveformViewState extends State<WavWaveformView> {
-  Duration? _audioDuration;
-  Duration _currentPosition = Duration.zero;
-  late final Stream<Duration> _positionStream;
+class _RecordedWaveformWidgetState extends State<RecordedWaveformWidget> {
+  late Future<List<double>> _waveF;
 
   @override
   void initState() {
     super.initState();
-    _loadAudioDuration();
-
-    // 再生準備と開始
-    widget.audioPlayerService.prepareAndPlayLocalFile(
-      widget.recordedFilePath,
-      widget.playbackSpeed,
-    );
-
-    // 位置更新リスナー
-    _positionStream = widget.audioPlayerService.positionStream;
-    _positionStream.listen((position) {
-      if (!mounted) return;
-      setState(() => _currentPosition = position);
-    });
+    _waveF = _loadWaveform(); // 一度だけ読み込んでキャッシュ
   }
 
-  Future<void> _loadAudioDuration() async {
-    final duration =
-        await widget.audioPlayerService.getDuration(widget.recordedFilePath);
-    if (!mounted) return;
-    setState(() => _audioDuration = duration);
+  Future<List<double>> _loadWaveform() async {
+    try {
+      final pcm = widget.isAsset
+          ? await decodeWaveFromAssets(widget.filePath)
+          : await decodeWaveFromFile(File(widget.filePath));
+      return processWaveformUniform(pcm); // 0..1 / 5ms刻み
+    } catch (e) {
+      debugPrint("❌ [Recorded] 波形読み込み失敗: $e");
+      return const <double>[];
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_audioDuration == null) {
-      return const Center(child: CircularProgressIndicator());
-    }
+    return FutureBuilder<List<double>>(
+      future: _waveF,
+      builder: (context, snap) {
+        if (snap.connectionState != ConnectionState.done) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        final wf = snap.data ?? const <double>[];
+        if (wf.isEmpty) return const SizedBox.shrink();
 
-    final double progress =
-        _currentPosition.inMilliseconds / _audioDuration!.inMilliseconds;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const SizedBox(height: 16),
-        SampleWaveformWidget(
-          filePath: widget.sampleAssetPath, // ← 修正済み
-          height: 100,
-          progress: 0.0, // ※必要なら `progress` にしてもOK
-        ),
-        const SizedBox(height: 32),
-        RecordedWaveformWidget(
-          filePath: widget.recordedFilePath,
-          audioDuration: _audioDuration!,
-          height: 100,
-          progress: progress,
-        ),
-      ],
+        return SizedBox(
+          height: widget.height,
+          width: double.infinity,
+          child: CustomPaint(
+            painter: LineWavePainter(
+              amplitudes: wf, // 0..1
+              progress: widget.progress, // 0..1
+              samplesPerSecond: widget.samplesPerSecond, // 200
+              displaySeconds: widget.displaySeconds, // 4
+              waveColor: widget.waveColor,
+            ),
+          ),
+        );
+      },
     );
-  }
-
-  @override
-  void dispose() {
-    widget.audioPlayerService.dispose();
-    super.dispose();
   }
 }

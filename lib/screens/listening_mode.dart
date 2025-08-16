@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import '../painters/line_wave_painter.dart';
 import '../models/material_model.dart';
 import '../models/subtitle_segment.dart';
 import '../models/word_segment.dart';
-
 import '../services/audio_player_service.dart';
 import '../services/subtitle_loader.dart';
-
 import '../utils/subtitle_utils.dart';
-
 import '../widgets/sample_waveform_widget.dart';
 import '../widgets/speed_selector.dart';
 import '../widgets/playback_controls.dart';
@@ -18,7 +15,6 @@ import '../widgets/subtitle_display.dart';
 import '../widgets/custom_app_bar.dart';
 import '../widgets/word_subtitle_bar.dart';
 import '../widgets/ab_repeat_controls.dart';
-// 追加
 import 'package:shadow_speak_v2/settings/settings_controller.dart';
 import '../services/simple_dictionary.dart';
 import '../widgets/word_meaning_sheet.dart';
@@ -293,7 +289,7 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
     final progress = (total != null && total.inMilliseconds > 0)
         ? _currentPosition.inMilliseconds / total.inMilliseconds
         : 0.0;
-
+    final ds = 2;
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: CustomAppBar(
@@ -391,46 +387,42 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
                       ),
               ),
 
-              // 波形＋カラオケ
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        height: 160,
-                        color: waveColor,
-                        child: sampleFilePath != null
-                            ? ClipRect(
-                                child: SampleWaveformWidget(
-                                  filePath: sampleFilePath!,
-                                  height: 100,
-                                  progress: progress,
-                                  sampleRate: 100,
-                                  displaySeconds: 4,
-                                ),
-                              )
-                            : const Center(child: CircularProgressIndicator()),
+              Container(
+                width: double.infinity,
+                height: 180,
+                color: waveColor,
+                child: Column(
+                  children: [
+                    // 🎵 波形
+                    SizedBox(
+                      height: 120,
+                      child: (sampleFilePath != null)
+                          ? SampleWaveformWidget(
+                              filePath: sampleFilePath!,
+                              height: 120,
+                              progress: progress,
+                              displaySeconds: ds,
+                            )
+                          : const Center(child: CircularProgressIndicator()),
+                    ),
+                    // 🎤 カラオケ字幕バー（1行）
+                    SizedBox(
+                      height: 40,
+                      child: CustomPaint(
+                        size: const Size(double.infinity, 40),
+                        painter: KaraokeSubtitlePainter(
+                          wordSegments: _wordSegments,
+                          currentMs: _currentPosition.inMilliseconds,
+                          displaySeconds: ds, // 波形と必ず同じ
+                          lingerMs: 220, // 過去残像
+                          futureLookaheadWords: 3, // ★ 未来3語まで見せる
+                          futureOpacities: const [0.8, 0.6, 0.4], // 濃さ（お好みで）
+                          minW: 56,
+                          minWActive: 96,
+                        ),
                       ),
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
-                        child: _wordSegments.isNotEmpty
-                            ? FocusedKaraokeSubtitle(
-                                wordSegments: _wordSegments,
-                                currentTime: _currentPosition,
-                                highlightColor: Colors.orange,
-                                defaultColor: textColor,
-                              )
-                            : Center(
-                                child: Text("字幕を読み込み中…",
-                                    style: TextStyle(color: textColor)),
-                              ),
-                      ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
               ),
 

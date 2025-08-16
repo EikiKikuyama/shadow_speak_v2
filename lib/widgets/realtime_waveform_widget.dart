@@ -67,7 +67,6 @@ class _RealtimeWaveformWidgetState extends State<RealtimeWaveformWidget> {
       size: Size(double.infinity, widget.height),
       painter: LineWavePainter(
         amplitudes: _amplitudes,
-        maxAmplitude: 1.0, // Streamは正規化済みなので固定でOK
         progress: 1.0, // 常に全体表示
       ),
     );
