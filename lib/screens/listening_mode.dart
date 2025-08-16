@@ -20,6 +20,8 @@ import '../widgets/word_subtitle_bar.dart';
 import '../widgets/ab_repeat_controls.dart';
 // 追加
 import 'package:shadow_speak_v2/settings/settings_controller.dart';
+import '../services/simple_dictionary.dart';
+import '../widgets/word_meaning_sheet.dart';
 
 class ListeningMode extends ConsumerStatefulWidget {
   final PracticeMaterial material;
@@ -32,6 +34,7 @@ class ListeningMode extends ConsumerStatefulWidget {
 
 class _ListeningModeState extends ConsumerState<ListeningMode> {
   final AudioPlayerService _audioService = AudioPlayerService();
+  final _dict = SimpleDictionary(); // ① 辞書を保持
 
   // === ABリピート用 ===
   Duration? _abStart;
@@ -57,11 +60,28 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
   String fullText = "";
   int currentCharIndex = 0;
 
+  // 単語ワンショット再生用
+  Duration? _wordPlayEnd;
+  bool _isWordPlaying = false;
+  Timer? _wordStopTimer; // ← 追加：単語停止用タイマー
+
+  static const int _kTailPadMs = 150; // 好みで 80〜150ms
+  Duration _paddedEnd(Duration end) {
+    final total = _audioService.totalDuration;
+    final padded = end + const Duration(milliseconds: _kTailPadMs);
+    if (total == null) return padded;
+    return padded <= total ? padded : total;
+  }
+
+// ABループを一時停止するためのフラグ（単語再生中はABを無効化）
+  bool _suppressABDuringWord = false;
+
   @override
   void initState() {
     super.initState();
     _loadSampleAudio();
     _loadSubtitle();
+    _dict.init(); // ② 起動時に辞書読み込み
 
     _positionSubscription = _audioService.positionStream.listen((pos) async {
       if (!mounted) return;
@@ -73,15 +93,21 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
       }
 
       // ===== ABループ処理 =====
-      if (_abState == ABRepeatState.ready &&
+      // ABループ（単語再生中は抑制）
+      if (!_suppressABDuringWord &&
+          _abState == ABRepeatState.ready &&
           _abStart != null &&
           _abEnd != null) {
-        const epsilon = Duration(milliseconds: 30);
+        // B確定時に _abEnd は _paddedEnd() で+100〜120ms 済み前提
+        final end = _abEnd!;
+        const lookahead = Duration(milliseconds: 40); // 少し手前でトリガー
         final now = DateTime.now();
         final inCooldown =
             now.difference(_lastSeekAt) < const Duration(milliseconds: 120);
 
-        if (!_isSeekingForLoop && !inCooldown && pos + epsilon >= _abEnd!) {
+        if (!_isSeekingForLoop &&
+            !inCooldown &&
+            _currentPosition + lookahead >= end) {
           _isSeekingForLoop = true;
           _lastSeekAt = now;
           try {
@@ -89,6 +115,42 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
             await _audioService.resume();
           } finally {
             _isSeekingForLoop = false;
+          }
+        }
+
+        // ① 単語ワンショットの終了判定（常に評価）
+        if (_isWordPlaying && _wordPlayEnd != null) {
+          if (_currentPosition + const Duration(milliseconds: 20) >=
+              _wordPlayEnd!) {
+            _wordStopTimer?.cancel();
+            _isWordPlaying = false;
+            _suppressABDuringWord = false;
+            _wordPlayEnd = null;
+            await _audioService.pause();
+            // return; // 早期リターンしてもOK
+          }
+        }
+
+        // ② ABループ（単語再生中は抑制）
+        if (!_suppressABDuringWord &&
+            _abState == ABRepeatState.ready &&
+            _abStart != null &&
+            _abEnd != null) {
+          const epsilon = Duration(milliseconds: 30);
+          final now = DateTime.now();
+          final inCooldown =
+              now.difference(_lastSeekAt) < const Duration(milliseconds: 120);
+
+          if (!_isSeekingForLoop && !inCooldown && pos + epsilon >= _abEnd!) {
+            _isSeekingForLoop = true;
+            _lastSeekAt = now;
+            try {
+              await _audioService.seek(_abStart!);
+              await _audioService.resume();
+              await _audioService.pause(); // ★ ここで確実に停止
+            } finally {
+              _isSeekingForLoop = false;
+            }
           }
         }
       }
@@ -102,6 +164,19 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
     setState(() {
       sampleFilePath = path;
     });
+  }
+
+  Future<void> _playWordOnce(WordSegment w) async {
+    final start = Duration(milliseconds: (w.start * 1000).round());
+    final rawEnd = Duration(milliseconds: (w.end * 1000).round());
+    final end = _paddedEnd(rawEnd);
+
+    _suppressABDuringWord = true;
+    try {
+      await _audioService.playSegmentOnce(start: start, end: end);
+    } finally {
+      _suppressABDuringWord = false;
+    }
   }
 
   Future<void> _loadSubtitle() async {
@@ -141,13 +216,6 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
     return '$m:$s.$ms';
   }
 
-  void _flashDim({int ms = 200}) {
-    setState(() => _dim = true);
-    Future.delayed(Duration(milliseconds: ms), () {
-      if (mounted) setState(() => _dim = false);
-    });
-  }
-
   Future<void> _handleSetA() async {
     setState(() {
       _abState = ABRepeatState.selectingA; // A選択モードへ
@@ -177,7 +245,7 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
     }
   }
 
-  void _handleReset() {
+  void _handleReset({bool alsoStopAudio = false}) {
     setState(() {
       _abStart = null;
       _abEnd = null;
@@ -186,10 +254,20 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
       _abState = ABRepeatState.idle;
       _dim = false; // 暗転も解除
     });
+
+    // 単語再生中フラグも解除
+    _isWordPlaying = false;
+    _suppressABDuringWord = false;
+    _wordPlayEnd = null;
+
+    if (alsoStopAudio) {
+      _audioService.pause();
+    }
   }
 
   @override
   void dispose() {
+    _wordStopTimer?.cancel();
     _positionSubscription?.cancel();
     _audioService.stop();
     _audioService.dispose();
@@ -256,41 +334,55 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
                           final wEnd =
                               Duration(milliseconds: (word.end * 1000).toInt());
 
-                          setState(() {
-                            if (_abState == ABRepeatState.selectingA) {
+                          // A/B 選択モード中：既存のAB設定ロジック
+                          if (_abState == ABRepeatState.selectingA) {
+                            setState(() {
                               _abStart = wStart;
                               _aLabel = _fmt(wStart);
                               _abEnd = null;
                               _bLabel = "--";
-                              _abState = ABRepeatState.selectingB; // 次はB
+                              _abState = ABRepeatState.selectingB;
                               _dim = true;
+                            });
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('次にB地点にしたい単語をタップしてください')),
+                            );
+                            return;
+                          }
+
+                          if (_abState == ABRepeatState.selectingB) {
+                            // 最短区間 200ms
+                            if (wEnd <=
+                                (_abStart ?? Duration.zero) +
+                                    const Duration(milliseconds: 200)) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                    content: Text('次にB地点にしたい単語をタップしてください')),
+                                    content: Text('BはAより少し後にしてください（>=200ms）')),
                               );
-                            } else if (_abState == ABRepeatState.selectingB) {
-                              // 最短区間 200ms
-                              if (wEnd <=
-                                  (_abStart ?? Duration.zero) +
-                                      const Duration(milliseconds: 200)) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content:
-                                          Text('BはAより少し後にしてください（>=200ms）')),
-                                );
-                                return;
-                              }
+                              return;
+                            }
+                            setState(() {
                               _abEnd = wEnd;
                               _bLabel = _fmt(wEnd);
-                              _abState = ABRepeatState.ready; // 完了
+                              _abState = ABRepeatState.ready;
                               _dim = false;
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('AB区間を設定しました')),
-                              );
-                            }
-                          });
-                        },
-                      )
+                            });
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('AB区間を設定しました')),
+                            );
+                            return;
+                          }
+
+                          // ↑どちらでもない通常時：辞書ポップアップを表示
+                          showWordMeaningSheet(
+                            context,
+                            word: word.word,
+                            lookup: _dict.lookup,
+                            onPlayOnce: () =>
+                                _playWordOnce(word), // ★ ここを忘れてると未使用警告が出る
+                          );
+                        })
                     : Center(
                         child: Text(
                           "字幕を読み込み中…",

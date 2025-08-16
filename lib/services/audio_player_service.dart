@@ -129,6 +129,50 @@ class AudioPlayerService {
     }
   }
 
+// クリップの設定/解除
+  Future<void> setClipRange({Duration? start, Duration? end}) async {
+    await _player.setClip(start: start, end: end);
+  }
+
+// ループのON/OFF
+  Future<void> setLooping(bool enabled) async {
+    await _player.setLoopMode(enabled ? LoopMode.one : LoopMode.off);
+  }
+
+// AudioPlayerService 内に追加
+  Future<void> playSegmentOnce({
+    required Duration start,
+    required Duration end,
+  }) async {
+    if (_currentFilePath == null) return;
+
+    // 極短で無音にならないよう最小長さを確保
+    const minLen = Duration(milliseconds: 120);
+    if (end <= start + minLen) {
+      end = start + minLen;
+    }
+
+    await _player.setLoopMode(LoopMode.off);
+    await _player.pause();
+
+    // いまのソースにクリップ設定
+    await _player.setClip(start: start, end: end);
+
+    // クリップ内先頭（= 0）から再生（←重要）
+    await _player.seek(Duration.zero);
+    await Future.delayed(const Duration(milliseconds: 10)); // iOS対策のごく短待ち
+    await _player.play();
+
+    // 終端で completed になるのを待つ
+    await _player.processingStateStream
+        .firstWhere((s) => s == ProcessingState.completed);
+
+    // 後片付け：停止＆クリップ解除。位置は end に合わせる
+    await _player.pause();
+    await _player.setClip(start: null, end: null);
+    await _player.seek(end);
+  }
+
   Future<String> copyAssetToFile(String assetPath) async {
     final tempDir = await getTemporaryDirectory();
     final file = File('${tempDir.path}/${assetPath.split("/").last}');

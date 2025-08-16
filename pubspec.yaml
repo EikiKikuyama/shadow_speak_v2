@@ -48,7 +48,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-
+    - assets/dict/
+    - assets/dict/simple_dict.json
 
     - assets/image/
     - assets/scripts/

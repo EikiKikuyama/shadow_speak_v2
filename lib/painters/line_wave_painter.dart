@@ -33,8 +33,6 @@ class LineWavePainter extends CustomPainter {
     double offsetX = 0;
 
     final double centerX = size.width / 2;
-    final double progressX =
-        (centerSampleIndex - startIndex) * unitWidth + offsetX;
 
     Path path = Path();
 

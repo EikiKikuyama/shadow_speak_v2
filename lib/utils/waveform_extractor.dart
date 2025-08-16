@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart'; // ← assets用に必要
 import 'dart:typed_data';
-import 'waveform_extractor.dart';
 
 Future<List<double>> extractWaveformFromBytes(Uint8List data) async {
   if (data.length < 44) throw Exception("WAVファイルが小さすぎる");
