@@ -64,6 +64,7 @@ class _RecordedWaveformWidgetState extends State<RecordedWaveformWidget> {
           width: double.infinity,
           child: CustomPaint(
             painter: LineWavePainter(
+              maxAmplitude: 1.0,
               amplitudes: wf, // 0..1
               progress: widget.progress, // 0..1
               samplesPerSecond: widget.samplesPerSecond, // 200

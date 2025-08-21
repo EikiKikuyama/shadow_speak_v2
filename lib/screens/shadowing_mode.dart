@@ -1,6 +1,8 @@
+// lib/screens/shadowing_mode.dart
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../models/material_model.dart';
 import '../models/subtitle_segment.dart';
 import '../services/audio_player_service.dart';
@@ -14,7 +16,6 @@ import '../settings/settings_controller.dart';
 
 class ShadowingMode extends ConsumerStatefulWidget {
   final PracticeMaterial material;
-
   const ShadowingMode({super.key, required this.material});
 
   @override
@@ -22,6 +23,7 @@ class ShadowingMode extends ConsumerStatefulWidget {
 }
 
 class _ShadowingModeState extends ConsumerState<ShadowingMode> {
+  // ===== Audio (sample) =====
   final AudioPlayerService _audioService = AudioPlayerService();
   bool _isResetting = false;
   bool _hasPlayedOnce = false;
@@ -32,8 +34,12 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
   Duration _currentPosition = Duration.zero;
   StreamSubscription<Duration>? _positionSubscription;
   StreamSubscription<bool>? _playingSubscription;
+
+  // ===== Subtitles =====
   List<SubtitleSegment> _subtitles = [];
   SubtitleSegment? _currentSubtitle;
+
+  // ===== Tips =====
   final List<String> _tips = [
     "Repeat after the speaker with the same rhythm.",
     "Focus on intonation and stress.",
@@ -47,11 +53,14 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
   void initState() {
     super.initState();
     _randomTip = (_tips..shuffle()).first;
+
     _loadSampleAudio();
     _loadSubtitle();
+
     _playingSubscription = _audioService.isPlayingStream.listen((playing) {
       if (mounted) setState(() => _isPlaying = playing);
     });
+
     _positionSubscription = _audioService.positionStream.listen((position) {
       if (!mounted) return;
       setState(() {
@@ -64,6 +73,7 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
     });
   }
 
+  // ===== Sample audio & subtitles =====
   Future<void> _loadSampleAudio() async {
     final path = await _audioService.copyAssetToFile(widget.material.audioPath);
     if (!mounted) return;
@@ -75,7 +85,7 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
 
   Future<void> _loadSubtitle() async {
     final filename = widget.material.scriptPath
-        .replaceFirst('assets/subtitles/', '') // パス先頭だけ削除
+        .replaceFirst('assets/subtitles/', '')
         .replaceAll('.json', '')
         .replaceAll('.txt', '');
     final data = await loadSubtitles(filename);
@@ -84,6 +94,7 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
     });
   }
 
+  // ===== Controls =====
   Future<void> _startCountdownAndPlay() async {
     if (_isPlaying || sampleFilePath == null) return;
     setState(() {
@@ -96,6 +107,7 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
       setState(() => countdownValue = i - 1);
     }
     if (!mounted || _isResetting) return;
+
     setState(() {
       countdownValue = null;
       _hasPlayedOnce = true;
@@ -119,22 +131,25 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
     _isResetting = true;
     await _audioService.reset();
     await _audioService.stop();
+
     if (sampleFilePath != null) {
       await _audioService.prepareLocalFile(sampleFilePath!, _currentSpeed);
     }
+
+    if (!mounted) return;
     setState(() {
       _isPlaying = false;
       _hasPlayedOnce = false;
       countdownValue = null;
+      _currentPosition = Duration.zero;
     });
   }
 
   @override
   void dispose() {
-    _audioService.dispose();
     _playingSubscription?.cancel();
     _positionSubscription?.cancel();
-    _isResetting = true;
+    _audioService.dispose();
     super.dispose();
   }
 
@@ -142,6 +157,7 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
   Widget build(BuildContext context) {
     final settingsController = ref.watch(settingsControllerProvider);
     final isDarkMode = settingsController.isDarkMode;
+
     final backgroundColor = isDarkMode ? const Color(0xFF001F3F) : Colors.white;
     final textColor = isDarkMode ? Colors.white : Colors.black;
     final subtitleBoxColor = isDarkMode ? Colors.white10 : Colors.grey[200];
@@ -160,19 +176,11 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
         backgroundColor: backgroundColor,
         titleColor: textColor,
         iconColor: textColor,
+        actions: [],
       ),
       body: Column(
         children: [
-          Container(
-            height: 120,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/icon.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          // Tip
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: Container(
@@ -194,7 +202,10 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
               ),
             ),
           ),
+
           const SizedBox(height: 12),
+
+          // Main
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
@@ -213,6 +224,8 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
                         textAlign: TextAlign.center,
                       ),
                     ),
+
+                  // サンプル波形のみ
                   Container(
                     width: double.infinity,
                     height: 160,
@@ -226,13 +239,12 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
                               filePath: sampleFilePath!,
                               height: 100,
                               progress: progress,
+                              // displaySeconds: 3, // ←好みで。未指定なら既定値
                             ),
                           ),
                         if (countdownValue != null)
                           Text(
-                            countdownValue == 0
-                                ? 'Go!'
-                                : countdownValue.toString(),
+                            countdownValue == 0 ? 'Go!' : '$countdownValue',
                             style: TextStyle(
                               fontSize: 48,
                               fontWeight: FontWeight.bold,
@@ -246,6 +258,8 @@ class _ShadowingModeState extends ConsumerState<ShadowingMode> {
               ),
             ),
           ),
+
+          // Controls
           Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
             child: Column(

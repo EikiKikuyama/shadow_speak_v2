@@ -1,12 +1,12 @@
 {
-  "text": " Suitshi Rohanda, the visionary founder of Honda Motor Company, never received a formal higher education. Born into a modest family, he dropped out of school at a young age but cultivated a deep passion for engineering. Instead of textbooks, he immersed himself in hands-on experience, often dismantling machines to understand their mechanics. Determined to compete on a global scale, he recognized the importance of learning beyond technical skills. Though not fluent in English, Honda studied foreign manuals meticulously and valued cross-cultural understanding. He surrounded himself with experts and never hesitated to ask questions. His relentless curiosity and willingness to fail set him apart. Success represents the 1% of your work which results from the 99% that is called failure, he once remarked. History exemplifies that true education stems not from institutions but from a relentless drive to grow, explore, and persevere.",
+  "text": " Soichiro Honda, the visionary founder of Honda Motor Company, never received a formal higher education. Born into a modest family, he dropped out of school at a young age but cultivated a deep passion for engineering. Instead of textbooks, he immersed himself in hands-on experience, often dismantling machines to understand their mechanics. Determined to compete on a global scale, he recognized the importance of learning beyond technical skills. Though not fluent in English, Honda studied foreign manuals meticulously and valued cross-cultural understanding. He surrounded himself with experts and never hesitated to ask questions. His relentless curiosity and willingness to fail set him apart. Success represents the 1% of your work which results from the 99% that is called failure, he once remarked. History exemplifies that true education stems not from institutions but from a relentless drive to grow, explore, and persevere.",
   "segments": [
     {
       "id": 0,
       "seek": 0,
       "start": 0.0,
       "end": 5.92,
-      "text": " Suitshi Rohanda, the visionary founder of Honda Motor Company, never received a formal higher education.",
+      "text": " Soichiro Honda, the visionary founder of Honda Motor Company, never received a formal higher education.",
       "tokens": [
         50364,
         2746,
@@ -38,13 +38,13 @@
       "no_speech_prob": 0.013126674108207226,
       "words": [
         {
-          "word": " Suitshi",
+          "word": " Soichiro",
           "start": 0.0,
           "end": 0.6,
           "probability": 0.2532433122396469
         },
         {
-          "word": " Rohanda,",
+          "word": " Honda,",
           "start": 0.6,
           "end": 1.04,
           "probability": 0.5715420544147491

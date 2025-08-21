@@ -12,6 +12,7 @@ class AudioPlayerService {
   Duration? get totalDuration => _duration;
   set totalDuration(Duration? value) => _duration = value;
 
+  // ---- 互換ストリーム ----
   final StreamController<Duration> _positionController =
       StreamController.broadcast();
   Stream<Duration> get onPositionChanged => _positionController.stream;
@@ -29,12 +30,21 @@ class AudioPlayerService {
 
   String? _currentFilePath;
 
+  // ===== チューニング =====
+  static const Duration _kTailExtraSingle =
+      Duration(milliseconds: 300); // 単発の余韻
+  static const Duration _kTailExtraAB = Duration(milliseconds: 300); // AB の余韻
+  static const Duration _kMinLen = Duration(milliseconds: 120); // 極短対策
+  static const Duration _kTinyWait = Duration(milliseconds: 10); // seek直後の微待ち
+
+  // ===== AB ループ用（イベント駆動） =====
+  bool _abLooping = false;
+  Completer<void>? _abCancel; // 中断用（stopABLoopでcomplete）
+
   AudioPlayerService() {
     _durationSub = _player.durationStream.listen((duration) {
       _duration = duration;
-      if (duration != null) {
-        _durationSubject.add(duration);
-      }
+      if (duration != null) _durationSubject.add(duration);
     });
 
     _positionSub = _player.positionStream.listen((position) {
@@ -48,9 +58,135 @@ class AudioPlayerService {
 
   bool get isActuallyPlaying => _player.playing;
 
-  Future<void> seek(Duration position) async {
-    await _player.seek(position);
+  // ========= ヘルパ =========
+  Duration _clampToTotal(Duration d) {
+    final dur = totalDuration;
+    if (dur == null) return d;
+    if (d > dur) return dur;
+    if (d.isNegative) return Duration.zero;
+    return d;
   }
+
+  // ========= 単発：開始ピッタリ／終了+余韻 =========
+  Future<void> playSegmentOnce({
+    required Duration start,
+    required Duration end,
+    Duration? tailExtra, // 任意で上書き
+  }) async {
+    if (_currentFilePath == null) return;
+
+    if (end - start <= _kMinLen) {
+      end = start + _kMinLen;
+    }
+    final endPlus = _clampToTotal(end + (tailExtra ?? _kTailExtraSingle));
+
+    await _player.setLoopMode(LoopMode.off);
+    await _player.pause();
+
+    await _player.setClip(start: start, end: endPlus);
+
+    // クリップ内先頭(=0)から再生 → 開始ピッタリ
+    await _player.seek(Duration.zero);
+    await Future.delayed(_kTinyWait);
+    await _player.play();
+
+    // クリップ終端（実エンジンが判断）で completed
+    await _player.processingStateStream
+        .firstWhere((s) => s == ProcessingState.completed);
+
+    // 後片付け
+    await _player.pause();
+    await _player.setClip(start: null, end: null);
+    await _player.seek(endPlus);
+  }
+
+  // 互換別名
+  Future<void> playSegmentWithTailOnce({
+    required Duration start,
+    required Duration end,
+    Duration tailExtra = _kTailExtraSingle,
+  }) =>
+      playSegmentOnce(start: start, end: end, tailExtra: tailExtra);
+
+  // ========= AB：completed 駆動で 1 周ずつ正確ループ =========
+  Future<void> playABLoop({
+    required Duration a,
+    required Duration b,
+    Duration? tailExtra, // 任意で上書き
+  }) async {
+    if (_currentFilePath == null) return;
+
+    if (b - a <= _kMinLen) b = a + _kMinLen;
+
+    // B+余韻を作成し、ファイル末尾ギリギリなら少し手前にクランプ
+    final dur = totalDuration;
+    var bPlus = _clampToTotal(b + (tailExtra ?? _kTailExtraAB));
+    if (dur != null && bPlus >= dur - const Duration(milliseconds: 20)) {
+      bPlus = dur - const Duration(milliseconds: 20);
+    }
+    if (bPlus <= a) bPlus = a + _kMinLen;
+
+    // 旧ループを終了
+    _abLooping = false;
+    _abCancel?.complete();
+    _abCancel = null;
+
+    // 新ループ開始
+    _abLooping = true;
+    _abCancel = Completer<void>();
+
+    // 非同期で回す（awaitしない）
+    // ignore: unawaited_futures
+    _runAbLoop(a, bPlus);
+  }
+
+  Future<void> _runAbLoop(Duration a, Duration bPlus) async {
+    while (_abLooping) {
+      try {
+        await _player.setLoopMode(LoopMode.off);
+        await _player.setClip(start: a, end: bPlus);
+
+        // クリップ内先頭(=0)から開始 → Aにピッタリ
+        await _player.seek(Duration.zero);
+        await Future.delayed(_kTinyWait);
+        await _player.play();
+
+        // ① clip終端（completed） or ② 中断 のどちらか先で抜ける
+        final completedF = _player.processingStateStream
+            .firstWhere((s) => s == ProcessingState.completed);
+        final cancelF = _abCancel!.future;
+
+        await Future.any([completedF, cancelF]);
+        if (!_abLooping) break;
+
+        // 次周準備：後片付け＋Aへ
+        await _player.pause();
+        await _player.setClip(start: null, end: null);
+        await _player.seek(a);
+        // 次の while で再度 setClip→seek→play
+      } catch (e) {
+        debugPrint('AB loop error: $e');
+        break;
+      }
+    }
+
+    // ループ終了クリーンアップ
+    await _player.setLoopMode(LoopMode.off);
+    await _player.setClip(start: null, end: null);
+  }
+
+  Future<void> stopABLoop() async {
+    _abLooping = false;
+    _abCancel?.complete();
+    _abCancel = null;
+
+    await _player.setLoopMode(LoopMode.off);
+    await _player.pause();
+    await _player.setClip(start: null, end: null);
+  }
+
+  // ========= 基本操作 =========
+  Future<void> seek(Duration position) async => _player.seek(position);
 
   Future<void> resume() async {
     if (_currentFilePath == null) {
@@ -106,7 +242,14 @@ class AudioPlayerService {
   }
 
   Future<void> stop() async {
+    // AB も止める
+    _abLooping = false;
+    _abCancel?.complete();
+    _abCancel = null;
+
     await _player.stop();
+    await _player.setClip(start: null, end: null);
+    await _player.setLoopMode(LoopMode.off);
     debugPrint("⏹ 停止");
   }
 
@@ -117,6 +260,11 @@ class AudioPlayerService {
 
   Future<void> reset() async {
     try {
+      // AB も止める
+      _abLooping = false;
+      _abCancel?.complete();
+      _abCancel = null;
+
       if (_player.playing ||
           _player.playerState.processingState == ProcessingState.ready) {
         await _player.seek(Duration.zero);
@@ -129,72 +277,24 @@ class AudioPlayerService {
     }
   }
 
-// クリップの設定/解除
+  // 互換API（他所で使っていれば）
   Future<void> setClipRange({Duration? start, Duration? end}) async {
     await _player.setClip(start: start, end: end);
   }
 
-// ループのON/OFF
   Future<void> setLooping(bool enabled) async {
     await _player.setLoopMode(enabled ? LoopMode.one : LoopMode.off);
   }
 
-// AudioPlayerService 内に追加
-  Future<void> playSegmentOnce({
-    required Duration start,
-    required Duration end,
-  }) async {
-    if (_currentFilePath == null) return;
-
-    // 極短で無音にならないよう最小長さを確保
-    const minLen = Duration(milliseconds: 120);
-    if (end <= start + minLen) {
-      end = start + minLen;
-    }
-
-    await _player.setLoopMode(LoopMode.off);
-    await _player.pause();
-
-    // いまのソースにクリップ設定
-    await _player.setClip(start: start, end: end);
-
-    // クリップ内先頭（= 0）から再生（←重要）
-    await _player.seek(Duration.zero);
-    await Future.delayed(const Duration(milliseconds: 10)); // iOS対策のごく短待ち
-    await _player.play();
-
-    // 終端で completed になるのを待つ
-    await _player.processingStateStream
-        .firstWhere((s) => s == ProcessingState.completed);
-
-    // 後片付け：停止＆クリップ解除。位置は end に合わせる
-    await _player.pause();
-    await _player.setClip(start: null, end: null);
-    await _player.seek(end);
-  }
-
-  Future<String> copyAssetToFile(String assetPath) async {
-    final tempDir = await getTemporaryDirectory();
-    final file = File('${tempDir.path}/${assetPath.split("/").last}');
-
-    // ✅ すでに同名のファイルが存在していれば、コピーせずそのまま返す
-    if (await file.exists()) {
-      debugPrint("📁 既存のキャッシュファイルを使用: ${file.path}");
-      return file.path;
-    }
-
-    // ⬇ 初回のみ asset からコピー
-    final byteData = await rootBundle.load('assets/$assetPath');
-    await file.writeAsBytes(byteData.buffer.asUint8List());
-    debugPrint("🆕 asset からファイルをコピー: ${file.path}");
-
-    return file.path;
-  }
-
+  // 位置ストリーム（直接）
   Stream<Duration> get positionStream => _player.positionStream;
 
   Future<void> dispose() async {
     try {
+      _abLooping = false;
+      _abCancel?.complete();
+      _abCancel = null;
+
       await stop();
       await _player.dispose();
       await _positionSub?.cancel();
@@ -206,5 +306,19 @@ class AudioPlayerService {
     } catch (e) {
       debugPrint('⚠️ dispose エラー: $e');
     }
+  }
+
+  // ========== おまけ：アセット→一時ファイル ==========
+  Future<String> copyAssetToFile(String assetPath) async {
+    final tempDir = await getTemporaryDirectory();
+    final file = File('${tempDir.path}/${assetPath.split("/").last}');
+    if (await file.exists()) {
+      debugPrint("📁 既存のキャッシュファイルを使用: ${file.path}");
+      return file.path;
+    }
+    final byteData = await rootBundle.load('assets/$assetPath');
+    await file.writeAsBytes(byteData.buffer.asUint8List());
+    debugPrint("🆕 asset からファイルをコピー: ${file.path}");
+    return file.path;
   }
 }

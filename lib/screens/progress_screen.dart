@@ -107,6 +107,7 @@ class _ProgressScreenState extends ConsumerState<ProgressScreen> {
         backgroundColor: appBarColor,
         titleColor: iconColor,
         iconColor: iconColor,
+        actions: [],
       ),
       body: Column(
         children: [

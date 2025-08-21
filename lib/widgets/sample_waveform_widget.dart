@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 import '../painters/line_wave_painter.dart';
 import '../utils/waveform_extractor.dart';
 
@@ -58,6 +57,7 @@ class _SampleWaveformWidgetState extends State<SampleWaveformWidget> {
           width: double.infinity,
           child: CustomPaint(
             painter: LineWavePainter(
+              maxAmplitude: 1.0,
               amplitudes: wf,
               progress: widget.progress,
               samplesPerSecond: widget.samplesPerSecond,

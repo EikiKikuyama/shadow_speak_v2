@@ -30,6 +30,7 @@ class PracticeModeSelectionScreen extends ConsumerWidget {
         backgroundColor: appBarColor,
         titleColor: titleColor,
         iconColor: iconColor,
+        actions: [],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

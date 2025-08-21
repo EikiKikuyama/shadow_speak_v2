@@ -26,6 +26,7 @@ class LevelHomeScreen extends ConsumerWidget {
         backgroundColor: const Color(0xFFF3F0FA),
         titleColor: Colors.black,
         iconColor: Colors.black,
+        actions: [],
       ),
       body: _buildLevelList(context, t, isDarkMode: false),
     );
@@ -39,6 +40,7 @@ class LevelHomeScreen extends ConsumerWidget {
         backgroundColor: const Color(0xFF0C1A3E),
         titleColor: Colors.white,
         iconColor: Colors.white,
+        actions: [],
       ),
       body: _buildLevelList(context, t, isDarkMode: true),
     );

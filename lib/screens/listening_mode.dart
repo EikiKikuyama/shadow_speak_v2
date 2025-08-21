@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../painters/line_wave_painter.dart';
 import '../models/material_model.dart';
 import '../models/subtitle_segment.dart';
@@ -13,7 +14,6 @@ import '../widgets/speed_selector.dart';
 import '../widgets/playback_controls.dart';
 import '../widgets/subtitle_display.dart';
 import '../widgets/custom_app_bar.dart';
-import '../widgets/word_subtitle_bar.dart';
 import '../widgets/ab_repeat_controls.dart';
 import 'package:shadow_speak_v2/settings/settings_controller.dart';
 import '../services/simple_dictionary.dart';
@@ -21,7 +21,6 @@ import '../widgets/word_meaning_sheet.dart';
 
 class ListeningMode extends ConsumerStatefulWidget {
   final PracticeMaterial material;
-
   const ListeningMode({super.key, required this.material});
 
   @override
@@ -29,39 +28,32 @@ class ListeningMode extends ConsumerStatefulWidget {
 }
 
 class _ListeningModeState extends ConsumerState<ListeningMode> {
+  // 再生
   final AudioPlayerService _audioService = AudioPlayerService();
-  final _dict = SimpleDictionary(); // ① 辞書を保持
-
-  // === ABリピート用 ===
-  Duration? _abStart;
-  Duration? _abEnd;
-  ABRepeatState _abState = ABRepeatState.idle;
-  bool _dim = false; // 短時間の暗転フィードバック
-  String _aLabel = "--";
-  String _bLabel = "--";
-
-  bool _isSeekingForLoop = false;
-  DateTime _lastSeekAt = DateTime.fromMillisecondsSinceEpoch(0);
-
-  // === 再生・字幕 ===
   String? sampleFilePath;
   double _currentSpeed = 1.0;
   Duration _currentPosition = Duration.zero;
+  StreamSubscription<Duration>? _positionSubscription;
 
+  // 字幕
   List<SubtitleSegment> _subtitles = [];
   List<WordSegment> _wordSegments = [];
   SubtitleSegment? _currentSubtitle;
-  StreamSubscription<Duration>? _positionSubscription;
 
-  String fullText = "";
-  int currentCharIndex = 0;
+  // 全文↔日本語訳トグル
+  bool _showJp = false;
 
-  // 単語ワンショット再生用
-  Duration? _wordPlayEnd;
-  bool _isWordPlaying = false;
-  Timer? _wordStopTimer; // ← 追加：単語停止用タイマー
+  // ABリピート
+  Duration? _abStart;
+  Duration? _abEnd;
+  ABRepeatState _abState = ABRepeatState.idle;
+  bool _dim = false; // A/B選択ガイダンスの半透明オーバレイ
+  String _aLabel = '--';
+  String _bLabel = '--';
 
-  static const int _kTailPadMs = 150; // 好みで 80〜150ms
+  // 単語ポップアップ辞書 & ワンショット再生
+  final _dict = SimpleDictionary();
+  static const int _kTailPadMs = 150; // 単語ワンショットの余韻
   Duration _paddedEnd(Duration end) {
     final total = _audioService.totalDuration;
     final padded = end + const Duration(milliseconds: _kTailPadMs);
@@ -69,17 +61,14 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
     return padded <= total ? padded : total;
   }
 
-// ABループを一時停止するためのフラグ（単語再生中はABを無効化）
-  bool _suppressABDuringWord = false;
-
   @override
   void initState() {
     super.initState();
+    _dict.init();
     _loadSampleAudio();
     _loadSubtitle();
-    _dict.init(); // ② 起動時に辞書読み込み
 
-    _positionSubscription = _audioService.positionStream.listen((pos) async {
+    _positionSubscription = _audioService.positionStream.listen((pos) {
       if (!mounted) return;
       setState(() => _currentPosition = pos);
 
@@ -87,109 +76,40 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
       if (current != _currentSubtitle) {
         setState(() => _currentSubtitle = current);
       }
-
-      // ===== ABループ処理 =====
-      // ABループ（単語再生中は抑制）
-      if (!_suppressABDuringWord &&
-          _abState == ABRepeatState.ready &&
-          _abStart != null &&
-          _abEnd != null) {
-        // B確定時に _abEnd は _paddedEnd() で+100〜120ms 済み前提
-        final end = _abEnd!;
-        const lookahead = Duration(milliseconds: 40); // 少し手前でトリガー
-        final now = DateTime.now();
-        final inCooldown =
-            now.difference(_lastSeekAt) < const Duration(milliseconds: 120);
-
-        if (!_isSeekingForLoop &&
-            !inCooldown &&
-            _currentPosition + lookahead >= end) {
-          _isSeekingForLoop = true;
-          _lastSeekAt = now;
-          try {
-            await _audioService.seek(_abStart!);
-            await _audioService.resume();
-          } finally {
-            _isSeekingForLoop = false;
-          }
-        }
-
-        // ① 単語ワンショットの終了判定（常に評価）
-        if (_isWordPlaying && _wordPlayEnd != null) {
-          if (_currentPosition + const Duration(milliseconds: 20) >=
-              _wordPlayEnd!) {
-            _wordStopTimer?.cancel();
-            _isWordPlaying = false;
-            _suppressABDuringWord = false;
-            _wordPlayEnd = null;
-            await _audioService.pause();
-            // return; // 早期リターンしてもOK
-          }
-        }
-
-        // ② ABループ（単語再生中は抑制）
-        if (!_suppressABDuringWord &&
-            _abState == ABRepeatState.ready &&
-            _abStart != null &&
-            _abEnd != null) {
-          const epsilon = Duration(milliseconds: 30);
-          final now = DateTime.now();
-          final inCooldown =
-              now.difference(_lastSeekAt) < const Duration(milliseconds: 120);
-
-          if (!_isSeekingForLoop && !inCooldown && pos + epsilon >= _abEnd!) {
-            _isSeekingForLoop = true;
-            _lastSeekAt = now;
-            try {
-              await _audioService.seek(_abStart!);
-              await _audioService.resume();
-              await _audioService.pause(); // ★ ここで確実に停止
-            } finally {
-              _isSeekingForLoop = false;
-            }
-          }
-        }
-      }
     });
   }
 
+  @override
+  void dispose() {
+    _positionSubscription?.cancel();
+    _audioService.stop();
+    _audioService.dispose();
+    super.dispose();
+  }
+
+  // ====== ロード系 ======
   Future<void> _loadSampleAudio() async {
     final path = await _audioService.copyAssetToFile(widget.material.audioPath);
     if (!mounted) return;
     await _audioService.prepareLocalFile(path, _currentSpeed);
-    setState(() {
-      sampleFilePath = path;
-    });
-  }
-
-  Future<void> _playWordOnce(WordSegment w) async {
-    final start = Duration(milliseconds: (w.start * 1000).round());
-    final rawEnd = Duration(milliseconds: (w.end * 1000).round());
-    final end = _paddedEnd(rawEnd);
-
-    _suppressABDuringWord = true;
-    try {
-      await _audioService.playSegmentOnce(start: start, end: end);
-    } finally {
-      _suppressABDuringWord = false;
-    }
+    setState(() => sampleFilePath = path);
   }
 
   Future<void> _loadSubtitle() async {
-    final filename = widget.material.scriptPath
+    final key = widget.material.scriptPath
         .replaceFirst('assets/subtitles/', '')
         .replaceAll('.json', '')
         .replaceAll('.txt', '');
-
-    final data = await loadSubtitles(filename);
-    final wordData = await loadWordSegments(filename);
+    final subs = await loadSubtitles(key);
+    final words = await loadWordSegments(key);
+    if (!mounted) return;
     setState(() {
-      _subtitles = data;
-      _wordSegments = wordData;
-      fullText = _subtitles.map((s) => s.text).join(" ");
+      _subtitles = subs;
+      _wordSegments = words;
     });
   }
 
+  // ====== 再生制御 ======
   Future<void> _togglePlayPause(bool isPlaying) async {
     if (sampleFilePath == null) return;
     await _audioService.setSpeed(_currentSpeed);
@@ -200,11 +120,17 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
     }
   }
 
-  Future<void> _reset() async {
-    await _audioService.reset();
+  Future<void> _reset() => _audioService.reset();
+
+  // ====== 単語ワンショット ======
+  Future<void> _playWordOnce(WordSegment w) async {
+    final start = Duration(milliseconds: (w.start * 1000).round());
+    final rawEnd = Duration(milliseconds: (w.end * 1000).round());
+    final end = _paddedEnd(rawEnd);
+    await _audioService.playSegmentOnce(start: start, end: end);
   }
 
-  // ========== ABハンドラ ==========
+  // ====== ABリピート UI ハンドラ ======
   String _fmt(Duration d) {
     final ms = (d.inMilliseconds % 1000).toString().padLeft(3, '0');
     final s = (d.inSeconds % 60).toString().padLeft(2, '0');
@@ -214,8 +140,9 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
 
   Future<void> _handleSetA() async {
     setState(() {
-      _abState = ABRepeatState.selectingA; // A選択モードへ
-      _dim = true; // 暗転を維持（確定まで）
+      _showJp = false; // A/B選択は英語で
+      _abState = ABRepeatState.selectingA;
+      _dim = true;
     });
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -226,17 +153,19 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
 
   Future<void> _handleSetB() async {
     setState(() {
+      _showJp = false; // Bも同様
       _abState = (_abStart == null)
-          ? ABRepeatState.selectingA // まだAが無いならAから
-          : ABRepeatState.selectingB; // B選択モードへ
+          ? ABRepeatState.selectingA
+          : ABRepeatState.selectingB;
       _dim = true;
     });
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content: Text(_abStart == null
-                ? '先にA地点を選んでください（本文をタップ）'
-                : 'B地点にしたい本文をタップしてください')),
+          content: Text(_abStart == null
+              ? '先にA地点を選んでください（本文をタップ）'
+              : 'B地点にしたい本文をタップしてください'),
+        ),
       );
     }
   }
@@ -245,35 +174,19 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
     setState(() {
       _abStart = null;
       _abEnd = null;
-      _aLabel = "--";
-      _bLabel = "--";
+      _aLabel = '--';
+      _bLabel = '--';
       _abState = ABRepeatState.idle;
-      _dim = false; // 暗転も解除
+      _dim = false;
     });
-
-    // 単語再生中フラグも解除
-    _isWordPlaying = false;
-    _suppressABDuringWord = false;
-    _wordPlayEnd = null;
-
-    if (alsoStopAudio) {
-      _audioService.pause();
-    }
+    _audioService.stopABLoop();
+    if (alsoStopAudio) _audioService.pause();
   }
 
-  @override
-  void dispose() {
-    _wordStopTimer?.cancel();
-    _positionSubscription?.cancel();
-    _audioService.stop();
-    _audioService.dispose();
-    super.dispose();
-  }
-
+  // ====== UI ======
   @override
   Widget build(BuildContext context) {
-    final settingsController = ref.watch(settingsControllerProvider);
-    final isDark = settingsController.isDarkMode;
+    final isDark = ref.watch(settingsControllerProvider).isDarkMode;
 
     final backgroundColor =
         isDark ? const Color(0xFF001F3F) : const Color(0xFFF4F1FA);
@@ -289,7 +202,8 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
     final progress = (total != null && total.inMilliseconds > 0)
         ? _currentPosition.inMilliseconds / total.inMilliseconds
         : 0.0;
-    final ds = 2;
+    const int ds = 2;
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: CustomAppBar(
@@ -297,103 +211,132 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
         backgroundColor: backgroundColor,
         titleColor: textColor,
         iconColor: textColor,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: _LangToggle(
+              showJp: _showJp,
+              onChanged: (v) => setState(() => _showJp = v),
+            ),
+          ),
+        ],
       ),
       body: Stack(
         children: [
-          // ===== メインUI =====
           Column(
             children: [
-              // 字幕（全体）
+              // ===== 上：全文エリア =====
               Container(
                 height: subtitleHeight,
                 width: double.infinity,
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: _subtitles.isNotEmpty
-                    ? // build() の SubtitleDisplay 呼び出しを修正
-                    SubtitleDisplay(
-                        currentTime: _currentPosition,
-                        allSubtitles: _subtitles,
-                        highlightColor: Colors.blue,
-                        defaultColor: textColor,
-                        abState: _abState,
-                        abStart: _abStart,
-                        abEnd: _abEnd,
-                        selectedA: _abStart, // ★ 追加
-                        selectedB: _abEnd, // ★ 追加
-                        onSelectSubtitle: (start, end) {
-                          // セグメントタップ時のフォールバック（任意）
-                        },
-                        onWordTap: (word) {
-                          final wStart = Duration(
-                              milliseconds: (word.start * 1000).toInt());
-                          final wEnd =
-                              Duration(milliseconds: (word.end * 1000).toInt());
+                    ? Stack(
+                        children: [
+                          Positioned.fill(
+                            child: _showJp
+                                ? _buildFullTranslation(textColor)
+                                : SubtitleDisplay(
+                                    currentTime: _currentPosition,
+                                    allSubtitles: _subtitles,
+                                    highlightColor: Colors.blue,
+                                    defaultColor: textColor,
+                                    abState: _abState,
+                                    abStart: _abStart,
+                                    abEnd: _abEnd,
+                                    selectedA: _abStart,
+                                    selectedB: _abEnd,
+                                    onSelectSubtitle: (s, e) {},
+                                    onWordTap: (word) async {
+                                      final wStart = Duration(
+                                          milliseconds:
+                                              (word.start * 1000).toInt());
+                                      final wEnd = Duration(
+                                          milliseconds:
+                                              (word.end * 1000).toInt());
 
-                          // A/B 選択モード中：既存のAB設定ロジック
-                          if (_abState == ABRepeatState.selectingA) {
-                            setState(() {
-                              _abStart = wStart;
-                              _aLabel = _fmt(wStart);
-                              _abEnd = null;
-                              _bLabel = "--";
-                              _abState = ABRepeatState.selectingB;
-                              _dim = true;
-                            });
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text('次にB地点にしたい単語をタップしてください')),
-                            );
-                            return;
-                          }
+                                      // AB選択モード
+                                      if (_abState ==
+                                          ABRepeatState.selectingA) {
+                                        setState(() {
+                                          _abStart = wStart;
+                                          _aLabel = _fmt(wStart);
+                                          _abEnd = null;
+                                          _bLabel = '--';
+                                          _abState = ABRepeatState.selectingB;
+                                          _dim = true;
+                                        });
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text(
+                                                  '次にB地点にしたい単語をタップしてください')),
+                                        );
+                                        return;
+                                      }
 
-                          if (_abState == ABRepeatState.selectingB) {
-                            // 最短区間 200ms
-                            if (wEnd <=
-                                (_abStart ?? Duration.zero) +
-                                    const Duration(milliseconds: 200)) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('BはAより少し後にしてください（>=200ms）')),
-                              );
-                              return;
-                            }
-                            setState(() {
-                              _abEnd = wEnd;
-                              _bLabel = _fmt(wEnd);
-                              _abState = ABRepeatState.ready;
-                              _dim = false;
-                            });
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('AB区間を設定しました')),
-                            );
-                            return;
-                          }
+                                      if (_abState ==
+                                          ABRepeatState.selectingB) {
+                                        // 最短幅
+                                        if (wEnd <=
+                                            (_abStart ?? Duration.zero) +
+                                                const Duration(
+                                                    milliseconds: 200)) {
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                                content: Text(
+                                                    'BはAより少し後にしてください（>=200ms）')),
+                                          );
+                                          return;
+                                        }
+                                        setState(() {
+                                          _abEnd = wEnd;
+                                          _bLabel = _fmt(wEnd);
+                                          _abState = ABRepeatState.ready;
+                                          _dim = false;
+                                        });
+                                        // ここでABループ開始
+                                        if (_abStart != null &&
+                                            _abEnd != null) {
+                                          await _audioService.playABLoop(
+                                            a: _abStart!,
+                                            b: _abEnd!,
+                                          );
+                                        }
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                              content: Text('AB区間を設定しました')),
+                                        );
+                                        return;
+                                      }
 
-                          // ↑どちらでもない通常時：辞書ポップアップを表示
-                          showWordMeaningSheet(
-                            context,
-                            word: word.word,
-                            lookup: _dict.lookup,
-                            onPlayOnce: () =>
-                                _playWordOnce(word), // ★ ここを忘れてると未使用警告が出る
-                          );
-                        })
+                                      // 通常：辞書ポップアップ（+単語ワンショット）
+                                      showWordMeaningSheet(
+                                        context,
+                                        word: word.word,
+                                        lookup: _dict.lookup,
+                                        onPlayOnce: () => _playWordOnce(word),
+                                      );
+                                    },
+                                  ),
+                          ),
+                        ],
+                      )
                     : Center(
-                        child: Text(
-                          "字幕を読み込み中…",
-                          style: TextStyle(color: textColor),
-                        ),
-                      ),
+                        child: Text('字幕を読み込み中…',
+                            style: TextStyle(color: textColor))),
               ),
 
+              // ===== 中：波形＋カラオケバー =====
               Container(
                 width: double.infinity,
                 height: 180,
                 color: waveColor,
                 child: Column(
                   children: [
-                    // 🎵 波形
                     SizedBox(
                       height: 120,
                       child: (sampleFilePath != null)
@@ -405,7 +348,6 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
                             )
                           : const Center(child: CircularProgressIndicator()),
                     ),
-                    // 🎤 カラオケ字幕バー（1行）
                     SizedBox(
                       height: 40,
                       child: CustomPaint(
@@ -413,27 +355,27 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
                         painter: KaraokeSubtitlePainter(
                           wordSegments: _wordSegments,
                           currentMs: _currentPosition.inMilliseconds,
-                          displaySeconds: ds, // 波形と必ず同じ
-                          lingerMs: 220, // 過去残像
-                          futureLookaheadWords: 3, // ★ 未来3語まで見せる
-                          futureOpacities: const [0.8, 0.6, 0.4], // 濃さ（お好みで）
+                          displaySeconds: ds,
+                          lingerMs: 220,
+                          futureLookaheadWords: 3,
+                          futureOpacities: const [0.8, 0.6, 0.4],
                           minW: 56,
                           minWActive: 96,
                         ),
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
 
-              // 下部コントロール群
+              // ===== 下：コントロール群 =====
               Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
+                padding: const EdgeInsets.only(bottom: 16),
                 child: Column(
                   children: [
                     if (total != null && total.inMilliseconds > 0)
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Slider(
                           value: _currentPosition.inMilliseconds
                               .toDouble()
@@ -442,23 +384,19 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
                           max: total.inMilliseconds.toDouble(),
                           activeColor: sliderActiveColor,
                           inactiveColor: sliderInactiveColor,
-                          onChanged: (value) {
-                            setState(() {
-                              _currentPosition =
-                                  Duration(milliseconds: value.toInt());
-                            });
-                          },
-                          onChangeEnd: (value) {
-                            _audioService
-                                .seek(Duration(milliseconds: value.toInt()));
-                          },
+                          onChanged: (v) => setState(() {
+                            _currentPosition =
+                                Duration(milliseconds: v.toInt());
+                          }),
+                          onChangeEnd: (v) => _audioService
+                              .seek(Duration(milliseconds: v.toInt())),
                         ),
                       ),
                     StreamBuilder<bool>(
                       stream: _audioService.isPlayingStream,
                       initialData: false,
-                      builder: (context, snapshot) {
-                        final isPlaying = snapshot.data ?? false;
+                      builder: (context, snap) {
+                        final isPlaying = snap.data ?? false;
                         return PlaybackControls(
                           isPlaying: isPlaying,
                           onPlayPauseToggle: () => _togglePlayPause(isPlaying),
@@ -470,24 +408,19 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
                         );
                       },
                     ),
-
-                    // === 1ボタンABコントローラー ===
                     ABRepeatControls(
                       aTime: _aLabel,
                       bTime: _bLabel,
-                      onSetA: _handleSetA, // selectingAへ
-                      onSetB: _handleSetB, // 未使用
-                      onReset: _handleReset,
+                      onSetA: _handleSetA,
+                      onSetB: _handleSetB,
+                      onReset: () => _handleReset(alsoStopAudio: false),
                     ),
-
                     const SizedBox(height: 12),
-
-                    // 再生速度
                     SpeedSelector(
                       currentSpeed: _currentSpeed,
-                      onSpeedSelected: (speed) {
-                        setState(() => _currentSpeed = speed);
-                        _audioService.setSpeed(speed);
+                      onSpeedSelected: (s) {
+                        setState(() => _currentSpeed = s);
+                        _audioService.setSpeed(s);
                       },
                     ),
                   ],
@@ -495,17 +428,86 @@ class _ListeningModeState extends ConsumerState<ListeningMode> {
               ),
             ],
           ),
-
-          // ===== 暗転オーバーレイ =====
-          // 置き換え（onTap付き GestureDetector をやめる）
           if (_dim)
             Positioned.fill(
               child: IgnorePointer(
-                ignoring: true, // タップを全部下に通す
+                ignoring: true,
                 child: Container(color: Colors.black.withOpacity(0.35)),
               ),
             ),
         ],
+      ),
+    );
+  }
+
+  // 全訳ビュー
+  Widget _buildFullTranslation(Color color) {
+    final lines = _subtitles
+        .map((s) => (s.translation.isNotEmpty ? s.translation : s.text))
+        .toList();
+    final body = lines.join('\n\n');
+    return SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
+      child: SelectableText(
+        body,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: color,
+          fontSize: 18,
+          height: 1.0,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+    );
+  }
+}
+
+/// 右上の EN/JP ピル・トグル
+class _LangToggle extends StatelessWidget {
+  final bool showJp;
+  final ValueChanged<bool> onChanged;
+  const _LangToggle({required this.showJp, required this.onChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final bg = isDark
+        ? Colors.white.withOpacity(0.10)
+        : Colors.black.withOpacity(0.06);
+    return Container(
+      decoration:
+          BoxDecoration(color: bg, borderRadius: BorderRadius.circular(18)),
+      padding: const EdgeInsets.all(4),
+      child: Row(mainAxisSize: MainAxisSize.min, children: [
+        _pill(label: 'EN', selected: !showJp, onTap: () => onChanged(false)),
+        const SizedBox(width: 4),
+        _pill(label: 'JP', selected: showJp, onTap: () => onChanged(true)),
+      ]),
+    );
+  }
+
+  Widget _pill({
+    required String label,
+    required bool selected,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        decoration: BoxDecoration(
+          color: selected ? Colors.deepPurpleAccent : Colors.transparent,
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: selected ? Colors.white : null,
+            fontWeight: FontWeight.w700,
+            letterSpacing: 0.5,
+          ),
+        ),
       ),
     );
   }

@@ -71,7 +71,8 @@ class MyApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       builder: (context, child) {
         return MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaleFactor: scaleFactor),
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: TextScaler.linear(scaleFactor)),
           child: child!,
         );
       },

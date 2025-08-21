@@ -32,4 +32,6 @@ class PracticeMaterial {
       wordCount: 0,
     );
   }
+
+  String get sampleWavPath => audioPath;
 }

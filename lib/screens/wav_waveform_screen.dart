@@ -1,16 +1,25 @@
+// lib/screens/wav_waveform_screen.dart
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../models/material_model.dart';
 import '../services/audio_player_service.dart';
-import '../widgets/sample_waveform_widget.dart';
 import '../screens/ai_scoring_screen.dart';
 import '../services/subtitle_loader.dart';
 import '../widgets/custom_app_bar.dart';
 import '../settings/settings_controller.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart'; // ← 追加
+
+import '../audio/waveform_pipeline.dart';
+import '../audio/wav_loader.dart';
+import '../settings/latency.dart';
+import '../widgets/series_waveform_widget.dart';
+import '../utils/wav_utils.dart';
+import 'dart:io';
 
 class WavWaveformScreen extends ConsumerStatefulWidget {
-  final String wavFilePath;
-  final PracticeMaterial material;
+  final String wavFilePath; // あなたの録音WAV
+  final PracticeMaterial material; // 見本の素材
 
   const WavWaveformScreen({
     super.key,
@@ -24,18 +33,28 @@ class WavWaveformScreen extends ConsumerStatefulWidget {
 
 class _WavWaveformScreenState extends ConsumerState<WavWaveformScreen> {
   final AudioPlayerService _audioService = AudioPlayerService();
+
   bool _isPlaying = false;
-  String? _copiedSamplePath;
   String subtitleText = '';
-  double _currentProgress = 0.0;
+
+  // 0..1 の 200fps シリーズ
+  List<double> _sampleSeries = []; // 見本
+  List<double> _recordedSeries = []; // あなた
+  int _sampleRate = 44100;
+
+  double _currentProgress = 0.0; // 0..1
+  StreamSubscription<Duration>? _posSub;
+
+  // 後で STT の結果を入れる場所（今は空でOK）
+  String? _userSttText;
 
   @override
   void initState() {
     super.initState();
-    _prepareSampleAudio();
+    _prepareWaveforms();
     _loadSubtitle();
 
-    _audioService.positionStream.listen((pos) {
+    _posSub = _audioService.positionStream.listen((pos) {
       if (!mounted || _audioService.totalDuration == null) return;
       final total = _audioService.totalDuration!.inMilliseconds;
       final current = pos.inMilliseconds;
@@ -45,19 +64,84 @@ class _WavWaveformScreenState extends ConsumerState<WavWaveformScreen> {
     });
   }
 
-  Future<void> _prepareSampleAudio() async {
-    final path = await _audioService.copyAssetToFile(widget.material.audioPath);
-    await _audioService.prepareLocalFile(path, 1.0);
+  @override
+  void dispose() {
+    _posSub?.cancel();
+    _audioService.dispose();
+    super.dispose();
+  }
+
+  Future<void> _prepareWaveforms() async {
+    // 見本 / 録音 WAV を float モノラルで取得
+    final sample = await loadWavAssetAsMonoFloat(widget.material.audioPath);
+    final recorded = await loadWavAsMonoFloat(widget.wavFilePath);
+
+    _sampleRate = sample.sampleRate;
+
+    final lagMs = ref.read(lagMsProvider);
+    final cfg = WaveformPipelineConfig(
+      alpha: 0.18,
+      rmsWinMs: 10,
+      hopMs: 5, // → 200fps
+      lagMs: lagMs,
+    );
+
+    // 0..1 の 200fps 系列に変換
+    var sampleSeries = WaveformPipeline.process(
+      raw: sample.samples,
+      sampleRate: _sampleRate,
+      cfg: cfg,
+    );
+    var recordedSeries = WaveformPipeline.process(
+      raw: recorded.samples,
+      sampleRate: _sampleRate,
+      cfg: cfg,
+    );
+
+    // ノイズゲート等の仕上げ
+    sampleSeries =
+        applyNoiseGate(sampleSeries, openDb: -38, closeDb: -52, holdMs: 120);
+    recordedSeries =
+        applyNoiseGate(recordedSeries, openDb: -38, closeDb: -52, holdMs: 120);
+
+    sampleSeries = squelchTinyIslands(sampleSeries, minOnMs: 100, level: 0.02);
+    recordedSeries =
+        squelchTinyIslands(recordedSeries, minOnMs: 100, level: 0.02);
+
+    sampleSeries = subtractGlobalFloor(sampleSeries, q: 0.12, margin: 1.10);
+    recordedSeries = subtractGlobalFloor(recordedSeries, q: 0.12, margin: 1.10);
+
+    sampleSeries = autoZeroFloor(sampleSeries, quantile: 0.985, margin: 1.05);
+    recordedSeries =
+        autoZeroFloor(recordedSeries, quantile: 0.985, margin: 1.05);
+
+    debugQuietStats('recorded AFTER ', recordedSeries);
+
     if (!mounted) return;
     setState(() {
-      _copiedSamplePath = path;
+      _sampleSeries = sampleSeries;
+      _recordedSeries = recordedSeries;
     });
+  }
+
+  // “無音床”を自動で0固定に寄せる
+  List<double> autoZeroFloor(
+    List<double> s, {
+    double maxSilence = 0.06,
+    double quantile = 0.98,
+    double margin = 1.15,
+  }) {
+    final low = s.where((v) => v >= 0 && v <= maxSilence).toList()..sort();
+    if (low.isEmpty) return s;
+    final idx = (low.length * quantile).floor().clamp(0, low.length - 1);
+    final floor = (low[idx] * margin).clamp(0.0, 1.0);
+    return s.map((v) => (v < floor) ? 0.0 : v).toList();
   }
 
   Future<void> _loadSubtitle() async {
     try {
       final filename = widget.material.scriptPath
-          .replaceFirst('assets/subtitles/', '') // パス先頭だけ削除
+          .replaceFirst('assets/subtitles/', '')
           .replaceAll('.json', '')
           .replaceAll('.txt', '');
       final data = await loadSubtitles(filename);
@@ -66,16 +150,40 @@ class _WavWaveformScreenState extends ConsumerState<WavWaveformScreen> {
         subtitleText = data.map((s) => s.text).join('\n');
       });
     } catch (e) {
-      debugPrint('❌ 字幕読み込み失敗: \$e');
-      setState(() {
-        subtitleText = '字幕の読み込みに失敗しました。';
-      });
+      debugPrint('❌ 字幕読み込み失敗: $e');
+      setState(() => subtitleText = '字幕の読み込みに失敗しました。');
     }
   }
 
+  void _showSnack(String msg) =>
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
+
   Future<void> _play() async {
-    setState(() => _isPlaying = true);
-    await _audioService.prepareAndPlayLocalFile(widget.wavFilePath, 1.0);
+    if (_isPlaying) return; // 二重再生防止
+    final path = widget.wavFilePath;
+
+    try {
+      final f = File(path);
+      if (!f.existsSync()) {
+        _showSnack('録音ファイルが見つかりません');
+        return;
+      }
+      if (f.lengthSync() < 1200) {
+        _showSnack('録音が短すぎるか壊れている可能性があります');
+        return;
+      }
+
+      setState(() => _isPlaying = true);
+      await _audioService.prepareAndPlayLocalFile(path, 1.0);
+    } catch (e) {
+      debugPrint('play error: $e');
+      _showSnack('再生に失敗しました。もう一度試すか録音し直してください');
+      // 事故復旧：内部状態を初期化
+      try {
+        await _audioService.reset();
+      } catch (_) {}
+      setState(() => _isPlaying = false);
+    }
   }
 
   Future<void> _pause() async {
@@ -86,12 +194,6 @@ class _WavWaveformScreenState extends ConsumerState<WavWaveformScreen> {
   Future<void> _reset() async {
     setState(() => _isPlaying = false);
     await _audioService.reset();
-  }
-
-  @override
-  void dispose() {
-    _audioService.dispose();
-    super.dispose();
   }
 
   @override
@@ -108,8 +210,10 @@ class _WavWaveformScreenState extends ConsumerState<WavWaveformScreen> {
     final waveformHeight = availableHeight * 0.18;
     final subtitleHeight = availableHeight * 0.25;
 
-    Widget buildWaveformContainer(
-        {required Widget child, required Color background}) {
+    Widget buildWaveformContainer({
+      required Widget child,
+      required Color background,
+    }) {
       return ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: Container(
@@ -135,10 +239,10 @@ class _WavWaveformScreenState extends ConsumerState<WavWaveformScreen> {
         backgroundColor: backgroundColor,
         titleColor: textColor,
         iconColor: textColor,
+        actions: [],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -149,34 +253,29 @@ class _WavWaveformScreenState extends ConsumerState<WavWaveformScreen> {
               const SizedBox(height: 8),
               buildWaveformContainer(
                 background: waveformBackground1,
-                child: SampleWaveformWidget(
-                  filePath: widget.wavFilePath,
-                  isAsset: false,
-                  height: waveformHeight,
-                  progress: _currentProgress,
-                ),
+                child: _recordedSeries.isEmpty
+                    ? Center(child: CircularProgressIndicator(color: textColor))
+                    : SeriesWaveformWidget(
+                        series: _recordedSeries,
+                        progress: _currentProgress,
+                        verticalPadding: 12.0,
+                      ),
               ),
               const SizedBox(height: 24),
               Text('見本の音声の波形',
                   style:
                       TextStyle(fontWeight: FontWeight.bold, color: textColor)),
               const SizedBox(height: 8),
-              _copiedSamplePath != null
-                  ? buildWaveformContainer(
-                      background: waveformBackground2,
-                      child: SampleWaveformWidget(
-                        filePath: _copiedSamplePath!,
-                        isAsset: false,
-                        height: waveformHeight,
+              buildWaveformContainer(
+                background: waveformBackground2,
+                child: _sampleSeries.isEmpty
+                    ? Center(child: CircularProgressIndicator(color: textColor))
+                    : SeriesWaveformWidget(
+                        series: _sampleSeries,
                         progress: _currentProgress,
+                        verticalPadding: 12.0,
                       ),
-                    )
-                  : buildWaveformContainer(
-                      background: waveformBackground2,
-                      child: Center(
-                        child: CircularProgressIndicator(color: textColor),
-                      ),
-                    ),
+              ),
               const SizedBox(height: 24),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -204,35 +303,28 @@ class _WavWaveformScreenState extends ConsumerState<WavWaveformScreen> {
                 ),
               ),
               const SizedBox(height: 16),
+
+              // ====== AI採点へ ======
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AiScoringScreen(
-                          whisperScore: 95,
-                          prosodyScore: 95,
-                          referenceText:
-                              'attention please, the next train bound for Tokyo will arrive at platform number 2.',
-                          transcribedText:
-                              'attention please, the next train bound for Tokyo will arrive at platform No2. please behind the yellow line...',
-                          prosodyFeedback:
-                              '抑揚は全体的に安定していますが、語尾がやや聞き取りづらい箇所があります。',
-                          pronunciationFeedback:
-                              '「Tokyo」や「yellow line」など、いくつかの単語の発音が不明瞭です。音節を意識して練習してみましょう。',
-                        ),
-                      ),
-                    );
-                  },
-                  style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: textColor),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
+                  onPressed: (_sampleSeries.isEmpty || _recordedSeries.isEmpty)
+                      ? null
+                      : () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => AiScoringScreen(
+                                referenceText: subtitleText, // 正解台本
+                                transcribedText:
+                                    _userSttText ?? '', // ← Whisper 等の結果
+                                sampleSeries: _sampleSeries, // 見本 0..1 200fps
+                                userSeries: _recordedSeries, // あなた 0..1 200fps
+                                userWavPath: widget.wavFilePath, // ★必須
+                              ),
+                            ),
+                          );
+                        },
                   child: Text(
                     'AI採点モードへ →',
                     style: TextStyle(
@@ -243,6 +335,7 @@ class _WavWaveformScreenState extends ConsumerState<WavWaveformScreen> {
                   ),
                 ),
               ),
+
               const SizedBox(height: 32),
             ],
           ),
